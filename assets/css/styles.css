@@ -1430,8 +1430,14 @@ footer a:hover { color:var(--ink) }
 @media(max-width:640px) {
   .nav-links { display:none }
   .proj-grid { grid-template-columns:1fr }
-  .stack-categories { grid-template-columns:1fr }
+  .stack-categories { grid-template-columns:1fr; gap:15px }
+  .sitem { padding:.9rem 1.2rem }
   .info-grid { grid-template-columns:1fr }
   footer { flex-direction:column; gap:6px; text-align:center }
-  .fb1,.fb2,.fb3 { display:none }
+  .f-badge { font-size:10px; padding:6px 10px; white-space:normal }
+  .f-badge .f-icon { font-size:14px }
+  .f-badge .f-sub { font-size:9px }
+  .fb1 { top:10px; right:-20px }
+  .fb2 { bottom:40px; right:-25px }
+  .fb3 { bottom:5px; left:5px }
 }
