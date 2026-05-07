@@ -1,0 +1,1437 @@
+/*
+  ════════════════════════════════════════════════════════════════════════════════
+  PORTFOLIO - CSS ŠTÝLY
+  Autor: Filip
+  Popis: Responzívne štýly pre moderné portfolio web developera
+          Používa CSS Variables, Grid, Flexbox a animácie
+  ════════════════════════════════════════════════════════════════════════════════
+*/
+
+/*
+  CSS VARIABLES (CUSTOM PROPERTIES) - globálne premenné pre farby a hodnoty
+  Použitie: var(--meno-premennej) - umožňuje jednoduchú zmenu témy
+*/
+:root {
+  /* FARBY - svetlá paleta s vysokým kontrastom */
+  --bg:       #fafaf8;  /* hlavné pozadie - veľmi svetlá béžová */
+  --bg2:      #f3f3ef;  /* sekundárne pozadie - o niečo tmavšie */
+  --bg3:      #eaeae4;  /* terciárne pozadie - ešte tmavšie */
+
+  --ink:      #14140f;  /* hlavný text - tmavo hnedá/čierna */
+  --ink2:     #5a5a52;  /* sekundárny text - stredne sivá */
+  --ink3:     #a8a89e;  /* terciárny text - svetlo sivá */
+
+  /* AKCENT FARBY - modrá a ďalšie */
+  --blue:     #2d4ef5;  /* hlavná modrá farba */
+  --blue-bg:  rgba(45,78,245,0.07);  /* priesvitné modré pozadie */
+  --blue-bd:  rgba(45,78,245,0.2);   /* priesvitná modrá hranica */
+
+  --green:    #0f7c3e;  /* zelená farba pre dostupnosť */
+  --green-bg: rgba(15,124,62,0.09);  /* priesvitné zelené pozadie */
+
+  --amber:    #b45309;  /* oranžová pre "in progress" */
+  --amber-bg: rgba(180,83,9,0.09);   /* priesvitné oranžové pozadie */
+
+  /* HRANICE - priesvitné čiary */
+  --bd:       rgba(20,20,15,0.08);   /* tenká hranica */
+  --bd2:      rgba(20,20,15,0.14);   /* hrubšia hranica */
+
+  /* ANIMÁCIE - easing funkcia pre plynulé prechody */
+  --ease:     cubic-bezier(0.16,1,0.3,1);  /* vlastná easing krivka */
+
+  /* PÍSMA - Google Fonts načítané v HTML */
+  --ff-head:  'Playfair Display', Georgia, serif;      /* pre nadpisy */
+  --ff-ui:    'Syne', system-ui, sans-serif;            /* pre UI prvky */
+  --ff-mono:  'JetBrains Mono', monospace;             /* pre kód/technické */
+}
+
+/*
+  CSS RESET - vynulovanie predvolených štýlov prehliadača
+  Zabezpečuje konzistentné správanie vo všetkých prehliadačoch
+*/
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+
+/*
+  HTML - základné nastavenie dokumentu
+  scroll-behavior:smooth - plynulé scrollovanie pri kliknutí na odkazy
+*/
+html { scroll-behavior:smooth }
+
+/*
+  BODY - hlavný kontajner stránky
+  background - svetlé pozadie
+  color - tmavý text
+  font-family - predvolené UI písmo
+  font-size - základná veľkosť textu (15px)
+  line-height - riadkovanie pre lepšiu čitateľnosť
+  overflow-x:hidden - zabráni horizontálnemu scrollovaniu
+  -webkit-font-smoothing - vyhladzovanie písiem na macOS
+*/
+body {
+  background:var(--bg); color:var(--ink);
+  font-family:var(--ff-ui); font-size:15px; line-height:1.65;
+  overflow-x:hidden; -webkit-font-smoothing:antialiased;
+}
+
+/*
+  SELECTION - zvýraznenie vybraného textu
+  background - modré pozadie pri výbere textu
+  color - biely text pre dobrý kontrast
+*/
+::selection { background:var(--blue); color:#fff }
+
+/*
+  SCROLLBAR - vlastný štýl scrollbar-u
+  width:3px - tenký scrollbar
+  track - dráha scrollbar-u (pozadie)
+  thumb - samotný scrollbar (zaoblený, sivý)
+*/
+::-webkit-scrollbar { width:3px }
+::-webkit-scrollbar-track { background:var(--bg) }
+::-webkit-scrollbar-thumb { background:var(--bd2); border-radius:2px }
+
+/* ─── NAVIGAČNÁ LIŠTA ─── */
+
+/*
+  NAV - fixná navigácia na vrchu stránky
+  position:fixed - zostáva na mieste pri scrollovaní
+  top,left,right:0 - roztiahnutá na celú šírku
+  z-index:100 - nad všetkými ostatnými prvkami
+  display:flex - flexbox pre rozloženie
+  align-items:center - vertikálne centrované
+  justify-content:space-between - prvky rozložené na kraje
+  padding - vnútorné odsadenie
+  transition - plynulé prechody pri zmene stavu
+*/
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 3.5rem; height:58px;
+  transition:background .3s, border-color .3s, backdrop-filter .3s;
+  border-bottom:1px solid transparent;
+}
+
+/*
+  NAV.UP - stav po scrollovaní (pridá sa trieda 'up' cez JavaScript)
+  background - priesvitné biele pozadie
+  border-color - viditeľná hranica
+  backdrop-filter:blur() - rozmazanie pozadia za navigáciou
+*/
+nav.up {
+  background:rgba(250,250,248,.92);
+  border-color:var(--bd);
+  backdrop-filter:blur(18px);
+}
+
+/*
+  LOGO - štýl pre logo/brand odkaz
+  font-family - elegantné serif písmo
+  font-size - veľkosť loga
+  color - tmavý text
+  text-decoration:none - bez podčiarknutia
+  letter-spacing - mierne rozšírenie písmen
+*/
+.logo {
+  font-family:var(--ff-head); font-size:22px; font-style:italic;
+  color:var(--ink); text-decoration:none; letter-spacing:-.01em;
+}
+
+/*
+  NAV LINKS - kontajner pre navigačné odkazy
+  display:flex - horizontálne zoradenie
+  gap - medzery medzi odkazmi
+  list-style:none - bez bodiek v zozname
+*/
+.nav-links { display:flex; gap:2.5rem; list-style:none }
+
+/*
+  NAV LINKS A - jednotlivé navigačné odkazy
+  font-size - malý text
+  letter-spacing - rozšírenie pre moderný vzhľad
+  text-transform:uppercase - veľké písmená
+  color - stredne tmavý text
+  text-decoration:none - bez podčiarknutia
+  position:relative - pre pseudo-element ::after
+  transition - plynulé zmeny farby
+*/
+.nav-links a {
+  font-size:12.5px; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--ink2); text-decoration:none; transition:color .18s;
+  position:relative;
+}
+
+/*
+  NAV LINKS A ::AFTER - dekoratívna čiara pod odkazmi
+  content:'' - prázdny obsah
+  position:absolute - absolútne pozicionovanie
+  bottom,left,right - pozícia čiary
+  height:1px - hrúbka čiary
+  background - farba čiary
+  transform:scaleX(0) - počiatočne skrytá (škálovanie na 0)
+  transform-origin:left - škálovanie zľava doprava
+  transition - plynulé škálovanie
+*/
+.nav-links a::after {
+  content:''; position:absolute; bottom:-2px; left:0; right:0;
+  height:1px; background:var(--ink);
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .25s var(--ease);
+}
+
+/*
+  NAV LINKS A:HOVER - hover efekt pre odkazy
+  color - tmavší text pri hover
+  ::after transform:scaleX(1) - zobrazenie čiary
+*/
+.nav-links a:hover { color:var(--ink) }
+.nav-links a:hover::after { transform:scaleX(1) }
+
+/*
+  NAV RIGHT - pravá časť navigácie (prepínač jazyka + kontakt)
+  display:flex - flexbox
+  align-items:center - vertikálne centrované
+  gap - medzera medzi prvkami
+*/
+.nav-right { display:flex; align-items:center; gap:1.5rem }
+
+/*
+  LANG BTN - tlačidlo prepínača jazyka
+  background:none - priesvitné pozadie
+  border - tenká hranica
+  color - stredne tmavý text
+  padding - vnútorné odsadenie
+  font-size - malý text
+  font-weight - polotučné
+  letter-spacing - rozšírenie
+  border-radius - zaoblené rohy
+  cursor:pointer - kurzor ruky
+  transition - plynulé zmeny
+  font-family - monospace písmo
+  text-transform:uppercase - veľké písmená
+*/
+.lang-btn {
+  background:none; border:1px solid var(--ink3); color:var(--ink2);
+  padding:5px 12px; font-size:11px; font-weight:600; letter-spacing:.05em;
+  border-radius:3px; cursor:pointer; transition:all .2s;
+  font-family:var(--ff-mono); text-transform:uppercase;
+}
+
+/*
+  LANG BTN:HOVER - hover efekt pre prepínač jazyka
+  color - tmavší text
+  border-color - tmavšia hranica
+*/
+.lang-btn:hover { color:var(--ink); border-color:var(--ink) }
+
+/*
+  NAV BTN - tlačidlo kontakt v navigácii
+  padding - vnútorné odsadenie
+  background - tmavé pozadie
+  color - biely text
+  border-radius - zaoblené rohy
+  font-size - malý text
+  font-weight - polotučné
+  letter-spacing - rozšírenie
+  text-decoration:none - bez podčiarknutia
+  transition - plynulé zmeny pozadia a transformácie
+*/
+.nav-btn {
+  padding:7px 20px; background:var(--ink); color:#fff;
+  border-radius:3px; font-size:12px; font-weight:600;
+  letter-spacing:.04em; text-decoration:none;
+  transition:background .2s, transform .15s;
+}
+
+/*
+  NAV BTN:HOVER - hover efekt pre nav tlačidlo
+  background - mierne svetlejšie pozadie
+  transform:translateY(-1px) - mierne posunutie nahor
+*/
+.nav-btn:hover { background:#333; transform:translateY(-1px) }
+
+/* ─── HERO SEKCIA ─── */
+
+/*
+  #HERO - hlavná uvítacia sekcia
+  min-height:100vh - výška aspoň celá obrazovka
+  display:grid - CSS Grid rozloženie
+  grid-template-columns:1.1fr .9fr - ľavá časť väčšia ako pravá
+  align-items:center - vertikálne centrované
+  gap - medzera medzi stĺpcami
+  padding - vnútorné odsadenie
+  position:relative - pre absolútne pozicionované prvky
+  overflow:hidden - oreže všetko čo presahuje
+*/
+#hero {
+  min-height:100vh;
+  display:grid; grid-template-columns:1.1fr .9fr;
+  align-items:center; gap:5rem;
+  padding:7rem 3.5rem 5rem;
+  position:relative; overflow:hidden;
+}
+
+/*
+  #HERO::BEFORE - dekoratívny pattern na pozadí
+  content:'' - prázdny obsah
+  position:absolute - absolútne pozicionovanie
+  inset:0 - roztiahnuté na celú sekciu
+  z-index:0 - pod obsahom
+  background-image - SVG pattern s turbulenciou (šum)
+  background-size - veľkosť patternu
+  pointer-events:none - neblokuje klikanie
+*/
+#hero::before {
+  content:''; position:absolute; inset:0; z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  background-size:200px; pointer-events:none;
+}
+
+/*
+  #HERO::AFTER - gradientový overlay vpravo hore
+  content:'' - prázdny obsah
+  position:absolute - absolútne pozicionovanie
+  top,right - pozícia vpravo hore
+  width,height - veľkosť elipsy
+  background - radiálny gradient s priesvitnou modrou
+  pointer-events:none - neblokuje klikanie
+*/
+#hero::after {
+  content:''; position:absolute; top:-10%; right:-5%;
+  width:60vw; height:130%;
+  background:radial-gradient(ellipse 55% 65% at 75% 45%, rgba(45,78,245,.045) 0%, transparent 70%);
+  pointer-events:none;
+}
+/*
+  HERO-L - ľavá časť hero sekcie (text)
+  position:relative - pre správne vrstvenie
+  z-index:1 - nad pozadím
+*/
+.hero-l { position:relative; z-index:1 }
+
+/*
+  H-PILL - zelený štítok "Dostupný pre spoluprácu"
+  display:inline-flex - flexbox v riadku
+  align-items:center - vertikálne centrované
+  gap - medzera medzi bodkou a textom
+  font-family - monospace písmo
+  font-size - malý text
+  letter-spacing - rozšírenie
+  color - zelený text
+  background - priesvitné zelené pozadie
+  padding - vnútorné odsadenie
+  border-radius - veľmi zaoblené rohy
+  margin-bottom - odstup dole
+  opacity:0 - počiatočná priehľadnosť pre animáciu
+  transform:translateY(8px) - počiatočná pozícia pre animáciu
+  animation - animácia "up" s oneskorením
+*/
+.h-pill {
+  display:inline-flex; align-items:center; gap:7px;
+  font-family:var(--ff-mono); font-size:10.5px; letter-spacing:.06em;
+  color:var(--green); background:var(--green-bg);
+  padding:5px 13px; border-radius:20px; margin-bottom:2.25rem;
+  opacity:0; transform:translateY(8px);
+  animation:up .5s .05s forwards;
+}
+
+/*
+  H-DOT - animovaná zelená bodka v štítku
+  width,height - veľkosť kruhu
+  border-radius:50% - okrúhly tvar
+  background - zelená farba
+  animation - blikajúci glow efekt
+*/
+.h-dot {
+  width:6px; height:6px; border-radius:50%; background:var(--green);
+  animation:glow-g 2.4s ease-in-out infinite;
+}
+
+/*
+  H-TITLE - hlavný nadpis hero sekcie
+  font-family - elegantné serif písmo
+  font-size - responzívna veľkosť (clamp - medzi 54px a 90px)
+  line-height - kompaktnejšie riadkovanie
+  letter-spacing - mierne zhustenie
+  margin-bottom - odstup dole
+  opacity:0 - počiatočná priehľadnosť
+  transform:translateY(18px) - posunutie pre animáciu
+  animation - animácia "up" s oneskorením
+*/
+.h-title {
+  font-family:var(--ff-head);
+  font-size:clamp(54px,6.5vw,90px);
+  line-height:.94; letter-spacing:-.03em;
+  margin-bottom:1.75rem;
+  opacity:0; transform:translateY(18px);
+  animation:up .8s .2s forwards;
+}
+
+/*
+  H-TITLE EM - kurzíva v nadpise ("developer")
+  font-style:italic - kurzíva
+  color - tmavšia farba pre kontrast
+*/
+.h-title em { font-style:italic; color:var(--ink2) }
+
+/*
+  H-DESC - popisný text pod nadpisom
+  font-size - štandardná veľkosť
+  color - stredne tmavý text
+  line-height - prirodzené riadkovanie
+  max-width - obmedzenie šírky pre čitateľnosť
+  margin-bottom - odstup dole
+  opacity:0 - počiatočná priehľadnosť
+  animation - animácia "up" s oneskorením
+*/
+.h-desc {
+  font-size:15px; color:var(--ink2);
+  line-height:1.85; max-width:420px; margin-bottom:2.25rem;
+  opacity:0; animation:up .75s .36s forwards;
+}
+
+/*
+  H-ACTIONS - kontajner pre tlačidlá
+  display:flex - horizontálne zoradenie
+  gap - medzera medzi tlačidlami
+  opacity:0 - počiatočná priehľadnosť
+  animation - animácia "up" s oneskorením
+*/
+.h-actions {
+  display:flex; gap:10px;
+  opacity:0; animation:up .75s .48s forwards;
+}
+
+/* ─── HERO VISUAL ─── */
+
+/*
+  HERO-R - pravá časť hero sekcie (profilový obrázok)
+  position:relative - pre absolútne pozicionované prvky
+  z-index:1 - nad pozadím
+  display:flex - flexbox
+  justify-content:flex-end - zarovnanie doprava
+  align-items:center - vertikálne centrované
+*/
+.hero-r {
+  position:relative; z-index:1;
+  display:flex; justify-content:flex-end; align-items:center;
+}
+
+/*
+  HERO-PROFILE - kontajner pre avatar a badge-y
+  position:relative - pre absolútne pozicionované badge-y
+  opacity:0 - počiatočná priehľadnosť
+  transform:translateY(14px) - posunutie pre animáciu
+  animation - animácia "up" s oneskorením
+*/
+.hero-profile {
+  position:relative;
+  opacity:0; transform:translateY(14px);
+  animation:up .9s .55s forwards;
+}
+
+/*
+  AVATAR-RING - okrúhly kontajner pre SVG avatar
+  width,height - veľkosť štvorca (SVG sa prispôsobí)
+  border-radius:50% - okrúhly tvar
+  background - lineárny gradient pre 3D efekt
+  border - tenká hranica
+  position:relative - pre správne pozicionovanie
+  overflow:hidden - oreže SVG ak presahuje
+  box-shadow - viacúrovňový tieň pre hĺbku
+*/
+.avatar-ring {
+  width:340px; height:340px;
+  border-radius:50%;
+  background:linear-gradient(135deg, var(--bg3) 0%, var(--bg2) 100%);
+  border:1px solid var(--bd2);
+  position:relative; overflow:hidden;
+  box-shadow:
+    0 0 0 8px rgba(45,78,245,.04),
+    0 0 0 16px rgba(45,78,245,.02),
+    0 24px 80px rgba(0,0,0,.09);
+}
+
+/*
+  AVATAR-RING SVG - SVG avatar vo vnútri kontajnera
+  width:100% height:100% - roztiahnutie na celý kontajner
+  display:block - odstráni medzery pod inline SVG
+*/
+.avatar-ring svg { width:100%; height:100%; display:block }
+
+/*
+  F-BADGE - plávajúce badge-y s informáciami o autorovi
+  position:absolute - absolútne pozicionovanie okolo avatara
+  background - biele pozadie
+  border - tenká sivá hranica
+  border-radius - zaoblené rohy
+  padding - vnútorné odsadenie
+  display:flex - flexbox pre ikonu a text
+  align-items:center - vertikálne centrované
+  gap - medzera medzi prvkami
+  box-shadow - jemný tieň
+  font-size - malý text
+  font-weight - polotučné
+  color - tmavý text
+  white-space:nowrap - zabráni zalomeniu textu
+  animation - plávajúca animácia (hore-dole)
+*/
+.f-badge {
+  position:absolute;
+  background:#fff; border:1px solid var(--bd2); border-radius:10px;
+  padding:9px 14px; display:flex; align-items:center; gap:8px;
+  box-shadow:0 4px 20px rgba(0,0,0,.07);
+  font-size:12px; font-weight:600; color:var(--ink); white-space:nowrap;
+  animation:float 4s ease-in-out infinite;
+}
+
+/*
+  F-BADGE NTH-CHILD - oneskorenie animácie pre každý badge
+  Každý badge má iné oneskorenie pre prirodzený efekt
+*/
+.f-badge:nth-child(2) { animation-delay:-1.3s }
+.f-badge:nth-child(3) { animation-delay:-2.6s }
+
+/*
+  F-BADGE .F-ICON - ikona v badge (emoji)
+  font-size - väčší font pre ikonu
+*/
+.f-badge .f-icon { font-size:16px }
+
+/*
+  F-BADGE .F-SUB - podnadpis v badge (menší text)
+  font-family - monospace písmo
+  font-size - veľmi malý text
+  color - stredne tmavý
+  font-weight - normálne (nie polotučné)
+  display:block - na nový riadok
+  margin-top - malý odstup zhora
+*/
+.f-badge .f-sub {
+  font-family:var(--ff-mono); font-size:10px;
+  color:var(--ink2); font-weight:400; display:block; margin-top:1px;
+}
+
+/*
+  FB1, FB2, FB3 - pozície jednotlivých badge-ov okolo avatara
+  top,right,bottom,left - absolútne pozicionovanie
+*/
+.fb1 { top:18px; right:-30px }
+.fb2 { bottom:60px; right:-40px }
+.fb3 { bottom:10px; left:10px }
+
+/* ─── TLAČIDLÁ ─── */
+
+/*
+  BTN-SOLID - plné tlačidlo (tmavé pozadie, biely text)
+  padding - vnútorné odsadenie
+  background - tmavé pozadie
+  color - biely text
+  border-radius - mierne zaoblené rohy
+  font-family - UI písmo
+  font-size - malý text
+  font-weight - polotučné
+  text-decoration:none - bez podčiarknutia
+  letter-spacing - mierne rozšírenie
+  transition - plynulé zmeny pri hover
+*/
+.btn-solid {
+  padding:11px 26px; background:var(--ink); color:#fff;
+  border-radius:4px; font-family:var(--ff-ui); font-size:13px;
+  font-weight:600; text-decoration:none; letter-spacing:.02em;
+  transition:background .2s, transform .15s, box-shadow .2s;
+}
+
+/*
+  BTN-SOLID:HOVER - hover efekt pre plné tlačidlo
+  background - mierne svetlejšie pozadie
+  transform:translateY(-1px) - posunutie nahor
+  box-shadow - pridaný tieň pre 3D efekt
+*/
+.btn-solid:hover { background:#2a2a22; transform:translateY(-1px); box-shadow:0 6px 20px rgba(0,0,0,.13) }
+
+/*
+  BTN-LINE - obrysové tlačidlo (priesvitné pozadie, tmavý text)
+  padding - vnútorné odsadenie
+  background:transparent - priesvitné pozadie
+  color - tmavý text
+  border - tenká hranica
+  border-radius - mierne zaoblené rohy
+  font-size - malý text
+  text-decoration:none - bez podčiarknutia
+  transition - plynulé zmeny pri hover
+*/
+.btn-line {
+  padding:11px 26px; background:transparent; color:var(--ink2);
+  border:1.5px solid var(--bd2); border-radius:4px; font-size:13px;
+  text-decoration:none;
+  transition:color .18s, border-color .18s, transform .15s;
+}
+
+/*
+  BTN-LINE:HOVER - hover efekt pre obrysové tlačidlo
+  color - tmavší text
+  border-color - tmavšia hranica
+  transform:translateY(-1px) - posunutie nahor
+*/
+.btn-line:hover { color:var(--ink); border-color:var(--ink2); transform:translateY(-1px) }
+
+/* ─── SPOLOČNÉ ŠTÝLY PRE SEKCIÍ ─── */
+
+/*
+  WRAP - kontajner pre obsah sekcií s konzistentným paddingom
+  padding - veľké vnútorné odsadenie na všetkých stranách
+*/
+.wrap { padding:7rem 3.5rem }
+
+/*
+  S-HEAD - hlavička sekcie (nadpis + čiara)
+  display:flex - flexbox
+  align-items:center - vertikálne centrované
+  gap - medzera medzi prvkami
+  margin-bottom - odstup dole
+*/
+.s-head { display:flex; align-items:center; gap:1.1rem; margin-bottom:3.5rem }
+
+/*
+  S-EYE - malý text pred nadpisom sekcie ("O MNE", "KONTAKT", atď.)
+  font-family - monospace písmo
+  font-size - veľmi malý text
+  color - svetlo sivý
+  letter-spacing - veľké rozšírenie
+  white-space:nowrap - bez zalomenia
+*/
+.s-eye { font-family:var(--ff-mono); font-size:10.5px; color:var(--ink3); letter-spacing:.12em; white-space:nowrap }
+
+/*
+  S-TITLE - hlavný nadpis sekcie
+  font-family - serif písmo pre nadpisy
+  font-size - responzívna veľkosť (clamp)
+  font-weight:400 - normálne (nie polotučné)
+  letter-spacing - mierne zhustenie
+  white-space:nowrap - bez zalomenia
+*/
+.s-title { font-family:var(--ff-head); font-size:clamp(30px,3.2vw,44px); font-weight:400; letter-spacing:-.02em; white-space:nowrap }
+
+/*
+  S-RULE - dekoratívna čiara vedľa nadpisu
+  flex:1 - zaberá všetok dostupný priestor
+  height:1px - hrúbka čiary
+  background - sivá farba
+  margin-left - dodatočná medzera vľavo
+*/
+.s-rule { flex:1; height:1px; background:var(--bd); margin-left:.75rem }
+
+/* ─── PROJECTS ─── */
+
+/*
+  #PROJECTS - sekcia s projektovými kartami
+  background - mierne tmavšie pozadie pre oddelenie
+*/
+#projects { background:var(--bg2) }
+
+/*
+  PROJ-GRID - mriežka pre projektové karty
+  display:grid - CSS Grid
+  grid-template-columns:repeat(3,1fr) - tri stĺpce rovnakej šírky
+  gap - medzery medzi kartami
+*/
+.proj-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px }
+
+/*
+  PCARD - projektová karta (funguje ako odkaz)
+  background - svetlé pozadie
+  border - tenká hranica
+  border-radius - zaoblené rohy
+  padding - vnútorné odsadenie
+  display:flex - flexbox
+  flex-direction:column - vertikálne zoradenie
+  position:relative - pre pseudo-elementy
+  overflow:hidden - oreže pretekajúci obsah
+  transition - plynulé zmeny pri hover
+  text-decoration:none - bez podčiarknutia
+  color:inherit - dedi farbu textu
+  cursor:pointer - kurzor ruky
+*/
+.pcard {
+  background:var(--bg); border:1px solid var(--bd); border-radius:14px;
+  padding:1.75rem; display:flex; flex-direction:column;
+  position:relative; overflow:hidden;
+  transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
+  text-decoration:none; color:inherit; cursor:pointer;
+}
+
+/*
+  PCARD::BEFORE - svetelný efekt pri hover (radial gradient)
+  content:'' - prázdny obsah
+  position:absolute - absolútne pozicionovanie
+  inset:0 - roztiahnuté na celú kartu
+  background - radiálny gradient s modrou farbou
+  opacity:0 - počiatočne skrytý
+  transition - plynulé zobrazovanie
+*/
+.pcard::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(circle at var(--mx,50%) var(--my,30%), rgba(45,78,245,.05) 0%, transparent 60%);
+  opacity:0; transition:opacity .4s;
+}
+
+/*
+  PCARD:HOVER - hover efekty pre kartu
+  transform:translateY(-5px) - posunutie nahor
+  box-shadow - väčší tieň
+  border-color - modrá hranica
+  ::before opacity:1 - zobrazenie svetelného efektu
+*/
+.pcard:hover { transform:translateY(-5px); box-shadow:0 16px 48px rgba(0,0,0,.1); border-color:var(--blue-bd) }
+.pcard:hover::before { opacity:1 }
+
+/*
+  PCARD-ACCENT - modrá čiara na vrchu karty (animovaná pri hover)
+  height:3px - hrúbka čiary
+  border-radius - zaoblené rohy
+  background - lineárny gradient (modrý)
+  margin - negatívny margin pre prekrytie paddingu
+  transform:scaleX(0) - počiatočne skrytá
+  transform-origin:left - škálovanie zľava
+  transition - plynulé škálovanie
+*/
+.pcard-accent {
+  height:3px; border-radius:3px;
+  background:linear-gradient(90deg, var(--blue), #818cf8);
+  margin:-1.75rem -1.75rem 1.5rem;
+  transform:scaleX(0); transform-origin:left;
+  transition:transform .4s var(--ease);
+}
+
+/*
+  PCARD:HOVER .PCARD-ACCENT - zobrazenie čiary pri hover na karte
+  transform:scaleX(1) - škálovanie na plnú šírku
+*/
+.pcard:hover .pcard-accent { transform:scaleX(1) }
+
+/*
+  PCARD-HEAD - hlavička karty (číslo, názov, ikona)
+  display:flex - flexbox
+  align-items:flex-start - zarovnanie nahor
+  justify-content:space-between - prvky na kraje
+  margin-bottom - odstup dole
+*/
+.pcard-head { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:1.1rem }
+
+/*
+  PCARD-ICON - ikona projektu (emoji v okrúhlom kontajneri)
+  width,height - veľkosť štvorca
+  border-radius - zaoblené rohy
+  background - svetlejšie pozadie
+  border - tenká hranica
+  display:flex - flexbox pre centrovanie
+  align-items:center - vertikálne centrované
+  justify-content:center - horizontálne centrované
+  font-size - veľkosť emoji
+  flex-shrink:0 - nezmenšuje sa
+  transition - animácie pri hover
+*/
+.pcard-icon {
+  width:44px; height:44px; border-radius:10px;
+  background:var(--bg2); border:1px solid var(--bd);
+  display:flex; align-items:center; justify-content:center;
+  font-size:20px; flex-shrink:0;
+  transition:transform .25s var(--ease), background .2s;
+}
+
+/*
+  PCARD:HOVER .PCARD-ICON - animácia ikony pri hover na karte
+  transform:scale(1.08) rotate(-5deg) - zväčšenie a mierne otočenie
+  background - modré pozadie
+*/
+.pcard:hover .pcard-icon { transform:scale(1.08) rotate(-5deg); background:var(--blue-bg) }
+
+/*
+  PCARD-NUM - poradové číslo projektu
+  font-family - monospace písmo
+  font-size - malý text
+  color - svetlo sivý
+  letter-spacing - rozšírenie
+  margin-bottom - odstup dole
+*/
+.pcard-num { font-family:var(--ff-mono); font-size:10px; color:var(--ink3); letter-spacing:.12em; margin-bottom:.35rem }
+
+/*
+  PCARD-TITLE - názov projektu
+  font-family - serif písmo
+  font-size - stredný text
+  font-weight:500 - polotučné
+  color - tmavý text
+  transition - zmena farby pri hover
+  line-height - kompaktnejšie riadkovanie
+*/
+.pcard-title { font-family:var(--ff-head); font-size:21px; font-weight:500; color:var(--ink); transition:color .2s; line-height:1.2 }
+
+/*
+  PCARD:HOVER .PCARD-TITLE - zmena farby názvu pri hover na karte
+  color - modrá farba
+*/
+.pcard:hover .pcard-title { color:var(--blue) }
+
+/*
+  PCARD-DESC - popis projektu
+  font-size - malý text
+  color - stredne tmavý
+  line-height - prirodzené riadkovanie
+  margin-bottom - odstup dole
+  flex:1 - zaberá dostupný priestor
+*/
+.pcard-desc { font-size:13px; color:var(--ink2); line-height:1.75; margin-bottom:1.25rem; flex:1 }
+
+/*
+  PCARD-TAGS - kontajner pre technické štítky
+  display:flex - flexbox
+  flex-wrap:wrap - zalamovanie na viac riadkov
+  gap - medzery medzi štítkami
+  margin-bottom - odstup dole
+*/
+.pcard-tags { display:flex; flex-wrap:wrap; gap:5px; margin-bottom:1.4rem }
+
+/*
+  PCARD-TAG - jednotlivý technický štítok
+  font-family - monospace písmo
+  font-size - veľmi malý text
+  padding - vnútorné odsadenie
+  border - tenká hranica
+  border-radius - zaoblené rohy
+  color - stredne tmavý text
+  letter-spacing - mierne rozšírenie
+  transition - zmeny pri hover
+*/
+.pcard-tag {
+  font-family:var(--ff-mono); font-size:10px;
+  padding:3px 9px; border:1px solid var(--bd2);
+  border-radius:3px; color:var(--ink2); letter-spacing:.04em;
+  transition:border-color .2s, color .2s, background .2s;
+}
+
+/*
+  PCARD:HOVER .PCARD-TAG - zmeny štítkov pri hover na karte
+  border-color - modrá hranica
+  color - modrý text
+  background - priesvitné modré pozadie
+*/
+.pcard:hover .pcard-tag { border-color:var(--blue-bd); color:var(--blue); background:var(--blue-bg) }
+
+/*
+  PCARD-FOOT - päta karty (odkazy a stav)
+  display:flex - flexbox
+  align-items:center - vertikálne centrované
+  justify-content:space-between - prvky na kraje
+  padding-top - vnútorný odstup zhora
+  border-top - horizontálna čiara
+*/
+.pcard-foot { display:flex; align-items:center; justify-content:space-between; padding-top:1.1rem; border-top:1px solid var(--bd) }
+
+/*
+  PCARD-LINKS - kontajner pre odkazy (Demo, GitHub)
+  display:flex - horizontálne zoradenie
+  gap - medzera medzi odkazmi
+*/
+.pcard-links { display:flex; gap:1rem }
+
+/*
+  PCARD-LINK - jednotlivý odkaz v päte karty
+  font-family - monospace písmo
+  font-size - malý text
+  color - svetlo sivý
+  text-decoration:none - bez podčiarknutia
+  letter-spacing - rozšírenie
+  transition - zmena farby
+*/
+.pcard-link { font-family:var(--ff-mono); font-size:11px; color:var(--ink3); text-decoration:none; letter-spacing:.04em; transition:color .2s }
+
+/*
+  PCARD:HOVER .PCARD-LINK - zmena farby odkazov pri hover na karte
+  color - modrá farba
+*/
+.pcard:hover .pcard-link { color:var(--blue) }
+
+/*
+  BADGE - všeobecný štýl pre stavové štítky
+  font-family - monospace písmo
+  font-size - veľmi malý text
+  padding - vnútorné odsadenie
+  border-radius - veľmi zaoblené
+  letter-spacing - rozšírenie
+*/
+.badge { font-family:var(--ff-mono); font-size:9.5px; padding:3px 9px; border-radius:20px; letter-spacing:.06em }
+
+/*
+  BADGE-FEAT - štítok pre "featured" projekty
+  background - priesvitné modré pozadie
+  color - modrý text
+*/
+.badge-feat { background:var(--blue-bg); color:var(--blue) }
+
+/*
+  BADGE-WIP - štítok pre "work in progress" projekty
+  background - priesvitné oranžové pozadie
+  color - oranžový text
+*/
+.badge-wip  { background:var(--amber-bg); color:var(--amber) }
+
+/* ─── STACK ─── */
+
+/*
+  #STACK - sekcia s technickými zručnosťami
+  background - svetlé pozadie
+*/
+#stack { background:var(--bg) }
+
+/*
+  STACK-CATEGORIES - mriežka pre kategórie zručností
+  display:grid - CSS Grid
+  grid-template-columns:repeat(3,1fr) - tri stĺpce rovnakej šírky
+  gap - medzery medzi kategóriami
+*/
+.stack-categories { display:grid; grid-template-columns:repeat(3,1fr); gap:20px }
+
+/*
+  SCAT - karta kategórie zručností (napr. Frontend, Backend, Tools)
+  background - svetlé pozadie
+  border - tenká hranica
+  border-radius - zaoblené rohy
+  overflow:hidden - oreže pretekajúci obsah
+  transition - plynulé zmeny pri hover
+*/
+.scat { background:var(--bg); border:1px solid var(--bd); border-radius:14px; overflow:hidden; transition:box-shadow .25s, border-color .25s }
+
+/*
+  SCAT:HOVER - hover efekty pre kategóriu
+  box-shadow - väčší tieň
+  border-color - tmavšia hranica
+*/
+.scat:hover { box-shadow:0 8px 32px rgba(0,0,0,.07); border-color:var(--bd2) }
+
+/*
+  SCAT-HEAD - hlavička kategórie (ikona a názov)
+  padding - vnútorné odsadenie
+  border-bottom - horizontálna čiara
+  background - mierne tmavšie pozadie
+  display:flex - flexbox
+  align-items:center - vertikálne centrované
+  gap - medzera medzi ikonou a textom
+*/
+.scat-head { padding:1.1rem 1.4rem .9rem; border-bottom:1px solid var(--bd); background:var(--bg2); display:flex; align-items:center; gap:10px }
+
+/*
+  SCAT-ICON - ikona kategórie
+  font-size - veľkosť emoji ikony
+*/
+.scat-icon { font-size:18px }
+
+/*
+  SCAT-LABEL - názov kategórie
+  font-family - monospace písmo
+  font-size - malý text
+  color - stredne tmavý
+  letter-spacing - rozšírenie
+  font-weight:500 - polotučné
+*/
+.scat-label { font-family:var(--ff-mono); font-size:10.5px; color:var(--ink2); letter-spacing:.1em; font-weight:500 }
+
+/*
+  SCAT-ITEMS - kontajner pre jednotlivé zručnosti v kategórii
+  padding - vertikálne odsadenie
+*/
+.scat-items { padding:.5rem 0 }
+
+/*
+  SITEM - jednotlivá zručnosť (napr. React, Node.js)
+  display:flex - flexbox
+  align-items:center - vertikálne centrované
+  justify-content:space-between - prvky na kraje
+  padding - vnútorné odsadenie
+  transition - zmena pozadia pri hover
+*/
+.sitem { display:flex; align-items:center; justify-content:space-between; padding:.7rem 1.4rem; transition:background .18s }
+
+/*
+  SITEM:HOVER - hover efekt pre zručnosť
+  background - mierne tmavšie pozadie
+*/
+.sitem:hover { background:var(--bg2) }
+
+/*
+  SITEM-L - ľavá časť zručnosti (bodka + názov)
+  display:flex - flexbox
+  align-items:center - vertikálne centrované
+  gap - medzera medzi bodkou a názvom
+*/
+.sitem-l { display:flex; align-items:center; gap:10px }
+
+/*
+  SITEM-DOT - farebná bodka označujúca úroveň zručnosti
+  width,height - veľkosť kruhu
+  border-radius:50% - kruhový tvar
+  flex-shrink:0 - nezmenšuje sa
+*/
+.sitem-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0 }
+
+/*
+  DOT-EXPERT - bodka pre expert úroveň (modrá)
+  background - tmavo modrá
+*/
+.dot-expert   { background:#2d4ef5 }
+
+/*
+  DOT-ADVANCED - bodka pre advanced úroveň (fialová)
+  background - tmavo fialová
+*/
+.dot-advanced { background:#7c3aed }
+
+/*
+  DOT-MID - bodka pre mid úroveň (zelená)
+  background - tmavo zelená
+*/
+.dot-mid      { background:#0f7c3e }
+
+/*
+  DOT-BASIC - bodka pre basic úroveň (sivá)
+  background - sivá
+*/
+.dot-basic    { background:var(--ink3) }
+
+/*
+  SITEM-NAME - názov zručnosti
+  font-size - stredný text
+  font-weight:600 - polotučné
+  color - tmavý text
+*/
+.sitem-name { font-size:13px; font-weight:600; color:var(--ink) }
+
+/*
+  SITEM-LEVEL - štítok s úrovňou zručnosti
+  font-family - monospace písmo
+  font-size - malý text
+  letter-spacing - rozšírenie
+  padding - vnútorné odsadenie
+  border-radius - zaoblené rohy
+*/
+.sitem-level { font-family:var(--ff-mono); font-size:9.5px; letter-spacing:.07em; padding:2px 8px; border-radius:20px }
+
+/*
+  LV-EXPERT - štýl pre expert úroveň
+  background - priesvitné modré pozadie
+  color - modrý text
+*/
+.lv-expert   { background:rgba(45,78,245,.08);   color:var(--blue) }
+
+/*
+  LV-ADVANCED - štýl pre advanced úroveň
+  background - priesvitné fialové pozadie
+  color - fialový text
+*/
+.lv-advanced { background:rgba(124,58,237,.08);  color:#7c3aed }
+
+/*
+  LV-MID - štýl pre mid úroveň
+  background - priesvitné zelené pozadie
+  color - zelený text
+*/
+.lv-mid      { background:rgba(15,124,62,.08);   color:var(--green) }
+
+/*
+  LV-BASIC - štýl pre basic úroveň
+  background - priesvitné sivé pozadie
+  color - sivý text
+*/
+.lv-basic    { background:rgba(168,168,158,.15); color:var(--ink2) }
+
+/*
+  STACK-LEGEND - legenda vysvetľujúca farby úrovní
+  display:flex - horizontálne zoradenie
+  gap - medzery medzi položkami
+  margin-bottom - odstup dole
+  flex-wrap:wrap - zalamovanie na viac riadkov
+*/
+.stack-legend { display:flex; gap:1.5rem; margin-bottom:2rem; flex-wrap:wrap }
+
+/*
+  LEG-ITEM - jednotlivá položka legendy
+  display:flex - flexbox
+  align-items:center - vertikálne centrované
+  gap - medzera medzi bodkou a textom
+*/
+.leg-item { display:flex; align-items:center; gap:6px }
+
+/*
+  LEG-DOT - farebná bodka v legende
+  width,height - veľkosť kruhu
+  border-radius:50% - kruhový tvar
+*/
+.leg-dot { width:7px; height:7px; border-radius:50% }
+
+/*
+  LEG-LABEL - text v legende
+  font-family - monospace písmo
+  font-size - malý text
+  color - stredne tmavý
+*/
+.leg-label { font-family:var(--ff-mono); font-size:10.5px; color:var(--ink2) }
+
+/* ─── ABOUT ─── */
+
+/*
+  #ABOUT - sekcia "O mne" s informáciami o osobe
+  background - mierne tmavšie pozadie
+  display:grid - CSS Grid pre rozloženie
+  grid-template-columns:1fr 1fr - dva stĺpce rovnakej šírky
+  gap - veľká medzera medzi stĺpcami
+  align-items:start - zarovnanie nahor
+  padding - veľké vnútorné odsadenie
+*/
+#about {
+  background:var(--bg2);
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:6rem; align-items:start; padding:7rem 3.5rem;
+}
+
+/*
+  ABOUT-EYE - malý textový štítok "ABOUT"
+  font-family - monospace písmo
+  font-size - veľmi malý text
+  color - svetlo sivý
+  letter-spacing - rozšírenie
+  margin-bottom - odstup dole
+*/
+.about-eye { font-family:var(--ff-mono); font-size:10.5px; color:var(--ink3); letter-spacing:.12em; margin-bottom:1.2rem }
+
+/*
+  ABOUT-TITLE - hlavný nadpis sekcie "About"
+  font-family - serif písmo
+  font-size - veľký text s clamp() pre responzivitu
+  font-weight:400 - normálne písmo
+  line-height - kompaktnejšie riadkovanie
+  letter-spacing - mierne zúženie
+  margin-bottom - odstup dole
+*/
+.about-title { font-family:var(--ff-head); font-size:clamp(34px,3.6vw,50px); font-weight:400; line-height:1.08; letter-spacing:-.025em; margin-bottom:2rem }
+
+/*
+  ABOUT-TITLE EM - kurzíva v nadpise
+  font-style:italic - kurzívne písmo
+  color - stredne tmavý text
+*/
+.about-title em { font-style:italic; color:var(--ink2) }
+
+/*
+  ABOUT-P - odsek s popisom
+  font-size - stredný text
+  color - stredne tmavý
+  line-height - prirodzené riadkovanie
+  margin-bottom - odstup dole
+*/
+.about-p { font-size:14px; color:var(--ink2); line-height:1.9; margin-bottom:1rem }
+
+/*
+  INFO-GRID - mriežka s informáciami (lokácia, skúsenosti, atď.)
+  display:grid - CSS Grid
+  grid-template-columns:1fr 1fr - dva stĺpce rovnakej šírky
+  gap:1px - tenká medzera
+  background - farba medzier
+  border - hranica okolo celej mriežky
+  border-radius - zaoblené rohy
+  overflow:hidden - oreže pretekajúci obsah
+  margin-bottom - odstup dole
+*/
+.info-grid {
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:1px; background:var(--bd);
+  border:1px solid var(--bd); border-radius:10px; overflow:hidden; margin-bottom:1.25rem;
+}
+
+/*
+  IG-CELL - jednotlivá bunka v informačnej mriežke
+  background - svetlé pozadie
+  padding - vnútorné odsadenie
+*/
+.ig-cell { background:var(--bg); padding:1.3rem 1.5rem }
+
+/*
+  IG-LABEL - štítok informácie (napr. "Location", "Experience")
+  font-family - monospace písmo
+  font-size - veľmi malý text
+  color - svetlo sivý
+  letter-spacing - rozšírenie
+  margin-bottom - odstup dole
+*/
+.ig-label { font-family:var(--ff-mono); font-size:10px; color:var(--ink3); letter-spacing:.1em; margin-bottom:.35rem }
+
+/*
+  IG-VAL - hlavná hodnota informácie
+  font-size - stredný text
+  font-weight:600 - polotučné
+  color - tmavý text
+*/
+.ig-val { font-size:14px; font-weight:600; color:var(--ink) }
+
+/*
+  IG-SUB - doplnková informácia pod hlavnou hodnotou
+  font-size - malý text
+  color - stredne tmavý
+  margin-top - odstup zhora
+*/
+.ig-sub { font-size:12px; color:var(--ink2); margin-top:2px }
+
+/*
+  AVAIL - indikátor dostupnosti pre spoluprácu
+  display:flex - flexbox
+  align-items:center - vertikálne centrované
+  gap - medzera medzi prvkami
+  padding - vnútorné odsadenie
+  border - tenká zelená hranica
+  border-radius - zaoblené rohy
+  background - priesvitné zelené pozadie
+*/
+.avail { display:flex; align-items:center; gap:10px; padding:.85rem 1.2rem; border:1px solid rgba(15,124,62,.2); border-radius:8px; background:var(--green-bg) }
+
+/*
+  AVAIL-D - blikajúca bodka indikujúca dostupnosť
+  width,height - veľkosť kruhu
+  border-radius:50% - kruhový tvar
+  background - zelená farba
+  flex-shrink:0 - nezmenšuje sa
+  box-shadow - zelený tieň
+  animation - blikajúca animácia
+*/
+.avail-d { width:7px; height:7px; border-radius:50%; background:var(--green); flex-shrink:0; box-shadow:0 0 0 3px rgba(15,124,62,.2); animation:glow-g 2.4s ease-in-out infinite }
+
+/*
+  AVAIL-T - text indikátora dostupnosti
+  font-size - malý text
+  color - zelený text
+  font-weight:600 - polotučné
+*/
+.avail-t { font-size:13px; color:var(--green); font-weight:600 }
+
+/* ─── CONTACT ─── */
+
+/*
+  #CONTACT - sekcia s kontaktnými informáciami
+  background - svetlé pozadie
+  text-align:center - centrovaný text
+  padding - veľké vnútorné odsadenie
+  position:relative - pre absolútne pozicionovanie
+  overflow:hidden - oreže pretekajúci obsah
+*/
+#contact { background:var(--bg); text-align:center; padding:9rem 3.5rem; position:relative; overflow:hidden }
+
+/*
+  CONTACT-GHOST - veľký priesvitný text na pozadí
+  position:absolute - absolútne pozicionovanie
+  font-family - serif písmo
+  font-style:italic - kurzíva
+  font-size - obrovský text s clamp() pre responzivitu
+  color - veľmi svetlá farba (takmer neviditeľná)
+  letter-spacing - mierne zúženie
+  top,left:50% - centrované
+  transform:translate(-50%,-50%) - presné centrované
+  pointer-events:none - neinteraktívne
+  user-select:none - nemožno označiť
+  white-space:nowrap - bez zalamovania
+*/
+.contact-ghost {
+  position:absolute; font-family:var(--ff-head); font-style:italic;
+  font-size:clamp(90px,16vw,210px); color:var(--bg2); letter-spacing:-.04em;
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  pointer-events:none; user-select:none; white-space:nowrap;
+}
+
+/*
+  C-INNER - vnútorný kontajner pre obsah (nad ghost textom)
+  position:relative - relatívne pozicionovanie
+  z-index:1 - nad ghost textom
+*/
+.c-inner { position:relative; z-index:1 }
+
+/*
+  C-EYE - malý textový štítok "CONTACT"
+  font-family - monospace písmo
+  font-size - malý text
+  color - svetlo sivý
+  letter-spacing - rozšírenie
+  margin-bottom - odstup dole
+*/
+.c-eye { font-family:var(--ff-mono); font-size:11px; color:var(--ink3); letter-spacing:.12em; margin-bottom:1.25rem }
+
+/*
+  C-TITLE - hlavný nadpis sekcie "Get in touch"
+  font-family - serif písmo
+  font-size - veľmi veľký text s clamp() pre responzivitu
+  font-weight:400 - normálne písmo
+  line-height:1 - kompaktnejšie riadkovanie
+  letter-spacing - mierne zúženie
+  margin-bottom - odstup dole
+*/
+.c-title { font-family:var(--ff-head); font-size:clamp(44px,7vw,88px); font-weight:400; line-height:1; letter-spacing:-.03em; margin-bottom:1.2rem }
+
+/*
+  C-TITLE EM - kurzíva v nadpise
+  font-style:italic - kurzívne písmo
+  color - stredne tmavý text
+*/
+.c-title em { font-style:italic; color:var(--ink2) }
+
+/*
+  C-SUB - podnadpis s vysvetlením
+  font-size - stredný text
+  color - stredne tmavý
+  max-width - maximálna šírka
+  margin - centrované a odstup dole
+  line-height - prirodzené riadkovanie
+*/
+.c-sub { font-size:14px; color:var(--ink2); max-width:360px; margin:0 auto 2.75rem; line-height:1.8 }
+
+/*
+  C-BTNS - kontajner pre tlačidlá (Email, LinkedIn, atď.)
+  display:flex - flexbox
+  gap - medzera medzi tlačidlami
+  justify-content:center - centrované
+  flex-wrap:wrap - zalamovanie na viac riadkov
+*/
+.c-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap }
+
+/*
+  C-EMAIL - email adresa na konci sekcie
+  font-family - monospace písmo
+  font-size - malý text
+  color - svetlo sivý
+  margin-top - odstup zhora
+*/
+.c-email { font-family:var(--ff-mono); font-size:12px; color:var(--ink3); margin-top:2rem }
+
+/* ─── FOOTER ─── */
+
+/*
+  FOOTER - päta stránky s copyrightom a odkazmi
+  padding - vnútorné odsadenie
+  border-top - horizontálna čiara zhora
+  display:flex - flexbox
+  justify-content:space-between - prvky na kraje
+  align-items:center - vertikálne centrované
+*/
+footer { padding:1.2rem 3.5rem; border-top:1px solid var(--bd); display:flex; justify-content:space-between; align-items:center }
+
+/*
+  FOOTER P - copyright text
+  font-family - monospace písmo
+  font-size - malý text
+  color - svetlo sivý
+*/
+footer p { font-family:var(--ff-mono); font-size:11px; color:var(--ink3) }
+
+/*
+  FOOTER A - odkazy v päte
+  color - svetlo sivý
+  text-decoration:none - bez podčiarknutia
+  transition - zmena farby
+*/
+footer a { color:var(--ink3); text-decoration:none; transition:color .2s }
+
+/*
+  FOOTER A:HOVER - hover efekt pre odkazy v päte
+  color - tmavý text
+*/
+footer a:hover { color:var(--ink) }
+
+/* ─── ANIMATIONS ─── */
+
+/*
+  @KEYFRAMES UP - animácia pre postupné zobrazovanie prvkov
+  to { opacity:1; transform:translateY(0) rotate(0) } - konečný stav: viditeľné, na pôvodnej pozícii
+*/
+@keyframes up    { to { opacity:1; transform:translateY(0) rotate(0) } }
+
+/*
+  @KEYFRAMES BLINK - blikajúca animácia (pre kurzor)
+  0%,100% - plná nepriehľadnosť
+  50% - polovičná nepriehľadnosť
+*/
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/*
+  @KEYFRAMES GLOW-G - zelené žiarivé blikanie (pre dostupnosť)
+  0%,100% - žiadny tieň
+  50% - zelený tieň s priesvitnosťou
+*/
+@keyframes glow-g { 0%,100%{box-shadow:0 0 0 0 rgba(15,124,62,.4)} 50%{box-shadow:0 0 0 5px rgba(15,124,62,0)} }
+
+/*
+  @KEYFRAMES FLOAT - plávajúca animácia (hore-dole)
+  0%,100% - pôvodná pozícia
+  50% - posunutie nahor
+*/
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
+
+/*
+  REVEAL - trieda pre prvky ktoré sa postupne zobrazujú pri scroll
+  opacity:0 - počiatočne skryté
+  transform:translateY(22px) - posunuté dole
+  transition - plynulé zobrazovanie
+*/
+.reveal { opacity:0; transform:translateY(22px); transition:opacity .65s var(--ease), transform .65s var(--ease) }
+
+/*
+  REVEAL.IN - stav keď je prvok viditeľný
+  opacity:1 - plne viditeľné
+  transform:translateY(0) - na pôvodnej pozícii
+*/
+.reveal.in { opacity:1; transform:translateY(0) }
+
+/*
+  D1-D4 - oneskorenia pre postupné zobrazovanie prvkov
+  transition-delay - oneskorenie animácie
+*/
+.d1 { transition-delay:.07s }
+.d2 { transition-delay:.14s }
+.d3 { transition-delay:.21s }
+.d4 { transition-delay:.28s }
+
+/* ─── RESPONSIVE ─── */
+
+/*
+  @MEDIA(MAX-WIDTH:1050PX) - úpravy pre stredné obrazovky
+  PROJ-GRID - projektová mriežka zmenená na 2 stĺpce
+  STACK-CATEGORIES - kategórie zručností zmenené na 2 stĺpce
+*/
+@media(max-width:1050px) {
+  .proj-grid { grid-template-columns:1fr 1fr }
+  .stack-categories { grid-template-columns:1fr 1fr }
+}
+
+/*
+  @MEDIA(MAX-WIDTH:960PX) - úpravy pre malé obrazovky
+  #HERO - hero sekcia zmenená na jeden stĺpec
+  .HERO-R - pravá časť zarovnaná naľavo
+  .AVATAR-RING - menší avatar
+  NAV - menšie padding
+  .WRAP - menšie padding pre všetky sekcie
+  #ABOUT - about sekcia zmenená na jeden stĺpec
+  FOOTER - menšie padding
+  #CONTACT - menšie padding
+*/
+@media(max-width:960px) {
+  #hero { grid-template-columns:1fr; padding:7rem 2rem 4rem; gap:3rem }
+  .hero-r { justify-content:flex-start }
+  .avatar-ring { width:260px; height:260px }
+  nav { padding:0 2rem }
+  .wrap { padding:5rem 2rem }
+  #about { grid-template-columns:1fr; gap:3rem; padding:5rem 2rem }
+  footer { padding:1.2rem 2rem }
+  #contact { padding:6rem 2rem }
+}
+@media(max-width:640px) {
+  .nav-links { display:none }
+  .proj-grid { grid-template-columns:1fr }
+  .stack-categories { grid-template-columns:1fr }
+  .info-grid { grid-template-columns:1fr }
+  footer { flex-direction:column; gap:6px; text-align:center }
+  .fb1,.fb2,.fb3 { display:none }
+}

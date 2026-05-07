@@ -1,0 +1,1063 @@
+<!-- 
+  ┌─────────────────────────────────────────────────────────────────────────────┐
+  │ PORTFOLIO - HTML DOKUMENTÁCIA                                               │
+  │ Autor: Filip                                                                │
+  │ Popis: Moderné portfolio webového developera s responzívnym dizajnom        │
+  │        a podporou viacjazyčnosti (SK/EN)                                    │
+  └─────────────────────────────────────────────────────────────────────────────┘
+-->
+
+<!doctype html>
+<!-- 
+  DOCTYPE - deklarácia formátu dokumentu (HTML5)
+  lang="sk" - nastavenie jazyka dokumentu na Slovenčinu pre lepšiu dostupnosť
+-->
+<html lang="sk">
+  <head>
+    <!-- META TAGY - informácie pre prehliadače a vyhľadávače -->
+
+    <!-- UTF-8 - znakový kód pre správne zobrazenie všetkých znakov -->
+    <meta charset="UTF-8" />
+
+    <!-- 
+      Viewport meta tag - zabezpečuje responzívny dizajn
+      width=device-width - šírka sa prispôsobí šírke zariadenia
+      initial-scale=1.0 - počiatočné priblíženie na 100%
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Nadpis stránky - zobrazí sa v záložke prehliadača -->
+    <title>Filip Glemba — Web Developer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/css/styles.css" />
+  </head>
+  <body>
+    <!-- 
+      BODY - hlavný obsah stránky
+      
+      Obsahuje všetky viditeľné prvky stránky:
+      - Navigáciu (nav)
+      - Hlavnú sekciu (hero)
+      - Sekciu projektov (projects)
+      - Sekciu technológií (stack)
+      - Sekciu o mne (about)
+      - Sekciu kontakt (contact)
+      - Pätičku (footer)
+    -->
+    <!-- ═══ NAV ═══ -->
+    <nav id="nav">
+      <!--
+        LOGO - odkaz na začiatok stránky (hero sekciu)
+        href="#hero" - anchor link na hero sekciu (smooth scroll)
+        class="logo" - štýl pre logo s veľkým písmom a hover efektom
+        "FG." - iniciály autora (Filip Glemba)
+      -->
+      <a href="#hero" class="logo">FG.</a>
+
+      <!--
+        NAVIGAČNÉ ODKAZY - hlavné sekcie stránky
+        class="nav-links" - horizontálny zoznam s medzerami medzi položkami
+      -->
+      <ul class="nav-links">
+        <!--
+          ODKAZ NA PROJEKTY - anchor link na sekciu projektov
+          href="#projects" - smooth scroll na projekty
+          data-i18n="projectsNav" - kľúč pre preklad do angličtiny
+          "Projekty" - text v slovenčine
+        -->
+        <li><a href="#projects" data-i18n="projectsNav">Projekty</a></li>
+
+        <!--
+          ODKAZ NA TECH STACK - anchor link na sekciu technológií
+          href="#stack" - smooth scroll na tech stack
+          "Stack" - text (bez prekladu, technický termín)
+        -->
+        <li><a href="#stack">Stack</a></li>
+
+        <!--
+          ODKAZ NA O MNE - anchor link na sekciu o autorovi
+          href="#about" - smooth scroll na about sekciu
+          data-i18n="about" - kľúč pre preklad do angličtiny
+          "O mne" - text v slovenčine
+        -->
+        <li><a href="#about" data-i18n="about">O mne</a></li>
+      </ul>
+
+      <!--
+        PRAVÁ ČASŤ NAVIGÁCIE - jazykový prepínač a kontaktné tlačidlo
+        class="nav-right" - flex kontajner zarovnaný doprava
+      -->
+      <div class="nav-right">
+        <!--
+          TLAČIDLO PREPÍNAČA JAZYKA - prepína medzi SK/EN
+          id="lang-toggle" - jedinečný identifikátor pre JavaScript
+          class="lang-btn" - štýl pre jazykové tlačidlo
+          "EN" - počiatočný text (prepína sa na "SK" pri kliknutí)
+        -->
+        <button id="lang-toggle" class="lang-btn">EN</button>
+
+        <!--
+          KONTAKTNÉ TLAČIDLO - odkaz na kontaktnú sekciu
+          href="#contact" - anchor link na kontakt (smooth scroll)
+          class="nav-btn" - štýl pre navigačné tlačidlo s šípkou
+          data-i18n="contact" - kľúč pre preklad do angličtiny
+          "Kontakt →" - text s šípkou v slovenčine
+        -->
+        <a href="#contact" class="nav-btn" data-i18n="contact">Kontakt →</a>
+      </div>
+    </nav>
+
+    <!--
+      ═══ HERO SEKCIA ═══
+      Hlavná uvítacia sekcia stránky s animáciami a profilovým obrázkom
+      Používa CSS Grid pre rozloženie (ľavá časť text, pravá časť obrázok)
+    -->
+    <section id="hero">
+      <!--
+        ĽAVÁ ČASŤ HERO - obsahuje text, nadpis a tlačidlá
+        position:relative - pre správne pozicionovanie v CSS Grid
+        z-index:1 - zabezpečuje, že obsah je nad pozadím
+      -->
+      <div class="hero-l">
+        <!--
+          ŠTÍTOK "DOSTUPNÝ PRE SPOLUPRÁCU" - zelený badge s animovanou bodkou
+          data-i18n="available" - prekladateľný text cez JavaScript
+        -->
+        <div class="h-pill">
+          <div class="h-dot"></div>
+          <span data-i18n="available">Dostupný pre spoluprácu</span>
+        </div>
+
+        <!--
+          HLAVNÝ NADPIS - veľký nadpis s animáciou
+          Preklad je rozdelený na dva samostatné prvky, aby sa zachovala HTML
+          štruktúra <br> a <em> pri prepnutí jazyka.
+        -->
+        <h1 class="h-title">
+          <span data-i18n="heroTitleLine1">Web</span><br />
+          <em data-i18n="heroTitleLine2">developer.</em>
+        </h1>
+
+        <!--
+          POPIS - krátky text o autorovi a jeho práci
+          data-i18n="heroDesc" - text sa prepne pri zmene jazyka
+        -->
+        <p class="h-desc" data-i18n="heroDesc">
+          Tvorím moderné webové aplikácie – od čistého frontendu po robustný
+          backend. Rád riešim zaujímavé problémy a staviam veci, ktoré fungujú a
+          dobre vyzerajú.
+        </p>
+
+        <!--
+          TLAČIDLÁ AKCIÍ - dva tlačidlá vedľa seba pre hlavné akcie
+          class="h-actions" - flexbox kontajner s medzerami medzi tlačidlami
+        -->
+        <div class="h-actions">
+          <!--
+            TLAČIDLO "POZRI PROJEKTY" - hlavné call-to-action tlačidlo
+            href="#projects" - anchor link na sekciu projektov (smooth scroll)
+            class="btn-solid" - plné tlačidlo s modrým pozadím a bielym textom
+            data-i18n="viewProjects" - kľúč pre preklad textu do angličtiny
+            "Pozri projekty" - text tlačidla v slovenčine
+          -->
+          <a href="#projects" class="btn-solid" data-i18n="viewProjects"
+            >Pozri projekty</a
+          >
+
+          <!--
+            TLAČIDLO "GITHUB" - sekundárne tlačidlo na GitHub profil
+            href="https://github.com/FilipGlemba" - odkaz na GitHub profil autora
+            target="_blank" - otvára sa v novom okne/tabe
+            class="btn-line" - obrysové tlačidlo s modrou hranicou
+            "GitHub ↗" - text s šípkou indikujúcou externý odkaz
+          -->
+          <a
+            href="https://github.com/FilipGlemba"
+            target="_blank"
+            class="btn-line"
+            >GitHub ↗</a
+          >
+        </div>
+      </div>
+
+      <div class="hero-r">
+        <div class="hero-profile">
+          <div class="avatar-ring">
+            <svg viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
+              <!--
+                DEFS - definície pre opakované použitie (gradienty, masky, atď.)
+                Všetky definície sú na začiatku SVG pre lepšiu organizáciu
+              -->
+              <defs>
+                <!--
+                  RADIAL GRADIENT - kruhový gradient pre pozadie
+                  cx="50%" cy="40%" - stred gradientu (trochu vyššie ako stred)
+                  r="60%" - polomer gradientu
+                -->
+                <radialGradient id="bg-grad" cx="50%" cy="40%" r="60%">
+                  <stop offset="0%" stop-color="#e8e8e2" />
+                  <stop offset="100%" stop-color="#d8d8d0" />
+                </radialGradient>
+
+                <!--
+                  SKIN GRADIENT - gradient pre pokožku
+                  Používa sa pre tvár a uši
+                -->
+                <radialGradient id="skin" cx="50%" cy="35%" r="60%">
+                  <stop offset="0%" stop-color="#f5cba7" />
+                  <stop offset="100%" stop-color="#e8a87c" />
+                </radialGradient>
+
+                <!--
+                  SHIRT GRADIENT - lineárny gradient pre tričko
+                  x1="0%" y1="0%" x2="100%" y2="100%" - šikmý gradient
+                -->
+                <linearGradient id="shirt" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#2d4ef5" />
+                  <stop offset="100%" stop-color="#818cf8" />
+                </linearGradient>
+
+                <!--
+                  CIRCLE CLIP PATH - okrúhla maska pre orezenie SVG
+                  cx="170" cy="170" r="170" - kruh so stredom v strede SVG
+                -->
+                <clipPath id="circle-clip">
+                  <circle cx="170" cy="170" r="170" />
+                </clipPath>
+              </defs>
+
+              <!--
+                G ELEMENT - skupina SVG prvkov
+                clip-path="url(#circle-clip)" - aplikuje okrúhlu masku na celú skupinu
+              -->
+              <g clip-path="url(#circle-clip)">
+                <!--
+                  POZADIE - veľký obdĺžnik s gradientom
+                  width="340" height="340" - veľkosť celej SVG
+                  fill="url(#bg-grad)" - použitie definovaného gradientu
+                -->
+                <rect width="340" height="340" fill="url(#bg-grad)" />
+
+                <!--
+                  GRID PATTERN - mriežka pre textúru pozadia
+                  width="20" height="20" - veľkosť jednej bunky mriežky
+                  patternUnits="userSpaceOnUse" - jednotky sú v pixeloch
+                -->
+                <pattern
+                  id="grid"
+                  width="20"
+                  height="20"
+                  patternUnits="userSpaceOnUse"
+                >
+                  <!--
+                    PATH - čiara mriežky (z 20,0 do 0,0 a potom do 0,20)
+                    stroke - farba čiary (svetlo sivá)
+                    stroke-width="1" - hrúbka čiary
+                  -->
+                  <path
+                    d="M 20 0 L 0 0 0 20"
+                    fill="none"
+                    stroke="rgba(0,0,0,0.04)"
+                    stroke-width="1"
+                  />
+                </pattern>
+
+                <!-- Aplikácia mriežkového patternu na celé pozadie -->
+                <rect width="340" height="340" fill="url(#grid)" />
+
+                <!--
+                  TIEŇ POD OSOBOU - elipsa pod tričkom pre 3D efekt
+                  cx="170" cy="310" - pozícia (v strede, dole)
+                  rx="90" ry="20" - široká a plochá
+                -->
+                <ellipse
+                  cx="170"
+                  cy="310"
+                  rx="90"
+                  ry="20"
+                  fill="rgba(0,0,0,0.08)"
+                />
+
+                <!--
+                  TRIČKO - komplexná cesta vytvárajúca tvar trička
+                  Q - kvadratické Bézierove krivky pre zaoblené tvary
+                -->
+                <path
+                  d="M 75 340 Q 75 240 110 220 Q 135 210 170 210 Q 205 210 230 220 Q 265 240 265 340 Z"
+                  fill="url(#shirt)"
+                />
+
+                <!--
+                  LÍMEC TRIČKA - malý trojuholník na vrchu trička
+                  L - priame čiary, Q - krivky
+                -->
+                <path
+                  d="M 145 215 L 170 240 L 195 215 Q 170 225 145 215Z"
+                  fill="rgba(255,255,255,0.15)"
+                />
+
+                <!--
+                  OBLIČAJ - obdĺžnik pre základ tváre
+                  x="152" y="190" width="36" height="30" - pozícia a veľkosť
+                  rx="8" - zaoblené rohy
+                -->
+                <rect
+                  x="152"
+                  y="190"
+                  width="36"
+                  height="30"
+                  rx="8"
+                  fill="url(#skin)"
+                />
+
+                <!--
+                  HLAVA - veľká elipsa pre hlavu
+                  cx="170" cy="160" rx="58" ry="64" - pozícia a veľkosť
+                -->
+                <ellipse cx="170" cy="160" rx="58" ry="64" fill="url(#skin)" />
+
+                <!--
+                  VLASY - komplexná cesta vytvárajúca účes
+                  Q - Bézierove krivky pre prirodzený tvar
+                -->
+                <path
+                  d="M 112 148 Q 112 88 170 88 Q 228 88 228 148 Q 220 120 170 118 Q 120 120 112 148Z"
+                  fill="#2c1a0e"
+                />
+
+                <!--
+                  OČI - malé čiary pre obočie
+                  stroke-linecap="round" - zaoblené konce
+                -->
+                <path
+                  d="M 112 148 Q 108 165 114 175 Q 110 155 118 148Z"
+                  fill="#2c1a0e"
+                />
+                <path
+                  d="M 228 148 Q 232 165 226 175 Q 230 155 222 148Z"
+                  fill="#2c1a0e"
+                />
+
+                <!-- Očné bielka - biele elipsy -->
+                <ellipse cx="148" cy="158" rx="9" ry="10" fill="white" />
+                <ellipse cx="192" cy="158" rx="9" ry="10" fill="white" />
+
+                <!-- Zreničky - tmavé kruhy v očiach -->
+                <ellipse cx="150" cy="160" rx="6" ry="7" fill="#2c1a0e" />
+                <ellipse cx="194" cy="160" rx="6" ry="7" fill="#2c1a0e" />
+
+                <!-- Lesk v očiach - malé biele bodky -->
+                <ellipse cx="152" cy="158" rx="2" ry="2" fill="white" />
+                <ellipse cx="196" cy="158" rx="2" ry="2" fill="white" />
+
+                <!-- Obočie - krivky nad očami -->
+                <path
+                  d="M 138 144 Q 148 138 159 142"
+                  fill="none"
+                  stroke="#2c1a0e"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                />
+                <path
+                  d="M 182 142 Q 192 138 202 144"
+                  fill="none"
+                  stroke="#2c1a0e"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                />
+
+                <!-- Úsmev - mierne zakrivená čiara -->
+                <path
+                  d="M 168 163 Q 163 175 168 180 Q 172 182 176 180 Q 181 175 172 163"
+                  fill="none"
+                  stroke="rgba(0,0,0,0.15)"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                />
+
+                <!-- Vrások na čele - malé čiary -->
+                <path
+                  d="M 152 192 Q 170 204 188 192"
+                  fill="none"
+                  stroke="rgba(0,0,0,0.2)"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                />
+
+                <!-- Uši - dve elipsy po stranách hlavy -->
+                <ellipse cx="112" cy="162" rx="10" ry="13" fill="url(#skin)" />
+                <ellipse cx="228" cy="162" rx="10" ry="13" fill="url(#skin)" />
+              </g>
+            </svg>
+          </div>
+
+          <div class="f-badge fb1">
+            <span class="f-icon">💻</span>
+            <div>
+              <strong data-i18n="fullstackDev">Full-stack Dev</strong>
+              <span class="f-sub" data-i18n="yearsExp">2+ roky skúseností</span>
+            </div>
+          </div>
+          <div class="f-badge fb2">
+            <span class="f-icon">⚡</span>
+            <div>
+              <strong data-i18n="projects10">10+ projektov</strong>
+              <span class="f-sub" data-i18n="completed">dokončených</span>
+            </div>
+          </div>
+          <div class="f-badge fb3">
+            <span class="f-icon">🇸🇰</span>
+            <div>
+              <strong data-i18n="slovakia">Slovensko</strong>
+              <span class="f-sub">remote friendly</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ PROJECTS ═══ -->
+    <section id="projects">
+      <!--
+        HLAVIČKA SEKCIÍ - spoločný štýl pre všetky sekcie
+        s-head - kontajner pre nadpis a čiaru
+        reveal - trieda pre animáciu pri scrollovaní
+      -->
+      <div class="wrap" style="padding-bottom: 0">
+        <div class="s-head reveal">
+          <h2 class="s-title" data-i18n="projectsTitle">Projekty</h2>
+          <div class="s-rule"></div>
+        </div>
+      </div>
+
+      <!--
+        GRID PROJEKTOV - responzívna mriežka kariet projektov
+        wrap - kontajner s paddingom
+        proj-grid - CSS Grid s tromi stĺpcami na desktop
+      -->
+      <div class="wrap" style="padding-top: 0">
+        <div class="proj-grid">
+          <!--
+            PCARD - projektová karta (funguje ako hover efekt)
+            class="pcard reveal" - základné štýly karty + animácia pri scroll
+            reveal - Intersection Observer animácia (zobrazenie pri scroll)
+          -->
+          <div class="pcard reveal">
+            <!--
+              PCARD-ACCENT - modrá čiara na vrchu karty (animovaná pri hover)
+              class="pcard-accent" - lineárny gradient z modrej do svetlo modrej
+              ::before pseudo-element v CSS vytvára svetelný efekt
+            -->
+            <div class="pcard-accent"></div>
+
+            <!--
+              PCARD-HEAD - hlavička karty s poradovým číslom, názvom a ikonou
+              class="pcard-head" - flexbox rozloženie (medzera medzi textom a ikonou)
+            -->
+            <div class="pcard-head">
+              <div>
+                <!--
+                  PCARD-NUM - poradové číslo projektu
+                  class="pcard-num" - monospace písmo, malý text, svetlo sivý
+                  "001" - formát s nulami pre konzistentnosť
+                -->
+                <div class="pcard-num">001</div>
+
+                <!--
+                  PCARD-TITLE - názov projektu
+                  class="pcard-title" - veľký text, polotučné, tmavý
+                  H3 - sémanticky správna úroveň nadpisu
+                -->
+                <h3 class="pcard-title">Weather App</h3>
+              </div>
+
+              <!--
+                PCARD-ICON - emoji ikona projektu
+                class="pcard-icon" - okrúhly kontajner s pozadím a animáciou
+                "🌤️" - emoji reprezentujúce počasie
+              -->
+              <div class="pcard-icon">🌤️</div>
+            </div>
+
+            <!--
+              PCARD-DESC - popis projektu
+              class="pcard-desc" - stredný text, stredne tmavý, dobré riadkovanie
+              data-i18n="weatherDesc" - kľúč pre preklad do angličtiny
+              Text vysvetľuje funkcionalitu aplikácie
+            -->
+            <p class="pcard-desc" data-i18n="weatherDesc">
+              Zadáš mesto, okamžite vidíš teplotu, vlhkosť, vietor a predpoveď
+              na ďalšie dni. Dáta z OpenWeather API, responzívny a rýchly UI.
+            </p>
+
+            <!--
+              PCARD-TAGS - technológie použité v projekte
+              class="pcard-tags" - flexbox kontajner s medzerami medzi tagmi
+              Každý tag má class="pcard-tag" - štýl s hranicami a hover efektmi
+            -->
+            <div class="pcard-tags">
+              <span class="pcard-tag">JavaScript</span>
+              <span class="pcard-tag">HTML/CSS</span>
+              <span class="pcard-tag">OpenWeather API</span>
+              <span class="pcard-tag">REST</span>
+            </div>
+
+            <!--
+              PCARD-FOOT - päta karty s odkazmi a stavom
+              class="pcard-foot" - flexbox medzi odkazmi a stavom
+            -->
+            <div class="pcard-foot">
+              <!--
+                PCARD-LINKS - kontajner pre odkazy na demo a GitHub
+                class="pcard-links" - horizontálne zoradenie s medzerami
+              -->
+              <div class="pcard-links">
+                <!--
+                  DEMO ODKAZ - odkaz na živú ukážku aplikácie
+                  href="https://weather-app-demo.netlify.app" - URL na hosting
+                  target="_blank" - otvára sa v novom okne/tabe
+                  class="pcard-link" - štýl pre odkaz s hover efektom
+                  "Demo ↗" - text s šípkou indikujúcou externý odkaz
+                -->
+                <a
+                  href="https://weather-app-demo.netlify.app"
+                  target="_blank"
+                  class="pcard-link"
+                  >Demo ↗</a
+                >
+
+                <!--
+                  GITHUB ODKAZ - odkaz na zdrojový kód
+                  href="https://github.com/username/weather-app" - GitHub repository
+                  target="_blank" - otvára sa v novom okne/tabe
+                  class="pcard-link" - rovnaký štýl ako demo odkaz
+                  "GitHub ↗" - text s šípkou pre GitHub
+                -->
+                <a
+                  href="https://github.com/username/weather-app"
+                  target="_blank"
+                  class="pcard-link"
+                  >GitHub ↗</a
+                >
+              </div>
+
+              <!--
+                BADGE - stavový štítok projektu
+                class="badge badge-wip" - základný badge štýl + "work in progress"
+                badge-wip - oranžové pozadie pre projekty vo vývoji
+                "IN PROGRESS" - text indikujúci stav vývoja
+              -->
+              <span class="badge badge-wip">IN PROGRESS</span>
+            </div>
+          </div>
+
+          <div class="pcard reveal d1">
+            <div class="pcard-accent"></div>
+            <div class="pcard-head">
+              <div>
+                <div class="pcard-num">002</div>
+                <h3 class="pcard-title">To-do App</h3>
+              </div>
+              <div class="pcard-icon">✅</div>
+            </div>
+            <p class="pcard-desc" data-i18n="todoDesc">
+              Prehľadná appka na poznámky a správu úloh. Pridávanie, editovanie,
+              mazanie – uložené lokálne, bez prihlásenia, okamžite použiteľné.
+            </p>
+            <div class="pcard-tags">
+              <span class="pcard-tag">JavaScript</span>
+              <span class="pcard-tag">HTML/CSS</span>
+              <span class="pcard-tag">LocalStorage</span>
+            </div>
+            <div class="pcard-foot">
+              <div class="pcard-links">
+                <a
+                  href="https://todo-app-demo.netlify.app"
+                  target="_blank"
+                  class="pcard-link"
+                  >Demo ↗</a
+                >
+                <a
+                  href="https://github.com/username/todo-app"
+                  target="_blank"
+                  class="pcard-link"
+                  >GitHub ↗</a
+                >
+              </div>
+              <span class="badge badge-wip">IN PROGRESS</span>
+            </div>
+          </div>
+
+          <div class="pcard reveal d2">
+            <div class="pcard-accent"></div>
+            <div class="pcard-head">
+              <div>
+                <div class="pcard-num">003</div>
+                <h3 class="pcard-title">Full-stack E-shop</h3>
+              </div>
+              <div class="pcard-icon">🛒</div>
+            </div>
+            <p class="pcard-desc" data-i18n="eshopDesc">
+              Kompletná e-commerce platforma – autentifikácia, správa produktov,
+              košík, platby a admin dashboard. Prvý veľký full-stack projekt.
+            </p>
+            <div class="pcard-tags">
+              <span class="pcard-tag">PHP</span>
+              <span class="pcard-tag">MySQL</span>
+              <span class="pcard-tag">JavaScript</span>
+              <span class="pcard-tag">HTML/CSS</span>
+            </div>
+            <div class="pcard-foot">
+              <div class="pcard-links">
+                <a
+                  href="https://eshop-demo.netlify.app"
+                  target="_blank"
+                  class="pcard-link"
+                  >Demo ↗</a
+                >
+                <a
+                  href="https://github.com/username/eshop"
+                  target="_blank"
+                  class="pcard-link"
+                  >GitHub ↗</a
+                >
+              </div>
+              <span class="badge badge-wip">IN PROGRESS</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ STACK ═══ -->
+    <section id="stack">
+      <!-- HLAVIČKA SEKCIÍ - spoločný štýl pre všetky sekcie -->
+      <div class="wrap">
+        <div class="s-head reveal">
+          <h2 class="s-title" data-i18n="stackTitle">Tech Stack</h2>
+          <div class="s-rule"></div>
+        </div>
+
+        <!--
+          LEGENDA TECH STACK - vysvetlenie úrovní znalostí
+          stack-legend - flex kontajner s medzerami medzi položkami
+          Každá legenda má bodku s farbou a popis
+        -->
+        <div class="stack-legend reveal">
+          <!-- Expert úroveň - modrá bodka -->
+          <div class="leg-item">
+            <div class="leg-dot dot-expert"></div>
+            <span class="leg-label">Expert</span>
+          </div>
+          <!-- Advanced úroveň - fialová bodka -->
+          <div class="leg-item">
+            <div class="leg-dot dot-advanced"></div>
+            <span class="leg-label">Advanced</span>
+          </div>
+          <!-- Intermediate úroveň - zelená bodka -->
+          <div class="leg-item">
+            <div class="leg-dot dot-mid"></div>
+            <span class="leg-label">Intermediate</span>
+          </div>
+          <!-- Familiar úroveň - sivá bodka -->
+          <div class="leg-item">
+            <div class="leg-dot dot-basic"></div>
+            <span class="leg-label">Familiar</span>
+          </div>
+        </div>
+
+        <!--
+          KATEGÓRIE TECH STACK - mriežka s rôznymi kategóriami technológií
+          stack-categories - CSS Grid s tromi stĺpcami
+        -->
+        <div class="stack-categories">
+          <!--
+            FRONTEND KATEGÓRIA - technológie pre klientskú stranu
+            scat - kontajner kategórie s hover efektmi
+            scat-head - hlavička s ikonou a názvom
+          -->
+          <div class="scat reveal">
+            <div class="scat-head">
+              <span class="scat-icon">🎨</span
+              ><span class="scat-label">FRONTEND</span>
+            </div>
+            <!-- scat-items - zoznam technológií v kategórii -->
+            <div class="scat-items">
+              <!--
+                HTML/CSS - základné webové technológie
+                sitem - jednotlivá položka technológie
+                dot-expert - modrá bodka pre expert úroveň
+              -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-expert"></div>
+                  <span class="sitem-name">HTML / CSS</span>
+                </div>
+                <span class="sitem-level lv-expert">Expert</span>
+              </div>
+
+              <!-- JavaScript - programovací jazyk pre interaktivitu -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-advanced"></div>
+                  <span class="sitem-name">JavaScript</span>
+                </div>
+                <span class="sitem-level lv-advanced">Advanced</span>
+              </div>
+
+              <!-- React - JavaScript knižnica pre UI komponenty -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-mid"></div>
+                  <span class="sitem-name">React</span>
+                </div>
+                <span class="sitem-level lv-mid">Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- BACKEND KATEGÓRIA - server-side technológie -->
+          <div class="scat reveal d1">
+            <div class="scat-head">
+              <span class="scat-icon">⚙️</span
+              ><span class="scat-label">BACKEND</span>
+            </div>
+            <div class="scat-items">
+              <!-- PHP - server-side programovací jazyk -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-advanced"></div>
+                  <span class="sitem-name">PHP</span>
+                </div>
+                <span class="sitem-level lv-advanced">Advanced</span>
+              </div>
+
+              <!-- Node.js - JavaScript runtime pre server -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-mid"></div>
+                  <span class="sitem-name">Node.js</span>
+                </div>
+                <span class="sitem-level lv-mid">Intermediate</span>
+              </div>
+
+              <!-- REST API Design - návrh RESTful API -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-basic"></div>
+                  <span class="sitem-name">REST API Design</span>
+                </div>
+                <span class="sitem-level lv-basic">Familiar</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DATABÁZY KATEGÓRIA - databázové technológie -->
+          <div class="scat reveal d2">
+            <div class="scat-head">
+              <span class="scat-icon">🗄️</span
+              ><span class="scat-label">DATABÁZY</span>
+            </div>
+            <div class="scat-items">
+              <!-- SQL/MySQL - relačná databáza -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-advanced"></div>
+                  <span class="sitem-name">SQL / MySQL</span>
+                </div>
+                <span class="sitem-level lv-advanced">Advanced</span>
+              </div>
+
+              <!-- MongoDB - NoSQL databáza -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-mid"></div>
+                  <span class="sitem-name">MongoDB</span>
+                </div>
+                <span class="sitem-level lv-mid">Intermediate</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- DEVOPS & DEPLOY KATEGÓRIA - nasadzovanie a hosting -->
+          <div class="scat reveal d1">
+            <div class="scat-head">
+              <span class="scat-icon">🚀</span
+              ><span class="scat-label">DEVOPS & DEPLOY</span>
+            </div>
+            <div class="scat-items">
+              <!-- Hosting/Deploy - nasadzovanie aplikácií -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-basic"></div>
+                  <span class="sitem-name">Hosting / Deploy</span>
+                </div>
+                <span class="sitem-level lv-basic">Familiar</span>
+              </div>
+            </div>
+          </div>
+
+          <!--
+            NÁSTROJE KATEGÓRIA - vývojové nástroje a VCS
+            grid-column: span 2 - zaberá dva stĺpce v mriežke
+          -->
+          <div class="scat reveal d2" style="grid-column: span 2">
+            <div class="scat-head">
+              <span class="scat-icon">🛠️</span
+              ><span class="scat-label">NÁSTROJE</span>
+            </div>
+            <div
+              class="scat-items"
+              style="display: grid; grid-template-columns: 1fr 1fr"
+            >
+              <!-- Git/GitHub - verzionovanie kódu -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-expert"></div>
+                  <span class="sitem-name">Git / GitHub</span>
+                </div>
+                <span class="sitem-level lv-expert">Expert</span>
+              </div>
+
+              <!-- VS Code - editor kódu -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-advanced"></div>
+                  <span class="sitem-name">VS Code</span>
+                </div>
+                <span class="sitem-level lv-advanced">Advanced</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ ABOUT ═══ -->
+    <section id="about">
+      <!--
+        ĽAVÁ ČASŤ ABOUT - text o autorovi
+        Používa CSS Grid pre rozloženie (1fr 1fr)
+      -->
+      <div>
+        <!--
+          "O MNE" - skrytý nadpis pre prístupnosť
+          about-eye - malý text v monospace písmom
+        -->
+        <div class="about-eye reveal" data-i18n="aboutTitle">O MNE</div>
+
+        <!--
+          HLAVNÝ NADPIS ABOUT - s animáciou a kurzívou
+          about-title - veľký nadpis s line-height pre lepšie čítanie
+        -->
+        <h2 class="about-title reveal">
+          <span data-i18n="codeHeading">Kódujem,</span><br /><span
+            data-i18n="codeBecause"
+            >pretože ma</span
+          ><br /><em data-i18n="codeEnjoy">to baví.</em>
+        </h2>
+
+        <!-- PRVÝ ODSTAVEC - o skúsenostiach a začiatkoch -->
+        <p class="about-p reveal d1" data-i18n="aboutDesc1">
+          Som začínajúci web developer s viac ako 4 rokmi skúseností. Začínal
+          som s HTML, CSS a JavaScript, postupne som pridal PHP a základné
+          React. Rád budujem jednoduché a funkčné webové aplikácie.
+        </p>
+
+        <!-- DRUHÝ ODSTAVEC - o osobných projektoch -->
+        <p class="about-p reveal d2" data-i18n="aboutDesc2">
+          Okrem klientskych projektov rád experimentujem a staviam veci, ktoré
+          mi samotného chýbali – ako DevCheat alebo táto stránka.
+        </p>
+
+        <!-- TRETÍ ODSTAVEC - viac detailov o prístupe a pracovných nástrojoch -->
+        <p class="about-p reveal d3" data-i18n="aboutDesc3">
+          Vo voľnom čase pracujem na osobných projektoch, ktoré mi dávajú
+          priestor skúšať nové nástroje, zlepšovať workflow a testovať rýchlosť
+          aj použiteľnosť. Toto portfólio je príklad môjho štýlu práce: čistá
+          štruktúra, precízny dizajn a praktický výkon.
+        </p>
+
+        <!-- TLAČIDLO "POROZPRÁVAJME SA" - odkaz na kontakt -->
+        <a
+          href="#contact"
+          class="btn-solid reveal d3"
+          style="display: inline-block; margin-top: 0.75rem"
+          data-i18n="letsChat"
+          >Porozprávajme sa →</a
+        >
+      </div>
+      <!-- PRAVÁ ČASŤ ABOUT - štatistiky a dostupnosť -->
+      <div>
+        <!--
+          INFO GRID - mriežka so štatistikami
+          info-grid - CSS Grid s 2x2 rozložením
+          ig-cell - jednotlivá bunka s informáciami
+        -->
+        <div class="info-grid reveal d1">
+          <!-- SKÚSENOSTI - 2+ roky web development -->
+          <div class="ig-cell">
+            <div class="ig-label" data-i18n="experience">SKÚSENOSTI</div>
+            <div class="ig-val" data-i18n="years2plus">4+ roky</div>
+            <div class="ig-sub" data-i18n="webDev">web development</div>
+          </div>
+
+          <!-- PROJEKTY - 10+ dokončených -->
+          <div class="ig-cell">
+            <div class="ig-label" data-i18n="projectsNav">PROJEKTY</div>
+            <div class="ig-val" data-i18n="projects10">10+</div>
+            <div class="ig-sub" data-i18n="completed">dokončených</div>
+          </div>
+
+          <!-- LOKALITA - Slovensko -->
+          <div class="ig-cell">
+            <div class="ig-label" data-i18n="location">LOKALITA</div>
+            <div class="ig-val" data-i18n="slovakia">Slovensko</div>
+            <div class="ig-sub" data-i18n="remoteFriendly">remote friendly</div>
+          </div>
+
+          <!-- JAZYKY - SK/EN plynule -->
+          <div class="ig-cell">
+            <div class="ig-label" data-i18n="languages">JAZYKY</div>
+            <div class="ig-val" data-i18n="languageCodes">SK / EN</div>
+            <div class="ig-sub" data-i18n="fluent">plynule</div>
+          </div>
+        </div>
+
+        <!--
+          DOSTUPNOSŤ - zelený banner s animovanou bodkou
+          avail - kontajner s paddingom a zeleným pozadím
+          avail-d - animovaná bodka indikujúca dostupnosť
+        -->
+        <div class="avail reveal d2">
+          <div class="avail-d"></div>
+          <span class="avail-t" data-i18n="available_now"
+            >Momentálne dostupný pre nové príležitosti</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══ CONTACT ═══ -->
+    <section id="contact">
+      <!--
+        GHOST TEXT - veľký text na pozadí pre vizuálny efekt
+        contact-ghost - absolútne pozicionovaný, priesvitný text
+        text sa prekladá podľa jazyka pomocou data-i18n
+      -->
+      <div class="contact-ghost" data-i18n="contactGhost">POĎME</div>
+
+      <!--
+        VNÚTORNÝ KONTAJNER - obsah kontaktných informácií
+        c-inner - relatívne pozicionovaný pre prekrytie ghost textu
+      -->
+      <div class="c-inner">
+        <!--
+          "KONTAKT" - skrytý nadpis pre prístupnosť
+          c-eye - malý text v monospace písmom
+        -->
+        <div class="c-eye reveal" data-i18n="contactTitle">KONTAKT</div>
+
+        <!--
+          HLAVNÝ NADPIS CONTACT - veľký nadpis s kurzívou
+          c-title - center-aligned nadpis s veľkým font-size
+        -->
+        <h2 class="c-title reveal">
+          <span data-i18n="letsTalk">Porozprávajme</span><br /><em
+            data-i18n="contactAbout"
+            >sa.</em
+          >
+        </h2>
+
+        <!-- POPIS - vysvetlenie účelu kontaktnej sekcie -->
+        <p class="c-sub reveal d1" data-i18n="contactDesc">
+          Hľadáš developera do tímu alebo na projekt? Som tu a rád si ťa
+          vypočujem.
+        </p>
+
+        <!--
+          TLAČIDLÁ KONTAKTU - email a sociálne siete
+          c-btns - flex kontajner s medzerami medzi tlačidlami
+        -->
+        <div class="c-btns reveal d2">
+          <!--
+            EMAIL TLAČIDLO - hlavné call-to-action pre kontakt
+            href="mailto:filipglemba.dev@gmail.com" - mailto protokol otvára email klienta
+            class="btn-solid" - plné tlačidlo s modrým pozadím
+            data-i18n="sendEmail" - kľúč pre preklad textu do angličtiny
+            "Napíš email" - text tlačidla v slovenčine
+          -->
+          <a
+            href="mailto:filipglemba.dev@gmail.com"
+            class="btn-solid"
+            data-i18n="sendEmail"
+            >Napíš email</a
+          >
+
+          <!--
+            LINKEDIN ODKAZ - profesionálny profil na LinkedIn
+            href="https://linkedin.com" - odkaz na LinkedIn profil (treba aktualizovať)
+            target="_blank" - otvára sa v novom okne/tabe
+            class="btn-line" - obrysové tlačidlo s modrou hranicou
+            "LinkedIn ↗" - text s šípkou indikujúcou externý odkaz
+          -->
+          <a href="https://linkedin.com" target="_blank" class="btn-line"
+            >LinkedIn ↗</a
+          >
+
+          <!--
+            GITHUB ODKAZ - profil s open-source projektami
+            href="https://github.com/FilipGlemba" - odkaz na GitHub profil autora
+            target="_blank" - otvára sa v novom okne/tabe
+            class="btn-line" - obrysové tlačidlo s modrou hranicou
+            "GitHub ↗" - text s šípkou indikujúcou externý odkaz
+          -->
+          <a
+            href="https://github.com/FilipGlemba"
+            target="_blank"
+            class="btn-line"
+            >GitHub ↗</a
+          >
+        </div>
+
+        <!-- EMAIL ADRESA - zobrazená pod tlačidlami -->
+        <div class="c-email reveal d3">filipglemba.dev@gmail.com</div>
+      </div>
+    </section>
+
+    <!-- ═══ FOOTER ═══ -->
+    <footer>
+      <!-- AUTORSKÉ PRÁVA - rok a meno autora -->
+      <p>© 2026 Filip Glemba</p>
+
+      <!-- POPIS PORTFOLIA - technológie použité pri tvorbe -->
+      <p data-i18n="footer">Portfolio postavené na HTML, CSS a JavaScripte</p>
+    </footer>
+
+    <!--
+      ═══ JAVASCRIPT SÚBORY ═══
+      Načítanie externých JS súborov pre funkcionalitu stránky
+    -->
+
+    <!--
+      PREKLADY - objekt s textami pre rôzne jazyky
+      translations.js - definuje prekladové kľúče pre SK/EN
+    -->
+    <script src="assets/js/translations.js"></script>
+
+    <!--
+      PREPÍNAČ JAZYKA - logika pre prepínanie jazykov
+      language-switcher.js - správa prepínač jazyka a aktualizáciu textov
+    -->
+    <script src="assets/js/language-switcher.js"></script>
+
+    <!--
+      HLAVNÝ JAVASCRIPT - všeobecná funkcionalita stránky
+      main.js - scroll efekty, animácie, interakcie
+    -->
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
