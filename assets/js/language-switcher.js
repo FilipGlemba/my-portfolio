@@ -1,4 +1,4 @@
-// Language switcher
+// Prepínač jazyka
 /*
   LANGUAGE-SWITCHER.JS - logika pre prepínač jazykov v portfóliu
   Umožňuje prepínať medzi slovenčinou a angličtinou, ukladá výber do localStorage
@@ -15,7 +15,7 @@ const langToggle = document.getElementById('lang-toggle'); // Získanie referenc
 const htmlEl = document.documentElement; // Získanie referencie na <html> element
 let currentLang = localStorage.getItem('lang') || 'sk'; // Načítanie jazyka z localStorage alebo default 'sk'
 
-// Set initial language
+// Nastavenie počiatočného jazyka
 htmlEl.lang = currentLang;
 langToggle.textContent = currentLang === 'sk' ? 'EN' : 'SK';
 
@@ -114,5 +114,5 @@ langToggle.addEventListener('click', () => {
 /*
   Spustenie aktualizácie textov pri načítaní stránky s aktuálnym jazykom
 */
-// Initialize page with current language
+// Inicializácia stránky s aktuálnym jazykom
 updatePageLanguage(currentLang);
