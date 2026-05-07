@@ -1430,8 +1430,13 @@ footer a:hover { color:var(--ink) }
 @media(max-width:640px) {
   .nav-links { display:none }
   .proj-grid { grid-template-columns:1fr }
-  .stack-categories { grid-template-columns:1fr; gap:15px }
-  .sitem { padding:.9rem 1.2rem }
+  .stack-categories { grid-template-columns:1fr; gap:18px }
+  .scat { min-width:0 }
+  .scat-head { padding:1rem 1.1rem .8rem }
+  .sitem { padding:.9rem 1.2rem; flex-wrap:wrap; gap:10px }
+  .sitem-l { min-width:0 }
+  .sitem-name { white-space:normal }
+  .sitem-level { flex-shrink:0 }
   .info-grid { grid-template-columns:1fr }
   footer { flex-direction:column; gap:6px; text-align:center }
   .f-badge { font-size:10px; padding:6px 10px; white-space:normal }
