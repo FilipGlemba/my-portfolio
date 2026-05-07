@@ -1,60 +1,56 @@
-# Portfolio Website
+# Moje portfólio
 
-Osobné portfólio web developera postavené na HTML, CSS a JavaScript s dvojjazyčnou podporou (SK/EN).
+Osobné portfólio web developera s moderným dizajnom, čistou štruktúrou a dvojjazyčnou podporou (SK / EN).
 
-## 🚀 Technológie
+## 🌐 Live demo
 
-- **Frontend:** HTML5, CSS3, JavaScript (ES6+)
-- **Styling:** Custom CSS s responzívnym dizajnom
-- **Interaktivita:** Vanilla JavaScript bez frameworkov
-- **Preklady:** Dynamické prepínanie jazykov cez JavaScript objekty
+Stránka je nasadená cez GitHub Pages:
+
+https://filipglemba.github.io/moje-portfolio/
+
+## 🚀 Čo obsahuje
+
+- **Hero** sekciu s jasným posolstvom
+- **Sekciu O mne** s profesionálnym popisom
+- **Tech stack** prehľad s úrovňami zručností
+- **Projektový showcase** s príkladmi
+- **Kontakt** s emailom a promptom na komunikáciu
+- **Dvojjazyčné prepínanie** SK/EN
+
+## 🛠️ Použité technológie
+
+- HTML5
+- CSS3
+- JavaScript (ES6+)
+- Vanilla JavaScript pre prepínanie jazyka
+- GitHub Pages pre nasadenie
 
 ## 📁 Štruktúra projektu
 
 ```
-portfolio/
-├── index.html              # Hlavná stránka
-├── assets/
-│   ├── css/
-│   │   └── styles.css      # Štýly a dizajn
-│   └── js/
-│       ├── main.js         # Hlavná logika
-│       ├── translations.js # Prekladové objekty
-│       └── language-switcher.js # Prepínač jazykov
+moje-portfolio/
+├── index.html
+├── README.md
+└── assets/
+    ├── css/
+    │   └── styles.css
+    └── js/
+        ├── main.js
+        ├── translations.js
+        └── language-switcher.js
 ```
 
-## 🏃‍♂️ Ako spustiť lokálne
+## 📌 Stav projektu
 
-1. Naklonuj repozitár:
-   ```bash
-   git clone https://github.com/filipglemba/portfolio.git
-   cd portfolio
-   ```
+Toto je dobrá verzia portfólia, ktorú je možné prezentovať. V budúcnosti plánujem doplniť:
 
-2. Otvor `index.html` v prehliadači alebo použij Python server:
-   ```bash
-   python -m http.server 8000
-   ```
-   Potom choď na `http://localhost:8000`
-
-## 🌍 Funkcie
-
-- **Dvojjazyčná podpora:** SK/EN s automatickým prepínaním
-- **Responzívny dizajn:** Funguje na všetkých zariadeniach
-- **Smooth animácie:** CSS transitions a JavaScript
-- **Tech stack overview:** Zobrazenie zručností s úrovňami
-- **Projekt showcase:** Sekcia s ukážkami projektov
-
-## 📋 Plánované doplnenia
-
-- [ ] Detailné popisy projektov s screenshotmi
-- [ ] LinkedIn link a sociálne siete
-- [ ] Kontakt formulár s backend integráciou
-- [ ] Dark mode prepínač
-- [ ] Optimalizácia výkonu a SEO
+- detailné popisy a screenshoty konkrétnych projektov
+- LinkedIn a ďalšie sociálne siete
+- kontaktný formulár
+- ďalšie vylepšenia dizajnu a SEO
 
 ## 📞 Kontakt
 
-Filip Glemba - [email](mailto:filip.glemba@example.com)
+Filip Glemba – [email](mailto:filip.glemba@example.com)
 
-Projekt je stále vo vývoji - welcome feedback a návrhy na vylepšenia!
+Ak chceš, môžem ti pomôcť pridať do portfólia aj LinkedIn alebo sekciu s referenciami.
