@@ -1,21 +1,41 @@
 <!doctype html>
+<!--
+  WEATHER APP - HTML DOKUMENT
+  Autor: Filip Glemba
+  Popis: Samostatna weather aplikacia v portfoliu.
+  JavaScript doplna data z OpenWeatherMap API, ovlada jazyk, jednotky,
+  temu, geolokaciu, oblubene mesta a renderovanie predpovede.
+-->
 <html lang="sk" data-theme="light">
   <head>
+    <!-- META TAGY - kodovanie a responzivne zobrazenie na mobiloch -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Nazov stranky v tabe prehliadaca -->
     <title>Weather · Portfolio</title>
+    <!-- FONTY - rovnaky vizualny smer ako hlavne portfolio -->
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Syne:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
+    <!-- Hlavny CSS subor pre weather aplikaciu -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- APP WRAPPER - hlavny kontajner celej aplikacie -->
     <div class="app" id="app">
-      <!-- ── Header ── -->
+      <!--
+        HEADER
+        Horna lista s logom a globalnymi ovladacmi aplikacie.
+        Ovlada navrat do portfolia, jazyk, jednotky, geolokaciu,
+        temu a oblubene mesta.
+      -->
       <header class="header">
+        <!-- Logo aplikacie; <em> vizualne oddeluje portfolio cast nazvu -->
         <span class="header-logo">Weather<em>Portfolio</em></span>
+        <!-- Skupina ovladacich prvkov v pravej casti headeru -->
         <div class="header-controls">
+          <!-- Odkaz spat na hlavnu portfolio stranku -->
           <a
             href="../index.html"
             class="ctrl-btn"
@@ -23,6 +43,7 @@
             title="Späť na portfolio"
             >Portfolio</a
           >
+          <!-- Prepinac jazyka SK/EN, text sa meni cez script.js -->
           <button
             class="ctrl-btn lang-toggle"
             id="langToggle"
@@ -30,6 +51,7 @@
           >
             EN
           </button>
+          <!-- Prepinac jednotiek medzi Celsius a Fahrenheit -->
           <button
             class="ctrl-btn unit-toggle"
             id="unitToggle"
@@ -37,6 +59,7 @@
           >
             °C
           </button>
+          <!-- Tlacidlo pre zistenie polohy cez browser Geolocation API -->
           <button class="ctrl-btn" id="locateBtn" title="Moja poloha">
             <svg
               width="14"
@@ -53,6 +76,7 @@
             </svg>
             <span class="ctrl-label">Poloha</span>
           </button>
+          <!-- Prepinac svetlej a tmavej temy cez atribut data-theme -->
           <button
             class="ctrl-btn theme-toggle"
             id="themeToggle"
@@ -88,6 +112,7 @@
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
           </button>
+          <!-- Otvorenie dropdownu s oblubenymi mestami z localStorage -->
           <button class="ctrl-btn" id="favoritesBtn" title="Obľúbené mestá">
             <svg
               width="14"
@@ -109,6 +134,11 @@
       </header>
 
       <!-- Favorites dropdown -->
+      <!--
+        FAVORITES DROPDOWN
+        Plavajuci panel s oblubenymi mestami. Zoznam nevznika v HTML napevno,
+        ale generuje ho script.js z dat ulozenych v localStorage.
+      -->
       <div class="favorites-dropdown" id="favoritesDropdown">
         <div class="favorites-header">
           <span id="favoritesTitle">Oblúbené mestá</span>
@@ -117,13 +147,19 @@
           </button>
         </div>
         <div class="favorites-list" id="favoritesList">
-          <!-- filled by JS -->
+          <!-- Zoznam oblubenych miest sa vklada dynamicky cez script.js -->
         </div>
       </div>
 
       <!-- ── Search ── -->
+      <!--
+        SEARCH SECTION
+        Hlavne vyhladavanie mesta. Input podporuje autocomplete navrhy
+        z OpenWeatherMap Geocoding API a submit cez tlacidlo alebo Enter.
+      -->
       <section class="search-section">
         <div class="search-wrap">
+          <!-- Search box obsahuje ikonu, textovy input a tlacidlo hladania -->
           <div class="search-box" id="searchBox">
             <svg
               class="search-icon"
@@ -147,6 +183,7 @@
               autocomplete="off"
               spellcheck="false"
             />
+            <!-- Tlacidlo na spustenie hladania podla zadaneho mesta -->
             <button class="search-btn" id="searchBtn">
               <svg
                 width="13"
@@ -162,14 +199,19 @@
               </svg>
             </button>
           </div>
-          <!-- Autocomplete dropdown -->
+          <!-- AUTOCOMPLETE - sem JavaScript vklada navrhy miest -->
           <div class="autocomplete" id="autocomplete"></div>
         </div>
       </section>
 
       <!-- ── Main ── -->
+      <!--
+        MAIN CONTENT
+        V tejto casti sa prepina medzi stavmi aplikacie:
+        prazdny uvod, chyba, nacitavanie a vysledne data o pocasi.
+      -->
       <main class="main">
-        <!-- Empty -->
+        <!-- EMPTY STATE - zobrazi sa pred prvym vyhladanim mesta -->
         <div class="state-box" id="emptyState">
           <div class="state-icon">
             <svg
@@ -194,7 +236,7 @@
           </p>
         </div>
 
-        <!-- Error -->
+        <!-- ERROR STATE - zobrazi sa pri chybe API, polohe alebo chybajucom kluci -->
         <div class="state-box hidden" id="errorState">
           <div class="state-icon error">
             <svg
@@ -215,7 +257,7 @@
           <p class="state-sub" id="errorSub">Skús iný názov mesta</p>
         </div>
 
-        <!-- Loading -->
+        <!-- LOADING STATE - kratke potvrdenie pocas nacitavania dat -->
         <div class="state-box hidden" id="loading">
           <div class="spinner"></div>
           <p class="state-sub" id="loadingText" style="margin-top: 1rem">
@@ -223,13 +265,14 @@
           </p>
         </div>
 
-        <!-- Weather -->
+        <!-- WEATHER DATA - hlavny obsah po uspesnom nacitani pocasia -->
         <div class="weather hidden" id="weatherData">
-          <!-- Current card -->
+          <!-- CURRENT CARD - aktualne pocasie pre vybrane mesto -->
           <div class="current-card reveal" id="currentCard">
-            <!-- bg gradient strip (day/night) -->
+            <!-- Pozadie karty sa meni podla denneho casu: rano, den, vecer, noc -->
             <div class="card-bg" id="cardBg"></div>
 
+            <!-- Horna cast karty: lokalita, krajina, lokalny cas, datum a favorite button -->
             <div class="current-top">
               <div>
                 <div class="location-name" id="locationName">—</div>
@@ -264,6 +307,7 @@
               </div>
             </div>
 
+            <!-- Stred karty: ikona, textovy popis, pocitova a hlavna teplota -->
             <div class="current-body">
               <div class="current-left">
                 <img id="weatherIcon" src="" alt="" class="weather-icon-img" />
@@ -277,6 +321,7 @@
               <div class="temp-main" id="tempMain">—</div>
             </div>
 
+            <!-- Detailne metriky aktualneho pocasia renderovane z API dat -->
             <div class="current-stats">
               <div class="stat-item">
                 <div class="stat-label" id="humidityLabel">💧 Vlhkosť</div>
@@ -315,7 +360,7 @@
             </div>
           </div>
 
-          <!-- Hourly -->
+          <!-- HOURLY FORECAST - horizontalny zoznam predpovede na najblizsie hodiny -->
           <div class="section-block reveal" id="hourlySection">
             <div class="section-eye" id="hourlyHeading">
               — NASLEDUJÚCICH 24 HODÍN
@@ -325,7 +370,7 @@
             </div>
           </div>
 
-          <!-- 5-day forecast -->
+          <!-- 5-DAY FORECAST - mriezka dennych predpovedi -->
           <div class="section-block reveal" id="forecastSection">
             <div class="section-eye" id="forecastHeading">
               — PREDPOVEĎ NA 5 DNÍ
@@ -335,6 +380,11 @@
         </div>
       </main>
 
+      <!--
+        FOOTER
+        Obsahuje zdroj dat a drobny branding. Prefix "Data/Dáta" sa preklada
+        cez element footerPrefix vo funkcii updateWeatherLanguage().
+      -->
       <footer class="footer">
         <span
           ><span id="footerPrefix">Dáta:</span>
@@ -345,7 +395,18 @@
         <span>Weather<em>.</em></span>
       </footer>
     </div>
+    <!--
+      CONFIG
+      Lokalny konfiguracny subor s API klucom. Je v .gitignore, preto sa
+      neposiela na GitHub. Verejna sablona je config.example.js.
+    -->
     <script src="config.js"></script>
+
+    <!--
+      HLAVNA LOGIKA
+      script.js riesi API volania, renderovanie dat, preklady, jednotky,
+      temu, geolokaciu, oblubene mesta a event listenery.
+    -->
     <script src="script.js"></script>
   </body>
 </html>
