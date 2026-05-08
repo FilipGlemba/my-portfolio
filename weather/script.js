@@ -2,7 +2,7 @@
 // CONFIG – vlož svoj OpenWeatherMap API kľúč
 // https://openweathermap.org/api (zadarmo)
 // ─────────────────────────────────────────────
-const API_KEY = 'YOUR_OPENWEATHERMAP_API_KEY';
+const API_KEY = window.WEATHER_CONFIG?.OPENWEATHERMAP_API_KEY || 'YOUR_OPENWEATHERMAP_API_KEY';
 const BASE    = 'https://api.openweathermap.org/data/2.5';
 const GEO     = 'https://api.openweathermap.org/geo/1.0';
 let lang      = localStorage.getItem('weather-lang') || 'sk';
@@ -41,7 +41,8 @@ const weatherTranslations = {
     offline: 'Offline režim - staršie dáta',
     close: 'Zavrieť',
     serverError: 'Chyba servera',
-    forecastError: 'Chyba predpovede'
+    forecastError: 'Chyba predpovede',
+    missingApiKey: 'Chýba OpenWeatherMap API kľúč'
   },
   en: {
     placeholder: 'Search city...',
@@ -76,7 +77,8 @@ const weatherTranslations = {
     geolocationUnsupported: 'Geolocation is not supported',
     offline: 'Offline mode - older data',
     serverError: 'Server error',
-    forecastError: 'Forecast error'
+    forecastError: 'Forecast error',
+    missingApiKey: 'Missing OpenWeatherMap API key'
 
   }
 };
@@ -277,7 +279,14 @@ function displaySpeed(ms) {
 }
 
 // ─── Fetch ───
+function requireApiKey() {
+  if (!API_KEY || API_KEY === 'YOUR_OPENWEATHERMAP_API_KEY') {
+    throw new Error(weatherTranslations[lang].missingApiKey);
+  }
+}
+
 async function fetchCurrent(query) {
+  requireApiKey();
   const qs = typeof query === 'string'
     ? `q=${encodeURIComponent(query)}`
     : `lat=${query.lat}&lon=${query.lon}`;
@@ -287,6 +296,7 @@ async function fetchCurrent(query) {
 }
 
 async function fetchForecast(lat, lon) {
+  requireApiKey();
   const res = await fetch(`${BASE}/forecast?lat=${lat}&lon=${lon}&units=metric&lang=${lang}&appid=${API_KEY}`);
   if (!res.ok) throw new Error(weatherTranslations[lang].forecastError);
   return res.json();
@@ -294,6 +304,7 @@ async function fetchForecast(lat, lon) {
 
 // Geocoding autocomplete
 async function fetchGeo(q) {
+  requireApiKey();
   const res = await fetch(`${GEO}/direct?q=${encodeURIComponent(q)}&limit=5&appid=${API_KEY}`);
   if (!res.ok) return [];
   return res.json();
@@ -565,7 +576,14 @@ cityInput.addEventListener('input', () => {
   }
 
   acTimer = setTimeout(async () => {
-    const results = await fetchGeo(val);
+    let results = [];
+    try {
+      results = await fetchGeo(val);
+    } catch {
+      hideAutocomplete();
+      return;
+    }
+
     if (!results.length) { hideAutocomplete(); return; }
 
     if (userLocation) {

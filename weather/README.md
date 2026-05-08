@@ -1,24 +1,24 @@
 # Weather App
 
-A responsive weather application built as part of my web developer portfolio. It lets users search for a city, check current weather conditions, view hourly and 5-day forecasts, save favorite locations, switch units, and use light or dark mode.
+Responzívna weather aplikácia vytvorená ako súčasť môjho portfólia. Používateľ môže vyhľadať mesto, pozrieť aktuálne počasie, hodinovú predpoveď, 5-dňovú predpoveď, uložiť obľúbené mestá, prepnúť jednotky, tému aj jazyk.
 
 ## Demo
 
-Live project: [Weather App](https://filipglemba.github.io/moje-portfolio/weather/)
+Live projekt: [Weather App](https://filipglemba.github.io/moje-portfolio/weather/)
 
-## Features
+## Funkcie
 
-- Current weather by city name or geolocation
-- Temperature, humidity, wind, pressure, visibility, cloud coverage, sunrise, and sunset
-- Hourly forecast for the next 24 hours
-- 5-day forecast overview
-- City autocomplete using the OpenWeatherMap Geocoding API
-- Favorite cities saved in `localStorage`
-- Celsius and Fahrenheit unit switch
-- Light and dark theme
-- Slovak and English language switch
-- Offline fallback for the last cached weather data
-- Responsive layout for mobile, tablet, and desktop
+- Aktuálne počasie podľa názvu mesta alebo geolokácie
+- Teplota, vlhkosť, vietor, tlak, viditeľnosť, oblačnosť, východ a západ slnka
+- Hodinová predpoveď na najbližších 24 hodín
+- Prehľadná 5-dňová predpoveď
+- Autocomplete miest cez OpenWeatherMap Geocoding API
+- Obľúbené mestá uložené v `localStorage`
+- Prepnutie jednotiek medzi Celsius a Fahrenheit
+- Svetlá a tmavá téma
+- Slovenský a anglický jazyk
+- Offline fallback pre posledné uložené počasie
+- Responzívny layout pre mobil, tablet aj desktop
 
 ## Tech Stack
 
@@ -28,57 +28,73 @@ Live project: [Weather App](https://filipglemba.github.io/moje-portfolio/weather
 - OpenWeatherMap API
 - LocalStorage
 
-## Project Structure
+## Štruktúra projektu
 
 ```text
 weather/
+|-- config.example.js
 |-- index.html
 |-- README.md
 |-- script.js
 `-- style.css
 ```
 
-## Getting Started
+## Spustenie lokálne
 
-1. Clone the repository:
+1. Naklonuj repozitár:
 
 ```bash
 git clone https://github.com/FilipGlemba/moje-portfolio.git
 ```
 
-2. Open the project folder:
+2. Otvor priečinok projektu:
 
 ```bash
 cd moje-portfolio/weather
 ```
 
-3. Add your OpenWeatherMap API key in `script.js`:
+3. Skopíruj konfiguračný súbor:
 
-```js
-const API_KEY = 'YOUR_OPENWEATHERMAP_API_KEY';
+```bash
+copy config.example.js config.js
 ```
 
-4. Open `index.html` in your browser.
+4. Do `config.js` vlož svoj OpenWeatherMap API kľúč:
+
+```js
+window.WEATHER_CONFIG = {
+  OPENWEATHERMAP_API_KEY: 'tvoj_api_kľúč'
+};
+```
+
+5. Otvor `index.html` v prehliadači.
+
+## Bezpečnosť API kľúča
+
+API kľúč sa nedá bezpečne skryť, ak je priamo v JavaScripte, ktorý sa posiela do prehliadača. Každý návštevník si vie otvoriť DevTools alebo zdrojový kód a kľúč skopírovať.
+
+Preto je v tomto repozitári iba `config.example.js`. Skutočný `config.js` je pridaný v `.gitignore`, aby sa neposielal na GitHub.
+
+Ak má aplikácia bežať verejne aj s tajným API kľúčom, najlepšie riešenie je backend alebo serverless proxy, napríklad Netlify Functions, Vercel Functions alebo vlastný Node/PHP endpoint. API kľúč potom zostane v serverovom `.env` súbore a frontend volá iba tvoj endpoint.
 
 ## API
 
-Weather data is provided by [OpenWeatherMap](https://openweathermap.org/). You need a free API key from OpenWeatherMap to run the app with live data.
+Dáta o počasí poskytuje [OpenWeatherMap](https://openweathermap.org/). Na použitie live dát je potrebný bezplatný API kľúč.
 
-Because this is a frontend-only project, the API key is visible in the browser. For production use, restrict the key in your OpenWeatherMap account or route requests through a backend.
+## Čo som si precvičil
 
-## What I Practiced
+- Práca s externým API
+- Renderovanie dát bez frameworku
+- Správa UI stavov
+- Ukladanie dát do `localStorage`
+- Viacjazyčné texty v rozhraní
+- Responzívny dizajn a polish UI
 
-- Fetching and rendering external API data
-- Managing UI state without a framework
-- Working with browser storage
-- Building multilingual UI text
-- Designing a responsive, polished project page
-
-## Author
+## Autor
 
 Filip Glemba  
 [GitHub](https://github.com/FilipGlemba)
 
-## License
+## Licencia
 
-This project is open for learning and portfolio review.
+Projekt slúži na portfolio a učenie.
