@@ -5,37 +5,89 @@
   Popis: Samostatna weather aplikacia v portfoliu.
   JavaScript doplna data z OpenWeatherMap API, ovlada jazyk, jednotky,
   temu, geolokaciu, oblubene mesta a renderovanie predpovede.
+
+  Struktura dokumentu:
+  1. <head> - meta tagy, fonty a CSS
+  2. header - logo a globalne ovladanie aplikacie
+  3. favorites dropdown - zoznam ulozenych miest
+  4. search section - vyhladavanie mesta a autocomplete
+  5. main - UI stavy a karty s pocasim
+  6. footer - zdroj dat a branding
+  7. scripts - konfiguracia API kluca a hlavna logika
+
+  Dolezite:
+  - ID atributy su pouzite v script.js cez document.getElementById().
+  - Triedy su pouzite hlavne pre styling v style.css.
+  - Trieda hidden skryva/nechava zobrazit jednotlive UI stavy.
+  - Texty v HTML su vychodiskove slovenske texty; po prepnuti jazyka ich meni JS.
 -->
 <html lang="sk" data-theme="light">
   <head>
-    <!-- META TAGY - kodovanie a responzivne zobrazenie na mobiloch -->
+    <!--
+      META TAGY
+      charset="UTF-8" umoznuje pouzivat diakritiku a specialne znaky.
+      viewport nastavuje sirku stranky podla zariadenia, aby fungoval
+      responzivny layout definovany v style.css.
+    -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- Nazov stranky v tabe prehliadaca -->
+    <!--
+      TITLE
+      Nazov viditelny v tabe prehliadaca a vo vysledkoch, ked si niekto
+      ulozi alebo zdieľa link na weather cast portfolia.
+    -->
     <title>Weather · Portfolio</title>
-    <!-- FONTY - rovnaky vizualny smer ako hlavne portfolio -->
+    <!--
+      GOOGLE FONTS
+      Fonty su nacitane priamo z Google Fonts, aby weather aplikacia
+      vizualne sedela k hlavnej portfolio stranke.
+    -->
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Syne:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
-    <!-- Hlavny CSS subor pre weather aplikaciu -->
+    <!--
+      STYLE.CSS
+      Samostatny stylesheet pre weather appku. Drzi farby, layout, responzivitu,
+      dark mode cez data-theme a vizualne stavy ako hover/loading/hidden.
+    -->
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- APP WRAPPER - hlavny kontajner celej aplikacie -->
+    <!--
+      APP WRAPPER
+      Hlavny kontajner celej aplikacie. Slúzi ako spolocny obal pre header,
+      search, main a footer. ID app je pripravene, keby bolo treba cielit
+      cely interface cez JavaScript.
+    -->
     <div class="app" id="app">
       <!--
         HEADER
         Horna lista s logom a globalnymi ovladacmi aplikacie.
         Ovlada navrat do portfolia, jazyk, jednotky, geolokaciu,
         temu a oblubene mesta.
+
+        Vacsina prvkov ma ID, pretoze script.js meni ich text, title,
+        stav alebo na ne pripaja click event listenery.
       -->
       <header class="header">
-        <!-- Logo aplikacie; <em> vizualne oddeluje portfolio cast nazvu -->
+        <!--
+          LOGO
+          Jednoduchy brand aplikacie. Element <em> je pouzity iba vizualne,
+          CSS mu dava odlisny styl ako zvysku nazvu.
+        -->
         <span class="header-logo">Weather<em>Portfolio</em></span>
-        <!-- Skupina ovladacich prvkov v pravej casti headeru -->
+        <!--
+          HEADER CONTROLS
+          Flex kontajner v pravej casti headeru. Na mobile sa jeho rozlozenie
+          upravuje cez media queries, aby sa ovladace nezlomili mimo obrazovku.
+        -->
         <div class="header-controls">
-          <!-- Odkaz spat na hlavnu portfolio stranku -->
+          <!--
+            PORTFOLIO LINK
+            Odkaz vracia pouzivatela spat na hlavny index.html.
+            ID portfolioBtn dovoluje prekladat text aj title cez updateWeatherLanguage().
+          -->
           <a
             href="../index.html"
             class="ctrl-btn"
@@ -43,7 +95,12 @@
             title="Späť na portfolio"
             >Portfolio</a
           >
-          <!-- Prepinac jazyka SK/EN, text sa meni cez script.js -->
+          <!--
+            LANGUAGE TOGGLE
+            Tlacidlo prepina lang medzi "sk" a "en".
+            JavaScript uklada vybrany jazyk do localStorage pod kluc weather-lang,
+            aby sa volba zachovala aj po refreshi.
+          -->
           <button
             class="ctrl-btn lang-toggle"
             id="langToggle"
@@ -51,7 +108,12 @@
           >
             EN
           </button>
-          <!-- Prepinac jednotiek medzi Celsius a Fahrenheit -->
+          <!--
+            UNIT TOGGLE
+            Prepina zobrazovanie teplot medzi C a F.
+            API data sa nacitavaju v metrickych jednotkach a prepocet sa robi
+            vo funkciach displayTemp() a displaySpeed() v script.js.
+          -->
           <button
             class="ctrl-btn unit-toggle"
             id="unitToggle"
@@ -59,7 +121,11 @@
           >
             °C
           </button>
-          <!-- Tlacidlo pre zistenie polohy cez browser Geolocation API -->
+          <!--
+            LOCATION BUTTON
+            Spusta navigator.geolocation. Ked pouzivatel povoli polohu,
+            aplikacia nacita pocasie podla latitude/longitude namiesto nazvu mesta.
+          -->
           <button class="ctrl-btn" id="locateBtn" title="Moja poloha">
             <svg
               width="14"
@@ -76,7 +142,11 @@
             </svg>
             <span class="ctrl-label">Poloha</span>
           </button>
-          <!-- Prepinac svetlej a tmavej temy cez atribut data-theme -->
+          <!--
+            THEME TOGGLE
+            Obsahuje dve SVG ikony: slnko a mesiac.
+            CSS ukazuje/skryva spravnu ikonu podla hodnoty data-theme na <html>.
+          -->
           <button
             class="ctrl-btn theme-toggle"
             id="themeToggle"
@@ -112,7 +182,11 @@
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
             </svg>
           </button>
-          <!-- Otvorenie dropdownu s oblubenymi mestami z localStorage -->
+          <!--
+            FAVORITES BUTTON
+            Otvara/zatvara panel s oblubenymi mestami.
+            Samotne pridanie mesta sa robi srdieckom v current weather karte.
+          -->
           <button class="ctrl-btn" id="favoritesBtn" title="Obľúbené mestá">
             <svg
               width="14"
@@ -133,19 +207,27 @@
         </div>
       </header>
 
-      <!-- Favorites dropdown -->
       <!--
         FAVORITES DROPDOWN
         Plavajuci panel s oblubenymi mestami. Zoznam nevznika v HTML napevno,
         ale generuje ho script.js z dat ulozenych v localStorage.
+
+        Panel je oddeleny od headeru, aby sa dal jednoducho poziciovat
+        absolutne cez CSS a aby otvorenie zoznamu nemenilo vysku hornej listy.
       -->
       <div class="favorites-dropdown" id="favoritesDropdown">
+        <!-- Hlavicka panelu: prekladatelny nazov a samostatne zatvaracie tlacidlo -->
         <div class="favorites-header">
           <span id="favoritesTitle">Oblúbené mestá</span>
           <button class="favorites-close" id="favoritesClose" title="Zavrieť">
             ×
           </button>
         </div>
+        <!--
+          FAVORITES LIST
+          Prazdny kontajner pre polozky oblubenych miest.
+          renderFavorites() sem vklada nazov mesta, krajinu a odstranit tlacidlo.
+        -->
         <div class="favorites-list" id="favoritesList">
           <!-- Zoznam oblubenych miest sa vklada dynamicky cez script.js -->
         </div>
@@ -156,11 +238,20 @@
         SEARCH SECTION
         Hlavne vyhladavanie mesta. Input podporuje autocomplete navrhy
         z OpenWeatherMap Geocoding API a submit cez tlacidlo alebo Enter.
+
+        Search je samostatna sekcia, pretoze ide o hlavny vstup do aplikacie.
+        Vsetky ostatne casti main obsahu sa menia podla toho, co pouzivatel
+        vyhlada alebo ci pouzije geolokaciu.
       -->
       <section class="search-section">
         <div class="search-wrap">
-          <!-- Search box obsahuje ikonu, textovy input a tlacidlo hladania -->
+          <!--
+            SEARCH BOX
+            Vizualny obal pre ikonu, input a submit tlacidlo.
+            ID searchBox je pripraveny pre styling/focus pracu cez CSS alebo JS.
+          -->
           <div class="search-box" id="searchBox">
+            <!-- Dekorativna lupa v inpute; samotne hladanie riesia event listenery -->
             <svg
               class="search-icon"
               width="15"
@@ -183,7 +274,11 @@
               autocomplete="off"
               spellcheck="false"
             />
-            <!-- Tlacidlo na spustenie hladania podla zadaneho mesta -->
+            <!--
+              SEARCH BUTTON
+              Spusta hladanie mesta napisaneho v cityInput.
+              Rovnakú akciu vie pouzivatel spustit aj klavesou Enter.
+            -->
             <button class="search-btn" id="searchBtn">
               <svg
                 width="13"
@@ -199,7 +294,11 @@
               </svg>
             </button>
           </div>
-          <!-- AUTOCOMPLETE - sem JavaScript vklada navrhy miest -->
+          <!--
+            AUTOCOMPLETE
+            JavaScript sem vklada navrhy miest z Geocoding API.
+            Trieda open v CSS riadi, ci je dropdown viditelny.
+          -->
           <div class="autocomplete" id="autocomplete"></div>
         </div>
       </section>
@@ -209,9 +308,17 @@
         MAIN CONTENT
         V tejto casti sa prepina medzi stavmi aplikacie:
         prazdny uvod, chyba, nacitavanie a vysledne data o pocasi.
+
+        Prepínanie stavov robi funkcia setState() v script.js.
+        Vsetky tieto bloky existuju v HTML stale, ale CSS trieda hidden
+        rozhoduje, ktory z nich je aktualne viditelny.
       -->
       <main class="main">
-        <!-- EMPTY STATE - zobrazi sa pred prvym vyhladanim mesta -->
+        <!--
+          EMPTY STATE
+          Zobrazi sa po prvom otvoreni aplikacie, kym pouzivatel este
+          nezadal mesto ani nepouzil geolokaciu. Texty sa prekladaju cez JS.
+        -->
         <div class="state-box" id="emptyState">
           <div class="state-icon">
             <svg
@@ -236,7 +343,11 @@
           </p>
         </div>
 
-        <!-- ERROR STATE - zobrazi sa pri chybe API, polohe alebo chybajucom kluci -->
+        <!--
+          ERROR STATE
+          Zobrazi sa pri chybe API, nenajdenom meste, zamietnutej polohe
+          alebo chybajucom API kluci. errorMsg a errorSub meni script.js.
+        -->
         <div class="state-box hidden" id="errorState">
           <div class="state-icon error">
             <svg
@@ -257,7 +368,11 @@
           <p class="state-sub" id="errorSub">Skús iný názov mesta</p>
         </div>
 
-        <!-- LOADING STATE - kratke potvrdenie pocas nacitavania dat -->
+        <!--
+          LOADING STATE
+          Kratke vizualne potvrdenie pocas fetchovania dat z API.
+          Spinner je cisto CSS animacia, text loadingText sa preklada.
+        -->
         <div class="state-box hidden" id="loading">
           <div class="spinner"></div>
           <p class="state-sub" id="loadingText" style="margin-top: 1rem">
@@ -265,24 +380,49 @@
           </p>
         </div>
 
-        <!-- WEATHER DATA - hlavny obsah po uspesnom nacitani pocasia -->
+        <!--
+          WEATHER DATA
+          Hlavny obsah po uspesnom nacitani pocasia.
+          Tento blok obsahuje aktualne pocasie, hodinovu predpoved
+          a 5-dnovy prehlad.
+        -->
         <div class="weather hidden" id="weatherData">
-          <!-- CURRENT CARD - aktualne pocasie pre vybrane mesto -->
+          <!--
+            CURRENT CARD
+            Najvacsi a najdolezitejsi blok aplikacie. Zobrazuje aktualne
+            pocasie pre vybrane mesto alebo aktualnu polohu pouzivatela.
+            Trieda reveal je pouzita na jemny vstupny efekt.
+          -->
           <div class="current-card reveal" id="currentCard">
-            <!-- Pozadie karty sa meni podla denneho casu: rano, den, vecer, noc -->
+            <!--
+              CARD BACKGROUND
+              Dekorativny gradient. script.js meni jeho triedy podla denneho
+              casu v danej lokalite, aby karta reagovala na rano/den/vecer/noc.
+            -->
             <div class="card-bg" id="cardBg"></div>
 
-            <!-- Horna cast karty: lokalita, krajina, lokalny cas, datum a favorite button -->
+            <!--
+              CURRENT TOP
+              Horna cast karty: mesto, krajina, lokalny cas, datum
+              a tlacidlo pre pridanie aktualneho mesta medzi oblubene.
+            -->
             <div class="current-top">
               <div>
+                <!-- Nazov lokality vratenej z API -->
                 <div class="location-name" id="locationName">—</div>
                 <div class="location-meta">
+                  <!-- Kod krajiny, oddelovac a lokalny cas v casovej zone mesta -->
                   <span id="locationCountry">—</span>
                   <span class="meta-sep">·</span>
                   <span id="localTime">—</span>
                 </div>
               </div>
               <div class="current-actions">
+                <!--
+                  FAVORITE CURRENT CITY
+                  Srdce pridava alebo odstranuje aktualne mesto z localStorage.
+                  JavaScript meni aktivny stav podla toho, ci uz mesto existuje.
+                -->
                 <button
                   class="favorite-btn"
                   id="favoriteBtn"
@@ -303,78 +443,112 @@
                     />
                   </svg>
                 </button>
+                <!-- Formatovany datum pre lokalny cas vybraneho mesta -->
                 <div class="current-date" id="currentDate">—</div>
               </div>
             </div>
 
-            <!-- Stred karty: ikona, textovy popis, pocitova a hlavna teplota -->
+            <!--
+              CURRENT BODY
+              Hlavna vizualna cast aktualneho pocasia: ikona, textovy popis,
+              pocitova teplota a velka hlavna teplota.
+            -->
             <div class="current-body">
               <div class="current-left">
+                <!-- Ikona pocasia z OpenWeatherMap; src a alt doplna renderCurrent() -->
                 <img id="weatherIcon" src="" alt="" class="weather-icon-img" />
                 <div>
+                  <!-- Textovy popis pocasia, napriklad clear sky alebo light rain -->
                   <div class="current-desc" id="weatherDesc">—</div>
+                  <!-- Pocitova teplota prepocitana podla aktualnych jednotiek -->
                   <div class="temp-feels">
                     Pocitová <span id="tempFeels">—</span>
                   </div>
                 </div>
               </div>
+              <!-- Najvacsi teplotny udaj v karte -->
               <div class="temp-main" id="tempMain">—</div>
             </div>
 
-            <!-- Detailne metriky aktualneho pocasia renderovane z API dat -->
+            <!--
+              CURRENT STATS
+              Mriezka detailnych metrik. Labely sa prekladaju cez updateWeatherLanguage(),
+              hodnoty sa plnia z current weather API v renderCurrent().
+            -->
             <div class="current-stats">
               <div class="stat-item">
+                <!-- Vlhkost vzduchu v percentach -->
                 <div class="stat-label" id="humidityLabel">💧 Vlhkosť</div>
                 <div class="stat-val" id="humidity">—</div>
               </div>
               <div class="stat-item">
+                <!-- Rychlost vetra; prepocet km/h alebo mph robi displaySpeed() -->
                 <div class="stat-label" id="windLabel">💨 Vietor</div>
                 <div class="stat-val" id="wind">—</div>
               </div>
               <div class="stat-item">
+                <!-- Smer vetra prevedeny zo stupnov na svetovu stranu -->
                 <div class="stat-label" id="directionLabel">🧭 Smer</div>
                 <div class="stat-val" id="windDir">—</div>
               </div>
               <div class="stat-item">
+                <!-- Atmosfericky tlak v hPa -->
                 <div class="stat-label" id="pressureLabel">🌡 Tlak</div>
                 <div class="stat-val" id="pressure">—</div>
               </div>
               <div class="stat-item">
+                <!-- Viditelnost z API prichadza v metroch, v UI sa ukazuje v km -->
                 <div class="stat-label" id="visibilityLabel">
                   👁 Viditeľnosť
                 </div>
                 <div class="stat-val" id="visibility">—</div>
               </div>
               <div class="stat-item">
+                <!-- Percento pokrytia oblohy oblakmi -->
                 <div class="stat-label" id="cloudsLabel">☁️ Oblačnosť</div>
                 <div class="stat-val" id="clouds">—</div>
               </div>
               <div class="stat-item">
+                <!-- Vychod slnka formatovany podla casovej zony lokality -->
                 <div class="stat-label" id="sunriseLabel">🌅 Východ</div>
                 <div class="stat-val" id="sunrise">—</div>
               </div>
               <div class="stat-item">
+                <!-- Zapad slnka formatovany podla casovej zony lokality -->
                 <div class="stat-label" id="sunsetLabel">🌇 Západ</div>
                 <div class="stat-val" id="sunset">—</div>
               </div>
             </div>
           </div>
 
-          <!-- HOURLY FORECAST - horizontalny zoznam predpovede na najblizsie hodiny -->
+          <!--
+            HOURLY FORECAST
+            Horizontalny zoznam predpovede na najblizsie hodiny.
+            Forecast API vracia data po 3 hodinach; script.js z nich berie
+            najblizsie polozky a renderuje ich do hourlyTrack.
+          -->
           <div class="section-block reveal" id="hourlySection">
+            <!-- Nadpis sekcie sa preklada cez hourlyHeading -->
             <div class="section-eye" id="hourlyHeading">
               — NASLEDUJÚCICH 24 HODÍN
             </div>
             <div class="hourly-scroll">
+              <!-- Dynamicky generovane hodinove karty -->
               <div class="hourly-track" id="hourlyTrack"></div>
             </div>
           </div>
 
-          <!-- 5-DAY FORECAST - mriezka dennych predpovedi -->
+          <!--
+            5-DAY FORECAST
+            Mriezka dennych predpovedi. Z forecast endpointu sa vyberaju
+            reprezentativne zaznamy pre jednotlive dni a vkladaju sa do gridu.
+          -->
           <div class="section-block reveal" id="forecastSection">
+            <!-- Nadpis sekcie sa meni podla aktualneho jazyka -->
             <div class="section-eye" id="forecastHeading">
               — PREDPOVEĎ NA 5 DNÍ
             </div>
+            <!-- Dynamicky generovane denne forecast karty -->
             <div class="forecast-grid" id="forecastGrid"></div>
           </div>
         </div>
@@ -384,6 +558,9 @@
         FOOTER
         Obsahuje zdroj dat a drobny branding. Prefix "Data/Dáta" sa preklada
         cez element footerPrefix vo funkcii updateWeatherLanguage().
+
+        OpenWeatherMap link je ponechany viditelny, aby bolo jasne,
+        odkial pochadzaju data. target="_blank" otvara zdroj v novom tabe.
       -->
       <footer class="footer">
         <span
@@ -399,6 +576,9 @@
       CONFIG
       Lokalny konfiguracny subor s API klucom. Je v .gitignore, preto sa
       neposiela na GitHub. Verejna sablona je config.example.js.
+
+      Musi byt nacitany pred script.js, pretoze script.js hned na zaciatku
+      cita window.WEATHER_CONFIG.OPENWEATHERMAP_API_KEY.
     -->
     <script src="config.js"></script>
 
@@ -406,6 +586,9 @@
       HLAVNA LOGIKA
       script.js riesi API volania, renderovanie dat, preklady, jednotky,
       temu, geolokaciu, oblubene mesta a event listenery.
+
+      Tento subor je nacitany az na konci body, aby uz existovali vsetky
+      HTML elementy, ktore si JavaScript vybera pomocou getElementById().
     -->
     <script src="script.js"></script>
   </body>
