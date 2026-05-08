@@ -673,6 +673,7 @@ nav.up {
   content:''; position:absolute; inset:0;
   background:radial-gradient(circle at var(--mx,50%) var(--my,30%), rgba(45,78,245,.05) 0%, transparent 60%);
   opacity:0; transition:opacity .4s;
+  pointer-events:none;
 }
 
 /*
@@ -868,6 +869,13 @@ nav.up {
   color - modrý text
 */
 .badge-feat { background:var(--blue-bg); color:var(--blue) }
+
+/*
+  BADGE-DONE - štítok pre dokončené projekty
+  background - priesvitné zelené pozadie
+  color - zelený text
+*/
+.badge-done { background:var(--green-bg); color:var(--green) }
 
 /*
   BADGE-WIP - štítok pre "work in progress" projekty

@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="sk" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather · Portfolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Syne:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app" id="app">
+      <!-- ── Header ── -->
+      <header class="header">
+        <span class="header-logo">Weather<em>Portfolio</em></span>
+        <div class="header-controls">
+          <a
+            href="../index.html"
+            class="ctrl-btn"
+            id="portfolioBtn"
+            title="Späť na portfolio"
+            >Portfolio</a
+          >
+          <button
+            class="ctrl-btn lang-toggle"
+            id="langToggle"
+            title="Prepnúť jazyk"
+          >
+            EN
+          </button>
+          <button
+            class="ctrl-btn unit-toggle"
+            id="unitToggle"
+            title="Prepnúť jednotky"
+          >
+            °C
+          </button>
+          <button class="ctrl-btn" id="locateBtn" title="Moja poloha">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="3" />
+              <path d="M12 2v3M12 19v3M2 12h3M19 12h3" />
+            </svg>
+            <span class="ctrl-label">Poloha</span>
+          </button>
+          <button
+            class="ctrl-btn theme-toggle"
+            id="themeToggle"
+            title="Prepnúť tému"
+          >
+            <svg
+              class="icon-sun"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+              />
+            </svg>
+            <svg
+              class="icon-moon"
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+          <button class="ctrl-btn" id="favoritesBtn" title="Obľúbené mestá">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+              />
+            </svg>
+            <span class="ctrl-label">Obľúbené</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Favorites dropdown -->
+      <div class="favorites-dropdown" id="favoritesDropdown">
+        <div class="favorites-header">
+          <span id="favoritesTitle">Oblúbené mestá</span>
+          <button class="favorites-close" id="favoritesClose" title="Zavrieť">
+            ×
+          </button>
+        </div>
+        <div class="favorites-list" id="favoritesList">
+          <!-- filled by JS -->
+        </div>
+      </div>
+
+      <!-- ── Search ── -->
+      <section class="search-section">
+        <div class="search-wrap">
+          <div class="search-box" id="searchBox">
+            <svg
+              class="search-icon"
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.35-4.35" />
+            </svg>
+            <input
+              type="text"
+              id="cityInput"
+              class="search-input"
+              placeholder="Hľadaj mesto..."
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button class="search-btn" id="searchBtn">
+              <svg
+                width="13"
+                height="13"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M5 12h14M12 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+          <!-- Autocomplete dropdown -->
+          <div class="autocomplete" id="autocomplete"></div>
+        </div>
+      </section>
+
+      <!-- ── Main ── -->
+      <main class="main">
+        <!-- Empty -->
+        <div class="state-box" id="emptyState">
+          <div class="state-icon">
+            <svg
+              width="44"
+              height="44"
+              viewBox="0 0 64 64"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="22" cy="36" r="12" />
+              <path d="M34 36h12a8 8 0 0 0 0-16 8 8 0 0 0-7.4 5" />
+              <path d="M22 24a10 10 0 0 1 9.6-7" />
+              <path d="M16 50l2-4M22 50l2-4M28 50l2-4" />
+            </svg>
+          </div>
+          <p class="state-title" id="emptyTitle">Aké je vonku počasie?</p>
+          <p class="state-sub" id="emptySub">
+            Zadaj mesto alebo použi svoju polohu
+          </p>
+        </div>
+
+        <!-- Error -->
+        <div class="state-box hidden" id="errorState">
+          <div class="state-icon error">
+            <svg
+              width="38"
+              height="38"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 8v4M12 16h.01" />
+            </svg>
+          </div>
+          <p class="state-title error-t" id="errorMsg">Mesto sa nenašlo</p>
+          <p class="state-sub" id="errorSub">Skús iný názov mesta</p>
+        </div>
+
+        <!-- Loading -->
+        <div class="state-box hidden" id="loading">
+          <div class="spinner"></div>
+          <p class="state-sub" id="loadingText" style="margin-top: 1rem">
+            Načítavam počasie...
+          </p>
+        </div>
+
+        <!-- Weather -->
+        <div class="weather hidden" id="weatherData">
+          <!-- Current card -->
+          <div class="current-card reveal" id="currentCard">
+            <!-- bg gradient strip (day/night) -->
+            <div class="card-bg" id="cardBg"></div>
+
+            <div class="current-top">
+              <div>
+                <div class="location-name" id="locationName">—</div>
+                <div class="location-meta">
+                  <span id="locationCountry">—</span>
+                  <span class="meta-sep">·</span>
+                  <span id="localTime">—</span>
+                </div>
+              </div>
+              <div class="current-actions">
+                <button
+                  class="favorite-btn"
+                  id="favoriteBtn"
+                  title="Pridať do oblúbených"
+                >
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path
+                      d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                    />
+                  </svg>
+                </button>
+                <div class="current-date" id="currentDate">—</div>
+              </div>
+            </div>
+
+            <div class="current-body">
+              <div class="current-left">
+                <img id="weatherIcon" src="" alt="" class="weather-icon-img" />
+                <div>
+                  <div class="current-desc" id="weatherDesc">—</div>
+                  <div class="temp-feels">
+                    Pocitová <span id="tempFeels">—</span>
+                  </div>
+                </div>
+              </div>
+              <div class="temp-main" id="tempMain">—</div>
+            </div>
+
+            <div class="current-stats">
+              <div class="stat-item">
+                <div class="stat-label" id="humidityLabel">💧 Vlhkosť</div>
+                <div class="stat-val" id="humidity">—</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label" id="windLabel">💨 Vietor</div>
+                <div class="stat-val" id="wind">—</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label" id="directionLabel">🧭 Smer</div>
+                <div class="stat-val" id="windDir">—</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label" id="pressureLabel">🌡 Tlak</div>
+                <div class="stat-val" id="pressure">—</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label" id="visibilityLabel">
+                  👁 Viditeľnosť
+                </div>
+                <div class="stat-val" id="visibility">—</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label" id="cloudsLabel">☁️ Oblačnosť</div>
+                <div class="stat-val" id="clouds">—</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label" id="sunriseLabel">🌅 Východ</div>
+                <div class="stat-val" id="sunrise">—</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-label" id="sunsetLabel">🌇 Západ</div>
+                <div class="stat-val" id="sunset">—</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hourly -->
+          <div class="section-block reveal" id="hourlySection">
+            <div class="section-eye" id="hourlyHeading">
+              — NASLEDUJÚCICH 24 HODÍN
+            </div>
+            <div class="hourly-scroll">
+              <div class="hourly-track" id="hourlyTrack"></div>
+            </div>
+          </div>
+
+          <!-- 5-day forecast -->
+          <div class="section-block reveal" id="forecastSection">
+            <div class="section-eye" id="forecastHeading">
+              — PREDPOVEĎ NA 5 DNÍ
+            </div>
+            <div class="forecast-grid" id="forecastGrid"></div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <span
+          ><span id="footerPrefix">Dáta:</span>
+          <a href="https://openweathermap.org" target="_blank"
+            >OpenWeatherMap</a
+          ></span
+        >
+        <span>Weather<em>.</em></span>
+      </footer>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
