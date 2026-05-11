@@ -1,24 +1,24 @@
 # Weather App
 
-Responzívna weather aplikácia vytvorená ako súčasť môjho portfólia. Používateľ môže vyhľadať mesto, pozrieť aktuálne počasie, hodinovú predpoveď, 5-dňovú predpoveď, uložiť obľúbené mestá, prepnúť jednotky, tému aj jazyk.
+A responsive weather application built as part of my portfolio. Users can search for a city, view current weather, see an hourly forecast, check a 5-day forecast, save favorite cities, switch units, change the theme, and choose the interface language.
 
 ## Demo
 
-Live projekt: [Weather App](https://filipglemba.github.io/moje-portfolio/weather/)
+Live project: [Weather App](https://filipglemba.github.io/moje-portfolio/weather/)
 
-## Funkcie
+## Features
 
-- Aktuálne počasie podľa názvu mesta alebo geolokácie
-- Teplota, vlhkosť, vietor, tlak, viditeľnosť, oblačnosť, východ a západ slnka
-- Hodinová predpoveď na najbližších 24 hodín
-- Prehľadná 5-dňová predpoveď
-- Autocomplete miest cez OpenWeatherMap Geocoding API
-- Obľúbené mestá uložené v `localStorage`
-- Prepnutie jednotiek medzi Celsius a Fahrenheit
-- Svetlá a tmavá téma
-- Slovenský a anglický jazyk
-- Offline fallback pre posledné uložené počasie
-- Responzívny layout pre mobil, tablet aj desktop
+- Current weather by city name or geolocation
+- Temperature, humidity, wind, pressure, visibility, cloud coverage, sunrise, and sunset
+- Hourly forecast for the next 24 hours
+- Clear 5-day forecast
+- City autocomplete through the OpenWeatherMap Geocoding API
+- Favorite cities saved in `localStorage`
+- Unit switching between Celsius and Fahrenheit
+- Light and dark theme
+- Slovak and English language support
+- Offline fallback for the last saved weather data
+- Responsive layout for mobile, tablet, and desktop
 
 ## Tech Stack
 
@@ -28,7 +28,7 @@ Live projekt: [Weather App](https://filipglemba.github.io/moje-portfolio/weather
 - OpenWeatherMap API
 - LocalStorage
 
-## Štruktúra projektu
+## Project Structure
 
 ```text
 weather/
@@ -39,62 +39,62 @@ weather/
 `-- style.css
 ```
 
-## Spustenie lokálne
+## Run Locally
 
-1. Naklonuj repozitár:
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/FilipGlemba/moje-portfolio.git
 ```
 
-2. Otvor priečinok projektu:
+2. Open the project folder:
 
 ```bash
 cd moje-portfolio/weather
 ```
 
-3. Skopíruj konfiguračný súbor:
+3. Copy the example configuration file:
 
 ```bash
 copy config.example.js config.js
 ```
 
-4. Do `config.js` vlož svoj OpenWeatherMap API kľúč:
+4. Add your OpenWeatherMap API key to `config.js`:
 
 ```js
 window.WEATHER_CONFIG = {
-  OPENWEATHERMAP_API_KEY: 'tvoj_api_kľúč'
+  OPENWEATHERMAP_API_KEY: 'your_api_key'
 };
 ```
 
-5. Otvor `index.html` v prehliadači.
+5. Open `index.html` in your browser.
 
-## Bezpečnosť API kľúča
+## API Key Security
 
-API kľúč sa nedá bezpečne skryť, ak je priamo v JavaScripte, ktorý sa posiela do prehliadača. Každý návštevník si vie otvoriť DevTools alebo zdrojový kód a kľúč skopírovať.
+An API key cannot be safely hidden when it is placed directly in JavaScript that is sent to the browser. Any visitor can open DevTools or the source code and copy the key.
 
-Preto je v tomto repozitári iba `config.example.js`. Skutočný `config.js` je pridaný v `.gitignore`, aby sa neposielal na GitHub.
+That is why this repository only includes `config.example.js`. The real `config.js` file is listed in `.gitignore` so it is not pushed to GitHub.
 
-Ak má aplikácia bežať verejne aj s tajným API kľúčom, najlepšie riešenie je backend alebo serverless proxy, napríklad Netlify Functions, Vercel Functions alebo vlastný Node/PHP endpoint. API kľúč potom zostane v serverovom `.env` súbore a frontend volá iba tvoj endpoint.
+If the application needs to run publicly with a private API key, the best solution is a backend or serverless proxy, such as Netlify Functions, Vercel Functions, or a custom Node/PHP endpoint. The API key can then stay in a server-side `.env` file, while the frontend calls only your endpoint.
 
 ## API
 
-Dáta o počasí poskytuje [OpenWeatherMap](https://openweathermap.org/). Na použitie live dát je potrebný bezplatný API kľúč.
+Weather data is provided by [OpenWeatherMap](https://openweathermap.org/). A free API key is required to use live data.
 
-## Čo som si precvičil
+## What I Practiced
 
-- Práca s externým API
-- Renderovanie dát bez frameworku
-- Správa UI stavov
-- Ukladanie dát do `localStorage`
-- Viacjazyčné texty v rozhraní
-- Responzívny dizajn a polish UI
+- Working with an external API
+- Rendering data without a framework
+- Managing UI states
+- Saving data in `localStorage`
+- Multilingual interface text
+- Responsive design and UI polish
 
-## Autor
+## Author
 
 Filip Glemba  
 [GitHub](https://github.com/FilipGlemba)
 
-## Licencia
+## License
 
-Projekt slúži na portfolio a učenie.
+This project is intended for portfolio and learning purposes.

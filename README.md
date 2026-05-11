@@ -1,70 +1,71 @@
-# Moje portfólio
+# My Portfolio
 
-Osobné portfólio web developera s moderným dizajnom, čistou štruktúrou a dvojjazyčnou podporou (SK / EN). Repozitár obsahuje hlavný portfolio web a samostatnú Weather aplikáciu priamo v priečinku `weather/`.
+Personal web developer portfolio with a modern design, clean structure, and bilingual support (SK / EN). This repository contains the main portfolio website and a standalone Weather App in the `weather/` directory.
 
-## 🚀 Čo je v repozitári
+## What Is Included
 
-- `index.html` — hlavné portfolio so sekciou projektov
-- `weather/index.html` — Weather app ako ukážka projektu v portfóliu
-- `assets/` — štýly a skripty pre portfolio
-- `weather/style.css`, `weather/script.js` — dizajn a logika počasia
+- `index.html` - main portfolio with a projects section
+- `weather/index.html` - Weather App included as a portfolio project
+- `assets/` - styles and scripts for the portfolio
+- `weather/style.css`, `weather/script.js` - weather app design and logic
 
-## 🌐 Integrácia Weather app
+## Weather App Integration
 
-Weather aplikácia je prepojená priamo z projektu v sekcii Projektov. Karta projektu teraz vedie na `weather/index.html` a súčasne je možné sa z aplikácie vrátiť späť do portfólia.
+The Weather App is linked directly from the Projects section of the portfolio. The project card opens `weather/index.html`, and the app also includes navigation back to the portfolio.
 
-## 🛠️ Použité technológie
+## Technologies Used
 
 - HTML5
 - CSS3
 - JavaScript (ES6+)
-- Vanilla JavaScript pre interakciu a viacjazyčnosť
-- OpenWeather API pre počasie
-- LocalStorage pre uložené obľúbené mestá a tému
+- Vanilla JavaScript for interaction and multilingual support
+- OpenWeather API for weather data
+- LocalStorage for saved favorite cities and theme preferences
 
-## 📦 Spustenie lokálne
+## Run Locally
 
-1. Klonuj repozitár:
+1. Clone the repository:
 
    ```bash
    git clone https://github.com/FilipGlemba/moje-portfolio.git
    cd moje-portfolio
    ```
 
-2. Otvor `index.html` pre portfólio alebo `weather/index.html` pre Weather aplikáciu.
+2. Open `index.html` for the portfolio or `weather/index.html` for the Weather App.
 
-3. Ak chceš používať lokálny server:
+3. To use a local server:
 
    ```bash
    python -m http.server 8000
    ```
 
-   Potom navštív `http://localhost:8000`.
+   Then visit `http://localhost:8000`.
 
-4. Pre Weather aplikáciu v `weather/script.js` si doplň vlastný OpenWeatherMap API kľúč.
+4. For the Weather App, copy `weather/config.example.js` to `weather/config.js` and add your own OpenWeatherMap API key.
 
-## 📁 Štruktúra projektu
+## Project Structure
 
-```
+```text
 moje-portfolio/
-├── index.html
-├── README.md
-├── assets/
-│   ├── css/
-│   │   └── styles.css
-│   └── js/
-│       ├── main.js
-│       ├── translations.js
-│       └── language-switcher.js
-└── weather/
-    ├── index.html
-    ├── README.md
-    ├── script.js
-    └── style.css
+|-- index.html
+|-- README.md
+|-- assets/
+|   |-- css/
+|   |   `-- styles.css
+|   `-- js/
+|       |-- main.js
+|       |-- translations.js
+|       `-- language-switcher.js
+`-- weather/
+    |-- index.html
+    |-- README.md
+    |-- config.example.js
+    |-- script.js
+    `-- style.css
 ```
 
-## 📞 Kontakt
+## Contact
 
-Filip Glemba – [email](mailto:filip.glemba@example.com)
+Filip Glemba - [email](mailto:filip.glemba@example.com)
 
-> Portfolio a Weather app sú pripravené na GitHub. Ak chceš, môžem pomôcť pridať aj GitHub Pages deploy alebo viac projektov.
+> The portfolio and Weather App are ready for GitHub. Future improvements could include GitHub Pages deployment details or additional portfolio projects.
