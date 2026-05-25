@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="sk" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-do App | Portfolio</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <!-- Top navigation with portfolio link, language switch, and theme toggle. -->
+      <header class="app-header">
+        <a class="brand" href="../index.html" aria-label="Back to portfolio">
+          Task<em>Studio</em>
+        </a>
+
+        <div class="header-actions">
+          <a class="control-btn" href="../index.html" id="portfolioLink"
+            >Portfolio</a
+          >
+          <button class="control-btn" id="languageBtn" type="button">EN</button>
+          <button
+            class="icon-btn"
+            id="themeBtn"
+            type="button"
+            aria-label="Toggle theme"
+          >
+            <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path
+                d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+              ></path>
+            </svg>
+            <svg class="moon-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <!-- Hero summary shows the app purpose and live task statistics. -->
+        <section class="hero-panel">
+          <div>
+            <p class="eyebrow" id="heroEyebrow">Personal productivity</p>
+            <h1 id="heroTitle">Plan the day with focus.</h1>
+            <p class="hero-copy" id="heroCopy">
+              A polished task manager for daily priorities, deadlines, notes,
+              and quick planning.
+            </p>
+          </div>
+
+          <div class="hero-stats" aria-label="Task overview">
+            <div class="metric">
+              <span id="metricTotal">0</span>
+              <small id="metricTotalLabel">Total</small>
+            </div>
+            <div class="metric">
+              <span id="metricOpen">0</span>
+              <small id="metricOpenLabel">Open</small>
+            </div>
+            <div class="metric">
+              <span id="metricDone">0%</span>
+              <small id="metricDoneLabel">Done</small>
+            </div>
+          </div>
+        </section>
+
+        <!-- Task composer is reused for both creating new tasks and editing existing ones. -->
+        <section class="task-composer" aria-labelledby="composerTitle">
+          <div class="composer-head">
+            <div>
+              <p class="section-kicker" id="composerKicker">New task</p>
+              <h2 id="composerTitle">Capture what matters</h2>
+            </div>
+            <span class="save-state" id="saveState">Saved locally</span>
+          </div>
+
+          <form id="taskForm" class="task-form">
+            <label class="field main-field">
+              <span id="titleLabel">Task title</span>
+              <input
+                id="taskTitle"
+                type="text"
+                maxlength="90"
+                autocomplete="off"
+                placeholder="Design project case study"
+                required
+              />
+            </label>
+
+            <div class="form-grid">
+              <label class="field">
+                <span id="dueLabel">Due date</span>
+                <input id="taskDue" type="date" />
+              </label>
+
+              <label class="field">
+                <span id="priorityLabel">Priority</span>
+                <select id="taskPriority">
+                  <option value="high">High</option>
+                  <option value="medium" selected>Medium</option>
+                  <option value="low">Low</option>
+                </select>
+              </label>
+            </div>
+
+            <label class="field">
+              <span id="notesLabel">Notes</span>
+              <textarea
+                id="taskNotes"
+                rows="3"
+                maxlength="220"
+                placeholder="Add context, links, or acceptance criteria"
+              ></textarea>
+            </label>
+
+            <div class="composer-actions">
+              <button class="primary-btn" id="submitBtn" type="submit">
+                Add task
+              </button>
+              <button class="ghost-btn" id="cancelEditBtn" type="button" hidden>
+                Cancel edit
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- Combined task area keeps search tools and the task board in one visual card. -->
+        <div class="task-area">
+          <section class="tools-panel">
+            <div class="search-field" role="search">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+              </svg>
+              <input
+                id="searchInput"
+                type="search"
+                placeholder="Search tasks..."
+                aria-label="Search tasks"
+              />
+            </div>
+
+            <div class="filter-tabs" role="tablist" aria-label="Task filters">
+              <button
+                class="filter-tab active"
+                type="button"
+                data-filter="all"
+                id="filterAll"
+              >
+                All
+              </button>
+              <button
+                class="filter-tab"
+                type="button"
+                data-filter="open"
+                id="filterOpen"
+              >
+                Open
+              </button>
+              <button
+                class="filter-tab"
+                type="button"
+                data-filter="today"
+                id="filterToday"
+              >
+                Today
+              </button>
+              <button
+                class="filter-tab"
+                type="button"
+                data-filter="done"
+                id="filterDone"
+              >
+                Done
+              </button>
+            </div>
+
+            <div class="tool-actions">
+              <button class="ghost-btn compact" id="exportBtn" type="button">
+                Export
+              </button>
+              <label
+                class="ghost-btn compact file-import"
+                for="importInput"
+                id="importBtn"
+                >Import</label
+              >
+              <input id="importInput" type="file" accept="application/json" />
+              <button class="danger-btn compact" id="clearDoneBtn" type="button">
+                Clear done
+              </button>
+            </div>
+          </section>
+
+          <section class="board" aria-live="polite">
+            <div class="board-head">
+              <div>
+                <p class="section-kicker" id="boardKicker">Task board</p>
+                <h2 id="boardTitle">Today and next</h2>
+              </div>
+              <select id="sortSelect" aria-label="Sort tasks">
+                <option value="manual">Custom order</option>
+                <option value="smart">Smart sort</option>
+                <option value="due">Due date</option>
+                <option value="priority">Priority</option>
+                <option value="created">Newest</option>
+              </select>
+            </div>
+
+            <div class="progress-wrap">
+              <div class="progress-copy">
+                <span id="progressLabel">Progress</span>
+                <strong id="progressText">0 of 0 complete</strong>
+              </div>
+              <div class="progress-track" aria-hidden="true">
+                <div class="progress-bar" id="progressBar"></div>
+              </div>
+            </div>
+
+            <div class="task-list" id="taskList"></div>
+
+            <div class="empty-state" id="emptyState" hidden>
+              <div class="empty-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 11l3 3L22 4"></path>
+                  <path
+                    d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"
+                  ></path>
+                </svg>
+              </div>
+              <h3 id="emptyTitle">No tasks here</h3>
+              <p id="emptyCopy">Add a task or change the filter to see more.</p>
+            </div>
+          </section>
+        </div>
+      </main>
+
+      <footer class="app-footer">
+        <span id="footerText">Built with HTML, CSS and JavaScript.</span>
+        <span>TaskStudio<em>.</em></span>
+      </footer>
+    </div>
+
+    <!-- Reusable confirm modal for destructive actions. -->
+    <div class="modal-backdrop" id="confirmModal" hidden>
+      <section
+        class="confirm-dialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirmTitle"
+        aria-describedby="confirmCopy"
+      >
+        <div class="confirm-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 9v4"></path>
+            <path d="M12 17h.01"></path>
+            <path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"></path>
+          </svg>
+        </div>
+        <div>
+          <p class="section-kicker" id="confirmKicker">Confirm action</p>
+          <h2 id="confirmTitle">Delete this task?</h2>
+          <p id="confirmCopy">
+            This action cannot be undone. The task will be removed from your
+            local list.
+          </p>
+        </div>
+        <div class="confirm-actions">
+          <button class="ghost-btn" id="confirmCancelBtn" type="button">
+            Cancel
+          </button>
+          <button class="danger-btn" id="confirmDeleteBtn" type="button">
+            Delete
+          </button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Template cloned by JavaScript for every rendered task. -->
+    <template id="taskTemplate">
+      <article class="task-card">
+        <button class="drag-handle" type="button" aria-label="Drag task">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 5h.01"></path>
+            <path d="M15 5h.01"></path>
+            <path d="M9 12h.01"></path>
+            <path d="M15 12h.01"></path>
+            <path d="M9 19h.01"></path>
+            <path d="M15 19h.01"></path>
+          </svg>
+        </button>
+        <button class="complete-btn" type="button" aria-label="Toggle complete">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 6 9 17l-5-5"></path>
+          </svg>
+        </button>
+        <div class="task-content">
+          <div class="task-topline">
+            <h3 class="task-title"></h3>
+            <span class="priority-pill"></span>
+          </div>
+          <p class="task-notes"></p>
+          <div class="task-meta">
+            <span class="due-pill"></span>
+            <span class="created-pill"></span>
+          </div>
+        </div>
+        <div class="task-actions">
+          <button
+            class="icon-btn small edit-task"
+            type="button"
+            aria-label="Edit task"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 20h9"></path>
+              <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"></path>
+            </svg>
+          </button>
+          <button
+            class="icon-btn small delete-task"
+            type="button"
+            aria-label="Delete task"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 6h18"></path>
+              <path d="M8 6V4h8v2"></path>
+              <path d="M19 6l-1 14H6L5 6"></path>
+            </svg>
+          </button>
+        </div>
+      </article>
+    </template>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -36,7 +36,7 @@ const translations = {
     // PROJECTS - texty v sekcii projektov
     projectsTitle: 'Projekty', // Nadpis sekcie projektov
     weatherDesc: 'Zadáš mesto, okamžite vidíš teplotu, vlhkosť, vietor a predpoveď na ďalšie dni. Dáta z OpenWeather API, responzívny a rýchly UI.', // Popis weather appky
-    todoDesc: 'Prehľadná appka na poznámky a správu úloh. Pridávanie, editovanie, mazanie – uložené lokálne, bez prihlásenia, okamžite použiteľné.', // Popis todo appky
+    todoDesc: 'Profesionálny správca úloh s prioritami, termínmi, filtrami, vyhľadávaním, light/dark témou a lokálnym ukladaním cez LocalStorage.', // Popis todo appky
     eshopDesc: 'Kompletná e-commerce platforma – autentifikácia, správa produktov, košík, platby a admin dashboard. Prvý veľký full-stack projekt.', // Popis e-shopu
 
     // STACK - texty v sekcii technických zručností
@@ -114,7 +114,7 @@ const translations = {
     // PROJECTS - projects section texts
     projectsTitle: 'Projects', // Projects section title
     weatherDesc: 'Enter a city and immediately see temperature, humidity, wind and forecast for the next days. Data from OpenWeather API, responsive and fast UI.', // Weather app description
-    todoDesc: 'A simple notes and task manager app. Add, edit, delete tasks – stored locally, no login required, ready to use.', // Todo app description
+    todoDesc: 'A professional task manager with priorities, due dates, filters, search, light/dark theme, and local persistence through LocalStorage.', // Todo app description
     eshopDesc: 'A complete e-commerce platform – authentication, product management, cart, payments, and admin dashboard. My first larger full-stack project.', // E-shop description
 
     // STACK - tech stack section texts
