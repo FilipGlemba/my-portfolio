@@ -33,21 +33,28 @@ The app lets users plan daily work, track progress, organize priorities, reorder
 
 ```text
 todo/
-├── index.html   # App markup, controls, modal, and task template
-├── style.css    # Visual system, responsive layout, and component states
-├── script.js    # State management, rendering, filters, drag and drop, storage
-└── README.md    # Project documentation
+|-- index.html   # App markup, controls, modal, and task template
+|-- style.css    # Visual system, responsive layout, and component states
+|-- script.js    # State management, rendering, filters, drag and drop, storage
+`-- README.md    # Project documentation
 ```
 
 ## Run Locally
 
-Open the app directly in a browser:
+Clone the repository and open the app file in a browser:
 
-```text
-file:///C:/Users/filip/OneDrive/Desktop/moje_portfolio/todo/index.html
+```bash
+git clone https://github.com/FilipGlemba/my-portfolio.git
+cd my-portfolio
 ```
 
-Or run a simple local server from the repository root:
+Then open:
+
+```text
+todo/index.html
+```
+
+You can also run a simple local server from the repository root:
 
 ```bash
 python -m http.server 8000
