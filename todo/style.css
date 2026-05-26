@@ -1,5 +1,9 @@
 :root {
-  /* Core design tokens for the light theme. */
+  /*
+    Core design tokens for the light theme.
+    Most component styles use these variables, so color and spacing changes can
+    be made from one place without rewriting every selector.
+  */
   color-scheme: light;
   --bg: #f5f7fb;
   --bg-soft: #eef2f8;
@@ -29,7 +33,11 @@
 }
 
 [data-theme="dark"] {
-  /* The same component styles read from these dark-mode tokens. */
+  /*
+    Dark theme token overrides.
+    The HTML data-theme attribute switches these values while the component CSS
+    stays the same, which keeps theme logic simple.
+  */
   color-scheme: dark;
   --bg: #0b1020;
   --bg-soft: #121a2c;
@@ -235,7 +243,11 @@ svg {
 }
 
 .workspace {
-  /* Main app layout: composer on the left, task workflow on the right. */
+  /*
+    Main app layout.
+    Desktop uses two columns: the composer stays on the left, while the full task
+    workflow is grouped on the right. Media queries collapse this to one column.
+  */
   flex: 1;
   display: grid;
   grid-template-columns: minmax(300px, 0.74fr) minmax(0, 1.26fr);
@@ -248,7 +260,11 @@ svg {
 .hero-panel,
 .task-composer,
 .task-area {
-  /* Shared glass-card treatment for the three primary surfaces. */
+  /*
+    Shared glass-card treatment for the three primary surfaces.
+    Hero, composer, and task area share the same border/background/shadow so the
+    app feels like one coherent interface.
+  */
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: rgba(255, 255, 255, 0.84);
@@ -349,7 +365,11 @@ svg {
 }
 
 .task-area {
-  /* Search, filters, progress, and tasks live in one card to avoid split panels. */
+  /*
+    Right-side workflow card.
+    This wrapper intentionally contains both tools and board so search and tasks
+    do not look disconnected from each other.
+  */
   grid-column: 2;
   display: grid;
   gap: 16px;
@@ -450,7 +470,11 @@ svg {
 }
 
 .tools-panel {
-  /* Controls area above the board: search, filters, import/export, clear done. */
+  /*
+    Controls area above the board.
+    The first row is search + utility actions, and the second row is the filter
+    tab group spanning the whole card width.
+  */
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   gap: 12px;
@@ -588,7 +612,11 @@ svg {
 }
 
 .task-card {
-  /* Four-column task row: drag handle, checkbox, content, actions. */
+  /*
+    Four-column task row.
+    Column order is drag handle, completion button, content, and edit/delete
+    actions. Mobile collapses the actions below the content.
+  */
   display: grid;
   grid-template-columns: 22px 34px minmax(0, 1fr) auto;
   gap: 10px;
@@ -605,7 +633,10 @@ svg {
 }
 
 .task-card.dragging {
-  /* Visual feedback while a task is being reordered. */
+  /*
+    Visual feedback while a task is being reordered.
+    Dragging fades the source card; drag-over highlights the possible drop target.
+  */
   opacity: 0.42;
   transform: scale(0.99);
 }
@@ -817,7 +848,11 @@ svg {
 }
 
 .modal-backdrop {
-  /* App-level confirmation layer for destructive actions. */
+  /*
+    App-level confirmation layer for destructive actions.
+    It is hidden with the hidden attribute and displayed as a centered dialog
+    when script.js needs user confirmation.
+  */
   position: fixed;
   inset: 0;
   z-index: 50;
@@ -895,7 +930,11 @@ svg {
 }
 
 @media (max-width: 940px) {
-  /* Collapse the two-column desktop layout into a single column. */
+  /*
+    Tablet layout.
+    The composer and task area stack vertically, and the sticky composer is
+    disabled so it behaves naturally in a single-column flow.
+  */
   .workspace {
     grid-template-columns: 1fr;
   }
@@ -912,7 +951,11 @@ svg {
 }
 
 @media (max-width: 760px) {
-  /* Tighten card spacing and stack control groups on smaller screens. */
+  /*
+    Mobile layout.
+    Controls switch to one column, card padding gets tighter, and actions stretch
+    so buttons remain easy to tap.
+  */
   .app-shell {
     width: min(100% - 28px, 1180px);
   }
