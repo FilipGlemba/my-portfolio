@@ -12,7 +12,11 @@
   </head>
   <body>
     <div class="app-shell">
-      <!-- Top navigation with portfolio link, language switch, and theme toggle. -->
+      <!--
+        Top navigation for the standalone app.
+        The portfolio link returns to the main site, while the language and theme
+        buttons are wired in script.js and persist their settings in LocalStorage.
+      -->
       <header class="app-header">
         <a class="brand" href="../index.html" aria-label="Back to portfolio">
           Task<em>Studio</em>
@@ -43,7 +47,11 @@
       </header>
 
       <main class="workspace">
-        <!-- Hero summary shows the app purpose and live task statistics. -->
+        <!--
+          Hero summary.
+          The text is replaced by the active language, and the three metrics are
+          updated on every render so the user always sees current task progress.
+        -->
         <section class="hero-panel">
           <div>
             <p class="eyebrow" id="heroEyebrow">Personal productivity</p>
@@ -70,7 +78,11 @@
           </div>
         </section>
 
-        <!-- Task composer is reused for both creating new tasks and editing existing ones. -->
+        <!--
+          Task composer.
+          The same form creates a new task or edits an existing one. When editing,
+          script.js fills the inputs, changes the submit text, and shows Cancel edit.
+        -->
         <section class="task-composer" aria-labelledby="composerTitle">
           <div class="composer-head">
             <div>
@@ -130,9 +142,14 @@
           </form>
         </section>
 
-        <!-- Combined task area keeps search tools and the task board in one visual card. -->
+        <!--
+          Combined task area.
+          Search, filters, import/export actions, sorting, progress, and rendered
+          tasks stay inside one card so the workflow reads as one connected tool.
+        -->
         <div class="task-area">
           <section class="tools-panel">
+            <!-- Search is live: every input event rerenders the filtered list. -->
             <div class="search-field" role="search">
               <svg viewBox="0 0 24 24" aria-hidden="true">
                 <circle cx="11" cy="11" r="8"></circle>
@@ -146,6 +163,7 @@
               />
             </div>
 
+            <!-- Filter buttons store their target view in data-filter attributes. -->
             <div class="filter-tabs" role="tablist" aria-label="Task filters">
               <button
                 class="filter-tab active"
@@ -181,6 +199,7 @@
               </button>
             </div>
 
+            <!-- Utility actions use JSON files so tasks can be backed up or restored. -->
             <div class="tool-actions">
               <button class="ghost-btn compact" id="exportBtn" type="button">
                 Export
@@ -199,6 +218,7 @@
           </section>
 
           <section class="board" aria-live="polite">
+            <!-- aria-live lets assistive tech know the task list can update dynamically. -->
             <div class="board-head">
               <div>
                 <p class="section-kicker" id="boardKicker">Task board</p>
@@ -213,6 +233,7 @@
               </select>
             </div>
 
+            <!-- Completion progress is calculated from all tasks, not only visible tasks. -->
             <div class="progress-wrap">
               <div class="progress-copy">
                 <span id="progressLabel">Progress</span>
@@ -223,6 +244,7 @@
               </div>
             </div>
 
+            <!-- JavaScript renders task-card clones into this list. -->
             <div class="task-list" id="taskList"></div>
 
             <div class="empty-state" id="emptyState" hidden>
@@ -247,7 +269,11 @@
       </footer>
     </div>
 
-    <!-- Reusable confirm modal for destructive actions. -->
+    <!--
+      Reusable confirm modal for destructive actions.
+      script.js injects the title/copy/action each time it is opened, so one modal
+      can safely handle deleting a single task and clearing completed tasks.
+    -->
     <div class="modal-backdrop" id="confirmModal" hidden>
       <section
         class="confirm-dialog"
@@ -282,7 +308,11 @@
       </section>
     </div>
 
-    <!-- Template cloned by JavaScript for every rendered task. -->
+    <!--
+      Task template.
+      Keeping the repeated task markup here avoids building large HTML strings in
+      JavaScript and makes each rendered card easier to maintain.
+    -->
     <template id="taskTemplate">
       <article class="task-card">
         <button class="drag-handle" type="button" aria-label="Drag task">

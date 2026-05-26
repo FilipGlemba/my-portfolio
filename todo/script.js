@@ -2,7 +2,11 @@ const STORAGE_KEY = 'task-studio-tasks';
 const THEME_KEY = 'task-studio-theme';
 const LANG_KEY = 'task-studio-lang';
 
-// All visible copy lives here so the UI can switch between Slovak and English.
+/*
+  Translation dictionary.
+  Every static label, button, placeholder, and status message is stored here so
+  language switching can update the interface without duplicating markup.
+*/
 const translations = {
   sk: {
     htmlLang: 'sk',
@@ -140,7 +144,11 @@ const translations = {
   }
 };
 
-// Cached DOM references keep render and event logic compact.
+/*
+  Cached DOM references.
+  Querying once at startup keeps the rest of the code readable and avoids
+  repeatedly searching the document during render or event handlers.
+*/
 const els = {
   languageBtn: document.getElementById('languageBtn'),
   themeBtn: document.getElementById('themeBtn'),
@@ -205,17 +213,22 @@ let lang = localStorage.getItem(LANG_KEY) || 'sk';
 let draggedTaskId = null;
 let pendingConfirmAction = null;
 
-// Older saved tasks may not have an order value, so normalize once on startup.
+/*
+  Older saved tasks may not have an order value because drag-and-drop was added
+  later. Normalizing once on startup keeps existing LocalStorage data compatible.
+*/
 normalizeTaskOrder();
 
 function uid() {
   return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
+// Dates are stored as YYYY-MM-DD strings so due-date comparison stays simple.
 function todayISO() {
   return new Date().toISOString().slice(0, 10);
 }
 
+// Reads saved tasks safely; broken or missing LocalStorage data falls back to [].
 function loadTasks() {
   try {
     return JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -234,7 +247,11 @@ function normalizeTaskOrder() {
   if (changed) localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
 }
 
-// Save all task changes to LocalStorage and briefly update the save indicator.
+/*
+  Persists all task changes.
+  The app keeps a single tasks array as source of truth, then serializes it to
+  LocalStorage whenever a task is added, edited, deleted, reordered, or imported.
+*/
 function saveTasks(message) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
   if (message) flashSaveState(message);
@@ -248,18 +265,26 @@ function flashSaveState(message) {
   }, 1500);
 }
 
+// Used by the Today filter and by the due-date badge styling.
 function isToday(value) {
   return value === todayISO();
 }
 
+// Overdue only applies to unfinished tasks, so completed old tasks stay calm.
 function isOverdue(value, done) {
   return value && value < todayISO() && !done;
 }
 
+// Lower number means higher sorting priority.
 function priorityWeight(priority) {
   return { high: 0, medium: 1, low: 2 }[priority] ?? 1;
 }
 
+/*
+  Sort pipeline.
+  Manual order is controlled by drag-and-drop. Smart sort keeps unfinished tasks
+  first, then groups them by due date and priority.
+*/
 function sortTasks(items) {
   return [...items].sort((a, b) => {
     if (els.sortSelect.value === 'manual') return a.order - b.order;
@@ -273,7 +298,11 @@ function sortTasks(items) {
   });
 }
 
-// Filtering is applied after sorting so every view keeps the selected order.
+/*
+  Filtering pipeline.
+  Search checks both title and notes, then the active filter decides which tasks
+  are visible. Filtering is applied after sorting so order remains predictable.
+*/
 function getVisibleTasks() {
   const query = els.searchInput.value.trim().toLowerCase();
   return sortTasks(tasks).filter(task => {
@@ -287,6 +316,7 @@ function getVisibleTasks() {
   });
 }
 
+// Converts stored ISO dates into compact locale-aware labels.
 function formatDate(value) {
   if (!value) return translations[lang].noDue;
   const date = new Date(`${value}T00:00:00`);
@@ -296,6 +326,12 @@ function formatDate(value) {
   }).format(date);
 }
 
+/*
+  Main render function.
+  It recalculates stats, updates progress, clears the old task list, and clones a
+  fresh task card for every visible task. This keeps DOM state synchronized with
+  the tasks array after every action.
+*/
 function render() {
   const t = translations[lang];
   const visibleTasks = getVisibleTasks();
@@ -312,7 +348,7 @@ function render() {
   els.taskList.innerHTML = '';
   els.emptyState.hidden = visibleTasks.length > 0;
 
-  // The list is rendered from state on every change to keep DOM and data aligned.
+  // Each cloned template gets task-specific text, state classes, aria labels, and event handlers.
   visibleTasks.forEach(task => {
     const node = els.template.content.firstElementChild.cloneNode(true);
     node.dataset.id = task.id;
@@ -357,7 +393,11 @@ function render() {
   });
 }
 
-// Applies translated copy to static UI elements, then rerenders dynamic tasks.
+/*
+  Applies the selected language to the UI.
+  Static elements are updated directly, while dynamic task cards are refreshed by
+  render() so priority labels and due-date text also switch language.
+*/
 function applyLanguage() {
   const t = translations[lang];
   document.documentElement.lang = t.htmlLang;
@@ -406,6 +446,7 @@ function applyLanguage() {
   render();
 }
 
+// Restores the composer to create mode after saving or cancelling an edit.
 function resetForm() {
   editingId = null;
   els.taskForm.reset();
@@ -414,12 +455,17 @@ function resetForm() {
   els.cancelEditBtn.hidden = true;
 }
 
+// New tasks receive an order smaller than the current minimum, so they appear first.
 function getTopOrder() {
   if (!tasks.length) return 0;
   return Math.min(...tasks.map(task => task.order)) - 1;
 }
 
-// Creates a new task or updates the currently edited task from the form values.
+/*
+  Form submit handler.
+  When editingId is set, the existing task is patched. Otherwise a new task is
+  created with default metadata and inserted at the top of the manual order.
+*/
 function upsertTask(event) {
   event.preventDefault();
   const title = els.taskTitle.value.trim();
@@ -450,12 +496,14 @@ function upsertTask(event) {
   render();
 }
 
+// Toggles completion without removing the task from the current data set.
 function toggleTask(id) {
   tasks = tasks.map(task => task.id === id ? { ...task, done: !task.done, updatedAt: Date.now() } : task);
   saveTasks(translations[lang].saved);
   render();
 }
 
+// Removes one task and cancels edit mode if that exact task was being edited.
 function deleteTask(id) {
   tasks = tasks.filter(task => task.id !== id);
   saveTasks(translations[lang].saved);
@@ -463,6 +511,7 @@ function deleteTask(id) {
   render();
 }
 
+// Opens the shared confirm modal before running the destructive delete action.
 function requestDeleteTask(id) {
   openConfirm({
     title: translations[lang].confirmDeleteTitle,
@@ -471,6 +520,7 @@ function requestDeleteTask(id) {
   });
 }
 
+// Loads a selected task into the composer and switches the submit button to save mode.
 function startEdit(id) {
   const task = tasks.find(item => item.id === id);
   if (!task) return;
@@ -484,13 +534,18 @@ function startEdit(id) {
   els.taskTitle.focus();
 }
 
+// Updates active filter button styling and refreshes the visible list.
 function setFilter(nextFilter) {
   filter = nextFilter;
   els.filterTabs.forEach(tab => tab.classList.toggle('active', tab.dataset.filter === filter));
   render();
 }
 
-// Native HTML drag and drop updates the saved manual order.
+/*
+  Drag and drop handlers.
+  Native HTML drag events store the dragged task id, highlight possible targets,
+  and call reorderTasks() with before/after placement based on pointer position.
+*/
 function handleDragStart(event) {
   draggedTaskId = event.currentTarget.dataset.id;
   event.currentTarget.classList.add('dragging');
@@ -527,6 +582,7 @@ function handleDragEnd() {
   });
 }
 
+// Rebuilds order values from the manually sorted id list and switches sort to Custom order.
 function reorderTasks(sourceId, targetId, placeAfter) {
   const manualOrder = [...tasks].sort((a, b) => a.order - b.order).map(task => task.id);
   const sourceIndex = manualOrder.indexOf(sourceId);
@@ -544,7 +600,10 @@ function reorderTasks(sourceId, targetId, placeAfter) {
   render();
 }
 
-// Export keeps the same task schema used in LocalStorage.
+/*
+  Export keeps the same schema used in LocalStorage.
+  The downloaded JSON includes tasks plus an exportedAt timestamp for context.
+*/
 function exportTasks() {
   const blob = new Blob([JSON.stringify({ tasks, exportedAt: new Date().toISOString() }, null, 2)], {
     type: 'application/json'
@@ -559,7 +618,11 @@ function exportTasks() {
   URL.revokeObjectURL(url);
 }
 
-// Import accepts either a raw task array or the app's exported { tasks } object.
+/*
+  Import accepts either a raw task array or the app's exported { tasks } object.
+  Incoming values are sanitized and trimmed so malformed files cannot inject
+  unexpected task shapes into the app state.
+*/
 function importTasks(file) {
   if (!file) return;
   const reader = new FileReader();
@@ -594,6 +657,7 @@ function importTasks(file) {
   reader.readAsText(file);
 }
 
+// Deletes all completed tasks after the user confirms the action.
 function clearCompleted() {
   tasks = tasks.filter(task => !task.done);
   normalizeTaskOrder();
@@ -601,6 +665,7 @@ function clearCompleted() {
   render();
 }
 
+// Avoids opening the modal if there are no completed tasks to clear.
 function requestClearCompleted() {
   if (!tasks.some(task => task.done)) return;
   openConfirm({
@@ -610,7 +675,11 @@ function requestClearCompleted() {
   });
 }
 
-// One confirm modal is reused for both deleting a task and clearing completed tasks.
+/*
+  Confirm modal helpers.
+  The modal stores the pending callback in pendingConfirmAction, then runs it only
+  if the user clicks the destructive confirmation button.
+*/
 function openConfirm({ title, copy, action }) {
   pendingConfirmAction = action;
   els.confirmTitle.textContent = title;
@@ -634,12 +703,17 @@ function seedTasks() {
   // Seed is disabled so the app starts clean.
 }
 
+// Theme preference is read once on startup; the toggle updates it later.
 function initTheme() {
   const savedTheme = localStorage.getItem(THEME_KEY) || 'light';
   document.documentElement.setAttribute('data-theme', savedTheme);
 }
 
-// Event wiring happens after all helper functions are defined.
+/*
+  Event wiring.
+  Listeners are attached once after helpers are defined. Task-card listeners are
+  attached inside render() because those nodes are recreated from the template.
+*/
 els.taskForm.addEventListener('submit', upsertTask);
 els.cancelEditBtn.addEventListener('click', resetForm);
 els.searchInput.addEventListener('input', render);
