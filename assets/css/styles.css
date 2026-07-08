@@ -900,6 +900,10 @@ nav.up {
 */
 .stack-categories { display:grid; grid-template-columns:repeat(3,1fr); gap:20px }
 
+.stack-tools { grid-column:span 2 }
+
+.stack-tools-items { display:grid; grid-template-columns:1fr 1fr }
+
 /*
   SCAT - karta kategórie zručností (napr. Frontend, Backend, Tools)
   background - svetlé pozadie
@@ -1439,6 +1443,8 @@ footer a:hover { color:var(--ink) }
   .nav-links { display:none }
   .proj-grid { grid-template-columns:1fr }
   .stack-categories { grid-template-columns:1fr; gap:18px }
+  .stack-tools { grid-column:auto }
+  .stack-tools-items { grid-template-columns:1fr }
   .scat { min-width:0 }
   .scat-head { padding:1rem 1.1rem .8rem }
   .sitem { padding:.9rem 1.2rem; flex-wrap:wrap; gap:10px }
