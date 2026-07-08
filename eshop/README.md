@@ -4,13 +4,16 @@
 [![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?logo=typescript&logoColor=white)]()
 [![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?logo=mongodb&logoColor=white)]()
 [![Stripe](https://img.shields.io/badge/-Stripe-008CDD?logo=stripe&logoColor=white)]()
+[![Status: WIP](https://img.shields.io/badge/Status-WIP-orange.svg)]()
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A production-ready full-stack e-commerce platform built with modern tech. Complete with user authentication, product catalog, shopping cart, Stripe integration, order management, and an admin dashboard.
+A **work-in-progress** full-stack e-commerce project built for learning Next.js, TypeScript, and modern web technologies. This is an educational project demonstrating full-stack development concepts, not yet a complete/production-ready system.
 
 ## 📋 Overview
 
-FitGear is a **sports & performance gear e-commerce store** built to demonstrate full-stack capabilities. Customers can browse, search, filter, and purchase products with a secure checkout flow. Orders are tracked with status updates, and admin users manage inventory and fulfillment through a protected dashboard.
+FitGear is a **sports & performance gear e-commerce store** built to demonstrate full-stack capabilities. This is an educational project exploring Next.js, TypeScript, MongoDB, and payment integrations. 
+
+**⚠️ Status:** This project is actively being developed and not yet complete. See the [Development Status](#-development-status) section below.
 
 ### For Customers
 
@@ -30,6 +33,37 @@ FitGear is a **sports & performance gear e-commerce store** built to demonstrate
 - 🖼️ Upload images via Cloudinary
 - 📋 Manage orders & update status
 - 👥 View customers & accounts
+
+## 🚧 Development Status
+
+### ✅ Implemented
+- [x] Project structure & routing (Next.js App Router)
+- [x] Database models (MongoDB/Mongoose)
+- [x] TypeScript setup
+- [x] Tailwind CSS styling
+- [x] Authentication scaffold (NextAuth setup)
+- [x] API route structure
+- [x] Component foundation
+- [x] Cart state management (Zustand)
+
+### 🔄 In Progress / Partial
+- [ ] Full user authentication flow
+- [ ] Complete product catalog UI
+- [ ] Shopping cart functionality
+- [ ] Stripe payment integration
+- [ ] Order management
+- [ ] Admin dashboard features
+- [ ] Form validation & error handling
+- [ ] Email notifications
+
+### ❌ Not Yet Started
+- [ ] Production deployment
+- [ ] Testing (unit/integration tests)
+- [ ] Performance optimization
+- [ ] Security hardening
+- [ ] Accessibility improvements
+- [ ] Mobile optimization
+- [ ] Documentation completion
 
 ## 🛠️ Tech Stack
 
@@ -197,13 +231,22 @@ PUT    /api/products/[slug]      Update product
 DELETE /api/products/[slug]      Delete product
 ```
 
-## 🧪 Testing
+## 🧪 Testing & Development
 
-### Test Account
+**Note:** This project is still in development. Testing is minimal. Use locally with caution.
+
+### Local Development
+
+```bash
+npm run dev
+# Runs on http://localhost:3000
+```
+
+### Test Account (Local Only)
 
 Use provided seed data or create your own account via registration.
 
-### Test Payment
+### Test Payment (Local Stripe Testing)
 
 Use Stripe's test card:
 
@@ -212,9 +255,24 @@ Use Stripe's test card:
 Exp: 12/25  CVC: 123
 ```
 
+**⚠️ These are test credentials only. Do NOT use in production.**
+
 ## 📦 Deployment
 
-### Vercel (Recommended)
+**⚠️ Not yet ready for production deployment.** This project is still in development and needs completion, testing, and security hardening before being deployed to production.
+
+### For Learning/Testing Locally
+
+You can run this locally for development and learning purposes:
+
+```bash
+npm run dev
+# Visit http://localhost:3000
+```
+
+### Future: Vercel (Recommended for Production)
+
+Once the project is complete, deployment to Vercel would look like:
 
 ```bash
 # 1. Push to GitHub
@@ -233,14 +291,18 @@ git push origin main
 - **Render** — Similar to Railway
 - **Heroku** — May need Procfile
 
-### Important for Production
+### Production Checklist (When Ready)
 
+- [ ] Complete all features
+- [ ] Add comprehensive testing
 - [ ] Set `NEXTAUTH_URL` to your domain
 - [ ] Use production Stripe keys
 - [ ] Configure MongoDB Atlas IP whitelist
 - [ ] Enable HTTPS
 - [ ] Set up error logging (Sentry, LogRocket)
 - [ ] Configure CORS for API
+- [ ] Security audit & hardening
+- [ ] Performance testing & optimization
 
 ## 🏛️ Key Features Explained
 
@@ -304,13 +366,47 @@ const uploadedUrl = await uploadToCloudinary(file);
 - Check for typos in variable names
 - Ensure `.env.local` is in root (not src/)
 
-## 📚 Learning Resources
+## 📚 Learning Resources & Purpose
+
+This project is built as a **learning exercise** to explore:
+
+- Full-stack Next.js development patterns
+- TypeScript in a real application
+- MongoDB database design & Mongoose ODM
+- Authentication with NextAuth.js
+- API design with Next.js API routes
+- State management with Zustand
+- Tailwind CSS for styling
+- Integration with third-party services (Stripe, Cloudinary, Resend)
+
+### Recommended Learning Path
+
+1. Start with basic product browsing & listing
+2. Add product detail pages
+3. Implement cart management
+4. Add user authentication
+5. Connect to Stripe for payments
+6. Build admin dashboard
+7. Add email notifications
+
+### Resources
 
 - [Next.js Docs](https://nextjs.org/docs)
 - [MongoDB Docs](https://docs.mongodb.com)
 - [Stripe Integration Guide](https://stripe.com/docs/payments)
 - [NextAuth.js Guide](https://next-auth.js.org)
 - [Tailwind CSS](https://tailwindcss.com/docs)
+
+## 🎓 What This Project Teaches
+
+- Full-stack JavaScript/TypeScript development
+- Building scalable API structures
+- Database schema design & relationships
+- User authentication & authorization
+- Payment processing integration
+- State management in React
+- Responsive design practices
+- Environment configuration & secrets management
 
 ## 🤝 Contributing
 
