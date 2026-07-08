@@ -431,4 +431,3 @@ MIT License - see LICENSE file
 **Filip Glemba**
 
 - GitHub: [@FilipGlemba](https://github.com/FilipGlemba)
-- Portfolio: [filip-glemba.sk](https://filip-glemba.sk)
