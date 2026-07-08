@@ -37,7 +37,7 @@ const translations = {
     projectsTitle: 'Projekty', // Nadpis sekcie projektov
     weatherDesc: 'Zadáš mesto, okamžite vidíš teplotu, vlhkosť, vietor a predpoveď na ďalšie dni. Dáta z OpenWeather API, responzívny a rýchly UI.', // Popis weather appky
     todoDesc: 'Profesionálny správca úloh s prioritami, termínmi, filtrami, vyhľadávaním, light/dark témou a lokálnym ukladaním cez LocalStorage.', // Popis todo appky
-    eshopDesc: 'Kompletná e-commerce platforma – autentifikácia, správa produktov, košík, platby a admin dashboard. Prvý veľký full-stack projekt.', // Popis e-shopu
+    eshopDesc: 'Moderný Next.js e-shop s autentifikáciou, produktovým katalógom, košíkom, objednávkami, platbami a admin dashboardom.', // Popis e-shopu
 
     // STACK - texty v sekcii technických zručností
     stackTitle: 'Tech Stack', // Nadpis sekcie stack
@@ -115,7 +115,7 @@ const translations = {
     projectsTitle: 'Projects', // Projects section title
     weatherDesc: 'Enter a city and immediately see temperature, humidity, wind and forecast for the next days. Data from OpenWeather API, responsive and fast UI.', // Weather app description
     todoDesc: 'A professional task manager with priorities, due dates, filters, search, light/dark theme, and local persistence through LocalStorage.', // Todo app description
-    eshopDesc: 'A complete e-commerce platform – authentication, product management, cart, payments, and admin dashboard. My first larger full-stack project.', // E-shop description
+    eshopDesc: 'A modern Next.js e-commerce app with authentication, product catalog, cart, orders, payments, and an admin dashboard.', // E-shop description
 
     // STACK - tech stack section texts
     stackTitle: 'Tech Stack', // Stack section title
