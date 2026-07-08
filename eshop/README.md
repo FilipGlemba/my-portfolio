@@ -11,7 +11,7 @@ A **work-in-progress** full-stack e-commerce project built for learning Next.js,
 
 ## 📋 Overview
 
-FitGear is a **sports & performance gear e-commerce store** built to demonstrate full-stack capabilities. This is an educational project exploring Next.js, TypeScript, MongoDB, and payment integrations. 
+FitGear is a **sports & performance gear e-commerce store** built to demonstrate full-stack capabilities. This is an educational project exploring Next.js, TypeScript, MongoDB, and payment integrations.
 
 **⚠️ Status:** This project is actively being developed and not yet complete. See the [Development Status](#-development-status) section below.
 
@@ -37,6 +37,7 @@ FitGear is a **sports & performance gear e-commerce store** built to demonstrate
 ## 🚧 Development Status
 
 ### ✅ Implemented
+
 - [x] Project structure & routing (Next.js App Router)
 - [x] Database models (MongoDB/Mongoose)
 - [x] TypeScript setup
@@ -47,6 +48,7 @@ FitGear is a **sports & performance gear e-commerce store** built to demonstrate
 - [x] Cart state management (Zustand)
 
 ### 🔄 In Progress / Partial
+
 - [ ] Full user authentication flow
 - [ ] Complete product catalog UI
 - [ ] Shopping cart functionality
@@ -57,6 +59,7 @@ FitGear is a **sports & performance gear e-commerce store** built to demonstrate
 - [ ] Email notifications
 
 ### ❌ Not Yet Started
+
 - [ ] Production deployment
 - [ ] Testing (unit/integration tests)
 - [ ] Performance optimization
@@ -90,7 +93,8 @@ eshop/
 │   │   ├── api/                    # API routes (auth, products, orders, checkout)
 │   │   ├── admin/                  # Admin dashboard pages
 │   │   ├── account/                # User account & profile
-│   │   ├── auth/                   # Login & register pages
+│   │   ├── login/                  # Login page
+│   │   ├── register/               # Registration page
 │   │   ├── products/               # Product catalog & details
 │   │   ├── cart/                   # Shopping cart
 │   │   ├── checkout/               # Checkout flow
