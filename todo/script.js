@@ -380,7 +380,7 @@ function render() {
     editBtn.setAttribute('aria-label', t.edit);
     deleteBtn.setAttribute('aria-label', t.delete);
 
-    completeBtn.addEventListener('click', () => toggleTask(task.id));
+    completeBtn.addEventListener('click', () => animateComplete(node, task));
     editBtn.addEventListener('click', () => startEdit(task.id));
     deleteBtn.addEventListener('click', () => requestDeleteTask(task.id));
     node.addEventListener('dragstart', handleDragStart);
@@ -501,6 +501,16 @@ function toggleTask(id) {
   tasks = tasks.map(task => task.id === id ? { ...task, done: !task.done, updatedAt: Date.now() } : task);
   saveTasks(translations[lang].saved);
   render();
+}
+
+// Plays a short "pop" on the card/checkbox being completed (or a lighter
+// pulse when reopening) before the list re-renders into its final state.
+// render() rebuilds every card from scratch, so the animation has to run on
+// the existing node first — otherwise it would never be visible.
+function animateComplete(node, task) {
+  const willBeDone = !task.done;
+  node.classList.add(willBeDone ? 'completing' : 'reopening');
+  window.setTimeout(() => toggleTask(task.id), willBeDone ? 260 : 140);
 }
 
 // Removes one task and cancels edit mode if that exact task was being edited.

@@ -55,6 +55,14 @@
   </head>
   <body>
     <!--
+      AMBIENT BACKGROUND
+      Dekorativna vrstva za celou aplikaciou. script.js jej meni triedy
+      (denna doba + skupina pocasia z API) v renderCurrent(), takze pozadie
+      jemne mení farebnost podla toho, ci je jasno/dazd/sneh a ci je
+      rano/den/vecer/noc v mieste, ktore si pouzivatel pozeral naposledy.
+    -->
+    <div class="ambient-bg" id="ambientBg"></div>
+    <!--
       APP WRAPPER
       Hlavny kontajner celej aplikacie. Slúzi ako spolocny obal pre header,
       search, main a footer. ID app je pripravene, keby bolo treba cielit

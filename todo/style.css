@@ -27,7 +27,7 @@
   --shadow: 0 18px 48px rgba(15, 23, 42, 0.11);
   --radius: 8px;
   --ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --ff-head: "Syne", system-ui, sans-serif;
+  --ff-head: "Playfair Display", Georgia, serif;
   --ff-ui: "Syne", system-ui, sans-serif;
   --ff-mono: "JetBrains Mono", monospace;
 }
@@ -135,7 +135,7 @@ svg {
   color: var(--ink);
   font-family: var(--ff-head);
   font-size: 22px;
-  font-weight: 800;
+  font-weight: 500;
   letter-spacing: 0;
   text-decoration: none;
 }
@@ -143,7 +143,7 @@ svg {
 .brand em,
 .app-footer em {
   color: var(--brand);
-  font-style: normal;
+  font-style: italic;
 }
 
 .header-actions,
@@ -323,9 +323,9 @@ svg {
   color: var(--ink);
   font-family: var(--ff-head);
   font-size: clamp(38px, 5.4vw, 72px);
-  font-weight: 800;
+  font-weight: 500;
   line-height: 0.96;
-  letter-spacing: 0;
+  letter-spacing: -0.01em;
 }
 
 .hero-copy {
@@ -390,8 +390,9 @@ svg {
 .board-head h2 {
   margin-top: 3px;
   color: var(--ink);
-  font-size: 24px;
-  font-weight: 800;
+  font-family: var(--ff-head);
+  font-size: 26px;
+  font-weight: 500;
   line-height: 1.1;
 }
 
@@ -659,6 +660,43 @@ svg {
 .task-card.done .task-title {
   color: var(--ink-3);
   text-decoration: line-through;
+}
+
+/*
+  Momentary feedback while a task is being marked complete/reopened, played on
+  the existing card for ~one animation cycle before script.js re-renders the
+  list into its final state (see animateComplete()).
+*/
+.task-card.completing {
+  animation: taskCompleteFlash 0.26s ease;
+}
+.task-card.completing .complete-btn {
+  animation: completeBtnPop 0.26s ease;
+  background: var(--green);
+  border-color: var(--green);
+  color: #fff;
+}
+.task-card.reopening .complete-btn {
+  animation: completeBtnPop 0.2s ease;
+}
+
+@keyframes taskCompleteFlash {
+  0%   { background: var(--surface); }
+  40%  { background: var(--green-soft); border-color: var(--green); }
+  100% { background: var(--surface); }
+}
+@keyframes completeBtnPop {
+  0%   { transform: scale(1); }
+  45%  { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .task-card.completing,
+  .task-card.completing .complete-btn,
+  .task-card.reopening .complete-btn {
+    animation: none;
+  }
 }
 
 .drag-handle {
