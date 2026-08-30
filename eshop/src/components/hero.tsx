@@ -2,8 +2,12 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { CountUp } from "@/components/count-up";
+
+// Client-only: WebGL can't render during SSR.
+const Hero3D = dynamic(() => import("@/components/hero-3d").then((mod) => mod.Hero3D), { ssr: false });
 
 const headline = ["GEAR UP.", "SHOW UP."];
 
@@ -27,6 +31,9 @@ export function Hero() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/40" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/40 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 hidden lg:block">
+          <Hero3D />
+        </div>
       </div>
 
       <div className="relative mx-auto flex min-h-[86vh] max-w-7xl flex-col justify-center px-4 py-24 sm:px-6">
