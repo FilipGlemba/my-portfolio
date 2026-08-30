@@ -14,8 +14,9 @@ FitGear is a sports & performance gear store demonstrating a complete full-stack
 
 ### For customers
 
-- 🔍 Browse, search, filter and sort the product catalog
-- 📦 Product detail pages with size/quantity selection
+- 🔍 Browse, search, filter and sort a 13-product catalog across 4 categories
+- 📦 Product detail pages with an image gallery, size/quantity selection, ratings, and reviews
+- 🔁 "You might also like" recommendations from the same category
 - 🛒 Persistent shopping cart (Zustand)
 - 💳 Stripe Checkout for payment
 - 👤 Email/password (and optional Google) authentication
@@ -25,7 +26,7 @@ FitGear is a sports & performance gear store demonstrating a complete full-stack
 ### For admins
 
 - 📊 Dashboard with revenue, daily orders, and real best-sellers
-- ➕ Create, edit, and delete products
+- ➕ Create, edit, and delete products, with drag-and-drop image upload straight to Cloudinary (optional — returns a clear error instead of a broken uploader if unconfigured)
 - 📋 View orders and update their status
 - 🔒 Protected by both middleware (edge) and per-route session checks
 

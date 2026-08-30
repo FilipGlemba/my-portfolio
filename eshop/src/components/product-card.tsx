@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { formatPrice } from "@/lib/format";
 import { TiltCard } from "@/components/tilt-card";
+import { StarRating } from "@/components/star-rating";
 
 export type ProductCardProps = {
   slug: string;
@@ -9,6 +10,8 @@ export type ProductCardProps = {
   category: string;
   badge: string;
   image: string;
+  rating?: number | null;
+  reviewCount?: number;
 };
 
 const badgeStyle: Record<string, string> = {
@@ -17,7 +20,7 @@ const badgeStyle: Record<string, string> = {
   LIMITED: "bg-ink text-white",
 };
 
-export function ProductCard({ slug, name, price, category, badge, image }: ProductCardProps) {
+export function ProductCard({ slug, name, price, category, badge, image, rating = null, reviewCount = 0 }: ProductCardProps) {
   return (
     <TiltCard maxTilt={7}>
       <article className="group h-full overflow-hidden rounded-2xl border border-black/5 bg-white transition-shadow duration-300 hover:shadow-panel">
@@ -41,6 +44,7 @@ export function ProductCard({ slug, name, price, category, badge, image }: Produ
           <Link href={`/products/${slug}`} className="block">
             <h3 className="font-display text-lg leading-tight tracking-wide text-ink">{name}</h3>
           </Link>
+          <StarRating rating={rating ?? null} reviewCount={reviewCount ?? 0} />
           <p className="text-base font-bold text-ink">{formatPrice(price)}</p>
         </div>
       </article>

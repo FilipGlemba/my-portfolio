@@ -1,6 +1,7 @@
 import connect from "@/lib/db";
 import Product from "@/models/Product";
 import Order from "@/models/Order";
+import Review from "@/models/Review";
 
 export type ProductSort = "price_asc" | "price_desc" | "newest";
 
@@ -9,6 +10,25 @@ export type ProductFilters = {
   search?: string;
   sort?: ProductSort;
 };
+
+export type RatingSummary = { rating: number; reviewCount: number };
+
+// One aggregate query for however many slugs are on screen, instead of one
+// query per product card (N+1).
+async function getRatingSummaries(slugs: string[]): Promise<Record<string, RatingSummary>> {
+  if (!slugs.length) return {};
+
+  const rows = await Review.aggregate([
+    { $match: { productSlug: { $in: slugs } } },
+    { $group: { _id: "$productSlug", rating: { $avg: "$rating" }, reviewCount: { $sum: 1 } } },
+  ]);
+
+  const summaries: Record<string, RatingSummary> = {};
+  for (const row of rows) {
+    summaries[row._id] = { rating: Math.round(row.rating * 10) / 10, reviewCount: row.reviewCount };
+  }
+  return summaries;
+}
 
 export async function getProducts(filters: ProductFilters = {}) {
   await connect();
@@ -22,12 +42,47 @@ export async function getProducts(filters: ProductFilters = {}) {
   else if (filters.sort === "price_desc") query = query.sort({ price: -1 });
   else query = query.sort({ createdAt: -1 });
 
-  return query.limit(100).lean();
+  const products = await query.limit(100).lean();
+  const summaries = await getRatingSummaries(products.map((p) => p.slug));
+
+  return products.map((product) => ({
+    ...product,
+    rating: summaries[product.slug]?.rating ?? null,
+    reviewCount: summaries[product.slug]?.reviewCount ?? 0,
+  }));
 }
 
 export async function getProductBySlug(slug: string) {
   await connect();
-  return Product.findOne({ slug }).lean();
+  const product = await Product.findOne({ slug }).lean();
+  if (!product) return null;
+
+  const summaries = await getRatingSummaries([slug]);
+  return {
+    ...product,
+    rating: summaries[slug]?.rating ?? null,
+    reviewCount: summaries[slug]?.reviewCount ?? 0,
+  };
+}
+
+export async function getReviewsForProduct(slug: string) {
+  await connect();
+  return Review.find({ productSlug: slug }).sort({ createdAt: -1 }).lean();
+}
+
+export async function getRecommendations(category: string, excludeSlug: string, limit = 4) {
+  await connect();
+  const products = await Product.find({ category, slug: { $ne: excludeSlug } })
+    .sort({ createdAt: -1 })
+    .limit(limit)
+    .lean();
+
+  const summaries = await getRatingSummaries(products.map((p) => p.slug));
+  return products.map((product) => ({
+    ...product,
+    rating: summaries[product.slug]?.rating ?? null,
+    reviewCount: summaries[product.slug]?.reviewCount ?? 0,
+  }));
 }
 
 export async function getOrdersForUser(email: string, isAdmin: boolean) {

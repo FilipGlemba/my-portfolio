@@ -15,7 +15,13 @@ All photos below are freely licensed (Creative Commons / public domain), sourced
 | `products/restore-foam-roller.jpg` | Foam roller: whole body daily massage | Christos Pontikis | Public Domain Mark 1.0 | https://www.flickr.com/photos/92854661@N07/23613110549 |
 | `products/trailblazer-off-road-runner.jpg` | Trail running shoes | Flying Puffin | CC BY-SA 2.0 | https://www.flickr.com/photos/21241590@N06/51789240812 |
 | `products/recovery-compression-sleeve.jpg` | Cropped from a POWERLIX knee brace product photo (packaging/logo cropped out) | shop8447 | CC0 1.0 | https://www.flickr.com/photos/185514373@N06/49060304608 |
+| `products/performance-training-backpack.jpg` | Incase ICON Pack | Incase. | CC BY 2.0 | https://www.flickr.com/photos/62021300@N00/13761592225 |
+| `products/yoga-mat.jpg` | A woman rolling up her exercising mat | Ivan Radic | CC BY 2.0 | https://www.flickr.com/photos/26344495@N05/49496894142 |
+| `products/gym-towel.jpg` | Towels at my Other Gym | Colin Davis Studio | CC BY 2.0 | https://www.flickr.com/photos/87506973@N00/3693852923 |
+| `products/training-gloves.jpg` | "Resistance Bands" (mislabeled search result — actually a glove close-up, used for the gloves product instead) | eekim | CC BY 2.0 | https://www.flickr.com/photos/63669472@N00/11452114374 |
+| `products/compression-socks.jpg` | KT Tape Pro, Zensah Compression Socks, and New Balance runDisney Running Shoes | AngryJulieMonday | CC BY 2.0 | https://www.flickr.com/photos/33731571@N07/8457134550 |
+| `products/performance-headband.jpg` | Trackandfield Tracksuit | Ryan McGuire / StockSnap | CC0 1.0 | https://stocksnap.io/photo/trackandfield-tracksuit-EAFA2E9467 |
 
-**Not real photos** — `performance-training-backpack` and `momentum-strength-tee` use generated illustrations (`src/lib/seed-data.ts`) instead: no relevant free-licensed photo turned up in the search, so a custom graphic was used rather than a wrong/misleading one. Swap these two for real photos first if you keep editing.
+**Not a real photo** — `momentum-strength-tee` still uses a generated illustration (`src/lib/seed-data.ts`): every tee/tank-top photo found in the search had a competing brand's logo printed on it, so a custom graphic was used rather than a misleading one. Swap it for a real photo first if you keep editing.
 
 All images were resized/re-compressed for the web (`sharp`) from their originals — go to the source link for the original file if you want to re-edit from full resolution.
