@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useCartStore } from "@/store/cart";
 import { useToast } from "@/components/toast-provider";
+import { TiltCard } from "@/components/tilt-card";
 import { formatPrice } from "@/lib/format";
 
 type Product = {
@@ -89,15 +90,20 @@ export function ProductDetail({ slug }: { slug: string }) {
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="space-y-4">
-          <div className="relative overflow-hidden rounded-2xl bg-black/[0.04]">
-            {/* eslint-disable-next-line @next/next/no-img-element -- image can be a real /images/... file or a generated SVG data: URI */}
-            <img src={product.images[0] ?? "/favicon.ico"} alt={product.name} className="gear-photo aspect-square w-full object-cover" />
-            {product.badge && product.badge !== "NONE" ? (
-              <span className={`absolute left-4 top-4 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] ${badgeStyle[product.badge] ?? "bg-white text-ink"}`}>
-                {product.badge}
-              </span>
-            ) : null}
-          </div>
+          <TiltCard maxTilt={9}>
+            <div className="relative overflow-hidden rounded-2xl bg-black/[0.04]" style={{ transformStyle: "preserve-3d" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element -- image can be a real /images/... file or a generated SVG data: URI */}
+              <img src={product.images[0] ?? "/favicon.ico"} alt={product.name} className="gear-photo aspect-square w-full object-cover" />
+              {product.badge && product.badge !== "NONE" ? (
+                <span
+                  style={{ transform: "translateZ(28px)" }}
+                  className={`absolute left-4 top-4 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] ${badgeStyle[product.badge] ?? "bg-white text-ink"}`}
+                >
+                  {product.badge}
+                </span>
+              ) : null}
+            </div>
+          </TiltCard>
         </motion.div>
 
         <motion.div
