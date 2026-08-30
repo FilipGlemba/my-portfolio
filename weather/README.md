@@ -220,5 +220,4 @@ MIT License — Use freely in personal or commercial projects
 **Filip Glemba**
 
 - 🌐 Portfolio: [filip-glemba.sk](https://filip-glemba.sk)
-- 💼 LinkedIn: [linkedin.com/in/filipglemba](https://linkedin.com/in/filipglemba)
 - 🐙 GitHub: [@FilipGlemba](https://github.com/FilipGlemba)

@@ -1,45 +1,51 @@
 import Link from "next/link";
-
-async function fetchProducts() {
-  const response = await fetch(`${process.env.NEXTAUTH_URL || "http://localhost:3000"}/api/products`, { cache: "no-store" });
-  if (!response.ok) throw new Error("Unable to load products.");
-  return response.json();
-}
+import { redirect } from "next/navigation";
+import { AdminNav } from "@/components/admin-nav";
+import { getAdminSession } from "@/lib/require-admin";
+import { getProducts } from "@/lib/queries";
+import { formatPrice } from "@/lib/format";
 
 export default async function AdminProductsPage() {
-  const data = await fetchProducts();
+  const session = await getAdminSession();
+  if (!session) redirect("/login");
+
+  const products = await getProducts();
 
   return (
-    <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
-      <div className="mb-10 flex items-center justify-between gap-4">
-        <div>
-          <p className="text-sm uppercase tracking-[0.24em] text-emerald-600">Products</p>
-          <h1 className="mt-3 text-4xl font-semibold text-slate-950">Manage inventory</h1>
-        </div>
-        <Link href="/admin/products/new" className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-6 py-3 text-sm font-semibold text-white transition hover:bg-emerald-500">
-          Create product
+    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
+      <div className="mb-8 flex items-center justify-between gap-4">
+        <h1 className="font-display text-4xl text-ink sm:text-5xl">Inventory</h1>
+        <Link href="/admin/products/new" className="inline-flex items-center justify-center rounded-full bg-flame-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600">
+          + Create product
         </Link>
       </div>
-      <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm">
-        <table className="min-w-full divide-y divide-slate-200 text-left text-sm">
-          <thead className="bg-slate-50 text-slate-600">
+      <AdminNav />
+      <div className="overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm">
+        <table className="min-w-full divide-y divide-black/5 text-left text-sm">
+          <thead className="bg-black/[0.02] text-black/50">
             <tr>
-              <th className="px-6 py-4">Name</th>
-              <th className="px-6 py-4">Category</th>
-              <th className="px-6 py-4">Price</th>
-              <th className="px-6 py-4">Stock</th>
-              <th className="px-6 py-4">Actions</th>
+              <th className="px-6 py-4 font-semibold">Product</th>
+              <th className="px-6 py-4 font-semibold">Category</th>
+              <th className="px-6 py-4 font-semibold">Price</th>
+              <th className="px-6 py-4 font-semibold">Stock</th>
+              <th className="px-6 py-4 font-semibold">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-200">
-            {data.products.map((product: any) => (
-              <tr key={product.slug}>
-                <td className="px-6 py-4 text-slate-950">{product.name}</td>
-                <td className="px-6 py-4 text-slate-600">{product.category}</td>
-                <td className="px-6 py-4 text-slate-600">€{product.price.toFixed(0)}</td>
-                <td className="px-6 py-4 text-slate-600">{product.stock}</td>
+          <tbody className="divide-y divide-black/5">
+            {products.map((product) => (
+              <tr key={product.slug} className="transition hover:bg-black/[0.015]">
                 <td className="px-6 py-4">
-                  <Link href={`/admin/products/${product.slug}`} className="rounded-full bg-slate-950 px-4 py-2 text-xs font-semibold text-white transition hover:bg-slate-800">
+                  <div className="flex items-center gap-3">
+                    {/* eslint-disable-next-line @next/next/no-img-element -- small table thumbnail, can be a real file or a generated SVG data: URI */}
+                    <img src={product.images?.[0] ?? "/favicon.ico"} alt="" className="h-10 w-10 rounded-lg object-cover" />
+                    <span className="font-medium text-ink">{product.name}</span>
+                  </div>
+                </td>
+                <td className="px-6 py-4 text-black/60">{product.category}</td>
+                <td className="px-6 py-4 text-black/60">{formatPrice(product.price)}</td>
+                <td className="px-6 py-4 text-black/60">{product.stock}</td>
+                <td className="px-6 py-4">
+                  <Link href={`/admin/products/${product.slug}`} className="rounded-full bg-ink px-4 py-2 text-xs font-semibold text-white transition hover:bg-black">
                     Edit
                   </Link>
                 </td>

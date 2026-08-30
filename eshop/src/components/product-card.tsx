@@ -10,21 +10,35 @@ export type ProductCardProps = {
   image: string;
 };
 
+const badgeStyle: Record<string, string> = {
+  NEW: "bg-volt text-ink",
+  BESTSELLER: "bg-flame-500 text-white",
+  LIMITED: "bg-ink text-white",
+};
+
 export function ProductCard({ slug, name, price, category, badge, image }: ProductCardProps) {
   return (
-    <article className="group overflow-hidden rounded-3xl border border-slate-200 bg-white transition hover:-translate-y-1 hover:shadow-panel">
-      <Link href={`/products/${slug}`} className="block h-72 overflow-hidden bg-slate-100">
-        <img src={image} alt={name} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" loading="lazy" />
+    <article className="group overflow-hidden rounded-2xl border border-black/5 bg-white transition duration-300 hover:-translate-y-1.5 hover:shadow-panel">
+      <Link href={`/products/${slug}`} className="relative block aspect-square overflow-hidden bg-slate-100">
+        {/* eslint-disable-next-line @next/next/no-img-element -- image can be a real /images/... file or a generated SVG data: URI; next/image can't optimize data URIs */}
+        <img
+          src={image}
+          alt={name}
+          className="gear-photo h-full w-full object-cover transition duration-500 group-hover:scale-[1.08]"
+          loading="lazy"
+        />
+        {badge && badge !== "NONE" ? (
+          <span className={`absolute left-3 top-3 rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] ${badgeStyle[badge] ?? "bg-white text-ink"}`}>
+            {badge}
+          </span>
+        ) : null}
       </Link>
-      <div className="space-y-3 p-6">
-        <div className="flex items-center justify-between gap-4 text-sm text-slate-500">
-          <span>{category}</span>
-          <span className="rounded-full border border-slate-200 px-3 py-1 uppercase tracking-[0.18em] text-slate-600">{badge}</span>
-        </div>
+      <div className="space-y-2 p-5">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-black/40">{category}</p>
         <Link href={`/products/${slug}`} className="block">
-          <h3 className="text-lg font-semibold text-slate-950">{name}</h3>
+          <h3 className="font-display text-lg leading-tight tracking-wide text-ink">{name}</h3>
         </Link>
-        <p className="text-base font-semibold text-slate-900">{formatPrice(price)}</p>
+        <p className="text-base font-bold text-ink">{formatPrice(price)}</p>
       </div>
     </article>
   );

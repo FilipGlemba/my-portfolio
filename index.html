@@ -1,33 +1,42 @@
-<!-- 
-  ┌─────────────────────────────────────────────────────────────────────────────┐
-  │ PORTFOLIO - HTML DOKUMENTÁCIA                                               │
-  │ Autor: Filip                                                                │
-  │ Popis: Moderné portfolio webového developera s responzívnym dizajnom        │
-  │        a podporou viacjazyčnosti (SK/EN)                                    │
-  └─────────────────────────────────────────────────────────────────────────────┘
+<!--
+  Portfolio webového developera Filipa Glembu.
+  Statická stránka (HTML/CSS/JS), bilingválny obsah (SK/EN) cez data-i18n atribúty.
 -->
 
 <!doctype html>
-<!-- 
-  DOCTYPE - deklarácia formátu dokumentu (HTML5)
-  lang="sk" - nastavenie jazyka dokumentu na Slovenčinu pre lepšiu dostupnosť
--->
 <html lang="sk">
   <head>
-    <!-- META TAGY - informácie pre prehliadače a vyhľadávače -->
-
-    <!-- UTF-8 - znakový kód pre správne zobrazenie všetkých znakov -->
     <meta charset="UTF-8" />
-
-    <!-- 
-      Viewport meta tag - zabezpečuje responzívny dizajn
-      width=device-width - šírka sa prispôsobí šírke zariadenia
-      initial-scale=1.0 - počiatočné priblíženie na 100%
-    -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Nadpis stránky - zobrazí sa v záložke prehliadača -->
     <title>Filip Glemba — Web Developer</title>
+    <meta
+      name="description"
+      content="Filip Glemba — web developer zameraný na moderný frontend a full-stack vývoj. Portfólio projektov v HTML/CSS/JS, React a Next.js."
+    />
+    <meta name="author" content="Filip Glemba" />
+
+    <!-- Open Graph / social preview -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Filip Glemba — Web Developer" />
+    <meta
+      property="og:description"
+      content="Portfólio projektov: vanilla JS aplikácie a full-stack Next.js e-shop."
+    />
+    <meta property="og:locale" content="sk_SK" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Filip Glemba — Web Developer" />
+    <meta
+      name="twitter:description"
+      content="Portfólio projektov: vanilla JS aplikácie a full-stack Next.js e-shop."
+    />
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232d4ef5'/%3E%3Ctext x='32' y='42' font-family='Arial,Helvetica,sans-serif' font-size='28' font-weight='700' fill='white' text-anchor='middle'%3EFG%3C/text%3E%3C/svg%3E"
+    />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Syne:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
@@ -35,145 +44,49 @@
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
-    <!-- 
-      BODY - hlavný obsah stránky
-      
-      Obsahuje všetky viditeľné prvky stránky:
-      - Navigáciu (nav)
-      - Hlavnú sekciu (hero)
-      - Sekciu projektov (projects)
-      - Sekciu technológií (stack)
-      - Sekciu o mne (about)
-      - Sekciu kontakt (contact)
-      - Pätičku (footer)
-    -->
     <!-- ═══ NAV ═══ -->
     <nav id="nav">
-      <!--
-        LOGO - odkaz na začiatok stránky (hero sekciu)
-        href="#hero" - anchor link na hero sekciu (smooth scroll)
-        class="logo" - štýl pre logo s veľkým písmom a hover efektom
-        "FG." - iniciály autora (Filip Glemba)
-      -->
       <a href="#hero" class="logo">FG.</a>
 
-      <!--
-        NAVIGAČNÉ ODKAZY - hlavné sekcie stránky
-        class="nav-links" - horizontálny zoznam s medzerami medzi položkami
-      -->
       <ul class="nav-links">
-        <!--
-          ODKAZ NA PROJEKTY - anchor link na sekciu projektov
-          href="#projects" - smooth scroll na projekty
-          data-i18n="projectsNav" - kľúč pre preklad do angličtiny
-          "Projekty" - text v slovenčine
-        -->
         <li><a href="#projects" data-i18n="projectsNav">Projekty</a></li>
-
-        <!--
-          ODKAZ NA TECH STACK - anchor link na sekciu technológií
-          href="#stack" - smooth scroll na tech stack
-          "Stack" - text (bez prekladu, technický termín)
-        -->
         <li><a href="#stack">Stack</a></li>
-
-        <!--
-          ODKAZ NA O MNE - anchor link na sekciu o autorovi
-          href="#about" - smooth scroll na about sekciu
-          data-i18n="about" - kľúč pre preklad do angličtiny
-          "O mne" - text v slovenčine
-        -->
         <li><a href="#about" data-i18n="about">O mne</a></li>
       </ul>
 
-      <!--
-        PRAVÁ ČASŤ NAVIGÁCIE - jazykový prepínač a kontaktné tlačidlo
-        class="nav-right" - flex kontajner zarovnaný doprava
-      -->
       <div class="nav-right">
-        <!--
-          TLAČIDLO PREPÍNAČA JAZYKA - prepína medzi SK/EN
-          id="lang-toggle" - jedinečný identifikátor pre JavaScript
-          class="lang-btn" - štýl pre jazykové tlačidlo
-          "EN" - počiatočný text (prepína sa na "SK" pri kliknutí)
-        -->
         <button id="lang-toggle" class="lang-btn">EN</button>
-
-        <!--
-          KONTAKTNÉ TLAČIDLO - odkaz na kontaktnú sekciu
-          href="#contact" - anchor link na kontakt (smooth scroll)
-          class="nav-btn" - štýl pre navigačné tlačidlo s šípkou
-          data-i18n="contact" - kľúč pre preklad do angličtiny
-          "Kontakt →" - text s šípkou v slovenčine
-        -->
         <a href="#contact" class="nav-btn" data-i18n="contact">Kontakt →</a>
       </div>
     </nav>
 
-    <!--
-      ═══ HERO SEKCIA ═══
-      Hlavná uvítacia sekcia stránky s animáciami a profilovým obrázkom
-      Používa CSS Grid pre rozloženie (ľavá časť text, pravá časť obrázok)
-    -->
+    <!-- ═══ HERO ═══ -->
     <section id="hero">
-      <!--
-        ĽAVÁ ČASŤ HERO - obsahuje text, nadpis a tlačidlá
-        position:relative - pre správne pozicionovanie v CSS Grid
-        z-index:1 - zabezpečuje, že obsah je nad pozadím
-      -->
       <div class="hero-l">
-        <!--
-          ŠTÍTOK "DOSTUPNÝ PRE SPOLUPRÁCU" - zelený badge s animovanou bodkou
-          data-i18n="available" - prekladateľný text cez JavaScript
-        -->
         <div class="h-pill">
           <div class="h-dot"></div>
           <span data-i18n="available">Dostupný pre spoluprácu</span>
         </div>
 
         <!--
-          HLAVNÝ NADPIS - veľký nadpis s animáciou
-          Preklad je rozdelený na dva samostatné prvky, aby sa zachovala HTML
-          štruktúra <br> a <em> pri prepnutí jazyka.
+          Preklad je rozdelený na dva prvky, aby ostala zachovaná
+          HTML štruktúra <br>/<em> pri prepnutí jazyka.
         -->
         <h1 class="h-title">
           <span data-i18n="heroTitleLine1">Web</span><br />
           <em data-i18n="heroTitleLine2">developer.</em>
         </h1>
 
-        <!--
-          POPIS - krátky text o autorovi a jeho práci
-          data-i18n="heroDesc" - text sa prepne pri zmene jazyka
-        -->
         <p class="h-desc" data-i18n="heroDesc">
           Tvorím moderné webové aplikácie – od čistého frontendu po robustný
           backend. Rád riešim zaujímavé problémy a staviam veci, ktoré fungujú a
           dobre vyzerajú.
         </p>
 
-        <!--
-          TLAČIDLÁ AKCIÍ - dva tlačidlá vedľa seba pre hlavné akcie
-          class="h-actions" - flexbox kontajner s medzerami medzi tlačidlami
-        -->
         <div class="h-actions">
-          <!--
-            TLAČIDLO "POZRI PROJEKTY" - hlavné call-to-action tlačidlo
-            href="#projects" - anchor link na sekciu projektov (smooth scroll)
-            class="btn-solid" - plné tlačidlo s modrým pozadím a bielym textom
-            data-i18n="viewProjects" - kľúč pre preklad textu do angličtiny
-            "Pozri projekty" - text tlačidla v slovenčine
-          -->
           <a href="#projects" class="btn-solid" data-i18n="viewProjects"
             >Pozri projekty</a
           >
-
-          <!--
-            TLAČIDLO "GITHUB" - sekundárne tlačidlo na GitHub profil
-            href="https://github.com/FilipGlemba" - odkaz na GitHub profil autora
-            target="_blank" - otvára sa v novom okne/tabe
-            class="btn-line" - obrysové tlačidlo s modrou hranicou
-            "GitHub ↗" - text s šípkou indikujúcou externý odkaz
-          -->
           <a
             href="https://github.com/FilipGlemba"
             target="_blank"
@@ -186,77 +99,34 @@
       <div class="hero-r">
         <div class="hero-profile">
           <div class="avatar-ring">
+            <!-- Dekoratívny avatar zložený z SVG tvarov (bez externého obrázku) -->
             <svg viewBox="0 0 340 340" xmlns="http://www.w3.org/2000/svg">
-              <!--
-                DEFS - definície pre opakované použitie (gradienty, masky, atď.)
-                Všetky definície sú na začiatku SVG pre lepšiu organizáciu
-              -->
               <defs>
-                <!--
-                  RADIAL GRADIENT - kruhový gradient pre pozadie
-                  cx="50%" cy="40%" - stred gradientu (trochu vyššie ako stred)
-                  r="60%" - polomer gradientu
-                -->
                 <radialGradient id="bg-grad" cx="50%" cy="40%" r="60%">
                   <stop offset="0%" stop-color="#e8e8e2" />
                   <stop offset="100%" stop-color="#d8d8d0" />
                 </radialGradient>
-
-                <!--
-                  SKIN GRADIENT - gradient pre pokožku
-                  Používa sa pre tvár a uši
-                -->
                 <radialGradient id="skin" cx="50%" cy="35%" r="60%">
                   <stop offset="0%" stop-color="#f5cba7" />
                   <stop offset="100%" stop-color="#e8a87c" />
                 </radialGradient>
-
-                <!--
-                  SHIRT GRADIENT - lineárny gradient pre tričko
-                  x1="0%" y1="0%" x2="100%" y2="100%" - šikmý gradient
-                -->
                 <linearGradient id="shirt" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#2d4ef5" />
                   <stop offset="100%" stop-color="#818cf8" />
                 </linearGradient>
-
-                <!--
-                  CIRCLE CLIP PATH - okrúhla maska pre orezenie SVG
-                  cx="170" cy="170" r="170" - kruh so stredom v strede SVG
-                -->
                 <clipPath id="circle-clip">
                   <circle cx="170" cy="170" r="170" />
                 </clipPath>
               </defs>
 
-              <!--
-                G ELEMENT - skupina SVG prvkov
-                clip-path="url(#circle-clip)" - aplikuje okrúhlu masku na celú skupinu
-              -->
               <g clip-path="url(#circle-clip)">
-                <!--
-                  POZADIE - veľký obdĺžnik s gradientom
-                  width="340" height="340" - veľkosť celej SVG
-                  fill="url(#bg-grad)" - použitie definovaného gradientu
-                -->
                 <rect width="340" height="340" fill="url(#bg-grad)" />
-
-                <!--
-                  GRID PATTERN - mriežka pre textúru pozadia
-                  width="20" height="20" - veľkosť jednej bunky mriežky
-                  patternUnits="userSpaceOnUse" - jednotky sú v pixeloch
-                -->
                 <pattern
                   id="grid"
                   width="20"
                   height="20"
                   patternUnits="userSpaceOnUse"
                 >
-                  <!--
-                    PATH - čiara mriežky (z 20,0 do 0,0 a potom do 0,20)
-                    stroke - farba čiary (svetlo sivá)
-                    stroke-width="1" - hrúbka čiary
-                  -->
                   <path
                     d="M 20 0 L 0 0 0 20"
                     fill="none"
@@ -264,15 +134,8 @@
                     stroke-width="1"
                   />
                 </pattern>
-
-                <!-- Aplikácia mriežkového patternu na celé pozadie -->
                 <rect width="340" height="340" fill="url(#grid)" />
 
-                <!--
-                  TIEŇ POD OSOBOU - elipsa pod tričkom pre 3D efekt
-                  cx="170" cy="310" - pozícia (v strede, dole)
-                  rx="90" ry="20" - široká a plochá
-                -->
                 <ellipse
                   cx="170"
                   cy="310"
@@ -280,30 +143,14 @@
                   ry="20"
                   fill="rgba(0,0,0,0.08)"
                 />
-
-                <!--
-                  TRIČKO - komplexná cesta vytvárajúca tvar trička
-                  Q - kvadratické Bézierove krivky pre zaoblené tvary
-                -->
                 <path
                   d="M 75 340 Q 75 240 110 220 Q 135 210 170 210 Q 205 210 230 220 Q 265 240 265 340 Z"
                   fill="url(#shirt)"
                 />
-
-                <!--
-                  LÍMEC TRIČKA - malý trojuholník na vrchu trička
-                  L - priame čiary, Q - krivky
-                -->
                 <path
                   d="M 145 215 L 170 240 L 195 215 Q 170 225 145 215Z"
                   fill="rgba(255,255,255,0.15)"
                 />
-
-                <!--
-                  OBLIČAJ - obdĺžnik pre základ tváre
-                  x="152" y="190" width="36" height="30" - pozícia a veľkosť
-                  rx="8" - zaoblené rohy
-                -->
                 <rect
                   x="152"
                   y="190"
@@ -312,26 +159,11 @@
                   rx="8"
                   fill="url(#skin)"
                 />
-
-                <!--
-                  HLAVA - veľká elipsa pre hlavu
-                  cx="170" cy="160" rx="58" ry="64" - pozícia a veľkosť
-                -->
                 <ellipse cx="170" cy="160" rx="58" ry="64" fill="url(#skin)" />
-
-                <!--
-                  VLASY - komplexná cesta vytvárajúca účes
-                  Q - Bézierove krivky pre prirodzený tvar
-                -->
                 <path
                   d="M 112 148 Q 112 88 170 88 Q 228 88 228 148 Q 220 120 170 118 Q 120 120 112 148Z"
                   fill="#2c1a0e"
                 />
-
-                <!--
-                  OČI - malé čiary pre obočie
-                  stroke-linecap="round" - zaoblené konce
-                -->
                 <path
                   d="M 112 148 Q 108 165 114 175 Q 110 155 118 148Z"
                   fill="#2c1a0e"
@@ -340,20 +172,12 @@
                   d="M 228 148 Q 232 165 226 175 Q 230 155 222 148Z"
                   fill="#2c1a0e"
                 />
-
-                <!-- Očné bielka - biele elipsy -->
                 <ellipse cx="148" cy="158" rx="9" ry="10" fill="white" />
                 <ellipse cx="192" cy="158" rx="9" ry="10" fill="white" />
-
-                <!-- Zreničky - tmavé kruhy v očiach -->
                 <ellipse cx="150" cy="160" rx="6" ry="7" fill="#2c1a0e" />
                 <ellipse cx="194" cy="160" rx="6" ry="7" fill="#2c1a0e" />
-
-                <!-- Lesk v očiach - malé biele bodky -->
                 <ellipse cx="152" cy="158" rx="2" ry="2" fill="white" />
                 <ellipse cx="196" cy="158" rx="2" ry="2" fill="white" />
-
-                <!-- Obočie - krivky nad očami -->
                 <path
                   d="M 138 144 Q 148 138 159 142"
                   fill="none"
@@ -368,8 +192,6 @@
                   stroke-width="3"
                   stroke-linecap="round"
                 />
-
-                <!-- Úsmev - mierne zakrivená čiara -->
                 <path
                   d="M 168 163 Q 163 175 168 180 Q 172 182 176 180 Q 181 175 172 163"
                   fill="none"
@@ -377,8 +199,6 @@
                   stroke-width="2"
                   stroke-linecap="round"
                 />
-
-                <!-- Vrások na čele - malé čiary -->
                 <path
                   d="M 152 192 Q 170 204 188 192"
                   fill="none"
@@ -386,8 +206,6 @@
                   stroke-width="2.5"
                   stroke-linecap="round"
                 />
-
-                <!-- Uši - dve elipsy po stranách hlavy -->
                 <ellipse cx="112" cy="162" rx="10" ry="13" fill="url(#skin)" />
                 <ellipse cx="228" cy="162" rx="10" ry="13" fill="url(#skin)" />
               </g>
@@ -421,11 +239,6 @@
 
     <!-- ═══ PROJECTS ═══ -->
     <section id="projects">
-      <!--
-        HLAVIČKA SEKCIÍ - spoločný štýl pre všetky sekcie
-        s-head - kontajner pre nadpis a čiaru
-        reveal - trieda pre animáciu pri scrollovaní
-      -->
       <div class="wrap" style="padding-bottom: 0">
         <div class="s-head reveal">
           <h2 class="s-title" data-i18n="projectsTitle">Projekty</h2>
@@ -433,71 +246,24 @@
         </div>
       </div>
 
-      <!--
-        GRID PROJEKTOV - responzívna mriežka kariet projektov
-        wrap - kontajner s paddingom
-        proj-grid - CSS Grid s tromi stĺpcami na desktop
-      -->
       <div class="wrap" style="padding-top: 0">
         <div class="proj-grid">
-          <!--
-            PCARD - projektová karta (funguje ako hover efekt)
-            class="pcard reveal" - základné štýly karty + animácia pri scroll
-            reveal - Intersection Observer animácia (zobrazenie pri scroll)
-          -->
           <div class="pcard reveal">
-            <!--
-              PCARD-ACCENT - modrá čiara na vrchu karty (animovaná pri hover)
-              class="pcard-accent" - lineárny gradient z modrej do svetlo modrej
-              ::before pseudo-element v CSS vytvára svetelný efekt
-            -->
             <div class="pcard-accent"></div>
 
-            <!--
-              PCARD-HEAD - hlavička karty s poradovým číslom, názvom a ikonou
-              class="pcard-head" - flexbox rozloženie (medzera medzi textom a ikonou)
-            -->
             <div class="pcard-head">
               <div>
-                <!--
-                  PCARD-NUM - poradové číslo projektu
-                  class="pcard-num" - monospace písmo, malý text, svetlo sivý
-                  "001" - formát s nulami pre konzistentnosť
-                -->
                 <div class="pcard-num">001</div>
-
-                <!--
-                  PCARD-TITLE - názov projektu
-                  class="pcard-title" - veľký text, polotučné, tmavý
-                  H3 - sémanticky správna úroveň nadpisu
-                -->
                 <h3 class="pcard-title">Weather App</h3>
               </div>
-
-              <!--
-                PCARD-ICON - emoji ikona projektu
-                class="pcard-icon" - okrúhly kontajner s pozadím a animáciou
-                "🌤️" - emoji reprezentujúce počasie
-              -->
               <div class="pcard-icon">🌤️</div>
             </div>
 
-            <!--
-              PCARD-DESC - popis projektu
-              class="pcard-desc" - stredný text, stredne tmavý, dobré riadkovanie
-              data-i18n="weatherDesc" - kľúč pre preklad do angličtiny
-              Text vysvetľuje funkcionalitu aplikácie
-            -->
             <p class="pcard-desc" data-i18n="weatherDesc">
               Zadáš mesto, okamžite vidíš teplotu, vlhkosť, vietor a predpoveď
               na ďalšie dni. Dáta z OpenWeather API, responzívny a rýchly UI.
             </p>
 
-            <!--
-              PCARD-TAGS - technológie použité v projekte
-              class="pcard-tags" - flexbox kontajner s medzerami medzi tagmi
-              Každý tag má class="pcard-tag" - štýl s hranicami a hover efektmi
-            -->
             <div class="pcard-tags">
               <span class="pcard-tag">JavaScript</span>
               <span class="pcard-tag">HTML/CSS</span>
@@ -505,20 +271,9 @@
               <span class="pcard-tag">Fetch API</span>
             </div>
 
-            <!--
-              PCARD-FOOT - päta karty s odkazmi a stavom
-              class="pcard-foot" - flexbox medzi odkazmi a stavom
-            -->
             <div class="pcard-foot">
-              <!--
-                PCARD-LINKS - kontajner pre odkazy na demo a GitHub
-                class="pcard-links" - horizontálne zoradenie s medzerami
-              -->
               <div class="pcard-links">
-                <!-- Demo odkaz na lokálnu Weather aplikáciu v repozitári -->
                 <a href="weather/index.html" class="pcard-link">Demo ↗</a>
-
-                <!-- Odkaz na GitHub priečinok Weather projektu -->
                 <a
                   href="https://github.com/FilipGlemba/moje-portfolio/tree/master/weather"
                   target="_blank"
@@ -526,13 +281,6 @@
                   >GitHub ↗</a
                 >
               </div>
-
-              <!--
-                BADGE - stavový štítok projektu
-                class="badge badge-done" - základný badge štýl + dokončený projekt
-                badge-done - zelené pozadie pre dokončené projekty
-                "DONE" - text indikujúci, že projekt je hotový
-              -->
               <span class="badge badge-done">DONE</span>
             </div>
           </div>
@@ -593,19 +341,13 @@
             <div class="pcard-foot">
               <div class="pcard-links">
                 <a
-                  href="https://eshop-demo.netlify.app"
-                  target="_blank"
-                  class="pcard-link"
-                  >Demo ↗</a
-                >
-                <a
-                  href="https://github.com/username/eshop"
+                  href="https://github.com/FilipGlemba/moje-portfolio/tree/master/eshop"
                   target="_blank"
                   class="pcard-link"
                   >GitHub ↗</a
                 >
               </div>
-              <span class="badge badge-wip">IN PROGRESS</span>
+              <span class="badge badge-done">DONE</span>
             </div>
           </div>
         </div>
@@ -614,18 +356,12 @@
 
     <!-- ═══ STACK ═══ -->
     <section id="stack">
-      <!-- HLAVIČKA SEKCIÍ - spoločný štýl pre všetky sekcie -->
       <div class="wrap">
         <div class="s-head reveal">
           <h2 class="s-title" data-i18n="stackTitle">Tech Stack</h2>
           <div class="s-rule"></div>
         </div>
 
-        <!--
-          LEGENDA TECH STACK - vysvetlenie úrovní znalostí
-          stack-legend - flex kontajner s medzerami medzi položkami
-          Každá legenda má bodku s farbou a popis
-        -->
         <div class="stack-legend reveal">
           <!-- Expert úroveň - modrá bodka -->
           <div class="leg-item">
@@ -649,28 +385,13 @@
           </div>
         </div>
 
-        <!--
-          KATEGÓRIE TECH STACK - mriežka s rôznymi kategóriami technológií
-          stack-categories - CSS Grid s tromi stĺpcami
-        -->
         <div class="stack-categories">
-          <!--
-            FRONTEND KATEGÓRIA - technológie pre klientskú stranu
-            scat - kontajner kategórie s hover efektmi
-            scat-head - hlavička s ikonou a názvom
-          -->
           <div class="scat reveal">
             <div class="scat-head">
               <span class="scat-icon">🎨</span
               ><span class="scat-label">FRONTEND</span>
             </div>
-            <!-- scat-items - zoznam technológií v kategórii -->
             <div class="scat-items">
-              <!--
-                HTML/CSS - základné webové technológie
-                sitem - jednotlivá položka technológie
-                dot-expert - modrá bodka pre expert úroveň
-              -->
               <div class="sitem">
                 <div class="sitem-l">
                   <div class="sitem-dot dot-expert"></div>
@@ -780,10 +501,6 @@
             </div>
           </div>
 
-          <!--
-            NÁSTROJE KATEGÓRIA - vývojové nástroje a VCS
-            grid-column: span 2 - zaberá dva stĺpce v mriežke
-          -->
           <div class="scat stack-tools reveal d2">
             <div class="scat-head">
               <span class="scat-icon">🛠️</span
@@ -815,21 +532,9 @@
 
     <!-- ═══ ABOUT ═══ -->
     <section id="about">
-      <!--
-        ĽAVÁ ČASŤ ABOUT - text o autorovi
-        Používa CSS Grid pre rozloženie (1fr 1fr)
-      -->
       <div>
-        <!--
-          "O MNE" - skrytý nadpis pre prístupnosť
-          about-eye - malý text v monospace písmom
-        -->
         <div class="about-eye reveal" data-i18n="aboutTitle">O MNE</div>
 
-        <!--
-          HLAVNÝ NADPIS ABOUT - s animáciou a kurzívou
-          about-title - veľký nadpis s line-height pre lepšie čítanie
-        -->
         <h2 class="about-title reveal">
           <span data-i18n="codeHeading">Kódujem,</span><br /><span
             data-i18n="codeBecause"
@@ -867,13 +572,7 @@
           >Porozprávajme sa →</a
         >
       </div>
-      <!-- PRAVÁ ČASŤ ABOUT - štatistiky a dostupnosť -->
       <div>
-        <!--
-          INFO GRID - mriežka so štatistikami
-          info-grid - CSS Grid s 2x2 rozložením
-          ig-cell - jednotlivá bunka s informáciami
-        -->
         <div class="info-grid reveal d1">
           <!-- SKÚSENOSTI - 2+ roky web development -->
           <div class="ig-cell">
@@ -904,11 +603,6 @@
           </div>
         </div>
 
-        <!--
-          DOSTUPNOSŤ - zelený banner s animovanou bodkou
-          avail - kontajner s paddingom a zeleným pozadím
-          avail-d - animovaná bodka indikujúca dostupnosť
-        -->
         <div class="avail reveal d2">
           <div class="avail-d"></div>
           <span class="avail-t" data-i18n="available_now"
@@ -920,28 +614,11 @@
 
     <!-- ═══ CONTACT ═══ -->
     <section id="contact">
-      <!--
-        GHOST TEXT - veľký text na pozadí pre vizuálny efekt
-        contact-ghost - absolútne pozicionovaný, priesvitný text
-        text sa prekladá podľa jazyka pomocou data-i18n
-      -->
       <div class="contact-ghost" data-i18n="contactGhost">POĎME</div>
 
-      <!--
-        VNÚTORNÝ KONTAJNER - obsah kontaktných informácií
-        c-inner - relatívne pozicionovaný pre prekrytie ghost textu
-      -->
       <div class="c-inner">
-        <!--
-          "KONTAKT" - skrytý nadpis pre prístupnosť
-          c-eye - malý text v monospace písmom
-        -->
         <div class="c-eye reveal" data-i18n="contactTitle">KONTAKT</div>
 
-        <!--
-          HLAVNÝ NADPIS CONTACT - veľký nadpis s kurzívou
-          c-title - center-aligned nadpis s veľkým font-size
-        -->
         <h2 class="c-title reveal">
           <span data-i18n="letsTalk">Porozprávajme</span><br /><em
             data-i18n="contactAbout"
@@ -949,24 +626,12 @@
           >
         </h2>
 
-        <!-- POPIS - vysvetlenie účelu kontaktnej sekcie -->
         <p class="c-sub reveal d1" data-i18n="contactDesc">
           Hľadáš developera do tímu alebo na projekt? Som tu a rád si ťa
           vypočujem.
         </p>
 
-        <!--
-          TLAČIDLÁ KONTAKTU - email a sociálne siete
-          c-btns - flex kontajner s medzerami medzi tlačidlami
-        -->
         <div class="c-btns reveal d2">
-          <!--
-            EMAIL TLAČIDLO - hlavné call-to-action pre kontakt
-            href="mailto:filip.glemba9@gmail.com" - mailto protokol otvára email klienta
-            class="btn-solid" - plné tlačidlo s modrým pozadím
-            data-i18n="sendEmail" - kľúč pre preklad textu do angličtiny
-            "Napíš email" - text tlačidla v slovenčine
-          -->
           <a
             href="mailto:filip.glemba9@gmail.com"
             class="btn-solid"
@@ -974,24 +639,6 @@
             >Napíš email</a
           >
 
-          <!--
-            LINKEDIN ODKAZ - profesionálny profil na LinkedIn
-            href="https://linkedin.com" - odkaz na LinkedIn profil (treba aktualizovať)
-            target="_blank" - otvára sa v novom okne/tabe
-            class="btn-line" - obrysové tlačidlo s modrou hranicou
-            "LinkedIn ↗" - text s šípkou indikujúcou externý odkaz
-          -->
-          <a href="https://linkedin.com" target="_blank" class="btn-line"
-            >LinkedIn ↗</a
-          >
-
-          <!--
-            GITHUB ODKAZ - profil s open-source projektami
-            href="https://github.com/FilipGlemba" - odkaz na GitHub profil autora
-            target="_blank" - otvára sa v novom okne/tabe
-            class="btn-line" - obrysové tlačidlo s modrou hranicou
-            "GitHub ↗" - text s šípkou indikujúcou externý odkaz
-          -->
           <a
             href="https://github.com/FilipGlemba"
             target="_blank"
@@ -1007,34 +654,12 @@
 
     <!-- ═══ FOOTER ═══ -->
     <footer>
-      <!-- AUTORSKÉ PRÁVA - rok a meno autora -->
       <p>© 2026 Filip Glemba</p>
-
-      <!-- POPIS PORTFOLIA - technológie použité pri tvorbe -->
       <p data-i18n="footer">Portfolio postavené na HTML, CSS a JavaScripte</p>
     </footer>
 
-    <!--
-      ═══ JAVASCRIPT SÚBORY ═══
-      Načítanie externých JS súborov pre funkcionalitu stránky
-    -->
-
-    <!--
-      PREKLADY - objekt s textami pre rôzne jazyky
-      translations.js - definuje prekladové kľúče pre SK/EN
-    -->
     <script src="assets/js/translations.js"></script>
-
-    <!--
-      PREPÍNAČ JAZYKA - logika pre prepínanie jazykov
-      language-switcher.js - správa prepínač jazyka a aktualizáciu textov
-    -->
     <script src="assets/js/language-switcher.js"></script>
-
-    <!--
-      HLAVNÝ JAVASCRIPT - všeobecná funkcionalita stránky
-      main.js - scroll efekty, animácie, interakcie
-    -->
     <script src="assets/js/main.js"></script>
   </body>
 </html>

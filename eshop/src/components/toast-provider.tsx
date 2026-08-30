@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useContext, useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
 type Toast = { id: string; message: string; type: "success" | "error" };
 
@@ -27,13 +28,21 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
     <ToastContext.Provider value={value}>
       {children}
       <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-3">
-        {toasts.map((toast) => (
-          <div key={toast.id} className={`max-w-sm rounded-3xl px-5 py-4 text-sm shadow-panel ${
-            toast.type === "success" ? "bg-emerald-600 text-white" : "bg-rose-600 text-white"
-          }`}>
-            {toast.message}
-          </div>
-        ))}
+        <AnimatePresence>
+          {toasts.map((toast) => (
+            <motion.div
+              key={toast.id}
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 40 }}
+              className={`max-w-sm rounded-2xl px-5 py-4 text-sm font-medium shadow-panel ${
+                toast.type === "success" ? "bg-ink text-white" : "bg-flame-500 text-white"
+              }`}
+            >
+              {toast.message}
+            </motion.div>
+          ))}
+        </AnimatePresence>
       </div>
     </ToastContext.Provider>
   );

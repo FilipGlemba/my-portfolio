@@ -1,13 +1,17 @@
 import Stripe from "stripe";
 
-const stripeSecret = process.env.STRIPE_SECRET_KEY;
-if (!stripeSecret) {
-  throw new Error("STRIPE_SECRET_KEY is required.");
-}
+let stripeClient: Stripe | null = null;
 
-export const stripe = new Stripe(stripeSecret, {
-  apiVersion: "2024-08-13",
-});
+export function stripe(): Stripe {
+  if (!stripeClient) {
+    const secretKey = process.env.STRIPE_SECRET_KEY;
+    if (!secretKey) {
+      throw new Error("STRIPE_SECRET_KEY environment variable is required to use Stripe checkout.");
+    }
+    stripeClient = new Stripe(secretKey);
+  }
+  return stripeClient;
+}
 
 export type CheckoutLineItem = {
   productId: string;
@@ -24,7 +28,7 @@ export const createCheckoutSession = async (
   cancelUrl: string,
   customerEmail?: string,
 ) => {
-  const session = await stripe.checkout.sessions.create({
+  const session = await stripe().checkout.sessions.create({
     payment_method_types: ["card"],
     mode: "payment",
     customer_email: customerEmail,
@@ -36,7 +40,7 @@ export const createCheckoutSession = async (
         currency: "eur",
         product_data: {
           name: item.name,
-          images: item.images,
+          images: item.images.filter((image) => image.startsWith("http")),
         },
         unit_amount: Math.round(item.price * 100),
       },
@@ -45,7 +49,7 @@ export const createCheckoutSession = async (
     success_url: successUrl,
     cancel_url: cancelUrl,
     metadata: {
-      items: JSON.stringify(lineItems.map((item) => ({ productId: item.productId, slug: item.slug, quantity: item.quantity, size: 1 }))),
+      items: JSON.stringify(lineItems.map((item) => ({ productId: item.productId, slug: item.slug, quantity: item.quantity }))),
     },
   });
   return session;
