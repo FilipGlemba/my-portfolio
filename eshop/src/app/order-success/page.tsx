@@ -2,8 +2,11 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { useCartStore } from "@/store/cart";
+
+const SuccessBadge3D = dynamic(() => import("@/components/success-badge-3d").then((mod) => mod.SuccessBadge3D), { ssr: false });
 
 export default function OrderSuccessPage() {
   const { clear } = useCartStore();
@@ -21,15 +24,20 @@ export default function OrderSuccessPage() {
         transition={{ duration: 0.5 }}
         className="rounded-2xl border border-black/5 bg-white p-12 text-center shadow-panel"
       >
-        <motion.div
-          initial={{ scale: 0 }}
-          animate={{ scale: 1 }}
-          transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.15 }}
-          className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-volt text-2xl font-bold text-ink"
-        >
-          ✓
-        </motion.div>
-        <h1 className="mt-6 font-display text-4xl text-ink">Order complete</h1>
+        <div className="relative mx-auto h-32 w-32">
+          <div className="absolute inset-0">
+            <SuccessBadge3D />
+          </div>
+          <motion.div
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ type: "spring", stiffness: 260, damping: 18, delay: 0.15 }}
+            className="absolute inset-0 m-auto flex h-16 w-16 items-center justify-center rounded-full bg-volt text-2xl font-bold text-ink"
+          >
+            ✓
+          </motion.div>
+        </div>
+        <h1 className="mt-2 font-display text-4xl text-ink">Order complete</h1>
         <p className="mt-4 text-black/60">
           Your order is confirmed. Check your email for tracking updates and order details.
         </p>
