@@ -1,5 +1,7 @@
-version: '3.8'
-
+# Optional: only needed if you want a persistent local database instead of
+# the automatic in-memory MongoDB used by default in development (see
+# src/lib/dev-mongo.ts). Start with `docker compose up -d`, then set
+# MONGODB_URI in .env.local to the value below and run `npm run seed`.
 services:
   mongodb:
     image: mongo:7.0

@@ -1,8 +1,7 @@
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import connect from "@/lib/db";
-import Order from "@/models/Order";
 import authOptions from "@/lib/auth";
+import { getOrdersForUser } from "@/lib/queries";
 
 export async function GET(request: NextRequest) {
   const session = await getServerSession(authOptions);
@@ -10,9 +9,6 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  await connect();
-
-  const filter = session.user.role === "admin" ? {} : { "shippingAddress.email": session.user.email };
-  const orders = await Order.find(filter).sort({ createdAt: -1 }).lean();
+  const orders = await getOrdersForUser(session.user.email, session.user.role === "admin");
   return NextResponse.json({ orders });
 }

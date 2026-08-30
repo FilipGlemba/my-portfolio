@@ -1,14 +1,20 @@
 import { Resend } from "resend";
 
-const apiKey = process.env.RESEND_API_KEY;
-if (!apiKey) {
-  throw new Error("RESEND_API_KEY is required.");
+let resendClient: Resend | null = null;
+
+function getResend(): Resend {
+  if (!resendClient) {
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey) {
+      throw new Error("RESEND_API_KEY environment variable is required to send emails.");
+    }
+    resendClient = new Resend(apiKey);
+  }
+  return resendClient;
 }
 
-const resend = new Resend(apiKey);
-
 export const sendOrderConfirmation = async (email: string, orderId: string, total: number) => {
-  await resend.emails.send({
+  await getResend().emails.send({
     from: "orders@fitgear.app",
     to: email,
     subject: "FitGear order confirmation",

@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
 
   let event: Stripe.Event;
   try {
-    event = stripe.webhooks.constructEvent(payload, signature, webhookSecret);
+    event = stripe().webhooks.constructEvent(payload, signature, webhookSecret);
   } catch (error) {
     return NextResponse.json({ error: "Webhook signature mismatch" }, { status: 400 });
   }
@@ -38,13 +38,15 @@ export async function POST(request: NextRequest) {
       if (existingOrder.status !== "paid") {
         existingOrder.status = "paid";
         await existingOrder.save();
-        await sendOrderConfirmation(email, existingOrder._id.toString(), existingOrder.total);
+        await sendOrderConfirmation(email, existingOrder._id.toString(), existingOrder.total).catch((error) =>
+          console.error("Failed to send order confirmation email:", error),
+        );
       }
       return NextResponse.json({ received: true });
     }
 
     const metadataItems = session.metadata?.items ? JSON.parse(session.metadata.items) : [];
-    const lineItems = await stripe.checkout.sessions.listLineItems(session.id as string);
+    const lineItems = await stripe().checkout.sessions.listLineItems(session.id as string);
 
     const items = Array.isArray(metadataItems)
       ? await Promise.all(
@@ -88,7 +90,9 @@ export async function POST(request: NextRequest) {
       createdAt: new Date(),
     });
 
-    await sendOrderConfirmation(email, order._id.toString(), order.total);
+    await sendOrderConfirmation(email, order._id.toString(), order.total).catch((error) =>
+      console.error("Failed to send order confirmation email:", error),
+    );
   }
 
   return NextResponse.json({ received: true });

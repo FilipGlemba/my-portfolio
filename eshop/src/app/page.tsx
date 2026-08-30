@@ -1,13 +1,15 @@
 import { Hero } from "@/components/hero";
+import { TrustMarquee } from "@/components/trust-marquee";
 import { CategoryGrid } from "@/components/category-grid";
-import { Roadmap } from "@/components/roadmap";
+import { FeaturedProducts } from "@/components/featured-products";
 
 export default function Home() {
   return (
-    <div className="space-y-16">
+    <div>
       <Hero />
+      <TrustMarquee />
+      <FeaturedProducts />
       <CategoryGrid />
-      <Roadmap />
     </div>
   );
 }

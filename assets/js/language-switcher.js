@@ -1,33 +1,14 @@
-// Prepínač jazyka
-/*
-  LANGUAGE-SWITCHER.JS - logika pre prepínač jazykov v portfóliu
-  Umožňuje prepínať medzi slovenčinou a angličtinou, ukladá výber do localStorage
-  Používa data-i18n atribúty v HTML pre identifikáciu preložiteľných textov
-*/
+// Prepínač jazyka SK/EN — ukladá výber do localStorage, aktualizuje texty cez data-i18n atribúty
+const langToggle = document.getElementById('lang-toggle');
+const htmlEl = document.documentElement;
+let currentLang = localStorage.getItem('lang') || 'sk';
 
-// ─── INICIALIZÁCIA ───
-/*
-  LANG-TOGGLE - tlačidlo pre prepnutie jazyka (v navigačnej lište)
-  HTML-EL - koreňový HTML element pre nastavenie lang atribútu
-  CURRENT-LANG - aktuálny jazyk (načítaný z localStorage alebo default 'sk')
-*/
-const langToggle = document.getElementById('lang-toggle'); // Získanie referencie na tlačidlo prepínača
-const htmlEl = document.documentElement; // Získanie referencie na <html> element
-let currentLang = localStorage.getItem('lang') || 'sk'; // Načítanie jazyka z localStorage alebo default 'sk'
-
-// Nastavenie počiatočného jazyka
 htmlEl.lang = currentLang;
 langToggle.textContent = currentLang === 'sk' ? 'EN' : 'SK';
 
-// ─── FUNKCIA PRE AKTUALIZÁCIU TEXTU ───
-/*
-  UPDATE-PAGE-LANGUAGE - aktualizuje všetky texty na stránke podľa vybraného jazyka
-  Param: lang - kód jazyka ('sk' alebo 'en')
-  Funkcia: prechádza všetky elementy s data-i18n atribútmi a nahrádza ich text
-*/
 function updatePageLanguage(lang) {
-  const t = translations[lang]; // Získanie prekladového objektu pre daný jazyk
-  
+  const t = translations[lang];
+
   // NAV - aktualizácia textov v navigačnej lište
   document.querySelectorAll('[data-i18n="projectsNav"]').forEach(el => el.textContent = t.projectsNav);
   document.querySelectorAll('[data-i18n="about"]').forEach(el => el.textContent = t.about);
@@ -97,22 +78,12 @@ function updatePageLanguage(lang) {
   document.querySelectorAll('[data-i18n="footer"]').forEach(el => el.textContent = t.footer);
 }
 
-// ─── EVENT LISTENER PRE PREPNUTIE JAZYKA ───
-/*
-  Kliknutie na tlačidlo prepínača jazyka
-  Prepína medzi 'sk' a 'en', ukladá do localStorage, aktualizuje UI
-*/
 langToggle.addEventListener('click', () => {
-  currentLang = currentLang === 'sk' ? 'en' : 'sk'; // Prepnutie jazyka
-  localStorage.setItem('lang', currentLang); // Uloženie do localStorage
-  htmlEl.lang = currentLang; // Aktualizácia lang atribútu
-  langToggle.textContent = currentLang === 'sk' ? 'EN' : 'SK'; // Aktualizácia textu tlačidla
-  updatePageLanguage(currentLang); // Aktualizácia všetkých textov na stránke
+  currentLang = currentLang === 'sk' ? 'en' : 'sk';
+  localStorage.setItem('lang', currentLang);
+  htmlEl.lang = currentLang;
+  langToggle.textContent = currentLang === 'sk' ? 'EN' : 'SK';
+  updatePageLanguage(currentLang);
 });
 
-// ─── INICIALIZÁCIA STRÁNKY ───
-/*
-  Spustenie aktualizácie textov pri načítaní stránky s aktuálnym jazykom
-*/
-// Inicializácia stránky s aktuálnym jazykom
 updatePageLanguage(currentLang);
