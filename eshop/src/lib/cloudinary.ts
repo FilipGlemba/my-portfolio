@@ -20,8 +20,11 @@ function ensureConfigured() {
 export const createCloudinarySignature = () => {
   ensureConfigured();
   const timestamp = Math.floor(Date.now() / 1000);
-  const signature = cloudinary.utils.api_sign_request({ timestamp }, process.env.CLOUDINARY_API_SECRET!);
-  return { timestamp, signature, cloudName: process.env.CLOUDINARY_CLOUD_NAME };
+  const folder = "fitgear/products";
+  const signature = cloudinary.utils.api_sign_request({ timestamp, folder }, process.env.CLOUDINARY_API_SECRET!);
+  // api_key is not secret (only api_secret is) — it's meant to travel with the
+  // signature so the browser can upload directly to Cloudinary.
+  return { timestamp, signature, folder, cloudName: process.env.CLOUDINARY_CLOUD_NAME, apiKey: process.env.CLOUDINARY_API_KEY };
 };
 
 export const uploadImage = async (imageData: string) => {

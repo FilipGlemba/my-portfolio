@@ -15,6 +15,8 @@ type Product = {
   category: string;
   badge: string;
   images: string[];
+  rating: number | null;
+  reviewCount: number;
 };
 
 export function ProductList() {

@@ -26,12 +26,13 @@ export async function getDevMongoUri(): Promise<string> {
 export async function seedIfEmpty() {
   const { default: Product } = await import("@/models/Product");
   const { default: User } = await import("@/models/User");
+  const { default: Review } = await import("@/models/Review");
 
   const existing = await Product.estimatedDocumentCount();
   if (existing > 0) return;
 
   const { hash } = await import("bcrypt");
-  const { SEED_PRODUCTS, SEED_USERS } = await import("@/lib/seed-data");
+  const { SEED_PRODUCTS, SEED_USERS, buildSeedReviews } = await import("@/lib/seed-data");
 
   await Product.insertMany(SEED_PRODUCTS);
   await Promise.all(
@@ -45,7 +46,18 @@ export async function seedIfEmpty() {
     ),
   );
 
+  const reviews = buildSeedReviews();
+  await Review.insertMany(
+    reviews.map((review) => ({
+      productSlug: review.productSlug,
+      name: review.name,
+      rating: review.rating,
+      comment: review.comment,
+      createdAt: new Date(Date.now() - review.daysAgo * 24 * 60 * 60 * 1000),
+    })),
+  );
+
   console.log(
-    `[fitgear] Seeded ${SEED_PRODUCTS.length} products and ${SEED_USERS.length} test accounts (admin@fitgear.local / admin123, user@fitgear.local / user123).`,
+    `[fitgear] Seeded ${SEED_PRODUCTS.length} products, ${reviews.length} reviews, and ${SEED_USERS.length} test accounts (admin@fitgear.local / admin123, user@fitgear.local / user123).`,
   );
 }

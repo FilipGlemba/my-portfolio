@@ -8,6 +8,11 @@ export async function GET() {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const payload = createCloudinarySignature();
-  return NextResponse.json(payload);
+  try {
+    const payload = createCloudinarySignature();
+    return NextResponse.json(payload);
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unable to prepare upload.";
+    return NextResponse.json({ error: message }, { status: 503 });
+  }
 }

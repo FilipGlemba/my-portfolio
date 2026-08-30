@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/toast-provider";
+import { ImageUploader } from "@/components/image-uploader";
 
 const fieldClass = "w-full rounded-xl border border-black/10 bg-black/[0.02] px-4 py-3 focus:border-flame-500 focus:outline-none";
 
@@ -20,19 +21,23 @@ export default function NewProductPage() {
     stock: "0",
     badge: "NONE",
     featured: false,
-    images: "",
+    images: [] as string[],
   });
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
+
+    if (!formState.images.length) {
+      toast.notify("Add at least one image before creating the product.", "error");
+      return;
+    }
+
     setIsSubmitting(true);
 
     const payload = {
       ...formState,
       price: Number(formState.price),
       stock: Number(formState.stock),
-      images: formState.images.split(",").map((image) => image.trim()).filter(Boolean),
-      featured: formState.featured,
     };
 
     const response = await fetch("/api/products", {
@@ -99,10 +104,10 @@ export default function NewProductPage() {
               <span>Featured product</span>
             </label>
           </div>
-          <label className="block text-sm text-black/70">
+          <div className="block text-sm text-black/70">
             <span className="mb-2 block font-semibold">Images</span>
-            <input type="text" value={formState.images} onChange={(event) => setFormState((prev) => ({ ...prev, images: event.target.value }))} placeholder="Comma-separated image URLs, e.g. /images/products/my-shoe.jpg" className={fieldClass} />
-          </label>
+            <ImageUploader images={formState.images} onChange={(images) => setFormState((prev) => ({ ...prev, images }))} />
+          </div>
           <button type="submit" disabled={isSubmitting} className="inline-flex items-center justify-center rounded-full bg-flame-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600 disabled:opacity-60">
             {isSubmitting ? "Creating…" : "Create product"}
           </button>

@@ -7,7 +7,8 @@ import { hash } from "bcrypt";
 import mongoose from "mongoose";
 import Product from "../src/models/Product";
 import User from "../src/models/User";
-import { SEED_PRODUCTS, SEED_USERS } from "../src/lib/seed-data";
+import Review from "../src/models/Review";
+import { SEED_PRODUCTS, SEED_USERS, buildSeedReviews } from "../src/lib/seed-data";
 
 async function seed() {
   const uri = process.env.MONGODB_URI;
@@ -21,7 +22,8 @@ async function seed() {
 
   await Product.deleteMany({});
   await User.deleteMany({});
-  console.log("Cleared existing products and users.");
+  await Review.deleteMany({});
+  console.log("Cleared existing products, users, and reviews.");
 
   const products = await Product.insertMany(SEED_PRODUCTS);
   console.log(`Created ${products.length} products.`);
@@ -35,6 +37,18 @@ async function seed() {
     });
     console.log(`Created ${seedUser.role} account: ${seedUser.email} / ${seedUser.password}`);
   }
+
+  const reviews = buildSeedReviews();
+  await Review.insertMany(
+    reviews.map((review) => ({
+      productSlug: review.productSlug,
+      name: review.name,
+      rating: review.rating,
+      comment: review.comment,
+      createdAt: new Date(Date.now() - review.daysAgo * 24 * 60 * 60 * 1000),
+    })),
+  );
+  console.log(`Created ${reviews.length} reviews.`);
 
   console.log("\nSeeding complete.");
   await mongoose.disconnect();

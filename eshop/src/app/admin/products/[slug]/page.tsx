@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useToast } from "@/components/toast-provider";
+import { ImageUploader } from "@/components/image-uploader";
 
 type Product = {
   name: string;
@@ -35,7 +36,7 @@ export default function EditProductPage({ params }: Props) {
     stock: "0",
     badge: "NONE",
     featured: false,
-    images: "",
+    images: [] as string[],
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -59,7 +60,7 @@ export default function EditProductPage({ params }: Props) {
         stock: data.product.stock.toString(),
         badge: data.product.badge,
         featured: data.product.featured,
-        images: (data.product.images || []).join(", "),
+        images: data.product.images || [],
       });
       setLoading(false);
     }
@@ -69,6 +70,12 @@ export default function EditProductPage({ params }: Props) {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+
+    if (!formState.images.length) {
+      toast.notify("A product needs at least one image.", "error");
+      return;
+    }
+
     setSaving(true);
     setError(null);
 
@@ -80,7 +87,7 @@ export default function EditProductPage({ params }: Props) {
       stock: Number(formState.stock),
       badge: formState.badge,
       featured: formState.featured,
-      images: formState.images.split(",").map((image) => image.trim()).filter(Boolean),
+      images: formState.images,
     };
 
     const response = await fetch(`/api/products/${params.slug}`, {
@@ -170,10 +177,10 @@ export default function EditProductPage({ params }: Props) {
             </label>
           </div>
 
-          <label className="block text-sm text-black/70">
+          <div className="block text-sm text-black/70">
             <span className="mb-2 block font-semibold">Images</span>
-            <input type="text" value={formState.images} onChange={(event) => setFormState((prev) => ({ ...prev, images: event.target.value }))} placeholder="Comma-separated image URLs" className={fieldClass} />
-          </label>
+            <ImageUploader images={formState.images} onChange={(images) => setFormState((prev) => ({ ...prev, images }))} />
+          </div>
 
           {error ? <p className="text-sm text-flame-600">{error}</p> : null}
           <div className="flex flex-col gap-3 sm:flex-row">

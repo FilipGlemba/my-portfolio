@@ -3,13 +3,19 @@ import connect from "@/lib/db";
 import Product from "@/models/Product";
 import { productUpdateSchema } from "@/lib/schemas";
 import { parseJson } from "@/lib/validation";
-import { getProductBySlug } from "@/lib/queries";
+import { getProductBySlug, getReviewsForProduct, getRecommendations } from "@/lib/queries";
 import { getAdminSession } from "@/lib/require-admin";
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
   const product = await getProductBySlug(params.slug);
   if (!product) return NextResponse.json({ error: "Not found" }, { status: 404 });
-  return NextResponse.json({ product });
+
+  const [reviews, recommendations] = await Promise.all([
+    getReviewsForProduct(params.slug),
+    getRecommendations(product.category, params.slug),
+  ]);
+
+  return NextResponse.json({ product, reviews, recommendations });
 }
 
 export async function PUT(request: NextRequest, { params }: { params: { slug: string } }) {
