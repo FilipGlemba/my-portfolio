@@ -123,6 +123,7 @@ const clouds        = document.getElementById('clouds');
 const sunrise       = document.getElementById('sunrise');
 const sunset        = document.getElementById('sunset');
 const cardBg        = document.getElementById('cardBg');
+const ambientBg      = document.getElementById('ambientBg');
 const hourlyTrack   = document.getElementById('hourlyTrack');
 const forecastGrid  = document.getElementById('forecastGrid');
 const currentCard   = document.getElementById('currentCard');
@@ -248,6 +249,19 @@ function getTimeOfDay(unix, tz) {
   return 'night';
 }
 
+// Groups OpenWeatherMap's `weather[0].main` values into the handful of
+// ambient-bg color themes defined in style.css
+function getConditionClass(main) {
+  const key = (main || '').toLowerCase();
+  if (key === 'clear') return 'clear';
+  if (key === 'clouds') return 'clouds';
+  if (key === 'rain') return 'rain';
+  if (key === 'drizzle') return 'drizzle';
+  if (key === 'thunderstorm') return 'thunderstorm';
+  if (key === 'snow') return 'snow';
+  return 'mist'; // mist/fog/haze/smoke/dust/sand/ash/squall/tornado
+}
+
 // Live local clock
 function startClock(tz) {
   clearInterval(clockInt);
@@ -335,6 +349,10 @@ function renderCurrent(data) {
   // gradient strip
   const tod = getTimeOfDay(data.dt, tz);
   cardBg.className = `card-bg${tod !== 'day' ? ' ' + tod : ''}`;
+
+  // whole-page ambient background: time of day + weather condition
+  const cond = getConditionClass(data.weather[0].main);
+  ambientBg.className = `ambient-bg ${tod} ${cond}`;
 
   startClock(tz);
 }

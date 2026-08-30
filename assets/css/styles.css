@@ -249,6 +249,23 @@ nav.up {
 */
 .nav-btn:hover { background:#333; transform:translateY(-1px) }
 
+/*
+  MENU-TOGGLE - hamburger tlačidlo pre mobilnú navigáciu
+  Skryté na desktope, zobrazí sa len pod 640px (viď media query nižšie),
+  kde .nav-links inak úplne miznú bez náhrady.
+*/
+.menu-toggle {
+  display:none; flex-direction:column; justify-content:center; gap:4px;
+  width:32px; height:32px; padding:0; background:none; border:none; cursor:pointer;
+}
+.menu-toggle span {
+  display:block; width:100%; height:1.5px; background:var(--ink);
+  transition:transform .25s var(--ease), opacity .2s;
+}
+nav.menu-open .menu-toggle span:nth-child(1) { transform:translateY(5.5px) rotate(45deg) }
+nav.menu-open .menu-toggle span:nth-child(2) { opacity:0 }
+nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rotate(-45deg) }
+
 /* ─── HERO SEKCIA ─── */
 
 /*
@@ -1440,7 +1457,19 @@ footer a:hover { color:var(--ink) }
   #contact { padding:6rem 2rem }
 }
 @media(max-width:640px) {
-  .nav-links { display:none }
+  .menu-toggle { display:flex }
+  .nav-links {
+    position:absolute; top:100%; left:0; right:0;
+    flex-direction:column; gap:0; margin:0; padding:.5rem 2rem 1rem;
+    background:rgba(250,250,248,.98); backdrop-filter:blur(18px);
+    border-bottom:1px solid var(--bd);
+    max-height:0; overflow:hidden; opacity:0;
+    transition:max-height .3s var(--ease), opacity .25s;
+  }
+  .nav-links li { width:100% }
+  .nav-links a { display:block; padding:.85rem 0; border-bottom:1px solid var(--bd) }
+  .nav-links li:last-child a { border-bottom:none }
+  nav.menu-open .nav-links { max-height:220px; opacity:1 }
   .proj-grid { grid-template-columns:1fr }
   .stack-categories { grid-template-columns:1fr; gap:18px }
   .stack-tools { grid-column:auto }
