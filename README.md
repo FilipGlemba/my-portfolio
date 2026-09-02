@@ -11,15 +11,15 @@ Personal web developer portfolio showcasing standalone projects with bilingual c
 
 ## 📊 Projects at a Glance
 
-| Project               | Type          | Key Features                                                                   |
-| --------------------- | ------------- | ------------------------------------------------------------------------------ |
-| 🌦️ **Weather App**    | Vanilla JS    | City search, forecasts, favorites, units toggle, themes, OpenWeatherMap API    |
-| ✅ **TaskStudio**     | Vanilla JS    | Task management, filters, priorities, drag & drop, import/export, LocalStorage |
+| Project               | Type          | Key Features                                                                  |
+| ---------------------- | ------------- | ------------------------------------------------------------------------------ |
 | 🛍️ **FitGear E-shop** | Next.js Stack | E-commerce with auth, catalog, cart, Stripe checkout, orders, admin dashboard  |
+
+The portfolio homepage (`index.html`) also showcases two additional projects — **Mozaika** (a band website) and an ongoing **client project** — that live in their own separate repositories and aren't included in this one.
 
 ## 📝 Overview
 
-The main portfolio is a responsive HTML/CSS/JavaScript site presenting projects, technical expertise, experience, and contact information. Each project is independently deployable and showcases different technical approaches—from vanilla frontend to full-stack modern web development.
+The main portfolio is a responsive HTML/CSS/JavaScript site presenting projects, technical expertise, experience, and contact information.
 
 ## 📁 Repository Structure
 
@@ -29,16 +29,6 @@ moje_portfolio/
 ├── assets/
 │   ├── css/styles.css        # Portfolio styles
 │   └── js/                   # Language switcher & navigation
-├── weather/                  # 🌦️ Weather Dashboard
-│   ├── index.html
-│   ├── script.js
-│   ├── style.css
-│   └── README.md
-├── todo/                     # ✅ TaskStudio Manager
-│   ├── index.html
-│   ├── script.js
-│   ├── style.css
-│   └── README.md
 └── eshop/                    # 🛍️ FitGear E-shop
     ├── package.json
     ├── src/
@@ -48,7 +38,7 @@ moje_portfolio/
 
 ## 🛠️ Tech Stack
 
-### Frontend (Portfolio & Static Apps)
+### Frontend (Portfolio)
 
 ```
 HTML5 • CSS3 • Vanilla JavaScript • Responsive Design (Grid/Flexbox) • LocalStorage
@@ -64,7 +54,7 @@ NextAuth • Stripe • Resend • Cloudinary • Zustand • Zod
 ### External APIs
 
 ```
-OpenWeatherMap • Stripe • NextAuth • Cloudinary
+Stripe • NextAuth • Cloudinary
 ```
 
 ## 🚀 Quick Start
@@ -85,16 +75,6 @@ python -m http.server 8000
 # Visit: http://localhost:8000
 ```
 
-### Weather App
-
-1. Create `weather/config.js` from `config.example.js`
-2. Add your [OpenWeatherMap API key](https://openweathermap.org/api)
-3. Open `weather/index.html` or visit via local server
-
-### TaskStudio
-
-Open `todo/index.html` directly in browser—no setup required!
-
 ### FitGear E-shop
 
 ```bash
@@ -108,10 +88,6 @@ npm run dev
 
 ## 📚 Project Details
 
-Each project has its own README with detailed setup, features, and technical information:
-
-- [**Weather App**](./weather/README.md) — REST API integration, geolocation, theme switching
-- [**TaskStudio**](./todo/README.md) — DOM manipulation, state management, LocalStorage
 - [**FitGear E-shop**](./eshop/README.md) — Full-stack development, database design, payment processing
 
 ## 🌍 Live & Deploy
@@ -144,30 +120,6 @@ CLOUDINARY_*
 RESEND_API_KEY
 ```
 
-```text
-http://localhost:8000
-```
-
-## Running Individual Projects
-
-Static apps:
-
-```text
-weather/index.html
-todo/index.html
-```
-
-E-shop:
-
-```bash
-cd eshop
-npm install
-copy .env.example .env.local
-npm run dev
-```
-
-Then visit:
-
 ## 🎯 Features & Skills Demonstrated
 
 ### Portfolio Site
@@ -176,20 +128,6 @@ Then visit:
 - ✅ CSS Grid & Flexbox responsive layouts
 - ✅ Bilingual interface (SK/EN) with JS switching
 - ✅ Modern typography & design
-
-### Weather App
-
-- ✅ REST API consumption & error handling
-- ✅ Async/await patterns
-- ✅ Browser geolocation API
-- ✅ LocalStorage persistence
-
-### TaskStudio
-
-- ✅ Complex DOM state management
-- ✅ Drag & drop interactions
-- ✅ JSON import/export
-- ✅ Advanced filtering & sorting
 
 ### FitGear E-shop
 
@@ -218,8 +156,6 @@ Feel free to fork, submit issues, and create pull requests. Feedback and contrib
 
 ## Environment Notes
 
-The Weather App needs an OpenWeatherMap API key in `weather/config.js`. Use `weather/config.example.js` as the template.
-
 The e-shop uses environment variables for MongoDB, NextAuth, Stripe, Resend, and Cloudinary. See `eshop/.env.example` for the expected keys.
 
 ## What This Repository Demonstrates
@@ -227,12 +163,11 @@ The e-shop uses environment variables for MongoDB, NextAuth, Stripe, Resend, and
 - Clean static portfolio structure
 - Responsive design across desktop, tablet, and mobile
 - Bilingual UI content with JavaScript-based language switching
-- Practical browser apps without a framework
 - LocalStorage persistence and client-side state handling
 - External API integration
 - Full-stack Next.js project structure
 
 ## Author
 
-Filip Glemba  
+Filip Glemba
 GitHub: [FilipGlemba](https://github.com/FilipGlemba)

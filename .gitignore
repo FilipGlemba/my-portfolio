@@ -1,5 +1,4 @@
 # API Keys & Secrets
-weather/config.js
 .env
 .env.local
 .env.*.local
