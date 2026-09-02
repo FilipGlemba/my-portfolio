@@ -1,3 +1,7 @@
+# Standalone project repos (own .git + GitHub remote — never nested here)
+/MOZAIKA/
+/SLOBODA/
+
 # API Keys & Secrets
 .env
 .env.local
