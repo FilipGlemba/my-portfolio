@@ -4,7 +4,7 @@ const translations = {
     // NAV
     projectsNav: 'Projekty',
     about: 'O mne',
-    contact: 'Kontakt',
+    contact: 'Kontakt →',
 
     // HERO
     available: 'Dostupný pre spoluprácu',
@@ -23,7 +23,7 @@ const translations = {
     // PROJECTS
     projectsTitle: 'Projekty',
     eshopDesc: 'Moderný Next.js e-shop s autentifikáciou, produktovým katalógom, košíkom, objednávkami, platbami a admin dashboardom.',
-    mozaikaDesc: 'Jednostránkový landing web pre hudobnú kapelu Mozaika z Liptova – prezentácia kapely, repertoáru a rezervačný formulár na dopyty pre svadby a oslavy. Formulár chráni CSRF, honeypot a rate-limit, e-maily posiela PHPMailer cez SMTP.',
+    mozaikaDesc: 'Jednostránkový landing web pre hudobnú kapelu Mozaika z Liptova – prezentácia kapely, repertoáru a rezervačný formulár na dopyty pre svadby a oslavy. Formulár chráni CSRF, honeypot a rate-limit. E-maily posiela PHPMailer cez SMTP.',
     clientDesc: 'Aktuálne pracujem na webe pre reálneho klienta – od návrhu po nasadenie. Detaily budú zverejnené po dokončení a schválení klientom.',
 
     // STACK
@@ -42,14 +42,14 @@ const translations = {
     codeHeading: 'Kódujem,',
     codeBecause: 'pretože ma',
     codeEnjoy: 'to baví.',
-    aboutDesc1: 'Som študent SSOŠTA (odbor Informačné a digitálne technológie, 3. ročník) s viac ako 4 rokmi praxe vo web developmente a certifikátom z Web Developer kurzu v Bratislave.',
+    aboutDesc1: 'Som študent SSOSTA (odbor Informačné a digitálne technológie, 3. ročník) s viac ako 4 rokmi praxe vo web developmente a certifikátom z Web Developer kurzu v Bratislave.',
     aboutDesc2: 'Okrem klientskych projektov experimentujem s osobnými nápadmi a tvorím nástroje, ktoré som si sám prial – napríklad DevCheat alebo toto portfólio.',
     aboutDesc3: 'Vo voľnom čase pracujem na osobných projektoch, ktoré mi dávajú priestor skúšať nové nástroje, zlepšovať workflow a testovať rýchlosť aj použiteľnosť. Toto portfólio je príklad môjho štýlu práce: čistá štruktúra, precízny dizajn a praktický výkon.',
-    letsChat: 'Porozprávajme sa',
+    letsChat: 'Porozprávajme sa →',
 
     // EDUCATION
     eduTitle: '🎓 VZDELANIE & CERTIFIKÁCIE',
-    eduSchool: 'SSOŠTA, odbor IDT (3. ročník, prebieha)',
+    eduSchool: 'SSOSTA, odbor IDT (3. ročník, prebieha)',
     eduCert: 'Certifikát: Web Developer kurz, Bratislava',
 
     // INFO GRID
@@ -60,7 +60,7 @@ const translations = {
     projectsCount: '3',
     location: 'LOKALITA',
     languages: 'JAZYKY',
-    fluent: 'SK: rodný jazyk · EN: B2',
+    fluent: 'plynule',
 
     // AVAILABILITY
     available_now: 'Momentálne dostupný pre nové príležitosti',
@@ -83,7 +83,7 @@ const translations = {
     // NAV
     projectsNav: 'Projects',
     about: 'About',
-    contact: 'Contact',
+    contact: 'Contact →',
 
     // HERO
     available: 'Available for work',
@@ -102,7 +102,7 @@ const translations = {
     // PROJECTS
     projectsTitle: 'Projects',
     eshopDesc: 'A modern Next.js e-commerce app with authentication, product catalog, cart, orders, payments, and an admin dashboard.',
-    mozaikaDesc: 'A one-page landing site for the Mozaika folk band from the Liptov region – showcasing the band, repertoire, and a booking inquiry form for weddings and celebrations. The form is protected by CSRF, a honeypot, and rate-limiting, with emails sent via PHPMailer over SMTP.',
+    mozaikaDesc: 'A one-page landing site for the Mozaika folk band from the Liptov region – showcasing the band, repertoire, and a booking inquiry form for weddings and celebrations. The form is protected by CSRF, a honeypot, and rate-limiting. Emails are sent via PHPMailer over SMTP.',
     clientDesc: 'I\'m currently working on a website for a real client – from design to deployment. Details will be published once the project is finished and approved by the client.',
 
     // STACK
@@ -121,14 +121,14 @@ const translations = {
     codeHeading: 'I code',
     codeBecause: 'because I',
     codeEnjoy: 'enjoy it.',
-    aboutDesc1: 'I\'m a student at SSOŠTA (Information and Digital Technologies program, 3rd year) with more than 4 years of practical experience in web development and a certificate from a Web Developer course in Bratislava.',
+    aboutDesc1: 'I\'m a student at SSOSTA (Information and Digital Technologies program, 3rd year) with more than 4 years of practical experience in web development and a certificate from a Web Developer course in Bratislava.',
     aboutDesc2: 'Besides client work, I experiment with personal projects and build tools I wished existed – like DevCheat or this portfolio.',
     aboutDesc3: 'In my free time I work on personal projects that let me explore new tools, improve my workflow and test for speed and usability. This portfolio is an example of my approach: clean structure, polished visuals and practical performance.',
-    letsChat: 'Let\'s talk',
+    letsChat: 'Let\'s talk →',
 
     // EDUCATION
     eduTitle: '🎓 EDUCATION & CERTIFICATIONS',
-    eduSchool: 'SSOŠTA, Information and Digital Technologies (3rd year, in progress)',
+    eduSchool: 'SSOSTA, Information and Digital Technologies (3rd year, in progress)',
     eduCert: 'Certificate: Web Developer course, Bratislava',
 
     // INFO GRID
@@ -139,7 +139,7 @@ const translations = {
     projectsCount: '3',
     location: 'LOCATION',
     languages: 'LANGUAGES',
-    fluent: 'SK: native language · EN: B2',
+    fluent: 'fluent',
 
     // AVAILABILITY
     available_now: 'Currently available for new opportunities',
