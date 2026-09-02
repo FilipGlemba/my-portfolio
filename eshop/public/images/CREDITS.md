@@ -21,6 +21,8 @@ All photos below are freely licensed (Creative Commons / public domain), sourced
 | `products/training-gloves.jpg` | "Resistance Bands" (mislabeled search result — actually a glove close-up, used for the gloves product instead) | eekim | CC BY 2.0 | https://www.flickr.com/photos/63669472@N00/11452114374 |
 | `products/compression-socks.jpg` | KT Tape Pro, Zensah Compression Socks, and New Balance runDisney Running Shoes | AngryJulieMonday | CC BY 2.0 | https://www.flickr.com/photos/33731571@N07/8457134550 |
 | `products/performance-headband.jpg` | Trackandfield Tracksuit | Ryan McGuire / StockSnap | CC0 1.0 | https://stocksnap.io/photo/trackandfield-tracksuit-EAFA2E9467 |
+| `products/elite-running-shoe-2.jpg` | Cropped from "My hideous running shoes" (tight crop on the laced toe box, to leave out a side-panel logo) | minorissues | CC BY 2.0 | https://www.flickr.com/photos/63051956@N00/3769610224 |
+| `products/yoga-mat-2.jpg` | Cropped from "A woman prepares for her yoga routine" | Shixart1985 | CC BY 2.0 | https://commons.wikimedia.org/w/index.php?curid=197293341 |
 
 **Not a real photo** — `momentum-strength-tee` still uses a generated illustration (`src/lib/seed-data.ts`): every tee/tank-top photo found in the search had a competing brand's logo printed on it, so a custom graphic was used rather than a misleading one. Swap it for a real photo first if you keep editing.
 
