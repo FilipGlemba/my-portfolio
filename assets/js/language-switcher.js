@@ -24,15 +24,15 @@ function updatePageLanguage(lang) {
   // BADGES - aktualizácia textov v badge-och (štítkoch)
   document.querySelectorAll('[data-i18n="fullstackDev"]').forEach(el => el.textContent = t.fullstackDev);
   document.querySelectorAll('[data-i18n="yearsExp"]').forEach(el => el.textContent = t.yearsExp);
-  document.querySelectorAll('[data-i18n="projects10"]').forEach(el => el.textContent = t.projects10);
+  document.querySelectorAll('[data-i18n="heroProjectsCount"]').forEach(el => el.textContent = t.heroProjectsCount);
   document.querySelectorAll('[data-i18n="completed"]').forEach(el => el.textContent = t.completed);
   document.querySelectorAll('[data-i18n="slovakia"]').forEach(el => el.textContent = t.slovakia);
-  
+
   // PROJECTS - aktualizácia textov v sekcii projektov
   document.querySelectorAll('[data-i18n="projectsTitle"]').forEach(el => el.textContent = t.projectsTitle);
-  document.querySelectorAll('[data-i18n="weatherDesc"]').forEach(el => el.textContent = t.weatherDesc);
-  document.querySelectorAll('[data-i18n="todoDesc"]').forEach(el => el.textContent = t.todoDesc);
   document.querySelectorAll('[data-i18n="eshopDesc"]').forEach(el => el.textContent = t.eshopDesc);
+  document.querySelectorAll('[data-i18n="mozaikaDesc"]').forEach(el => el.textContent = t.mozaikaDesc);
+  document.querySelectorAll('[data-i18n="clientDesc"]').forEach(el => el.textContent = t.clientDesc);
   
   // STACK - aktualizácia textov v sekcii technických zručností
   document.querySelectorAll('[data-i18n="stackTitle"]').forEach(el => el.textContent = t.stackTitle);
@@ -50,12 +50,18 @@ function updatePageLanguage(lang) {
   document.querySelectorAll('[data-i18n="aboutDesc2"]').forEach(el => el.textContent = t.aboutDesc2);
   document.querySelectorAll('[data-i18n="aboutDesc3"]').forEach(el => el.textContent = t.aboutDesc3);
   document.querySelectorAll('[data-i18n="letsChat"]').forEach(el => el.textContent = t.letsChat);
-  
+
+  // EDUCATION - aktualizácia textov v bloku vzdelania
+  document.querySelectorAll('[data-i18n="eduTitle"]').forEach(el => el.textContent = t.eduTitle);
+  document.querySelectorAll('[data-i18n="eduSchool"]').forEach(el => el.textContent = t.eduSchool);
+  document.querySelectorAll('[data-i18n="eduCert"]').forEach(el => el.textContent = t.eduCert);
+
   // INFO GRID - aktualizácia textov v informačnej mriežke
   document.querySelectorAll('[data-i18n="experience"]').forEach(el => el.textContent = t.experience);
   document.querySelectorAll('[data-i18n="years2plus"]').forEach(el => el.textContent = t.years2plus);
   document.querySelectorAll('[data-i18n="webDev"]').forEach(el => el.textContent = t.webDev);
   document.querySelectorAll('[data-i18n="projects"]').forEach(el => el.textContent = t.projects);
+  document.querySelectorAll('[data-i18n="projectsCount"]').forEach(el => el.textContent = t.projectsCount);
   document.querySelectorAll('[data-i18n="location"]').forEach(el => el.textContent = t.location);
   document.querySelectorAll('[data-i18n="slovakia"]').forEach(el => el.textContent = t.slovakia);
   document.querySelectorAll('[data-i18n="remoteFriendly"]').forEach(el => el.textContent = t.remoteFriendly);

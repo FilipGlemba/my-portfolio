@@ -1240,6 +1240,21 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 */
 .avail-t { font-size:13px; color:var(--green); font-weight:600 }
 
+/*
+  EDU-CARD - mini-blok vzdelania a certifikácií pod tech stackom
+  border, border-radius, background - rovnaký jazyk ako ig-cell
+  margin-top - odstup od stack-categories grid
+*/
+.edu-card { border:1px solid var(--bd); border-radius:10px; background:var(--bg); padding:1.3rem 1.5rem; margin-top:1.5rem }
+
+/*
+  EDU-LIST - zoznam položiek vzdelania/certifikátov
+  display:flex column - položky pod sebou s odstupom
+*/
+.edu-list { display:flex; flex-direction:column; gap:.4rem; margin-top:.6rem }
+.edu-list li { list-style:none; font-size:14px; color:var(--ink2); padding-left:1rem; position:relative }
+.edu-list li::before { content:"–"; position:absolute; left:0; color:var(--ink3) }
+
 /* ─── CONTACT ─── */
 
 /*
