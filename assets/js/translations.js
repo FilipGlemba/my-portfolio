@@ -14,7 +14,7 @@ const translations = {
     viewProjects: 'Pozri projekty',
 
     // BADGES
-    fullstackDev: 'Full-stack Dev',
+    fullstackDev: 'Web Developer',
     yearsExp: '4+ roky skúseností',
     heroProjectsCount: '3 projekty',
     completed: 'dokončených',
@@ -93,7 +93,7 @@ const translations = {
     viewProjects: 'View projects',
 
     // BADGES
-    fullstackDev: 'Full-stack Dev',
+    fullstackDev: 'Web Developer',
     yearsExp: '4+ years experience',
     heroProjectsCount: '3 projects',
     completed: 'completed',
