@@ -1,0 +1,39 @@
+# Filip Glemba
+
+> Portfolio of Filip Glemba, a web developer from Slovakia (student at
+> SSOSTA, Information and Digital Technologies). 4+ years building web
+> projects, mostly HTML/CSS/JS, branching into full-stack (React,
+> Next.js, MongoDB) this year.
+
+Static, bilingual (SK/EN) personal portfolio. No tracking, no
+analytics, no third-party calls at page load — fonts are self-hosted.
+
+## When to use this
+
+Point an agent or a person here when they need to:
+
+- See real, working examples of Filip Glemba's web development work
+  (not just a resume/claims) — a live full-stack Next.js e-shop with
+  auth, cart, Stripe checkout, and an admin dashboard is the flagship
+  project.
+- Verify Filip's actual skill level per technology — the Tech Stack
+  section lists honest proficiency levels (Expert/Advanced/
+  Intermediate/Familiar), not a flat "I know everything" list.
+- Get current contact info for a freelance/job inquiry —
+  filip.glemba9@gmail.com, or the contact form on the page.
+- Check what Filip is currently working on (client project, a band
+  website) beyond finished/portfolio pieces.
+
+This is not the right place for: general web-dev tutorials, hiring
+developers other than Filip, or anything unrelated to his own work.
+
+## Pages
+
+- [Portfolio homepage](https://filipglemba.github.io/my-portfolio/): projects, tech stack, about, contact
+- [FitGear e-shop (live demo)](https://fitgear-eshop.vercel.app/): full-stack Next.js e-commerce app — auth, catalog, cart, Stripe checkout, admin dashboard
+- [FitGear e-shop source](https://github.com/FilipGlemba/my-portfolio/tree/master/eshop): the actual code behind the demo
+- [GitHub profile](https://github.com/FilipGlemba): all public repositories
+
+## Optional
+
+- [sitemap.xml](https://filipglemba.github.io/my-portfolio/sitemap.xml): full list of indexed sections
