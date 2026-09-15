@@ -29,11 +29,11 @@ developers other than Filip, or anything unrelated to his own work.
 
 ## Pages
 
-- [Portfolio homepage](https://filipglemba.github.io/my-portfolio/): projects, tech stack, about, contact
+- [Portfolio homepage](https://filip-glemba.vercel.app/): projects, tech stack, about, contact
 - [FitGear e-shop (live demo)](https://fitgear-eshop.vercel.app/): full-stack Next.js e-commerce app — auth, catalog, cart, Stripe checkout, admin dashboard
 - [FitGear e-shop source](https://github.com/FilipGlemba/my-portfolio/tree/master/eshop): the actual code behind the demo
 - [GitHub profile](https://github.com/FilipGlemba): all public repositories
 
 ## Optional
 
-- [sitemap.xml](https://filipglemba.github.io/my-portfolio/sitemap.xml): full list of indexed sections
+- [sitemap.xml](https://filip-glemba.vercel.app/sitemap.xml): full list of indexed sections

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://filipglemba.github.io/my-portfolio/sitemap.xml
+Sitemap: https://filip-glemba.vercel.app/sitemap.xml
