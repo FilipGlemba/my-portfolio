@@ -60,7 +60,7 @@ const translations = {
     projectsCount: '3',
     location: 'LOKALITA',
     languages: 'JAZYKY',
-    fluent: 'plynule',
+    fluent: 'SK rodný jazyk · EN B1',
 
     // AVAILABILITY
     available_now: 'Momentálne dostupný pre nové príležitosti',
@@ -139,7 +139,7 @@ const translations = {
     projectsCount: '3',
     location: 'LOCATION',
     languages: 'LANGUAGES',
-    fluent: 'fluent',
+    fluent: 'SK native · EN B1',
 
     // AVAILABILITY
     available_now: 'Currently available for new opportunities',
