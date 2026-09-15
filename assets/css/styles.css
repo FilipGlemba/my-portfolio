@@ -447,13 +447,13 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 }
 
 /*
-  AVATAR-RING - okrúhly kontajner pre SVG avatar
-  width,height - veľkosť štvorca (SVG sa prispôsobí)
+  AVATAR-RING - okrúhly kontajner pre profilovú fotku
+  width,height - veľkosť štvorca (foto sa prispôsobí)
   border-radius:50% - okrúhly tvar
-  background - lineárny gradient pre 3D efekt
+  background - lineárny gradient (fallback, kým sa foto načíta)
   border - tenká hranica
   position:relative - pre správne pozicionovanie
-  overflow:hidden - oreže SVG ak presahuje
+  overflow:hidden - oreže foto do kruhu
   box-shadow - viacúrovňový tieň pre hĺbku
 */
 .avatar-ring {
@@ -469,11 +469,12 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 }
 
 /*
-  AVATAR-RING SVG - SVG avatar vo vnútri kontajnera
+  AVATAR-RING IMG - profilová fotka vo vnútri kontajnera
   width:100% height:100% - roztiahnutie na celý kontajner
-  display:block - odstráni medzery pod inline SVG
+  object-fit:cover - orežе foto tak, aby vyplnilo kruh bez skreslenia
+  display:block - odstráni medzeru pod inline obrázkom
 */
-.avatar-ring svg { width:100%; height:100%; display:block }
+.avatar-ring img { width:100%; height:100%; object-fit:cover; display:block }
 
 /*
   F-BADGE - plávajúce badge-y s informáciami o autorovi
