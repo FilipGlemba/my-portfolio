@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { useCartStore } from "@/store/cart";
 import { useToast } from "@/components/toast-provider";
@@ -74,6 +75,10 @@ export default function CheckoutPage() {
           <button type="submit" disabled={loading} className="w-full rounded-full bg-flame-500 px-6 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600 disabled:cursor-not-allowed disabled:opacity-60">
             {loading ? "Redirecting to Stripe..." : "Continue to Stripe"}
           </button>
+          <p className="text-center text-xs text-black/50">
+            Your shipping details are stored with your order. See the{" "}
+            <Link href="/privacy" className="underline decoration-flame-500 decoration-2 underline-offset-2">Privacy Policy</Link> for details.
+          </p>
         </form>
       </div>
     </section>

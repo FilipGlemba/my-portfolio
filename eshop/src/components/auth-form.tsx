@@ -95,6 +95,12 @@ export function AuthForm({ mode }: AuthFormProps) {
           <input type="password" value={password} onChange={(event) => setPassword(event.target.value)} className={fieldClass} required />
         </label>
         {error ? <p className="text-sm font-medium text-flame-600">{error}</p> : null}
+        {mode === "register" ? (
+          <p className="text-xs text-black/50">
+            By creating an account you agree to our{" "}
+            <Link href="/privacy" className="underline decoration-flame-500 decoration-2 underline-offset-2">Privacy Policy</Link>.
+          </p>
+        ) : null}
         <button
           type="submit"
           disabled={submitting}

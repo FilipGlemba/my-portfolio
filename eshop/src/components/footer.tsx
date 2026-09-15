@@ -32,6 +32,7 @@ export function Footer() {
             <p className="mb-3 font-semibold text-white">Project</p>
             <div className="flex flex-col gap-2">
               <a href="https://github.com/FilipGlemba" target="_blank" rel="noreferrer" className="transition hover:text-volt">GitHub ↗</a>
+              <Link href="/privacy" className="transition hover:text-volt">Privacy Policy</Link>
             </div>
           </div>
         </div>
