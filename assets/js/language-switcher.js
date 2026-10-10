@@ -16,15 +16,12 @@ function updatePageLanguage(lang) {
   
   // HERO - aktualizácia textov v hlavnej uvítacej sekcii
   document.querySelectorAll('[data-i18n="available"]').forEach(el => el.textContent = t.available);
-  document.querySelectorAll('[data-i18n="heroTitleLine1"]').forEach(el => el.textContent = t.heroTitleLine1);
-  document.querySelectorAll('[data-i18n="heroTitleLine2"]').forEach(el => el.textContent = t.heroTitleLine2);
+  document.querySelectorAll('[data-i18n="heroRole"]').forEach(el => el.textContent = t.heroRole);
+  document.querySelectorAll('[data-i18n="photoCaption"]').forEach(el => el.textContent = t.photoCaption);
   document.querySelectorAll('[data-i18n="heroDesc"]').forEach(el => el.textContent = t.heroDesc);
   document.querySelectorAll('[data-i18n="viewProjects"]').forEach(el => el.textContent = t.viewProjects);
   
   // BADGES - aktualizácia textov v badge-och (štítkoch)
-  document.querySelectorAll('[data-i18n="fullstackDev"]').forEach(el => el.textContent = t.fullstackDev);
-  document.querySelectorAll('[data-i18n="yearsExp"]').forEach(el => el.textContent = t.yearsExp);
-  document.querySelectorAll('[data-i18n="heroProjectsCount"]').forEach(el => el.textContent = t.heroProjectsCount);
   document.querySelectorAll('[data-i18n="projectsStatus"]').forEach(el => el.textContent = t.projectsStatus);
   document.querySelectorAll('[data-i18n="slovakia"]').forEach(el => el.textContent = t.slovakia);
 
@@ -41,7 +38,6 @@ function updatePageLanguage(lang) {
   document.querySelectorAll('[data-i18n="stackTitle"]').forEach(el => el.textContent = t.stackTitle);
   document.querySelectorAll('[data-i18n="frontend"]').forEach(el => el.textContent = t.frontend);
   document.querySelectorAll('[data-i18n="backend"]').forEach(el => el.textContent = t.backend);
-  document.querySelectorAll('[data-i18n="databases"]').forEach(el => el.textContent = t.databases);
   document.querySelectorAll('[data-i18n="tools"]').forEach(el => el.textContent = t.tools);
   
   // ABOUT - aktualizácia textov v sekcii o mne

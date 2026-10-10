@@ -8,15 +8,12 @@ const translations = {
 
     // HERO
     available: 'Dostupný pre spoluprácu',
-    heroTitleLine1: 'Web',
-    heroTitleLine2: 'developer.',
+    heroRole: 'Web developer · Slovensko',
+    photoCaption: 'Áno, aj takto chodím na code review.',
     heroDesc: 'Tvorím moderné webové aplikácie – od čistého frontendu po robustný backend. Rád riešim zaujímavé problémy a vytváram projekty, ktoré fungujú, rýchlo sa načítajú a dobre vyzerajú.',
     viewProjects: 'Pozri projekty',
 
     // BADGES
-    fullstackDev: 'Web Developer',
-    yearsExp: '4+ roky skúseností',
-    heroProjectsCount: '4 projekty',
     projectsStatus: '1 živý · 3 vo vývoji',
     slovakia: 'Slovensko',
 
@@ -26,14 +23,13 @@ const translations = {
     notaflowDesc: 'Aplikácia pre kapely – archív nôt, setlisty, pódium-režim a zmluvy, na webe aj ako Android/iOS appka. Práca SOČ v dvojčlennom tíme; moja časť je backend (Express, Prisma, JWT auth), archív nôt, PDF zmluvy a kalkulačka cestovných nákladov.',
     wipTitle: 'ROZPRACOVANÉ',
     mozaikaDesc: 'Web pre folklórnu kapelu z Liptova s rezervačným formulárom (PHP, PHPMailer).',
-    clientTitle: '🤝 Klientsky projekt',
+    clientTitle: 'Klientsky projekt',
     clientDesc: 'Web pre reálneho klienta od návrhu po nasadenie. Detaily po schválení klientom.',
 
     // STACK
     stackTitle: 'Tech Stack',
     frontend: 'FRONTEND',
-    backend: 'BACKEND',
-    databases: 'DATABÁZY',
+    backend: 'BACKEND & DATABÁZY',
     tools: 'NÁSTROJE',
     expert: 'Expert',
     advanced: 'Advanced',
@@ -51,7 +47,7 @@ const translations = {
     letsChat: 'Porozprávajme sa →',
 
     // EDUCATION
-    eduTitle: '🎓 VZDELANIE & CERTIFIKÁCIE',
+    eduTitle: 'VZDELANIE & CERTIFIKÁCIE',
     eduSchool: 'SSOSTA, odbor IDT (3. ročník, prebieha)',
     eduCert: 'Certifikát: Web Developer kurz, Bratislava',
 
@@ -90,15 +86,12 @@ const translations = {
 
     // HERO
     available: 'Available for work',
-    heroTitleLine1: 'Web',
-    heroTitleLine2: 'developer.',
+    heroRole: 'Web developer · Slovakia',
+    photoCaption: 'Yes, this is how I show up to code review.',
     heroDesc: 'I build modern web applications — from clean frontend to robust backend. I enjoy solving interesting problems and building products that are fast, usable, and visually polished.',
     viewProjects: 'View projects',
 
     // BADGES
-    fullstackDev: 'Web Developer',
-    yearsExp: '4+ years experience',
-    heroProjectsCount: '4 projects',
     projectsStatus: '1 live · 3 in progress',
     slovakia: 'Slovakia',
 
@@ -108,14 +101,13 @@ const translations = {
     notaflowDesc: 'An app for bands – sheet-music archive, setlists, stage mode and contracts, on the web and as an Android/iOS app. A two-person SOČ (student research competition) project; my part is the backend (Express, Prisma, JWT auth), the sheet-music archive, PDF contracts and a travel-cost calculator.',
     wipTitle: 'IN PROGRESS',
     mozaikaDesc: 'A website for a folk band from the Liptov region, with a booking form (PHP, PHPMailer).',
-    clientTitle: '🤝 Client project',
+    clientTitle: 'Client project',
     clientDesc: 'A website for a real client, from design to deployment. Details once the client approves.',
 
     // STACK
     stackTitle: 'Tech Stack',
     frontend: 'FRONTEND',
-    backend: 'BACKEND',
-    databases: 'DATABASES',
+    backend: 'BACKEND & DATA',
     tools: 'TOOLS',
     expert: 'Expert',
     advanced: 'Advanced',
@@ -133,7 +125,7 @@ const translations = {
     letsChat: 'Let\'s talk →',
 
     // EDUCATION
-    eduTitle: '🎓 EDUCATION & CERTIFICATIONS',
+    eduTitle: 'EDUCATION & CERTIFICATIONS',
     eduSchool: 'SSOSTA, Information and Digital Technologies (3rd year, in progress)',
     eduCert: 'Certificate: Web Developer course, Bratislava',
 

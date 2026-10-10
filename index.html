@@ -92,14 +92,8 @@
           <span data-i18n="available">Dostupný pre spoluprácu</span>
         </div>
 
-        <!--
-          Preklad je rozdelený na dva prvky, aby ostala zachovaná
-          HTML štruktúra <br>/<em> pri prepnutí jazyka.
-        -->
-        <h1 class="h-title">
-          <span data-i18n="heroTitleLine1">Web</span><br />
-          <em data-i18n="heroTitleLine2">developer.</em>
-        </h1>
+        <h1 class="h-title">Filip<br /><em>Glemba.</em></h1>
+        <p class="h-role" data-i18n="heroRole">Web developer · Slovensko</p>
 
         <p class="h-desc" data-i18n="heroDesc">
           Tvorím moderné webové aplikácie – od čistého frontendu po robustný
@@ -131,27 +125,9 @@
             />
           </div>
 
-          <div class="f-badge fb1">
-            <span class="f-icon">💻</span>
-            <div>
-              <strong data-i18n="fullstackDev">Web Developer</strong>
-              <span class="f-sub" data-i18n="yearsExp">4+ roky skúseností</span>
-            </div>
-          </div>
-          <div class="f-badge fb2">
-            <span class="f-icon">⚡</span>
-            <div>
-              <strong data-i18n="heroProjectsCount">4 projekty</strong>
-              <span class="f-sub" data-i18n="projectsStatus">1 živý · 3 vo vývoji</span>
-            </div>
-          </div>
-          <div class="f-badge fb3">
-            <span class="f-icon">🇸🇰</span>
-            <div>
-              <strong data-i18n="slovakia">Slovensko</strong>
-              <span class="f-sub">remote friendly</span>
-            </div>
-          </div>
+          <p class="photo-caption" data-i18n="photoCaption">
+            Áno, aj takto chodím na code review.
+          </p>
         </div>
       </div>
     </section>
@@ -175,7 +151,6 @@
                 <div class="pcard-num">001</div>
                 <h3 class="pcard-title">Full-stack E-shop</h3>
               </div>
-              <div class="pcard-icon">🛒</div>
             </div>
 
             <p class="pcard-desc" data-i18n="eshopDesc">
@@ -212,7 +187,6 @@
                 <div class="pcard-num">002</div>
                 <h3 class="pcard-title">NotaFlow</h3>
               </div>
-              <div class="pcard-icon">🎼</div>
             </div>
             <p class="pcard-desc" data-i18n="notaflowDesc">
               Aplikácia pre kapely – archív nôt, setlisty, pódium-režim a
@@ -238,7 +212,7 @@
             <ul class="wip-list">
               <li class="wip-item">
                 <div class="wip-head">
-                  <span class="wip-name">🎻 Mozaika</span>
+                  <span class="wip-name">Mozaika</span>
                   <span class="badge badge-wip">WIP</span>
                 </div>
                 <p class="wip-desc" data-i18n="mozaikaDesc">
@@ -248,7 +222,7 @@
               </li>
               <li class="wip-item">
                 <div class="wip-head">
-                  <span class="wip-name" data-i18n="clientTitle">🤝 Klientsky projekt</span>
+                  <span class="wip-name" data-i18n="clientTitle">Klientsky projekt</span>
                   <span class="badge badge-wip">WIP</span>
                 </div>
                 <p class="wip-desc" data-i18n="clientDesc">
@@ -271,22 +245,14 @@
         </div>
 
         <div class="stack-legend reveal">
-          <!-- Expert úroveň - modrá bodka -->
-          <div class="leg-item">
-            <div class="leg-dot dot-expert"></div>
-            <span class="leg-label">Expert</span>
-          </div>
-          <!-- Advanced úroveň - fialová bodka -->
           <div class="leg-item">
             <div class="leg-dot dot-advanced"></div>
             <span class="leg-label">Advanced</span>
           </div>
-          <!-- Intermediate úroveň - zelená bodka -->
           <div class="leg-item">
             <div class="leg-dot dot-mid"></div>
             <span class="leg-label">Intermediate</span>
           </div>
-          <!-- Familiar úroveň - sivá bodka -->
           <div class="leg-item">
             <div class="leg-dot dot-basic"></div>
             <span class="leg-label">Familiar</span>
@@ -296,8 +262,7 @@
         <div class="stack-categories">
           <div class="scat reveal">
             <div class="scat-head">
-              <span class="scat-icon">🎨</span
-              ><span class="scat-label">FRONTEND</span>
+              <span class="scat-label" data-i18n="frontend">FRONTEND</span>
             </div>
             <div class="scat-items">
               <div class="sitem">
@@ -307,8 +272,6 @@
                 </div>
                 <span class="sitem-level lv-advanced">Advanced</span>
               </div>
-
-              <!-- JavaScript - programovací jazyk pre interaktivitu -->
               <div class="sitem">
                 <div class="sitem-l">
                   <div class="sitem-dot dot-mid"></div>
@@ -316,8 +279,6 @@
                 </div>
                 <span class="sitem-level lv-mid">Intermediate</span>
               </div>
-
-              <!-- React - JavaScript knižnica pre UI komponenty -->
               <div class="sitem">
                 <div class="sitem-l">
                   <div class="sitem-dot dot-basic"></div>
@@ -325,44 +286,21 @@
                 </div>
                 <span class="sitem-level lv-basic">Familiar</span>
               </div>
-
-              <!-- TypeScript - typovaný JavaScript (e-shop) -->
               <div class="sitem">
                 <div class="sitem-l">
                   <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">TypeScript</span>
-                </div>
-                <span class="sitem-level lv-basic">Familiar</span>
-              </div>
-
-              <!-- Next.js - React framework (e-shop) -->
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">Next.js</span>
-                </div>
-                <span class="sitem-level lv-basic">Familiar</span>
-              </div>
-
-              <!-- Tailwind CSS - utility-first CSS (e-shop, NotaFlow) -->
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">Tailwind CSS</span>
+                  <span class="sitem-name">Next.js / TypeScript</span>
                 </div>
                 <span class="sitem-level lv-basic">Familiar</span>
               </div>
             </div>
           </div>
 
-          <!-- BACKEND KATEGÓRIA - server-side technológie -->
           <div class="scat reveal d1">
             <div class="scat-head">
-              <span class="scat-icon">⚙️</span
-              ><span class="scat-label">BACKEND</span>
+              <span class="scat-label" data-i18n="backend">BACKEND & DATABÁZY</span>
             </div>
             <div class="scat-items">
-              <!-- PHP - server-side programovací jazyk -->
               <div class="sitem">
                 <div class="sitem-l">
                   <div class="sitem-dot dot-mid"></div>
@@ -370,35 +308,6 @@
                 </div>
                 <span class="sitem-level lv-mid">Intermediate</span>
               </div>
-
-              <!-- Node.js - JavaScript runtime pre server -->
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">Node.js</span>
-                </div>
-                <span class="sitem-level lv-basic">Familiar</span>
-              </div>
-
-              <!-- Express - backend NotaFlow (REST API, JWT auth) -->
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">Express</span>
-                </div>
-                <span class="sitem-level lv-basic">Familiar</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- DATABÁZY KATEGÓRIA - databázové technológie -->
-          <div class="scat reveal d2">
-            <div class="scat-head">
-              <span class="scat-icon">🗄️</span
-              ><span class="scat-label">DATABÁZY</span>
-            </div>
-            <div class="scat-items">
-              <!-- SQL/MySQL - relačná databáza -->
               <div class="sitem">
                 <div class="sitem-l">
                   <div class="sitem-dot dot-mid"></div>
@@ -406,8 +315,13 @@
                 </div>
                 <span class="sitem-level lv-mid">Intermediate</span>
               </div>
-
-              <!-- MongoDB - NoSQL databáza -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-basic"></div>
+                  <span class="sitem-name">Node.js / Express</span>
+                </div>
+                <span class="sitem-level lv-basic">Familiar</span>
+              </div>
               <div class="sitem">
                 <div class="sitem-l">
                   <div class="sitem-dot dot-basic"></div>
@@ -415,43 +329,14 @@
                 </div>
                 <span class="sitem-level lv-basic">Familiar</span>
               </div>
-
-              <!-- Prisma - ORM v backende NotaFlow -->
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">Prisma</span>
-                </div>
-                <span class="sitem-level lv-basic">Familiar</span>
-              </div>
             </div>
           </div>
 
-          <!-- DEVOPS & DEPLOY KATEGÓRIA - nasadzovanie a hosting -->
-          <div class="scat reveal d1">
+          <div class="scat reveal d2">
             <div class="scat-head">
-              <span class="scat-icon">🚀</span
-              ><span class="scat-label">DEVOPS & DEPLOY</span>
+              <span class="scat-label" data-i18n="tools">NÁSTROJE</span>
             </div>
             <div class="scat-items">
-              <!-- Hosting/Deploy - nasadzovanie aplikácií -->
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">Hosting / Deploy</span>
-                </div>
-                <span class="sitem-level lv-basic">Familiar</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="scat stack-tools reveal d2">
-            <div class="scat-head">
-              <span class="scat-icon">🛠️</span
-              ><span class="scat-label">NÁSTROJE</span>
-            </div>
-            <div class="scat-items stack-tools-items">
-              <!-- Git/GitHub - verzionovanie kódu -->
               <div class="sitem">
                 <div class="sitem-l">
                   <div class="sitem-dot dot-advanced"></div>
@@ -459,21 +344,19 @@
                 </div>
                 <span class="sitem-level lv-advanced">Advanced</span>
               </div>
-
-              <!-- VS Code - editor kódu -->
               <div class="sitem">
                 <div class="sitem-l">
-                  <div class="sitem-dot dot-advanced"></div>
-                  <span class="sitem-name">VS Code</span>
+                  <div class="sitem-dot dot-basic"></div>
+                  <span class="sitem-name">Vercel / GitHub Pages</span>
                 </div>
-                <span class="sitem-level lv-advanced">Advanced</span>
+                <span class="sitem-level lv-basic">Familiar</span>
               </div>
             </div>
           </div>
         </div>
 
         <div class="edu-card reveal d2">
-          <div class="ig-label" data-i18n="eduTitle">🎓 VZDELANIE & CERTIFIKÁCIE</div>
+          <div class="ig-label" data-i18n="eduTitle">VZDELANIE & CERTIFIKÁCIE</div>
           <ul class="edu-list">
             <li data-i18n="eduSchool">SSOSTA, odbor IDT (3. ročník, prebieha)</li>
             <li data-i18n="eduCert">Certifikát: Web Developer kurz, Bratislava</li>
