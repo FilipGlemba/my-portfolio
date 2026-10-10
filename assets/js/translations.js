@@ -10,7 +10,7 @@ const translations = {
     available: 'Dostupný pre spoluprácu',
     heroRole: 'Web developer · Slovensko',
     photoCaption: 'Áno, aj takto chodím na code review.',
-    heroDesc: 'Tvorím moderné webové aplikácie – od čistého frontendu po robustný backend. Rád riešim zaujímavé problémy a vytváram projekty, ktoré fungujú, rýchlo sa načítajú a dobre vyzerajú.',
+    heroDesc: 'Už vyše štyri roky robím weby v HTML, CSS a JavaScripte. Tento rok som pridal React, Next.js a backend – výsledkom je živý e-shop a NotaFlow, aplikácia pre kapely.',
     viewProjects: 'Pozri projekty',
 
     // BADGES
@@ -43,7 +43,7 @@ const translations = {
     codeEnjoy: 'to baví.',
     aboutDesc1: 'Som študent SSOSTA (odbor Informačné a digitálne technológie, 3. ročník) s viac ako 4 rokmi praxe vo web developmente a certifikátom z Web Developer kurzu v Bratislave.',
     aboutDesc2: 'Okrem školy staviam veci, ktoré sám potrebujem – napríklad NotaFlow, aplikáciu pre kapely, ktorú robíme ako prácu SOČ. Na akordeóne hrám vyše 12 rokov, takže hudba a kód sa u mňa stretávajú často.',
-    aboutDesc3: 'Vo voľnom čase pracujem na osobných projektoch, ktoré mi dávajú priestor skúšať nové nástroje, zlepšovať workflow a testovať rýchlosť aj použiteľnosť. Toto portfólio je príklad môjho štýlu práce: čistá štruktúra, precízny dizajn a praktický výkon.',
+    aboutDesc3: 'Záleží mi na tom, aby weby boli rýchle a nesledovali návštevníkov – na tomto portfóliu nebeží žiadna analytika a fonty hostím sám. A úrovne v Tech Stacku sú úprimné: čo je pri „Familiar“, to sa práve učím.',
     letsChat: 'Porozprávajme sa →',
 
     // EDUCATION
@@ -88,7 +88,7 @@ const translations = {
     available: 'Available for work',
     heroRole: 'Web developer · Slovakia',
     photoCaption: 'Yes, this is how I show up to code review.',
-    heroDesc: 'I build modern web applications — from clean frontend to robust backend. I enjoy solving interesting problems and building products that are fast, usable, and visually polished.',
+    heroDesc: 'I’ve been building websites with HTML, CSS and JavaScript for over four years. This year I added React, Next.js and backend work – the results are a live e-shop and NotaFlow, an app for bands.',
     viewProjects: 'View projects',
 
     // BADGES
@@ -121,7 +121,7 @@ const translations = {
     codeEnjoy: 'enjoy it.',
     aboutDesc1: 'I\'m a student at SSOSTA (Information and Digital Technologies program, 3rd year) with more than 4 years of practical experience in web development and a certificate from a Web Developer course in Bratislava.',
     aboutDesc2: 'Outside of school I build things I need myself – like NotaFlow, an app for bands that we\'re making as a SOČ project. I\'ve played the accordion for over 12 years, so music and code meet a lot in my work.',
-    aboutDesc3: 'In my free time I work on personal projects that let me explore new tools, improve my workflow and test for speed and usability. This portfolio is an example of my approach: clean structure, polished visuals and practical performance.',
+    aboutDesc3: 'I care about sites being fast and not tracking their visitors – this portfolio runs no analytics and self-hosts its fonts. And the levels in the Tech Stack are honest: anything marked “Familiar” is what I’m learning right now.',
     letsChat: 'Let\'s talk →',
 
     // EDUCATION
