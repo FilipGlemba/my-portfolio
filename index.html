@@ -21,7 +21,7 @@
     <meta property="og:title" content="Filip Glemba — Web Developer" />
     <meta
       property="og:description"
-      content="Portfólio projektov: full-stack Next.js e-shop, web pre hudobnú kapelu a klientsky webový projekt."
+      content="Portfólio projektov: full-stack Next.js e-shop a NotaFlow – aplikácia pre kapely (práca SOČ)."
     />
     <meta property="og:locale" content="sk_SK" />
     <meta property="og:image" content="assets/img/profilovka.jpg" />
@@ -30,7 +30,7 @@
     <meta name="twitter:title" content="Filip Glemba — Web Developer" />
     <meta
       name="twitter:description"
-      content="Portfólio projektov: full-stack Next.js e-shop, web pre hudobnú kapelu a klientsky webový projekt."
+      content="Portfólio projektov: full-stack Next.js e-shop a NotaFlow – aplikácia pre kapely (práca SOČ)."
     />
 
     <link
@@ -55,7 +55,7 @@
         "jobTitle": "Web Developer",
         "description": "Web developer focused on modern frontend and full-stack development (Next.js). Student at SSOSTA (Information and Digital Technologies).",
         "sameAs": ["https://github.com/FilipGlemba"],
-        "knowsAbout": ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "PHP", "MySQL", "MongoDB", "Git"]
+        "knowsAbout": ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Tailwind CSS", "Node.js", "Express", "PHP", "MySQL", "MongoDB", "Prisma", "Git"]
       }
     </script>
 
@@ -141,8 +141,8 @@
           <div class="f-badge fb2">
             <span class="f-icon">⚡</span>
             <div>
-              <strong data-i18n="heroProjectsCount">3 projekty</strong>
-              <span class="f-sub" data-i18n="completed">dokončených</span>
+              <strong data-i18n="heroProjectsCount">4 projekty</strong>
+              <span class="f-sub" data-i18n="projectsStatus">1 živý · 3 vo vývoji</span>
             </div>
           </div>
           <div class="f-badge fb3">
@@ -195,7 +195,7 @@
               <div class="pcard-links">
                 <a href="https://fitgear-eshop.vercel.app" target="_blank" class="pcard-link">Demo →</a>
                 <a
-                  href="https://github.com/FilipGlemba/moje-portfolio/tree/master/eshop"
+                  href="https://github.com/FilipGlemba/my-portfolio/tree/master/eshop"
                   target="_blank"
                   class="pcard-link"
                   >GitHub ↗</a
@@ -210,21 +210,22 @@
             <div class="pcard-head">
               <div>
                 <div class="pcard-num">002</div>
-                <h3 class="pcard-title">Mozaika</h3>
+                <h3 class="pcard-title">NotaFlow</h3>
               </div>
-              <div class="pcard-icon">🎻</div>
+              <div class="pcard-icon">🎼</div>
             </div>
-            <p class="pcard-desc" data-i18n="mozaikaDesc">
-              Jednostránkový landing web pre hudobnú kapelu Mozaika z
-              Liptova – prezentácia kapely, repertoáru a rezervačný
-              formulár na dopyty pre svadby a oslavy. Formulár chráni CSRF,
-              honeypot a rate-limit. E-maily posiela PHPMailer cez SMTP.
+            <p class="pcard-desc" data-i18n="notaflowDesc">
+              Aplikácia pre kapely – archív nôt, setlisty, pódium-režim a
+              zmluvy, na webe aj ako Android/iOS appka. Práca SOČ v
+              dvojčlennom tíme; moja časť je backend (Express, Prisma, JWT
+              auth), archív nôt, PDF zmluvy a kalkulačka cestovných nákladov.
             </p>
             <div class="pcard-tags">
-              <span class="pcard-tag">HTML / CSS</span>
-              <span class="pcard-tag">JavaScript</span>
-              <span class="pcard-tag">PHP</span>
-              <span class="pcard-tag">PHPMailer</span>
+              <span class="pcard-tag">React</span>
+              <span class="pcard-tag">Capacitor</span>
+              <span class="pcard-tag">Express</span>
+              <span class="pcard-tag">Prisma</span>
+              <span class="pcard-tag">Tailwind</span>
             </div>
             <div class="pcard-foot">
               <div class="pcard-links"></div>
@@ -232,25 +233,30 @@
             </div>
           </div>
 
-          <div class="pcard reveal d2">
-            <div class="pcard-accent"></div>
-            <div class="pcard-head">
-              <div>
-                <div class="pcard-num">003</div>
-                <h3 class="pcard-title">Klientsky projekt</h3>
-              </div>
-              <div class="pcard-icon">🤝</div>
-            </div>
-            <p class="pcard-desc" data-i18n="clientDesc">
-              Aktuálne pracujem na webe pre reálneho klienta – od návrhu po
-              nasadenie. Detaily budú zverejnené po dokončení a schválení
-              klientom.
-            </p>
-            <div class="pcard-tags"></div>
-            <div class="pcard-foot">
-              <div class="pcard-links"></div>
-              <span class="badge badge-wip">WIP</span>
-            </div>
+          <div class="pcard pcard-wip reveal d2">
+            <div class="ig-label" data-i18n="wipTitle">ROZPRACOVANÉ</div>
+            <ul class="wip-list">
+              <li class="wip-item">
+                <div class="wip-head">
+                  <span class="wip-name">🎻 Mozaika</span>
+                  <span class="badge badge-wip">WIP</span>
+                </div>
+                <p class="wip-desc" data-i18n="mozaikaDesc">
+                  Web pre folklórnu kapelu z Liptova s rezervačným formulárom
+                  (PHP, PHPMailer).
+                </p>
+              </li>
+              <li class="wip-item">
+                <div class="wip-head">
+                  <span class="wip-name" data-i18n="clientTitle">🤝 Klientsky projekt</span>
+                  <span class="badge badge-wip">WIP</span>
+                </div>
+                <p class="wip-desc" data-i18n="clientDesc">
+                  Web pre reálneho klienta od návrhu po nasadenie. Detaily po
+                  schválení klientom.
+                </p>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -319,6 +325,33 @@
                 </div>
                 <span class="sitem-level lv-basic">Familiar</span>
               </div>
+
+              <!-- TypeScript - typovaný JavaScript (e-shop) -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-basic"></div>
+                  <span class="sitem-name">TypeScript</span>
+                </div>
+                <span class="sitem-level lv-basic">Familiar</span>
+              </div>
+
+              <!-- Next.js - React framework (e-shop) -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-basic"></div>
+                  <span class="sitem-name">Next.js</span>
+                </div>
+                <span class="sitem-level lv-basic">Familiar</span>
+              </div>
+
+              <!-- Tailwind CSS - utility-first CSS (e-shop, NotaFlow) -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-basic"></div>
+                  <span class="sitem-name">Tailwind CSS</span>
+                </div>
+                <span class="sitem-level lv-basic">Familiar</span>
+              </div>
             </div>
           </div>
 
@@ -346,6 +379,15 @@
                 </div>
                 <span class="sitem-level lv-basic">Familiar</span>
               </div>
+
+              <!-- Express - backend NotaFlow (REST API, JWT auth) -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-basic"></div>
+                  <span class="sitem-name">Express</span>
+                </div>
+                <span class="sitem-level lv-basic">Familiar</span>
+              </div>
             </div>
           </div>
 
@@ -370,6 +412,15 @@
                 <div class="sitem-l">
                   <div class="sitem-dot dot-basic"></div>
                   <span class="sitem-name">MongoDB</span>
+                </div>
+                <span class="sitem-level lv-basic">Familiar</span>
+              </div>
+
+              <!-- Prisma - ORM v backende NotaFlow -->
+              <div class="sitem">
+                <div class="sitem-l">
+                  <div class="sitem-dot dot-basic"></div>
+                  <span class="sitem-name">Prisma</span>
                 </div>
                 <span class="sitem-level lv-basic">Familiar</span>
               </div>
@@ -452,9 +503,10 @@
 
         <!-- DRUHÝ ODSTAVEC - o osobných projektoch -->
         <p class="about-p reveal d2" data-i18n="aboutDesc2">
-          Okrem klientskych projektov experimentujem s osobnými nápadmi a
-          tvorím nástroje, ktoré som si sám prial – napríklad DevCheat alebo
-          toto portfólio.
+          Okrem školy staviam veci, ktoré sám potrebujem – napríklad
+          NotaFlow, aplikáciu pre kapely, ktorú robíme ako prácu SOČ.
+          Na akordeóne hrám vyše 12 rokov, takže hudba a kód sa u mňa
+          stretávajú často.
         </p>
 
         <!-- TRETÍ ODSTAVEC - viac detailov o prístupe a pracovných nástrojoch -->
@@ -486,8 +538,8 @@
           <!-- PROJEKTY - 3 dokončené/rozbehnuté -->
           <div class="ig-cell">
             <div class="ig-label" data-i18n="projects">PROJEKTY</div>
-            <div class="ig-val" data-i18n="projectsCount">3</div>
-            <div class="ig-sub" data-i18n="completed">dokončených</div>
+            <div class="ig-val" data-i18n="projectsCount">4</div>
+            <div class="ig-sub" data-i18n="projectsStatus">1 živý · 3 vo vývoji</div>
           </div>
 
           <!-- LOKALITA - Slovensko -->

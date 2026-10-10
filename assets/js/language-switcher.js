@@ -25,12 +25,15 @@ function updatePageLanguage(lang) {
   document.querySelectorAll('[data-i18n="fullstackDev"]').forEach(el => el.textContent = t.fullstackDev);
   document.querySelectorAll('[data-i18n="yearsExp"]').forEach(el => el.textContent = t.yearsExp);
   document.querySelectorAll('[data-i18n="heroProjectsCount"]').forEach(el => el.textContent = t.heroProjectsCount);
-  document.querySelectorAll('[data-i18n="completed"]').forEach(el => el.textContent = t.completed);
+  document.querySelectorAll('[data-i18n="projectsStatus"]').forEach(el => el.textContent = t.projectsStatus);
   document.querySelectorAll('[data-i18n="slovakia"]').forEach(el => el.textContent = t.slovakia);
 
   // PROJECTS - aktualizácia textov v sekcii projektov
   document.querySelectorAll('[data-i18n="projectsTitle"]').forEach(el => el.textContent = t.projectsTitle);
   document.querySelectorAll('[data-i18n="eshopDesc"]').forEach(el => el.textContent = t.eshopDesc);
+  document.querySelectorAll('[data-i18n="notaflowDesc"]').forEach(el => el.textContent = t.notaflowDesc);
+  document.querySelectorAll('[data-i18n="wipTitle"]').forEach(el => el.textContent = t.wipTitle);
+  document.querySelectorAll('[data-i18n="clientTitle"]').forEach(el => el.textContent = t.clientTitle);
   document.querySelectorAll('[data-i18n="mozaikaDesc"]').forEach(el => el.textContent = t.mozaikaDesc);
   document.querySelectorAll('[data-i18n="clientDesc"]').forEach(el => el.textContent = t.clientDesc);
   
