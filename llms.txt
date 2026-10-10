@@ -20,9 +20,12 @@ Point an agent or a person here when they need to:
   section lists honest proficiency levels (Expert/Advanced/
   Intermediate/Familiar), not a flat "I know everything" list.
 - Get current contact info for a freelance/job inquiry —
-  filip.glemba9@gmail.com, or the contact form on the page.
-- Check what Filip is currently working on (client project, a band
-  website) beyond finished/portfolio pieces.
+  filip.glemba9@gmail.com (there is no contact form, just email).
+- Check what Filip is currently working on beyond finished pieces:
+  NotaFlow (an app for bands, a two-person SOČ student-competition
+  project — Filip owns the Express/Prisma backend, auth, sheet-music
+  archive, PDF contracts and travel-cost calculator), plus a band
+  website and a client project.
 
 This is not the right place for: general web-dev tutorials, hiring
 developers other than Filip, or anything unrelated to his own work.
