@@ -1144,37 +1144,6 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 .ig-sub { font-size:12px; color:var(--ink2); margin-top:2px }
 
 /*
-  AVAIL - indikátor dostupnosti pre spoluprácu
-  display:flex - flexbox
-  align-items:center - vertikálne centrované
-  gap - medzera medzi prvkami
-  padding - vnútorné odsadenie
-  border - tenká zelená hranica
-  border-radius - zaoblené rohy
-  background - priesvitné zelené pozadie
-*/
-.avail { display:flex; align-items:center; gap:10px; padding:.85rem 1.2rem; border:1px solid rgba(15,124,62,.2); border-radius:8px; background:var(--green-bg) }
-
-/*
-  AVAIL-D - blikajúca bodka indikujúca dostupnosť
-  width,height - veľkosť kruhu
-  border-radius:50% - kruhový tvar
-  background - zelená farba
-  flex-shrink:0 - nezmenšuje sa
-  box-shadow - zelený tieň
-  animation - blikajúca animácia
-*/
-.avail-d { width:7px; height:7px; border-radius:50%; background:var(--green); flex-shrink:0; box-shadow:0 0 0 3px rgba(15,124,62,.2); animation:glow-g 2.4s ease-in-out infinite }
-
-/*
-  AVAIL-T - text indikátora dostupnosti
-  font-size - malý text
-  color - zelený text
-  font-weight:600 - polotučné
-*/
-.avail-t { font-size:13px; color:var(--green); font-weight:600 }
-
-/*
   EDU-CARD - mini-blok vzdelania a certifikácií pod tech stackom
   border, border-radius, background - rovnaký jazyk ako ig-cell
   margin-top - odstup od stack-categories grid

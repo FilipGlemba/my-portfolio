@@ -62,7 +62,6 @@ const translations = {
     fluent: 'SK rodný jazyk · EN B1',
 
     // AVAILABILITY
-    available_now: 'Momentálne dostupný pre nové príležitosti',
     remoteFriendly: 'remote friendly',
     languageCodes: 'SK / EN',
 
@@ -140,7 +139,6 @@ const translations = {
     fluent: 'SK native · EN B1',
 
     // AVAILABILITY
-    available_now: 'Currently available for new opportunities',
     remoteFriendly: 'remote friendly',
     languageCodes: 'SK / EN',
 
