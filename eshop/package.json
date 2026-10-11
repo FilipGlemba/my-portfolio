@@ -9,7 +9,8 @@
     "lint": "eslint . --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "seed": "tsx scripts/seed.ts"
+    "seed": "tsx scripts/seed.ts",
+    "backfill:sizes": "tsx scripts/backfill-sizes.ts"
   },
   "dependencies": {
     "@react-three/drei": "^9.122.0",

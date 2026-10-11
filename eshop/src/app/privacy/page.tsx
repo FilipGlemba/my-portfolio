@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Privacy Policy — FitGear",
+  title: "Privacy Policy",
 };
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {

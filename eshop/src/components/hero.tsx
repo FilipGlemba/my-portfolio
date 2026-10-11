@@ -11,13 +11,22 @@ const Hero3D = dynamic(() => import("@/components/hero-3d").then((mod) => mod.He
 
 const headline = ["GEAR UP.", "SHOW UP."];
 
-const stats = [
-  { value: 8, suffix: "+", label: "Products" },
-  { value: 4, suffix: "", label: "Categories" },
-  { value: 30, suffix: "d", label: "Free returns" },
-];
+type HeroProps = {
+  /** Live counts from the catalog; omitted when the DB isn't reachable (e.g. at build time). */
+  productCount?: number;
+  categoryCount?: number;
+};
 
-export function Hero() {
+function buildStats({ productCount, categoryCount }: HeroProps) {
+  return [
+    ...(productCount ? [{ value: productCount, suffix: "", label: "Products" }] : []),
+    ...(categoryCount ? [{ value: categoryCount, suffix: "", label: "Categories" }] : []),
+    { value: 30, suffix: "d", label: "Free returns" },
+  ];
+}
+
+export function Hero(props: HeroProps) {
+  const stats = buildStats(props);
   return (
     <section className="relative isolate overflow-hidden bg-ink text-white">
       <div className="absolute inset-0">

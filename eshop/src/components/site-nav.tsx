@@ -18,6 +18,10 @@ export function SiteNav() {
   const itemCount = useCartStore((state) => state.items.reduce((sum, item) => sum + item.quantity, 0));
   const [mounted, setMounted] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Close the mobile menu whenever the route changes.
+  useEffect(() => setMenuOpen(false), [pathname]);
 
   useEffect(() => {
     setMounted(true);
@@ -39,7 +43,7 @@ export function SiteNav() {
           <span className="font-display text-xl tracking-wide text-white">FITGEAR</span>
         </Link>
 
-        <nav className="flex flex-wrap items-center gap-1 text-sm font-medium text-white/70">
+        <nav aria-label="Main" className="hidden items-center gap-1 text-sm font-medium text-white/70 md:flex">
           {navItems.map((item) => {
             const active = pathname === item.href;
             return (
@@ -61,6 +65,7 @@ export function SiteNav() {
           })}
         </nav>
 
+        <div className="flex items-center gap-2">
         <Link
           href="/cart"
           className="relative inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm font-semibold text-white transition hover:border-volt/60 hover:bg-white/10"
@@ -72,7 +77,40 @@ export function SiteNav() {
             </span>
           ) : null}
         </Link>
+        <button
+          type="button"
+          onClick={() => setMenuOpen((open) => !open)}
+          aria-expanded={menuOpen}
+          aria-controls="mobile-menu"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-full border border-white/15 bg-white/5 md:hidden"
+        >
+          <span className={`h-[2px] w-4 bg-white transition ${menuOpen ? "translate-y-[7px] rotate-45" : ""}`} />
+          <span className={`h-[2px] w-4 bg-white transition ${menuOpen ? "opacity-0" : ""}`} />
+          <span className={`h-[2px] w-4 bg-white transition ${menuOpen ? "-translate-y-[7px] -rotate-45" : ""}`} />
+        </button>
+        </div>
       </div>
+
+      {menuOpen ? (
+        <nav id="mobile-menu" aria-label="Main" className="border-t border-white/10 bg-ink md:hidden">
+          <ul className="mx-auto flex max-w-7xl flex-col px-4 py-2 sm:px-6">
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  onClick={() => setMenuOpen(false)}
+                  className={`block border-b border-white/5 py-3.5 text-base font-medium last:border-0 ${
+                    pathname === item.href ? "text-volt" : "text-white/80"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ) : null}
     </header>
   );
 }

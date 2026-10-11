@@ -52,6 +52,12 @@ export async function getProducts(filters: ProductFilters = {}) {
   }));
 }
 
+export async function getCatalogStats() {
+  await connect();
+  const [products, categories] = await Promise.all([Product.countDocuments(), Product.distinct("category")]);
+  return { products, categories: categories.length };
+}
+
 export async function getProductBySlug(slug: string) {
   await connect();
   const product = await Product.findOne({ slug }).lean();

@@ -10,6 +10,7 @@ import { StarRating } from "@/components/star-rating";
 import { ProductCard } from "@/components/product-card";
 import { Reveal } from "@/components/reveal";
 import { formatPrice } from "@/lib/format";
+import { MAX_LINE_QUANTITY } from "@/lib/limits";
 
 type Product = {
   slug: string;
@@ -22,6 +23,7 @@ type Product = {
   stock: number;
   rating: number | null;
   reviewCount: number;
+  sizes?: string[];
 };
 
 type Review = {
@@ -55,7 +57,7 @@ export function ProductDetail({ slug }: { slug: string }) {
   const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
   const [activeImage, setActiveImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
-  const [size, setSize] = useState("M");
+  const [size, setSize] = useState("");
   const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState(false);
   const cart = useCartStore();
@@ -71,6 +73,7 @@ export function ProductDetail({ slug }: { slug: string }) {
       })
       .then((data) => {
         setProduct(data.product);
+        setSize(data.product?.sizes?.[0] ?? "");
         setReviews(data.reviews ?? []);
         setRecommendations(data.recommendations ?? []);
       })
@@ -104,12 +107,15 @@ export function ProductDetail({ slug }: { slug: string }) {
     );
   }
 
+  const sizes = product.sizes ?? [];
+  const maxQuantity = Math.max(1, Math.min(product.stock, MAX_LINE_QUANTITY));
+
   const handleAdd = () => {
     cart.addItem({
       slug: product.slug,
       name: product.name,
       price: product.price,
-      quantity,
+      quantity: Math.min(maxQuantity, Math.max(1, quantity || 1)),
       image: product.images[0] ?? "/favicon.ico",
       size,
     });
@@ -173,18 +179,20 @@ export function ProductDetail({ slug }: { slug: string }) {
             </p>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            <label className="block text-sm text-black/70">
-              <span className="mb-2 block font-semibold text-ink">Size</span>
-              <select value={size} onChange={(event) => setSize(event.target.value)} className="w-full rounded-xl border border-black/10 bg-black/[0.02] px-4 py-3 focus:border-flame-500 focus:outline-none">
-                {["S", "M", "L", "XL"].map((option) => (
-                  <option key={option} value={option}>{option}</option>
-                ))}
-              </select>
-            </label>
+          <div className={`grid gap-4 ${sizes.length ? "sm:grid-cols-2" : "sm:max-w-[50%]"}`}>
+            {sizes.length ? (
+              <label className="block text-sm text-black/70">
+                <span className="mb-2 block font-semibold text-ink">Size</span>
+                <select value={size} onChange={(event) => setSize(event.target.value)} className="w-full rounded-xl border border-black/10 bg-black/[0.02] px-4 py-3 focus:border-flame-500 focus:outline-none">
+                  {sizes.map((option) => (
+                    <option key={option} value={option}>{option}</option>
+                  ))}
+                </select>
+              </label>
+            ) : null}
             <label className="block text-sm text-black/70">
               <span className="mb-2 block font-semibold text-ink">Quantity</span>
-              <input type="number" min="1" max={product.stock} value={quantity} onChange={(event) => setQuantity(Number(event.target.value))} className="w-full rounded-xl border border-black/10 bg-black/[0.02] px-4 py-3 focus:border-flame-500 focus:outline-none" />
+              <input type="number" min="1" max={maxQuantity} value={quantity} onChange={(event) => setQuantity(Number(event.target.value))} className="w-full rounded-xl border border-black/10 bg-black/[0.02] px-4 py-3 focus:border-flame-500 focus:outline-none" />
             </label>
           </div>
 

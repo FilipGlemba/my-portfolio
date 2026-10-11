@@ -4,6 +4,10 @@ import { Reveal } from "@/components/reveal";
 import { getProducts } from "@/lib/queries";
 import { CATEGORY_IMAGES } from "@/lib/seed-data";
 
+export function generateMetadata({ params }: { params: { category: string } }) {
+  return { title: decodeURIComponent(params.category) };
+}
+
 export default async function CollectionsPage({ params }: { params: { category: string } }) {
   const products = await getProducts({ category: params.category });
   const image = CATEGORY_IMAGES[params.category];

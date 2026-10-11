@@ -52,7 +52,8 @@ export default function NewProductPage() {
     }
 
     setIsSubmitting(false);
-    toast.notify("Unable to create product.", "error");
+    const data = await response.json().catch(() => ({}));
+    toast.notify(data.error || "Unable to create product.", "error");
   }
 
   return (

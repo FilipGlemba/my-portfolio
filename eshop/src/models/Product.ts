@@ -10,6 +10,7 @@ export interface IProduct extends mongoose.Document {
   images: string[];
   badge: "NEW" | "BESTSELLER" | "LIMITED" | "NONE";
   featured: boolean;
+  sizes?: string[];
   createdAt: Date;
 }
 
@@ -24,6 +25,8 @@ const ProductSchema = new Schema<IProduct>(
     images: { type: [String], required: true, default: [] },
     badge: { type: String, enum: ["NEW", "BESTSELLER", "LIMITED", "NONE"], default: "NONE" },
     featured: { type: Boolean, default: false },
+    // Empty/missing = one size, the product page shows no size picker.
+    sizes: { type: [String], default: undefined },
     createdAt: { type: Date, default: Date.now },
   },
   { timestamps: false },

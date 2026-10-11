@@ -10,7 +10,8 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-body", display: "swa
 const anton = Anton({ subsets: ["latin"], weight: "400", variable: "--font-display", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "FitGear — Gear up. Show up.",
+  // Pages set their own title ("Shop", a product name, …); the template adds the brand.
+  title: { default: "FitGear — Gear up. Show up.", template: "%s — FitGear" },
   description: "FitGear is a modern e-commerce storefront built with Next.js, MongoDB, Stripe, and NextAuth.",
 };
 
