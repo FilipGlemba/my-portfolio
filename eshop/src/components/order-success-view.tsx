@@ -39,7 +39,7 @@ export function OrderSuccessView({ demo, orderId }: { demo: boolean; orderId: st
         </div>
         <h1 className="mt-2 font-display text-4xl text-ink">{demo ? "Demo order placed" : "Order complete"}</h1>
         {orderId ? (
-          <p className="mt-3 font-mono text-sm text-black/50">Order #{orderId.slice(-8).toUpperCase()}</p>
+          <p className="mt-3 font-mono text-sm text-black/60">Order #{orderId.slice(-8).toUpperCase()}</p>
         ) : null}
         <p className="mx-auto mt-4 max-w-lg text-black/60">
           {demo
@@ -47,7 +47,7 @@ export function OrderSuccessView({ demo, orderId }: { demo: boolean; orderId: st
             : "Your order is confirmed. Check your email for tracking updates and order details."}
         </p>
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <button onClick={() => router.push("/")} className="rounded-full bg-flame-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600">
+          <button onClick={() => router.push("/")} className="rounded-full bg-flame-600 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-700">
             Continue shopping
           </button>
           <button onClick={() => router.push("/account")} className="rounded-full border border-black/10 px-6 py-3 text-sm font-bold uppercase tracking-wide text-ink transition hover:bg-black/[0.03]">

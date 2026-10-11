@@ -13,7 +13,9 @@ type CountUpProps = {
 export function CountUp({ value, decimals = 0, suffix = "", duration = 1.4 }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, margin: "-40px" });
-  const [display, setDisplay] = useState(0);
+  // Server HTML shows the real number (correct without JS / for crawlers);
+  // the count-up from 0 only starts once the element scrolls into view.
+  const [display, setDisplay] = useState(value);
 
   useEffect(() => {
     if (!inView) return;

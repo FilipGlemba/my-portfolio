@@ -1,20 +1,16 @@
-"use client";
-
-import Link from "next/link";
 import Image from "next/image";
-import dynamic from "next/dynamic";
-import { motion } from "framer-motion";
+import Link from "next/link";
 import { CountUp } from "@/components/count-up";
-
-// Client-only: WebGL can't render during SSR.
-const Hero3D = dynamic(() => import("@/components/hero-3d").then((mod) => mod.Hero3D), { ssr: false });
-
-const headline = ["GEAR UP.", "SHOW UP."];
+import { TiltCard } from "@/components/tilt-card";
+import { formatPrice } from "@/lib/format";
+import type { CatalogProduct } from "@/lib/queries";
 
 type HeroProps = {
   /** Live counts from the catalog; omitted when the DB isn't reachable (e.g. at build time). */
   productCount?: number;
   categoryCount?: number;
+  /** The product shown big on the right — a real item, not decoration. */
+  spotlight?: CatalogProduct | null;
 };
 
 function buildStats({ productCount, categoryCount }: HeroProps) {
@@ -25,96 +21,100 @@ function buildStats({ productCount, categoryCount }: HeroProps) {
   ];
 }
 
+const headline = ["Gear up.", "Show up."];
+
 export function Hero(props: HeroProps) {
   const stats = buildStats(props);
+  const { spotlight } = props;
+
   return (
     <section className="relative isolate overflow-hidden bg-ink text-white">
-      <div className="absolute inset-0">
-        <Image
-          src="/images/hero/sprinter.jpg"
-          alt=""
-          fill
-          priority
-          sizes="100vw"
-          className="gear-photo object-cover opacity-45"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/70 to-ink/40" />
-        <div className="absolute inset-0 bg-gradient-to-r from-ink via-ink/40 to-transparent" />
-        <div className="pointer-events-none absolute inset-0 hidden lg:block">
-          <Hero3D />
-        </div>
+      {/* Ambient light + grain instead of a flat black slab */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -right-40 top-1/4 h-[36rem] w-[36rem] rounded-full bg-volt/10 blur-[120px]" />
+        <div className="absolute -left-32 bottom-0 h-[26rem] w-[26rem] rounded-full bg-flame-600/10 blur-[110px]" />
+        <div className="absolute inset-0 bg-grain [background-size:22px_22px]" />
       </div>
 
-      <div className="relative mx-auto flex min-h-[86vh] max-w-7xl flex-col justify-center px-4 py-24 sm:px-6">
-        <motion.span
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex w-fit items-center gap-2 rounded-full border border-volt/40 bg-volt/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.3em] text-volt"
-        >
-          <span className="h-1.5 w-1.5 rounded-full bg-volt" />
-          New collection dropped
-        </motion.span>
+      <div className="mx-auto grid max-w-7xl items-center gap-14 px-4 py-16 sm:px-6 lg:min-h-[80vh] lg:grid-cols-[1.05fr_0.95fr] lg:py-20">
+        <div>
+          <p className="flex animate-fade-up items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-volt">
+            <span className="h-px w-8 bg-volt" />
+            Training · Running · Recovery
+          </p>
 
-        <h1 className="mt-6 font-display text-[15vw] leading-[0.86] tracking-tight sm:text-[9vw] lg:text-[7.5rem]">
-          {headline.map((line, i) => (
-            <motion.span
-              key={line}
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
-              className={`block ${i === 1 ? "text-volt" : "text-white"}`}
+          <h1 className="mt-6 font-display text-[17vw] uppercase leading-[0.86] tracking-tight sm:text-[7.5rem] lg:text-[8.25rem]">
+            {/* Not animated on purpose: the headline is the page's LCP element,
+                and an entry animation on it delays LCP by seconds on mobile. */}
+            {headline.map((line, i) => (
+              <span key={line} className={`block pb-1 ${i === 1 ? "text-volt" : "text-white"}`}>
+                {line}
+              </span>
+            ))}
+          </h1>
+
+          <p className="mt-7 max-w-md animate-fade-up text-lg leading-relaxed text-white/75 [animation-delay:350ms] [text-wrap:pretty]">
+            Training, running and recovery gear for the days you don&apos;t feel like showing up — and the ones you crush anyway.
+          </p>
+
+          <div className="mt-9 flex animate-fade-up flex-wrap items-center gap-x-8 gap-y-4 [animation-delay:450ms]">
+            <Link
+              href="/products"
+              className="inline-flex items-center justify-center rounded-full bg-flame-600 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-700 active:scale-[0.98]"
             >
-              {line}
-            </motion.span>
-          ))}
-        </h1>
+              Shop the collection
+            </Link>
+            <Link href="/collections/Running" className="group text-sm font-bold uppercase tracking-wide text-white">
+              Running gear <span className="inline-block transition group-hover:translate-x-1">→</span>
+            </Link>
+          </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          className="mt-6 max-w-lg text-lg text-white/70"
-        >
-          Performance gear for training, running, and recovery — built for the days you don&apos;t feel like showing up, and the ones you crush anyway.
-        </motion.p>
+          <dl className="mt-14 grid max-w-md animate-fade-up grid-cols-3 gap-6 border-t border-white/10 pt-7 [animation-delay:550ms]">
+            {stats.map((stat) => (
+              <div key={stat.label} className="flex flex-col-reverse">
+                <dt className="mt-1 text-xs uppercase tracking-[0.2em] text-white/60">{stat.label}</dt>
+                <dd className="font-display text-3xl tabular-nums text-white sm:text-4xl">
+                  <CountUp value={stat.value} suffix={stat.suffix} />
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.62 }}
-          className="mt-9 flex flex-col gap-3 sm:flex-row"
-        >
-          <Link
-            href="/products"
-            className="inline-flex items-center justify-center rounded-full bg-flame-500 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600"
-          >
-            Shop the drop
+        {spotlight ? (
+          <Link href={`/products/${spotlight.slug}`} className="group relative block animate-fade-up [animation-delay:250ms]">
+            {/* Offset block behind the card — layering instead of a flat edge */}
+            <div aria-hidden className="absolute -bottom-4 -right-4 h-full w-full rounded-[28px] border border-volt/40" />
+            <TiltCard maxTilt={7}>
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[28px] bg-ink-soft ring-1 ring-white/10 sm:aspect-[4/5]">
+                <Image
+                  src={spotlight.images[0]}
+                  alt={spotlight.name}
+                  fill
+                  priority
+                  sizes="(min-width: 1024px) 520px, 92vw"
+                  className="gear-photo object-cover transition duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+                {spotlight.badge !== "NONE" ? (
+                  <span className="absolute left-0 top-6 bg-flame-600 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] text-white">
+                    {spotlight.badge}
+                  </span>
+                ) : null}
+                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 sm:p-8">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-[0.25em] text-volt">{spotlight.category}</p>
+                    <p className="mt-2 font-display text-3xl leading-none sm:text-4xl">{spotlight.name}</p>
+                    <p className="mt-3 text-lg font-semibold tabular-nums text-white/90">{formatPrice(spotlight.price)}</p>
+                  </div>
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-xl text-ink transition group-hover:bg-volt">
+                    →
+                  </span>
+                </div>
+              </div>
+            </TiltCard>
           </Link>
-          <Link
-            href="/collections/Running"
-            className="inline-flex items-center justify-center rounded-full border border-white/25 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition hover:border-white hover:bg-white/10"
-          >
-            Browse collections
-          </Link>
-        </motion.div>
-
-        <motion.dl
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.85 }}
-          className="mt-16 grid max-w-lg grid-cols-3 gap-6 border-t border-white/10 pt-8"
-        >
-          {stats.map((stat) => (
-            <div key={stat.label}>
-              <dt className="sr-only">{stat.label}</dt>
-              <dd className="font-display text-3xl text-white sm:text-4xl">
-                <CountUp value={stat.value} suffix={stat.suffix} />
-              </dd>
-              <dd className="mt-1 text-xs uppercase tracking-[0.2em] text-white/50">{stat.label}</dd>
-            </div>
-          ))}
-        </motion.dl>
+        ) : null}
       </div>
     </section>
   );

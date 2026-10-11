@@ -1,235 +1,204 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 import { useCartStore } from "@/store/cart";
 import { useToast } from "@/components/toast-provider";
 import { TiltCard } from "@/components/tilt-card";
 import { StarRating } from "@/components/star-rating";
 import { ProductCard } from "@/components/product-card";
 import { Reveal } from "@/components/reveal";
-import { formatPrice } from "@/lib/format";
+import { formatDate, formatPrice } from "@/lib/format";
 import { MAX_LINE_QUANTITY } from "@/lib/limits";
+import { FREE_SHIPPING_THRESHOLD, SHIPPING_FEE } from "@/lib/shipping";
+import type { CatalogProduct, CatalogReview } from "@/lib/queries";
 
-type Product = {
-  slug: string;
-  name: string;
-  description: string;
-  price: number;
-  category: string;
-  images: string[];
-  badge: string;
-  stock: number;
-  rating: number | null;
-  reviewCount: number;
-  sizes?: string[];
-};
-
-type Review = {
-  _id: string;
-  name: string;
-  rating: number;
-  comment: string;
-  createdAt: string;
-};
-
-type Recommendation = {
-  slug: string;
-  name: string;
-  price: number;
-  category: string;
-  badge: string;
-  images: string[];
-  rating: number | null;
-  reviewCount: number;
+type Props = {
+  product: CatalogProduct;
+  reviews: CatalogReview[];
+  recommendations: CatalogProduct[];
 };
 
 const badgeStyle: Record<string, string> = {
   NEW: "bg-volt text-ink",
-  BESTSELLER: "bg-flame-500 text-white",
+  BESTSELLER: "bg-flame-600 text-white",
   LIMITED: "bg-ink text-white",
 };
 
-export function ProductDetail({ slug }: { slug: string }) {
-  const [product, setProduct] = useState<Product | null>(null);
-  const [reviews, setReviews] = useState<Review[]>([]);
-  const [recommendations, setRecommendations] = useState<Recommendation[]>([]);
+function ProductImage({ src, alt, priority = false, sizes }: { src: string; alt: string; priority?: boolean; sizes: string }) {
+  return src.startsWith("data:") ? (
+    // eslint-disable-next-line @next/next/no-img-element -- generated SVG placeholder; next/image can't optimize data: URIs
+    <img src={src} alt={alt} className="h-full w-full object-cover" />
+  ) : (
+    <Image src={src} alt={alt} fill priority={priority} sizes={sizes} className="gear-photo object-cover" />
+  );
+}
+
+export function ProductDetail({ product, reviews, recommendations }: Props) {
   const [activeImage, setActiveImage] = useState(0);
+  const [size, setSize] = useState(product.sizes[0] ?? "");
   const [quantity, setQuantity] = useState(1);
-  const [size, setSize] = useState("");
-  const [loading, setLoading] = useState(true);
   const [added, setAdded] = useState(false);
-  const cart = useCartStore();
+  const addItem = useCartStore((state) => state.addItem);
   const toast = useToast();
-  const router = useRouter();
 
-  useEffect(() => {
-    setActiveImage(0);
-    fetch(`/api/products/${slug}`)
-      .then(async (response) => {
-        if (!response.ok) throw new Error("Product not found");
-        return response.json();
-      })
-      .then((data) => {
-        setProduct(data.product);
-        setSize(data.product?.sizes?.[0] ?? "");
-        setReviews(data.reviews ?? []);
-        setRecommendations(data.recommendations ?? []);
-      })
-      .catch(() => setProduct(null))
-      .finally(() => setLoading(false));
-  }, [slug]);
-
-  if (loading) {
-    return (
-      <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
-        <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-          <div className="aspect-square animate-pulse rounded-2xl bg-black/[0.06]" />
-          <div className="space-y-4">
-            <div className="h-4 w-1/3 animate-pulse rounded bg-black/[0.06]" />
-            <div className="h-10 w-2/3 animate-pulse rounded bg-black/[0.06]" />
-            <div className="h-24 animate-pulse rounded bg-black/[0.06]" />
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  if (!product) {
-    return (
-      <div className="mx-auto max-w-3xl px-4 py-24 text-center sm:px-6">
-        <p className="font-display text-3xl text-ink">Product not found.</p>
-        <button onClick={() => router.push("/products")} className="mt-6 inline-flex rounded-full bg-ink px-6 py-3 text-sm font-bold uppercase tracking-wide text-white">
-          Back to shop
-        </button>
-      </div>
-    );
-  }
-
-  const sizes = product.sizes ?? [];
+  const inStock = product.stock > 0;
   const maxQuantity = Math.max(1, Math.min(product.stock, MAX_LINE_QUANTITY));
+  const images = product.images.length ? product.images : ["/favicon.ico"];
 
   const handleAdd = () => {
-    cart.addItem({
+    if (!inStock) return;
+    addItem({
       slug: product.slug,
       name: product.name,
       price: product.price,
-      quantity: Math.min(maxQuantity, Math.max(1, quantity || 1)),
-      image: product.images[0] ?? "/favicon.ico",
+      quantity: Math.min(maxQuantity, Math.max(1, quantity)),
+      image: images[0],
       size,
     });
-    toast.notify("Added to cart", "success");
+    toast.notify(`Added ${product.name}${size ? ` (${size})` : ""} to your cart`, "success");
     setAdded(true);
-    window.setTimeout(() => setAdded(false), 1500);
+    window.setTimeout(() => setAdded(false), 1800);
   };
 
+  const addLabel = !inStock ? "Out of stock" : added ? "Added ✓" : "Add to cart";
+
   return (
-    <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-      <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
-        <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.45 }} className="space-y-3">
-          <TiltCard maxTilt={9}>
-            <div className="relative overflow-hidden rounded-2xl bg-black/[0.04]" style={{ transformStyle: "preserve-3d" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element -- image can be a real /images/... file or a generated SVG data: URI */}
-              <img src={product.images[activeImage] ?? product.images[0] ?? "/favicon.ico"} alt={product.name} className="gear-photo aspect-square w-full object-cover" />
+    <section className="mx-auto max-w-6xl px-4 pb-32 pt-10 sm:px-6 lg:pb-16">
+      <nav aria-label="Breadcrumb" className="mb-8 text-sm text-black/60">
+        <ol className="flex flex-wrap items-center gap-2">
+          <li><Link href="/products" className="hover:text-ink">Shop</Link></li>
+          <li aria-hidden>/</li>
+          <li><Link href={`/products?category=${encodeURIComponent(product.category)}`} className="hover:text-ink">{product.category}</Link></li>
+          <li aria-hidden>/</li>
+          <li aria-current="page" className="font-medium text-ink">{product.name}</li>
+        </ol>
+      </nav>
+
+      <div className="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+        <div className="space-y-3">
+          <TiltCard maxTilt={6}>
+            <div className="relative aspect-square overflow-hidden rounded-2xl bg-[#ECEBE6]">
+              <ProductImage src={images[activeImage] ?? images[0]} alt={product.name} priority sizes="(min-width: 1024px) 560px, 100vw" />
               {product.badge && product.badge !== "NONE" ? (
-                <span
-                  style={{ transform: "translateZ(28px)" }}
-                  className={`absolute left-4 top-4 rounded-full px-3 py-1.5 text-xs font-bold uppercase tracking-[0.16em] ${badgeStyle[product.badge] ?? "bg-white text-ink"}`}
-                >
+                <span className={`absolute left-0 top-5 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.18em] ${badgeStyle[product.badge] ?? "bg-white text-ink"}`}>
                   {product.badge}
                 </span>
               ) : null}
             </div>
           </TiltCard>
-          {product.images.length > 1 ? (
+          {images.length > 1 ? (
             <div className="flex gap-3">
-              {product.images.map((image, i) => (
+              {images.map((image, i) => (
                 <button
                   key={image + i}
+                  type="button"
                   onClick={() => setActiveImage(i)}
-                  className={`h-20 w-20 overflow-hidden rounded-xl border-2 transition ${
-                    i === activeImage ? "border-flame-500" : "border-transparent opacity-70 hover:opacity-100"
+                  aria-label={`Show image ${i + 1} of ${images.length}`}
+                  aria-current={i === activeImage}
+                  className={`relative h-20 w-20 overflow-hidden rounded-lg ring-2 transition ${
+                    i === activeImage ? "ring-flame-500" : "ring-transparent opacity-70 hover:opacity-100"
                   }`}
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element -- thumbnail of the same mixed real/data-uri image set */}
-                  <img src={image} alt="" className="gear-photo h-full w-full object-cover" />
+                  <ProductImage src={image} alt="" sizes="80px" />
                 </button>
               ))}
             </div>
           ) : null}
-        </motion.div>
+        </div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, delay: 0.1 }}
-          className="space-y-8 rounded-2xl border border-black/5 bg-white p-8 shadow-panel sm:p-10"
-        >
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center justify-between gap-4">
-              <p className="text-xs font-bold uppercase tracking-[0.3em] text-flame-500">{product.category}</p>
-              <span className="font-display text-2xl text-ink">{formatPrice(product.price)}</span>
-            </div>
-            <h1 className="font-display text-4xl leading-tight text-ink">{product.name}</h1>
+        <div className="lg:pt-2">
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-flame-600">{product.category}</p>
+          <h1 className="mt-3 font-display text-4xl leading-[1.05] text-ink sm:text-5xl">{product.name}</h1>
+          <div className="mt-4 flex flex-wrap items-center gap-4">
+            <span className="text-2xl font-bold tabular-nums text-ink">{formatPrice(product.price)}</span>
             <StarRating rating={product.rating} reviewCount={product.reviewCount} size="md" />
-            <p className="text-black/60">{product.description}</p>
-            <p className="text-xs font-semibold uppercase tracking-wide text-black/40">
-              {product.stock > 0 ? `${product.stock} in stock` : "Out of stock"}
-            </p>
           </div>
+          <p className="mt-5 max-w-prose leading-relaxed text-black/70">{product.description}</p>
 
-          <div className={`grid gap-4 ${sizes.length ? "sm:grid-cols-2" : "sm:max-w-[50%]"}`}>
-            {sizes.length ? (
-              <label className="block text-sm text-black/70">
-                <span className="mb-2 block font-semibold text-ink">Size</span>
-                <select value={size} onChange={(event) => setSize(event.target.value)} className="w-full rounded-xl border border-black/10 bg-black/[0.02] px-4 py-3 focus:border-flame-500 focus:outline-none">
-                  {sizes.map((option) => (
-                    <option key={option} value={option}>{option}</option>
-                  ))}
-                </select>
-              </label>
-            ) : null}
-            <label className="block text-sm text-black/70">
-              <span className="mb-2 block font-semibold text-ink">Quantity</span>
-              <input type="number" min="1" max={maxQuantity} value={quantity} onChange={(event) => setQuantity(Number(event.target.value))} className="w-full rounded-xl border border-black/10 bg-black/[0.02] px-4 py-3 focus:border-flame-500 focus:outline-none" />
-            </label>
-          </div>
+          <p className={`mt-5 flex items-center gap-2 text-sm font-medium ${inStock ? "text-emerald-700" : "text-flame-700"}`}>
+            <span className={`h-2 w-2 rounded-full ${inStock ? "bg-emerald-600" : "bg-flame-600"}`} />
+            {!inStock ? "Out of stock" : product.stock <= 10 ? `Only ${product.stock} left` : "In stock — ships in 1–2 days"}
+          </p>
 
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <motion.button
+          {product.sizes.length ? (
+            <fieldset className="mt-8">
+              <legend className="mb-3 text-sm font-semibold text-ink">Size</legend>
+              <div className="flex flex-wrap gap-2">
+                {product.sizes.map((option) => (
+                  <button
+                    key={option}
+                    type="button"
+                    onClick={() => setSize(option)}
+                    aria-pressed={size === option}
+                    className={`min-w-[3.25rem] rounded-lg px-3 py-2.5 text-sm font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-flame-500 ${
+                      size === option ? "bg-ink text-white" : "bg-white text-ink ring-1 ring-black/15 hover:ring-black/40"
+                    }`}
+                  >
+                    {option}
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+          ) : null}
+
+          <div className="mt-8 flex items-stretch gap-3">
+            <div className="flex items-center rounded-full bg-white ring-1 ring-black/15" role="group" aria-label="Quantity">
+              <button type="button" onClick={() => setQuantity((q) => Math.max(1, q - 1))} aria-label="Decrease quantity" className="h-12 w-11 rounded-l-full text-lg text-black/70 transition hover:text-ink disabled:opacity-30" disabled={quantity <= 1}>−</button>
+              <span aria-live="polite" className="w-8 text-center font-semibold tabular-nums text-ink">{quantity}</span>
+              <button type="button" onClick={() => setQuantity((q) => Math.min(maxQuantity, q + 1))} aria-label="Increase quantity" className="h-12 w-11 rounded-r-full text-lg text-black/70 transition hover:text-ink disabled:opacity-30" disabled={quantity >= maxQuantity}>+</button>
+            </div>
+            <button
+              type="button"
               onClick={handleAdd}
-              whileTap={{ scale: 0.96 }}
-              className="inline-flex min-w-[180px] items-center justify-center rounded-full bg-flame-500 px-6 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600"
+              disabled={!inStock}
+              className="flex-1 rounded-full bg-flame-600 px-6 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:bg-black/20 disabled:shadow-none"
             >
-              {added ? "Added ✓" : "Add to cart"}
-            </motion.button>
-            <button onClick={() => router.push("/cart")} className="inline-flex min-w-[180px] items-center justify-center rounded-full border border-black/10 bg-white px-6 py-3.5 text-sm font-bold uppercase tracking-wide text-ink transition hover:bg-black/[0.03]">
-              View cart
+              {addLabel}
             </button>
           </div>
-        </motion.div>
+          {added ? (
+            <Link href="/cart" className="mt-3 inline-block text-sm font-semibold text-ink underline decoration-flame-500 decoration-2 underline-offset-4">
+              View cart →
+            </Link>
+          ) : null}
+
+          <ul className="mt-10 divide-y divide-black/10 border-y border-black/10 text-sm text-black/70">
+            <li className="flex justify-between gap-4 py-3.5">
+              <span className="font-semibold text-ink">Shipping</span>
+              <span>Free over {formatPrice(FREE_SHIPPING_THRESHOLD)}, otherwise {formatPrice(SHIPPING_FEE)}</span>
+            </li>
+            <li className="flex justify-between gap-4 py-3.5">
+              <span className="font-semibold text-ink">Returns</span>
+              <span>30 days, unworn and with tags</span>
+            </li>
+            <li className="flex justify-between gap-4 py-3.5">
+              <span className="font-semibold text-ink">Payment</span>
+              <span>Demo store — nothing is charged</span>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <Reveal className="mt-20">
         <h2 className="font-display text-3xl text-ink">
-          Reviews {product.reviewCount ? <span className="text-black/40">({product.reviewCount})</span> : null}
+          Reviews {product.reviewCount ? <span className="text-black/60">({product.reviewCount})</span> : null}
         </h2>
         {reviews.length ? (
           <div className="mt-6 grid gap-4 sm:grid-cols-2">
             {reviews.map((review) => (
-              <div key={review._id} className="rounded-2xl border border-black/5 bg-white p-5">
-                <div className="flex items-center justify-between gap-4">
-                  <p className="font-semibold text-ink">{review.name}</p>
-                  <StarRating rating={review.rating} reviewCount={1} showCount={false} />
-                </div>
-                <p className="mt-2 text-sm text-black/60">{review.comment}</p>
-                <p className="mt-3 text-xs text-black/35">{new Date(review.createdAt).toLocaleDateString()}</p>
-              </div>
+              <figure key={review.id} className="rounded-2xl bg-white p-6 ring-1 ring-black/5">
+                <StarRating rating={review.rating} reviewCount={1} showCount={false} />
+                <blockquote className="mt-3 leading-relaxed text-ink">“{review.comment}”</blockquote>
+                <figcaption className="mt-4 text-sm text-black/60">
+                  <span className="font-semibold text-ink">{review.name}</span> · {formatDate(review.createdAt)}
+                </figcaption>
+              </figure>
             ))}
           </div>
         ) : (
-          <p className="mt-4 text-black/50">No reviews yet.</p>
+          <p className="mt-4 text-black/60">No reviews yet.</p>
         )}
       </Reveal>
 
@@ -243,6 +212,24 @@ export function ProductDetail({ slug }: { slug: string }) {
           </div>
         </Reveal>
       ) : null}
+
+      {/* Mobile: keep price + add-to-cart reachable while reading reviews. */}
+      <div className="fixed inset-x-0 bottom-0 z-40 border-t border-black/10 bg-white/95 px-4 py-3 backdrop-blur lg:hidden">
+        <div className="mx-auto flex max-w-6xl items-center gap-4">
+          <div className="min-w-0 flex-1">
+            <p className="truncate text-sm font-semibold text-ink">{product.name}{size ? ` · ${size}` : ""}</p>
+            <p className="text-sm tabular-nums text-black/70">{formatPrice(product.price)}</p>
+          </div>
+          <button
+            type="button"
+            onClick={handleAdd}
+            disabled={!inStock}
+            className="rounded-full bg-flame-600 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-flame-700 active:scale-[0.98] disabled:bg-black/20"
+          >
+            {addLabel}
+          </button>
+        </div>
+      </div>
     </section>
   );
 }

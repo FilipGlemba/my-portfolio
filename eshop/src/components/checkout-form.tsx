@@ -4,9 +4,20 @@ import Link from "next/link";
 import { useState } from "react";
 import { useCartStore } from "@/store/cart";
 import { useToast } from "@/components/toast-provider";
+import { OrderSummary } from "@/components/order-summary";
 import { useHydrated } from "@/lib/use-hydrated";
 
-const fieldClass = "w-full rounded-xl border border-black/10 bg-black/[0.02] px-4 py-3 focus:border-flame-500 focus:outline-none";
+const fieldClass =
+  "mt-2 w-full rounded-xl bg-white px-4 py-3 text-ink ring-1 ring-black/15 transition placeholder:text-black/40 focus:outline-none focus:ring-2 focus:ring-flame-500";
+
+function Field({ label, className = "", ...input }: { label: string; className?: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <label className={`block text-sm font-semibold text-ink ${className}`}>
+      {label}
+      <input required {...input} className={fieldClass} />
+    </label>
+  );
+}
 
 export function CheckoutForm({ demoMode }: { demoMode: boolean }) {
   const [loading, setLoading] = useState(false);
@@ -19,6 +30,7 @@ export function CheckoutForm({ demoMode }: { demoMode: boolean }) {
     setLoading(true);
     const formData = new FormData(event.currentTarget);
     const payload = {
+      name: formData.get("name"),
       email: formData.get("email"),
       address: formData.get("address"),
       city: formData.get("city"),
@@ -46,16 +58,17 @@ export function CheckoutForm({ demoMode }: { demoMode: boolean }) {
   }
 
   if (!hydrated) {
-    return <section aria-hidden className="mx-auto h-96 max-w-3xl animate-pulse rounded-2xl bg-white px-4 py-20 sm:px-6" />;
+    return <section aria-hidden className="mx-auto my-16 h-96 max-w-6xl animate-pulse rounded-2xl bg-white" />;
   }
 
   if (!items.length) {
     return (
       <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-        <div className="rounded-2xl border border-black/5 bg-white p-10 text-center">
-          <p className="text-black/60">Your cart is empty — add something before checking out.</p>
-          <Link href="/products" className="mt-4 inline-block font-semibold text-ink underline decoration-flame-500 decoration-2 underline-offset-2">
-            Browse products
+        <div className="rounded-2xl bg-white px-6 py-16 text-center ring-1 ring-black/5">
+          <p className="font-display text-3xl text-ink">Nothing to check out yet.</p>
+          <p className="mt-2 text-black/60">Your cart is empty — add something first.</p>
+          <Link href="/products" className="mt-6 inline-flex rounded-full bg-flame-600 px-7 py-3.5 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-flame-700">
+            Browse the shop
           </Link>
         </div>
       </section>
@@ -63,43 +76,51 @@ export function CheckoutForm({ demoMode }: { demoMode: boolean }) {
   }
 
   return (
-    <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-      <div className="space-y-8 rounded-2xl border border-black/5 bg-white p-8 shadow-panel sm:p-10">
-        <div>
-          <h1 className="font-display text-4xl text-ink">Checkout</h1>
-          {demoMode ? (
-            <p className="mt-3 rounded-xl border border-volt/50 bg-volt/15 px-4 py-3 text-sm text-ink/80">
-              <strong className="font-semibold text-ink">Demo store — no payment is taken.</strong> Your order is
-              saved for real and shows up in your account and in the admin dashboard.
-            </p>
-          ) : (
-            <p className="mt-2 text-sm text-black/50">You&apos;ll pay on Stripe&apos;s secure checkout page.</p>
-          )}
-        </div>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="grid gap-4 sm:grid-cols-2">
-            <label className="block text-sm text-black/70">
-              <span className="mb-2 block font-semibold">Email</span>
-              <input type="email" name="email" required autoComplete="email" className={fieldClass} />
-            </label>
-            <label className="block text-sm text-black/70">
-              <span className="mb-2 block font-semibold">Shipping address</span>
-              <input type="text" name="address" required autoComplete="street-address" className={fieldClass} placeholder="Street address" />
-            </label>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-3">
-            <input type="text" name="city" required autoComplete="address-level2" placeholder="City" aria-label="City" className={fieldClass} />
-            <input type="text" name="postalCode" required autoComplete="postal-code" placeholder="Postal code" aria-label="Postal code" className={fieldClass} />
-            <input type="text" name="country" required autoComplete="country-name" placeholder="Country" aria-label="Country" className={fieldClass} />
-          </div>
-          <button type="submit" disabled={loading} className="w-full rounded-full bg-flame-500 px-6 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600 disabled:cursor-not-allowed disabled:opacity-60">
+    <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
+      <Link href="/cart" className="text-sm font-semibold text-black/60 hover:text-ink">← Back to cart</Link>
+      <h1 className="mt-4 font-display text-4xl text-ink sm:text-5xl">Checkout</h1>
+      {demoMode ? (
+        <p className="mt-4 max-w-2xl rounded-xl bg-volt/25 px-4 py-3 text-sm text-ink ring-1 ring-volt-dark/40">
+          <strong className="font-semibold">Demo store — no payment is taken.</strong> Your order is saved for real and shows up
+          in your account and in the admin dashboard.
+        </p>
+      ) : null}
+
+      <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_380px]">
+        <form id="checkout-form" onSubmit={handleSubmit} className="space-y-10">
+          <fieldset className="space-y-5">
+            <legend className="mb-1 font-display text-2xl text-ink">Contact</legend>
+            <div className="grid gap-5 sm:grid-cols-2">
+              <Field label="Full name" name="name" autoComplete="name" minLength={2} maxLength={80} />
+              <Field label="Email" name="email" type="email" autoComplete="email" />
+            </div>
+          </fieldset>
+
+          <fieldset className="space-y-5">
+            <legend className="mb-1 font-display text-2xl text-ink">Shipping address</legend>
+            <Field label="Street address" name="address" autoComplete="street-address" minLength={5} />
+            <div className="grid gap-5 sm:grid-cols-[1fr_160px]">
+              <Field label="City" name="city" autoComplete="address-level2" minLength={2} />
+              <Field label="Postal code" name="postalCode" autoComplete="postal-code" minLength={3} />
+            </div>
+            <Field label="Country" name="country" autoComplete="country-name" defaultValue="Slovakia" minLength={2} />
+          </fieldset>
+        </form>
+
+        <OrderSummary items={items} showItems>
+          <button
+            type="submit"
+            form="checkout-form"
+            disabled={loading}
+            className="w-full rounded-full bg-flame-600 px-6 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-700 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-60"
+          >
             {demoMode ? (loading ? "Placing order…" : "Place demo order") : loading ? "Redirecting to Stripe…" : "Continue to Stripe"}
           </button>
-          <p className="text-center text-xs text-black/50">
-            Your shipping details are stored with your order. See the{" "}
-            <Link href="/privacy" className="underline decoration-flame-500 decoration-2 underline-offset-2">Privacy Policy</Link> for details.
+          <p className="text-center text-xs text-black/60">
+            Your details are stored with your order. See the{" "}
+            <Link href="/privacy" className="underline decoration-flame-500 decoration-2 underline-offset-2">Privacy Policy</Link>.
           </p>
-        </form>
+        </OrderSummary>
       </div>
     </section>
   );

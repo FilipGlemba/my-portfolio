@@ -20,9 +20,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${inter.variable} ${anton.variable}`}>
       <body className="min-h-screen bg-[#F5F4F0] font-sans text-ink antialiased">
         <ToastProvider>
+          <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-white">
+            Skip to content
+          </a>
           <div className="min-h-screen">
             <SiteNav />
-            <main>
+            <main id="main">
               <PageTransition>{children}</PageTransition>
             </main>
           </div>

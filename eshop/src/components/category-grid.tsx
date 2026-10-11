@@ -16,7 +16,7 @@ export function CategoryGrid() {
     <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6">
       <Reveal className="mb-10 flex items-baseline justify-between gap-6">
         <div>
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-flame-500">Collections</p>
+          <p className="text-xs font-bold uppercase tracking-[0.3em] text-flame-700">Collections</p>
           <h2 className="mt-3 font-display text-4xl text-ink sm:text-5xl">Shop by category</h2>
         </div>
       </Reveal>

@@ -96,7 +96,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         </label>
         {error ? <p className="text-sm font-medium text-flame-600">{error}</p> : null}
         {mode === "register" ? (
-          <p className="text-xs text-black/50">
+          <p className="text-xs text-black/60">
             By creating an account you agree to our{" "}
             <Link href="/privacy" className="underline decoration-flame-500 decoration-2 underline-offset-2">Privacy Policy</Link>.
           </p>
@@ -104,7 +104,7 @@ export function AuthForm({ mode }: AuthFormProps) {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full rounded-full bg-flame-500 px-5 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600 disabled:opacity-60"
+          className="w-full rounded-full bg-flame-600 px-5 py-3.5 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-700 disabled:opacity-60"
         >
           {submitting ? "Please wait…" : mode === "login" ? "Sign in" : "Create account"}
         </button>

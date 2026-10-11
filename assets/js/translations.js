@@ -19,7 +19,7 @@ const translations = {
 
     // PROJECTS
     projectsTitle: 'Projekty',
-    eshopDesc: 'Moderný Next.js e-shop s autentifikáciou, produktovým katalógom, košíkom, objednávkami, platbami a admin dashboardom.',
+    eshopDesc: 'Next.js e-shop s fitness výbavou: vyhľadávanie a filtre, veľkosti, košík s dopravou zdarma od 50 €, demo pokladňa (alebo Stripe) a admin s grafom tržieb.',
     notaflowDesc: 'Aplikácia pre kapely – archív nôt, setlisty, pódium-režim a zmluvy, na webe aj ako Android/iOS appka. Práca SOČ v dvojčlennom tíme; moja časť je backend (Express, Prisma, JWT auth), archív nôt, PDF zmluvy a kalkulačka cestovných nákladov.',
     wipTitle: 'ROZPRACOVANÉ',
     mozaikaDesc: 'Web pre folklórnu kapelu z Liptova s rezervačným formulárom (PHP, PHPMailer).',
@@ -96,7 +96,7 @@ const translations = {
 
     // PROJECTS
     projectsTitle: 'Projects',
-    eshopDesc: 'A modern Next.js e-commerce app with authentication, product catalog, cart, orders, payments, and an admin dashboard.',
+    eshopDesc: 'A Next.js store for fitness gear: search and filters, sizes, a cart with free shipping over €50, a demo checkout (or Stripe) and an admin dashboard with a revenue chart.',
     notaflowDesc: 'An app for bands – sheet-music archive, setlists, stage mode and contracts, on the web and as an Android/iOS app. A two-person SOČ (student research competition) project; my part is the backend (Express, Prisma, JWT auth), the sheet-music archive, PDF contracts and a travel-cost calculator.',
     wipTitle: 'IN PROGRESS',
     mozaikaDesc: 'A website for a folk band from the Liptov region, with a booking form (PHP, PHPMailer).',

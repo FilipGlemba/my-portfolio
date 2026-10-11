@@ -32,7 +32,7 @@ export function StarRating({ rating, reviewCount, size = "sm", showCount = true 
         </div>
       </div>
       <span className="text-xs font-semibold text-black/60">{rating.toFixed(1)}</span>
-      {showCount ? <span className="text-xs text-black/40">({reviewCount})</span> : null}
+      {showCount ? <span className="text-xs text-black/60">({reviewCount})</span> : null}
     </div>
   );
 }

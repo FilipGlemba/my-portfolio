@@ -34,6 +34,7 @@ export const createCheckoutSession = async (
   successUrl: string,
   cancelUrl: string,
   customerEmail?: string,
+  shippingCost = 0,
 ) => {
   const session = await stripe().checkout.sessions.create({
     payment_method_types: ["card"],
@@ -52,7 +53,11 @@ export const createCheckoutSession = async (
         unit_amount: Math.round(item.price * 100),
       },
       quantity: item.quantity,
-    })),
+    })).concat(
+      shippingCost > 0
+        ? [{ price_data: { currency: "eur", product_data: { name: "Shipping", images: [] }, unit_amount: Math.round(shippingCost * 100) }, quantity: 1 }]
+        : [],
+    ),
     success_url: successUrl,
     cancel_url: cancelUrl,
     metadata: {

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { formatPrice } from "@/lib/format";
+import { formatDate, formatPrice } from "@/lib/format";
 
 export type OrderSummary = {
   id: string;
@@ -13,13 +13,13 @@ const statusStyle: Record<string, string> = {
   paid: "bg-volt/25 text-ink",
   shipped: "bg-flame-100 text-flame-600",
   delivered: "bg-volt text-ink",
-  cancelled: "bg-black/5 text-black/40",
+  cancelled: "bg-black/5 text-black/60",
 };
 
 export function OrderTable({ orders }: { orders: OrderSummary[] }) {
   if (!orders.length) {
     return (
-      <div className="rounded-2xl border border-black/5 bg-white p-10 text-center text-black/50">
+      <div className="rounded-2xl border border-black/5 bg-white p-10 text-center text-black/60">
         No orders yet.
       </div>
     );
@@ -28,7 +28,7 @@ export function OrderTable({ orders }: { orders: OrderSummary[] }) {
   return (
     <div className="overflow-hidden rounded-2xl border border-black/5 bg-white">
       <table className="min-w-full divide-y divide-black/5 text-left text-sm">
-        <thead className="bg-black/[0.02] text-black/50">
+        <thead className="bg-black/[0.02] text-black/60">
           <tr>
             <th className="px-6 py-4 font-semibold">Order</th>
             <th className="px-6 py-4 font-semibold">Total</th>
@@ -47,7 +47,7 @@ export function OrderTable({ orders }: { orders: OrderSummary[] }) {
                   {order.status}
                 </span>
               </td>
-              <td className="px-6 py-4 text-black/60">{new Date(order.createdAt).toLocaleDateString()}</td>
+              <td className="px-6 py-4 text-black/60">{formatDate(order.createdAt)}</td>
               <td className="px-6 py-4">
                 <Link href={`/admin/orders/${order.id}`} className="rounded-full bg-ink px-4 py-2 text-xs font-semibold text-white transition hover:bg-black">
                   View

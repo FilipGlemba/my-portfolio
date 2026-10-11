@@ -16,6 +16,7 @@ export const productCreateSchema = z.object({
 export const productUpdateSchema = productCreateSchema.partial().extend({ slug: z.string().min(3) });
 
 export const checkoutSchema = z.object({
+  name: z.string().trim().min(2).max(80),
   email: z.string().email(),
   address: z.string().min(5),
   city: z.string().min(2),

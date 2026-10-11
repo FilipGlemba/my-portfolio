@@ -138,7 +138,7 @@ export default function EditProductPage({ params }: Props) {
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
-      <Link href="/admin/products" className="text-sm font-semibold text-black/50 transition hover:text-ink">← Back to products</Link>
+      <Link href="/admin/products" className="text-sm font-semibold text-black/60 transition hover:text-ink">← Back to products</Link>
       <div className="mt-6 rounded-2xl border border-black/5 bg-white p-8 shadow-panel sm:p-10">
         <h1 className="font-display text-3xl text-ink">Edit product</h1>
         <p className="mt-2 text-sm text-black/60">Update product information and sync inventory.</p>
@@ -186,7 +186,7 @@ export default function EditProductPage({ params }: Props) {
 
           {error ? <p className="text-sm text-flame-600">{error}</p> : null}
           <div className="flex flex-col gap-3 sm:flex-row">
-            <button type="submit" disabled={saving} className="inline-flex flex-1 items-center justify-center rounded-full bg-flame-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600 disabled:opacity-60">
+            <button type="submit" disabled={saving} className="inline-flex flex-1 items-center justify-center rounded-full bg-flame-600 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-700 disabled:opacity-60">
               {saving ? "Saving…" : "Save changes"}
             </button>
             <button type="button" onClick={handleDelete} className="inline-flex flex-1 items-center justify-center rounded-full border border-black/10 bg-white px-6 py-3 text-sm font-bold uppercase tracking-wide text-ink transition hover:bg-black/[0.03]">

@@ -88,22 +88,22 @@ export default function OrderDetailPage({ params }: Props) {
 
   return (
     <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-      <Link href="/admin/orders" className="text-sm font-semibold text-black/50 transition hover:text-ink">← Back to orders</Link>
+      <Link href="/admin/orders" className="text-sm font-semibold text-black/60 transition hover:text-ink">← Back to orders</Link>
       <div className="mt-6 space-y-8 rounded-2xl border border-black/5 bg-white p-8 shadow-panel sm:p-10">
         <div>
-          <p className="text-sm text-black/50">Order detail</p>
+          <p className="text-sm text-black/60">Order detail</p>
           <h1 className="mt-1 font-display text-4xl text-ink">#{order._id.slice(-6)}</h1>
         </div>
         <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
           <div className="space-y-6">
             <div className="rounded-xl border border-black/5 bg-black/[0.015] p-6">
-              <p className="text-sm text-black/50">Customer</p>
+              <p className="text-sm text-black/60">Customer</p>
               <p className="mt-2 font-semibold text-ink">{order.shippingAddress.name}</p>
               <p className="text-sm text-black/60">{order.shippingAddress.email}</p>
               <p className="text-sm text-black/60">{order.shippingAddress.address}, {order.shippingAddress.city}</p>
             </div>
             <div className="rounded-xl border border-black/5 bg-black/[0.015] p-6">
-              <p className="text-sm text-black/50">Items</p>
+              <p className="text-sm text-black/60">Items</p>
               <ul className="mt-4 space-y-3">
                 {order.items.map((item, index) => {
                   const productName = typeof item.product === "object"
@@ -124,7 +124,7 @@ export default function OrderDetailPage({ params }: Props) {
           </div>
           <div className="space-y-6">
             <div className="rounded-xl border border-black/5 bg-black/[0.015] p-6">
-              <p className="text-sm text-black/50">Total</p>
+              <p className="text-sm text-black/60">Total</p>
               <p className="mt-2 font-display text-3xl text-ink">{formatPrice(order.total)}</p>
             </div>
             <div className="rounded-xl border border-black/5 bg-black/[0.015] p-6">

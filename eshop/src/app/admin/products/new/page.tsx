@@ -58,7 +58,7 @@ export default function NewProductPage() {
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
-      <Link href="/admin/products" className="text-sm font-semibold text-black/50 transition hover:text-ink">← Back to products</Link>
+      <Link href="/admin/products" className="text-sm font-semibold text-black/60 transition hover:text-ink">← Back to products</Link>
       <div className="mt-6 rounded-2xl border border-black/5 bg-white p-8 shadow-panel sm:p-10">
         <h1 className="font-display text-3xl text-ink">New product</h1>
         <form onSubmit={handleSubmit} className="mt-8 grid gap-6">
@@ -109,7 +109,7 @@ export default function NewProductPage() {
             <span className="mb-2 block font-semibold">Images</span>
             <ImageUploader images={formState.images} onChange={(images) => setFormState((prev) => ({ ...prev, images }))} />
           </div>
-          <button type="submit" disabled={isSubmitting} className="inline-flex items-center justify-center rounded-full bg-flame-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600 disabled:opacity-60">
+          <button type="submit" disabled={isSubmitting} className="inline-flex items-center justify-center rounded-full bg-flame-600 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-700 disabled:opacity-60">
             {isSubmitting ? "Creating…" : "Create product"}
           </button>
         </form>

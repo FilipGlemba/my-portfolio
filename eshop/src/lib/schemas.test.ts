@@ -4,6 +4,7 @@ import { MAX_LINE_QUANTITY } from "@/lib/limits";
 
 describe("checkoutSchema", () => {
   const validPayload = {
+    name: "Jana Kováčová",
     email: "buyer@example.com",
     address: "Main street 1",
     city: "Bratislava",
@@ -29,6 +30,11 @@ describe("checkoutSchema", () => {
     expect(result.success).toBe(false);
   });
 
+  it("rejects a checkout without the buyer's name", () => {
+    const { name, ...withoutName } = validPayload;
+    expect(checkoutSchema.safeParse(withoutName).success).toBe(false);
+  });
+
   it("rejects a checkout with no shipping address", () => {
     const { address, ...withoutAddress } = validPayload;
     const result = checkoutSchema.safeParse(withoutAddress);
@@ -37,7 +43,7 @@ describe("checkoutSchema", () => {
 });
 
 describe("checkoutSchema limits", () => {
-  const base = { email: "buyer@example.com", address: "Main street 1", city: "Bratislava", postalCode: "81101", country: "Slovakia" };
+  const base = { name: "Jana Kováčová", email: "buyer@example.com", address: "Main street 1", city: "Bratislava", postalCode: "81101", country: "Slovakia" };
 
   it("rejects more than the per-line quantity limit", () => {
     const result = checkoutSchema.safeParse({ ...base, items: [{ slug: "velocity-pro-trainer", quantity: MAX_LINE_QUANTITY + 1 }] });

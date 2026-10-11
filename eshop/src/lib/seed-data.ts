@@ -1,21 +1,3 @@
-// Generated illustration used only for the one product where no relevant
-// free-licensed photo was found (see public/images/CREDITS.md).
-function placeholderImage(label: string, from: string, to: string) {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600">
-    <defs>
-      <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-        <stop offset="0%" stop-color="${from}" />
-        <stop offset="100%" stop-color="${to}" />
-      </linearGradient>
-    </defs>
-    <rect width="600" height="600" fill="url(#g)" />
-    <circle cx="480" cy="120" r="180" fill="rgba(215,255,63,0.10)" />
-    <circle cx="80" cy="520" r="140" fill="rgba(0,0,0,0.18)" />
-    <text x="50%" y="52%" dominant-baseline="middle" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="800" letter-spacing="1" fill="rgba(255,255,255,0.95)">${label.toUpperCase()}</text>
-  </svg>`;
-  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
-}
-
 export type SeedProduct = {
   name: string;
   slug: string;
@@ -101,7 +83,7 @@ export const SEED_PRODUCTS: SeedProduct[] = [
     price: 34.99,
     category: "Training",
     stock: 80,
-    images: [placeholderImage("Strength Tee", "#FF4433", "#C22417")],
+    images: ["/images/products/momentum-strength-tee.jpg"],
     badge: "NONE",
     featured: false,
   },
