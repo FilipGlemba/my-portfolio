@@ -1,6 +1,6 @@
 const items = [
   "Free tracked shipping",
-  "Secure Stripe checkout",
+  "Demo store · no real charges",
   "30-day returns",
   "Real order history",
 ];

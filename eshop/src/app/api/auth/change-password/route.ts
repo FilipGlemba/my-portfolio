@@ -6,6 +6,7 @@ import User from "@/models/User";
 import { parseJson } from "@/lib/validation";
 import { z } from "zod";
 import authOptions from "@/lib/auth";
+import { DEMO_READ_ONLY_ERROR, isReadOnlyDemo } from "@/lib/demo";
 
 const changePasswordSchema = z.object({
   currentPassword: z.string().min(8),
@@ -16,6 +17,9 @@ export async function PUT(request: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  if (isReadOnlyDemo(session.user?.email)) {
+    return NextResponse.json({ error: DEMO_READ_ONLY_ERROR }, { status: 403 });
   }
 
   const body = await parseJson(request, changePasswordSchema);

@@ -5,6 +5,7 @@ import { productUpdateSchema } from "@/lib/schemas";
 import { parseJson } from "@/lib/validation";
 import { getProductBySlug, getReviewsForProduct, getRecommendations } from "@/lib/queries";
 import { getAdminSession } from "@/lib/require-admin";
+import { DEMO_READ_ONLY_ERROR, isReadOnlyDemo } from "@/lib/demo";
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
   const product = await getProductBySlug(params.slug);
@@ -23,6 +24,9 @@ export async function PUT(request: NextRequest, { params }: { params: { slug: st
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
+  if (isReadOnlyDemo(session.user?.email)) {
+    return NextResponse.json({ error: DEMO_READ_ONLY_ERROR }, { status: 403 });
+  }
 
   const body = await parseJson(request, productUpdateSchema);
   await connect();
@@ -36,6 +40,9 @@ export async function DELETE(request: NextRequest, { params }: { params: { slug:
   const session = await getAdminSession();
   if (!session) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  if (isReadOnlyDemo(session.user?.email)) {
+    return NextResponse.json({ error: DEMO_READ_ONLY_ERROR }, { status: 403 });
   }
 
   await connect();

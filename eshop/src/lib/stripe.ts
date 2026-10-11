@@ -2,6 +2,13 @@ import Stripe from "stripe";
 
 let stripeClient: Stripe | null = null;
 
+// Without a key the store runs in demo mode: checkout records the order as
+// paid without charging anything. Adding STRIPE_SECRET_KEY (test keys are fine)
+// switches it to real Stripe Checkout — no code change needed.
+export function isStripeConfigured(): boolean {
+  return Boolean(process.env.STRIPE_SECRET_KEY);
+}
+
 export function stripe(): Stripe {
   if (!stripeClient) {
     const secretKey = process.env.STRIPE_SECRET_KEY;

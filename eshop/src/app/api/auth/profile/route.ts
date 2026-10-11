@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import connect from "@/lib/db";
 import User from "@/models/User";
 import authOptions from "@/lib/auth";
+import { DEMO_READ_ONLY_ERROR, isReadOnlyDemo } from "@/lib/demo";
 import { parseJson } from "@/lib/validation";
 import { updateProfileSchema } from "@/lib/schemas";
 
@@ -25,6 +26,9 @@ export async function PUT(request: NextRequest) {
   const session = await getServerSession(authOptions);
   if (!session?.user?.email) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+  if (isReadOnlyDemo(session.user?.email)) {
+    return NextResponse.json({ error: DEMO_READ_ONLY_ERROR }, { status: 403 });
   }
 
   const body = await parseJson(request, updateProfileSchema);

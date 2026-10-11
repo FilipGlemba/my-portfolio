@@ -97,7 +97,8 @@ export default function EditProductPage({ params }: Props) {
     });
 
     if (!response.ok) {
-      setError("Unable to update product.");
+      const data = await response.json().catch(() => ({}));
+      setError(data.error || "Unable to update product.");
       setSaving(false);
       return;
     }
@@ -112,7 +113,8 @@ export default function EditProductPage({ params }: Props) {
       method: "DELETE",
     });
     if (!response.ok) {
-      setError("Unable to delete product.");
+      const data = await response.json().catch(() => ({}));
+      setError(data.error || "Unable to delete product.");
       return;
     }
     router.push("/admin/products");

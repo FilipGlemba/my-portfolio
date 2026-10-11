@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { checkoutSchema, registerSchema, orderStatusSchema } from "@/lib/schemas";
+import { MAX_LINE_QUANTITY } from "@/lib/limits";
 
 describe("checkoutSchema", () => {
   const validPayload = {
@@ -32,6 +33,24 @@ describe("checkoutSchema", () => {
     const { address, ...withoutAddress } = validPayload;
     const result = checkoutSchema.safeParse(withoutAddress);
     expect(result.success).toBe(false);
+  });
+});
+
+describe("checkoutSchema limits", () => {
+  const base = { email: "buyer@example.com", address: "Main street 1", city: "Bratislava", postalCode: "81101", country: "Slovakia" };
+
+  it("rejects more than the per-line quantity limit", () => {
+    const result = checkoutSchema.safeParse({ ...base, items: [{ slug: "velocity-pro-trainer", quantity: MAX_LINE_QUANTITY + 1 }] });
+    expect(result.success).toBe(false);
+  });
+
+  it("rejects fractional quantities", () => {
+    const result = checkoutSchema.safeParse({ ...base, items: [{ slug: "velocity-pro-trainer", quantity: 1.5 }] });
+    expect(result.success).toBe(false);
+  });
+
+  it("rejects an empty cart", () => {
+    expect(checkoutSchema.safeParse({ ...base, items: [] }).success).toBe(false);
   });
 });
 

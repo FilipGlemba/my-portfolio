@@ -26,12 +26,19 @@ export type SeedProduct = {
   images: string[];
   badge: "NEW" | "BESTSELLER" | "LIMITED" | "NONE";
   featured: boolean;
+  /** Selectable sizes. Omitted = one size (no size picker is shown). */
+  sizes?: string[];
 };
+
+const SHOE_SIZES = ["40", "41", "42", "43", "44", "45"];
+const APPAREL_SIZES = ["S", "M", "L", "XL"];
+const SOCK_SIZES = ["S/M", "L/XL"];
 
 export const SEED_PRODUCTS: SeedProduct[] = [
   {
     name: "Velocity Pro Trainer",
     slug: "velocity-pro-trainer",
+    sizes: SHOE_SIZES,
     description: "Lightweight training shoes engineered for speed, stability, and long-distance comfort.",
     price: 129.99,
     category: "Training",
@@ -43,6 +50,7 @@ export const SEED_PRODUCTS: SeedProduct[] = [
   {
     name: "Elite Running Shoe",
     slug: "elite-running-shoe",
+    sizes: SHOE_SIZES,
     description: "Premium running shoes with responsive cushioning for marathon training.",
     price: 159.99,
     category: "Running",
@@ -54,6 +62,7 @@ export const SEED_PRODUCTS: SeedProduct[] = [
   {
     name: "Recovery Compression Sleeve",
     slug: "recovery-compression-sleeve",
+    sizes: APPAREL_SIZES,
     description: "High-performance compression wear for faster muscle recovery and injury prevention.",
     price: 49.99,
     category: "Recovery",
@@ -87,6 +96,7 @@ export const SEED_PRODUCTS: SeedProduct[] = [
   {
     name: "Momentum Strength Tee",
     slug: "momentum-strength-tee",
+    sizes: APPAREL_SIZES,
     description: "Breathable moisture-wicking tee built for heavy lifting days and high-rep circuits.",
     price: 34.99,
     category: "Training",
@@ -98,6 +108,7 @@ export const SEED_PRODUCTS: SeedProduct[] = [
   {
     name: "Trailblazer Off-Road Runner",
     slug: "trailblazer-off-road-runner",
+    sizes: SHOE_SIZES,
     description: "Grip-heavy trail running shoes with reinforced toe protection for uneven terrain.",
     price: 174.99,
     category: "Running",
@@ -131,6 +142,7 @@ export const SEED_PRODUCTS: SeedProduct[] = [
   {
     name: "Chalk Grip Training Gloves",
     slug: "chalk-grip-training-gloves",
+    sizes: APPAREL_SIZES,
     description: "Padded palm gloves with a reinforced grip zone for lifting, rowing, and pull-up work.",
     price: 24.99,
     category: "Training",
@@ -153,6 +165,7 @@ export const SEED_PRODUCTS: SeedProduct[] = [
   {
     name: "Circulate Compression Socks",
     slug: "circulate-compression-socks",
+    sizes: SOCK_SIZES,
     description: "Graduated compression socks that ease leg fatigue on long runs and speed up recovery after.",
     price: 22.99,
     category: "Recovery",

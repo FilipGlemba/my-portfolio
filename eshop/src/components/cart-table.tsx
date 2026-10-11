@@ -3,12 +3,18 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { formatPrice } from "@/lib/format";
 import { useCartStore } from "@/store/cart";
+import { useHydrated } from "@/lib/use-hydrated";
 
 export function CartTable() {
   const items = useCartStore((state) => state.items);
   const updateQuantity = useCartStore((state) => state.updateQuantity);
   const removeItem = useCartStore((state) => state.removeItem);
   const subtotal = useCartStore((state) => state.subtotal());
+  const hydrated = useHydrated();
+
+  if (!hydrated) {
+    return <div aria-hidden className="h-40 animate-pulse rounded-2xl border border-black/5 bg-white" />;
+  }
 
   if (!items.length) {
     return (
@@ -39,18 +45,18 @@ export function CartTable() {
                   <img src={item.image} alt={item.name} className="gear-photo h-20 w-20 rounded-xl object-cover" />
                   <div>
                     <p className="font-semibold text-ink">{item.name}</p>
-                    <p className="text-sm text-black/50">Size: {item.size}</p>
+                    {item.size ? <p className="text-sm text-black/50">Size: {item.size}</p> : null}
                   </div>
                 </div>
                 <p className="text-sm text-black/60">{formatPrice(item.price)}</p>
                 <div className="flex items-center gap-2">
-                  <button type="button" onClick={() => updateQuantity(item.slug, item.quantity - 1)} className="h-8 w-8 rounded-full border border-black/10 text-black/70 transition hover:border-flame-500 hover:text-flame-500">−</button>
+                  <button type="button" onClick={() => updateQuantity(item.slug, item.quantity - 1, item.size)} className="h-8 w-8 rounded-full border border-black/10 text-black/70 transition hover:border-flame-500 hover:text-flame-500">−</button>
                   <span className="min-w-[2rem] text-center font-semibold text-ink">{item.quantity}</span>
-                  <button type="button" onClick={() => updateQuantity(item.slug, item.quantity + 1)} className="h-8 w-8 rounded-full border border-black/10 text-black/70 transition hover:border-flame-500 hover:text-flame-500">+</button>
+                  <button type="button" onClick={() => updateQuantity(item.slug, item.quantity + 1, item.size)} className="h-8 w-8 rounded-full border border-black/10 text-black/70 transition hover:border-flame-500 hover:text-flame-500">+</button>
                 </div>
                 <div className="flex items-center justify-between gap-4">
                   <p className="font-bold text-ink">{formatPrice(item.price * item.quantity)}</p>
-                  <button type="button" onClick={() => removeItem(item.slug)} className="text-sm font-semibold text-flame-500 hover:text-flame-600">Remove</button>
+                  <button type="button" onClick={() => removeItem(item.slug, item.size)} className="text-sm font-semibold text-flame-500 hover:text-flame-600">Remove</button>
                 </div>
               </motion.div>
             ))}

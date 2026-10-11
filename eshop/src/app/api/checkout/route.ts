@@ -1,46 +1,55 @@
+import { randomUUID } from "crypto";
 import { NextRequest, NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { ZodError } from "zod";
 import connect from "@/lib/db";
 import Product from "@/models/Product";
 import Order from "@/models/Order";
 import User from "@/models/User";
-import { getServerSession } from "next-auth";
 import authOptions from "@/lib/auth";
-import { parseJson } from "@/lib/validation";
 import { checkoutSchema } from "@/lib/schemas";
-import { createCheckoutSession, type CheckoutLineItem } from "@/lib/stripe";
+import { createCheckoutSession, isStripeConfigured, type CheckoutLineItem } from "@/lib/stripe";
+
+// Thrown for problems the shopper can fix — its message is safe to show them.
+class CheckoutError extends Error {}
 
 export async function POST(request: NextRequest) {
-  const body = await parseJson(request, checkoutSchema);
-  await connect();
-
-  const session = await getServerSession(authOptions);
+  let body;
+  try {
+    body = checkoutSchema.parse(await request.json());
+  } catch (error) {
+    const message = error instanceof ZodError ? "Please check your details and try again." : "Invalid request.";
+    return NextResponse.json({ error: message }, { status: 400 });
+  }
 
   try {
+    await connect();
+    const session = await getServerSession(authOptions);
+
     const items: CheckoutLineItem[] = await Promise.all(
       body.items.map(async (item) => {
         const product = await Product.findOne({ slug: item.slug }).lean();
-        if (!product) throw new Error(`Product "${item.slug}" is no longer available.`);
+        if (!product) throw new CheckoutError(`"${item.slug}" is no longer available — please remove it from your cart.`);
         return {
           productId: product._id.toString(),
           slug: product.slug,
           name: product.name,
-          price: product.price,
+          price: product.price, // always the DB price, never the client's
           quantity: item.quantity,
           images: product.images || [],
         };
       }),
     );
 
-    const checkoutSession = await createCheckoutSession(
-      items,
-      `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/order-success`,
-      `${process.env.NEXTAUTH_URL || "http://localhost:3000"}/cart`,
-      body.email,
-    );
+    const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
+    const demoMode = !isStripeConfigured();
+    const checkoutSession = demoMode
+      ? null
+      : await createCheckoutSession(items, `${baseUrl}/order-success`, `${baseUrl}/cart`, body.email);
 
     const orderUser = session?.user?.email ? await User.findOne({ email: session.user.email }) : null;
 
-    await Order.create({
+    const order = await Order.create({
       user: orderUser?._id ?? null,
       items: items.map((item) => ({
         product: item.productId,
@@ -51,8 +60,10 @@ export async function POST(request: NextRequest) {
         price: item.price,
       })),
       total: items.reduce((sum, item) => sum + item.price * item.quantity, 0),
-      status: "pending",
-      stripeSessionId: checkoutSession.id,
+      // Demo orders skip payment, so they're recorded as paid straight away;
+      // real Stripe orders stay pending until the webhook confirms payment.
+      status: demoMode ? "paid" : "pending",
+      stripeSessionId: checkoutSession ? checkoutSession.id : `demo_${randomUUID()}`,
       shippingAddress: {
         name: session?.user?.name ?? body.email,
         email: body.email,
@@ -64,10 +75,13 @@ export async function POST(request: NextRequest) {
       createdAt: new Date(),
     });
 
-    return NextResponse.json({ url: checkoutSession.url });
+    const url = checkoutSession ? checkoutSession.url : `/order-success?order=${order._id.toString()}&demo=1`;
+    return NextResponse.json({ url, demo: demoMode });
   } catch (error) {
+    if (error instanceof CheckoutError) {
+      return NextResponse.json({ error: error.message }, { status: 400 });
+    }
     console.error("Checkout failed:", error);
-    const message = error instanceof Error ? error.message : "Unable to start checkout.";
-    return NextResponse.json({ error: message }, { status: 502 });
+    return NextResponse.json({ error: "Checkout is temporarily unavailable. Please try again in a moment." }, { status: 500 });
   }
 }

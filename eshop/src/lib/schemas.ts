@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { MAX_CART_LINES, MAX_LINE_QUANTITY } from "@/lib/limits";
 
 export const productCreateSchema = z.object({
   name: z.string().min(3),
@@ -20,13 +21,17 @@ export const checkoutSchema = z.object({
   city: z.string().min(2),
   postalCode: z.string().min(3),
   country: z.string().min(2),
-  items: z.array(
-    z.object({
-      slug: z.string().min(3),
-      quantity: z.number().min(1),
-      size: z.string().optional(),
-    }),
-  ),
+  // Caps keep the public demo's order stats sane (no "1 000 000 × gloves").
+  items: z
+    .array(
+      z.object({
+        slug: z.string().min(3),
+        quantity: z.number().int().min(1).max(MAX_LINE_QUANTITY),
+        size: z.string().optional(),
+      }),
+    )
+    .min(1)
+    .max(MAX_CART_LINES),
 });
 
 export const orderStatusSchema = z.object({ status: z.enum(["pending", "paid", "shipped", "delivered", "cancelled"]) });
