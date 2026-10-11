@@ -69,7 +69,6 @@ function updatePageLanguage(lang) {
   document.querySelectorAll('[data-i18n="fluent"]').forEach(el => el.textContent = t.fluent);
   
   // AVAILABILITY - aktualizácia textu o dostupnosti
-  document.querySelectorAll('[data-i18n="available_now"]').forEach(el => el.textContent = t.available_now);
   
   // CONTACT - aktualizácia textov v sekcii kontakt
   document.querySelectorAll('[data-i18n="contactTitle"]').forEach(el => el.textContent = t.contactTitle);
