@@ -24,9 +24,15 @@
       content="Portfólio projektov: full-stack Next.js e-shop a NotaFlow – aplikácia pre kapely (práca SOČ)."
     />
     <meta property="og:locale" content="sk_SK" />
-    <meta property="og:image" content="assets/img/profilovka.jpg" />
+    <meta property="og:url" content="https://filip-glemba.vercel.app/" />
+    <!-- Plná URL — Facebook, LinkedIn a Discord relatívnu cestu nenačítajú.
+         JPG zámerne (nie WebP), niektoré služby WebP v náhľadoch nečítajú. -->
+    <meta property="og:image" content="https://filip-glemba.vercel.app/assets/img/profilovka.jpg" />
+    <meta property="og:image:width" content="661" />
+    <meta property="og:image:height" content="684" />
+    <meta property="og:image:alt" content="Filip Glemba" />
     <meta name="twitter:card" content="summary" />
-    <meta name="twitter:image" content="assets/img/profilovka.jpg" />
+    <meta name="twitter:image" content="https://filip-glemba.vercel.app/assets/img/profilovka.jpg" />
     <meta name="twitter:title" content="Filip Glemba — Web Developer" />
     <meta
       name="twitter:description"
@@ -59,9 +65,11 @@
       }
     </script>
 
-    <!-- Fonty sú self-hostované (assets/fonts/) — žiadne volanie na Google
-         pri načítaní stránky, žiadny prenos IP tretej strane bez súhlasu. -->
-    <link rel="stylesheet" href="assets/css/fonts.css" />
+    <!-- Fonty sú self-hostované (assets/fonts/, @font-face v styles.css) —
+         žiadne volanie na Google, žiadny prenos IP tretej strane bez súhlasu.
+         Dva fonty mena v hero sa prednačítajú, aby sa nečakalo na CSS. -->
+    <link rel="preload" href="assets/fonts/playfair-display-400-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/playfair-display-400-italic-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
@@ -117,12 +125,27 @@
       <div class="hero-r">
         <div class="hero-profile">
           <div class="avatar-ring">
-            <img
-              src="assets/img/profilovka.jpg"
-              alt="Filip Glemba"
-              width="661"
-              height="684"
-            />
+            <!-- WebP vo veľkosti podľa zariadenia (fotka má 400px, na mobile
+                 260px); JPG je záloha pre staré prehliadače. -->
+            <picture>
+              <source
+                type="image/webp"
+                srcset="
+                  assets/img/profilovka-260.webp 260w,
+                  assets/img/profilovka-400.webp 400w,
+                  assets/img/profilovka-520.webp 520w,
+                  assets/img/profilovka-661.webp 661w
+                "
+                sizes="(max-width: 960px) 260px, 400px"
+              />
+              <img
+                src="assets/img/profilovka.jpg"
+                alt="Filip Glemba"
+                width="661"
+                height="684"
+                fetchpriority="high"
+              />
+            </picture>
           </div>
 
           <p class="photo-caption" data-i18n="photoCaption">
