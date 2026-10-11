@@ -76,7 +76,7 @@ export function ImageUploader({ images, onChange }: ImageUploaderProps) {
         </div>
       ) : null}
 
-      <label className="flex cursor-pointer items-center justify-center rounded-xl border border-dashed border-black/20 bg-black/[0.02] px-4 py-6 text-sm text-black/50 transition hover:border-flame-500 hover:text-flame-500">
+      <label className="flex cursor-pointer items-center justify-center rounded-xl border border-dashed border-black/20 bg-black/[0.02] px-4 py-6 text-sm text-black/60 transition hover:border-flame-500 hover:text-flame-700">
         {uploading ? "Uploading…" : "Click to upload image(s), or drag & drop"}
         <input
           ref={inputRef}
@@ -88,7 +88,7 @@ export function ImageUploader({ images, onChange }: ImageUploaderProps) {
           onChange={(event) => handleFiles(event.target.files)}
         />
       </label>
-      <p className="text-xs text-black/40">
+      <p className="text-xs text-black/60">
         Needs Cloudinary configured (see .env.example) — without it this returns a clear error instead of a broken upload.
       </p>
     </div>

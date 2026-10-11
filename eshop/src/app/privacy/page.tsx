@@ -14,7 +14,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 export default function PrivacyPage() {
   return (
     <section className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-      <p className="text-xs font-bold uppercase tracking-wide text-flame-500">Legal</p>
+      <p className="text-xs font-bold uppercase tracking-wide text-flame-700">Legal</p>
       <h1 className="mt-2 font-display text-4xl text-ink">Privacy Policy</h1>
       <p className="mt-4 text-sm text-black/60">
         FitGear is a portfolio project built by Filip Glemba to demonstrate full-stack
@@ -56,7 +56,7 @@ export default function PrivacyPage() {
       <Section title="Your rights">
         <p>
           You can ask to see, correct, or delete any data tied to your account or order at
-          any time — email <a href="mailto:filip.glemba9@gmail.com" className="text-flame-500 underline">filip.glemba9@gmail.com</a> and it&apos;ll be handled directly.
+          any time — email <a href="mailto:filip.glemba9@gmail.com" className="text-flame-700 underline">filip.glemba9@gmail.com</a> and it&apos;ll be handled directly.
         </p>
       </Section>
     </section>

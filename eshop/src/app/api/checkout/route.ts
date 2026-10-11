@@ -9,6 +9,7 @@ import User from "@/models/User";
 import authOptions from "@/lib/auth";
 import { checkoutSchema } from "@/lib/schemas";
 import { createCheckoutSession, isStripeConfigured, type CheckoutLineItem } from "@/lib/stripe";
+import { orderTotal, shippingFor } from "@/lib/shipping";
 
 // Thrown for problems the shopper can fix — its message is safe to show them.
 class CheckoutError extends Error {}
@@ -41,11 +42,12 @@ export async function POST(request: NextRequest) {
       }),
     );
 
+    const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
     const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000";
     const demoMode = !isStripeConfigured();
     const checkoutSession = demoMode
       ? null
-      : await createCheckoutSession(items, `${baseUrl}/order-success`, `${baseUrl}/cart`, body.email);
+      : await createCheckoutSession(items, `${baseUrl}/order-success`, `${baseUrl}/cart`, body.email, shippingFor(subtotal));
 
     const orderUser = session?.user?.email ? await User.findOne({ email: session.user.email }) : null;
 
@@ -59,13 +61,13 @@ export async function POST(request: NextRequest) {
         qty: item.quantity,
         price: item.price,
       })),
-      total: items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+      total: orderTotal(subtotal), // includes shipping — the same number the summary showed
       // Demo orders skip payment, so they're recorded as paid straight away;
       // real Stripe orders stay pending until the webhook confirms payment.
       status: demoMode ? "paid" : "pending",
       stripeSessionId: checkoutSession ? checkoutSession.id : `demo_${randomUUID()}`,
       shippingAddress: {
-        name: session?.user?.name ?? body.email,
+        name: body.name,
         email: body.email,
         address: body.address,
         city: body.city,

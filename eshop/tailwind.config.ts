@@ -17,8 +17,8 @@ const config: Config = {
           300: "#FF8F78",
           400: "#FF6448",
           500: "#FF4433",
-          600: "#E8331F",
-          700: "#C22417",
+          600: "#D42A17",
+          700: "#B0200F",
         },
         volt: {
           DEFAULT: "#D7FF3F",
@@ -42,9 +42,16 @@ const config: Config = {
           "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-50%)" },
         },
+        // Pure-CSS entrance animations: they run as soon as the CSS loads, so
+        // above-the-fold text doesn't stay invisible until JS hydrates.
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(14px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         marquee: "marquee 22s linear infinite",
+        "fade-up": "fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both",
       },
     },
   },

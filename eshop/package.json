@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "seed": "tsx scripts/seed.ts",
-    "backfill:sizes": "tsx scripts/backfill-sizes.ts"
+    "sync:catalog": "tsx scripts/sync-catalog.ts"
   },
   "dependencies": {
     "@react-three/drei": "^9.122.0",

@@ -1,72 +1,78 @@
 "use client";
 
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { formatPrice } from "@/lib/format";
+import { MAX_LINE_QUANTITY } from "@/lib/limits";
 import { useCartStore } from "@/store/cart";
-import { useHydrated } from "@/lib/use-hydrated";
 
 export function CartTable() {
   const items = useCartStore((state) => state.items);
   const updateQuantity = useCartStore((state) => state.updateQuantity);
   const removeItem = useCartStore((state) => state.removeItem);
-  const subtotal = useCartStore((state) => state.subtotal());
-  const hydrated = useHydrated();
-
-  if (!hydrated) {
-    return <div aria-hidden className="h-40 animate-pulse rounded-2xl border border-black/5 bg-white" />;
-  }
-
-  if (!items.length) {
-    return (
-      <div className="rounded-2xl border border-black/5 bg-white p-12 text-center">
-        <p className="font-display text-2xl text-ink">Your cart is empty.</p>
-        <p className="mt-2 text-sm text-black/50">Go find something worth training for.</p>
-      </div>
-    );
-  }
 
   return (
-    <div className="space-y-6">
-      <div className="rounded-2xl border border-black/5 bg-white p-4 sm:p-6">
-        <AnimatePresence initial={false}>
-          <div className="grid gap-4">
-            {items.map((item) => (
-              <motion.div
-                key={`${item.slug}-${item.size}`}
-                layout
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: 1, height: "auto" }}
-                exit={{ opacity: 0, height: 0 }}
-                transition={{ duration: 0.25 }}
-                className="grid gap-4 rounded-xl border border-black/5 bg-black/[0.015] p-4 sm:grid-cols-[1.3fr_0.8fr_0.8fr_0.8fr] sm:items-center"
-              >
-                <div className="flex items-center gap-4">
-                  {/* eslint-disable-next-line @next/next/no-img-element -- image can be a real /images/... file or a generated SVG data: URI */}
-                  <img src={item.image} alt={item.name} className="gear-photo h-20 w-20 rounded-xl object-cover" />
-                  <div>
-                    <p className="font-semibold text-ink">{item.name}</p>
-                    {item.size ? <p className="text-sm text-black/50">Size: {item.size}</p> : null}
-                  </div>
+    <ul className="divide-y divide-black/10 rounded-2xl bg-white px-5 ring-1 ring-black/5 sm:px-6">
+      <AnimatePresence initial={false}>
+        {items.map((item) => (
+          <motion.li
+            key={`${item.slug}-${item.size}`}
+            layout
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="flex gap-4 py-5"
+          >
+            <Link href={`/products/${item.slug}`} className="relative h-24 w-24 shrink-0 overflow-hidden rounded-xl bg-[#ECEBE6]">
+              {/* eslint-disable-next-line @next/next/no-img-element -- thumbnail; may be a generated SVG data: URI */}
+              <img src={item.image} alt={item.name} className="gear-photo h-full w-full object-cover" />
+            </Link>
+            <div className="flex min-w-0 flex-1 flex-col justify-between gap-3 sm:flex-row sm:items-center">
+              <div className="min-w-0">
+                <Link href={`/products/${item.slug}`} className="font-semibold text-ink hover:underline">
+                  {item.name}
+                </Link>
+                <p className="mt-1 text-sm text-black/60">
+                  {item.size ? `Size ${item.size} · ` : ""}
+                  {formatPrice(item.price)} each
+                </p>
+                <button
+                  type="button"
+                  onClick={() => removeItem(item.slug, item.size)}
+                  className="mt-2 text-sm font-semibold text-flame-700 hover:text-flame-600"
+                >
+                  Remove
+                </button>
+              </div>
+              <div className="flex items-center justify-between gap-6 sm:justify-end">
+                <div className="flex items-center rounded-full ring-1 ring-black/15" role="group" aria-label={`Quantity of ${item.name}`}>
+                  <button
+                    type="button"
+                    onClick={() => updateQuantity(item.slug, item.quantity - 1, item.size)}
+                    disabled={item.quantity <= 1}
+                    aria-label="Decrease quantity"
+                    className="h-9 w-9 rounded-l-full text-black/70 transition hover:text-ink disabled:opacity-30"
+                  >
+                    −
+                  </button>
+                  <span className="w-7 text-center text-sm font-semibold tabular-nums text-ink">{item.quantity}</span>
+                  <button
+                    type="button"
+                    onClick={() => updateQuantity(item.slug, item.quantity + 1, item.size)}
+                    disabled={item.quantity >= MAX_LINE_QUANTITY}
+                    aria-label="Increase quantity"
+                    className="h-9 w-9 rounded-r-full text-black/70 transition hover:text-ink disabled:opacity-30"
+                  >
+                    +
+                  </button>
                 </div>
-                <p className="text-sm text-black/60">{formatPrice(item.price)}</p>
-                <div className="flex items-center gap-2">
-                  <button type="button" onClick={() => updateQuantity(item.slug, item.quantity - 1, item.size)} className="h-8 w-8 rounded-full border border-black/10 text-black/70 transition hover:border-flame-500 hover:text-flame-500">−</button>
-                  <span className="min-w-[2rem] text-center font-semibold text-ink">{item.quantity}</span>
-                  <button type="button" onClick={() => updateQuantity(item.slug, item.quantity + 1, item.size)} className="h-8 w-8 rounded-full border border-black/10 text-black/70 transition hover:border-flame-500 hover:text-flame-500">+</button>
-                </div>
-                <div className="flex items-center justify-between gap-4">
-                  <p className="font-bold text-ink">{formatPrice(item.price * item.quantity)}</p>
-                  <button type="button" onClick={() => removeItem(item.slug, item.size)} className="text-sm font-semibold text-flame-500 hover:text-flame-600">Remove</button>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </AnimatePresence>
-      </div>
-      <div className="rounded-2xl border border-black/5 bg-white p-6 text-right">
-        <p className="text-sm text-black/50">Subtotal</p>
-        <p className="mt-2 font-display text-3xl text-ink">{formatPrice(subtotal)}</p>
-      </div>
-    </div>
+                <p className="w-20 text-right font-bold tabular-nums text-ink">{formatPrice(item.price * item.quantity)}</p>
+              </div>
+            </div>
+          </motion.li>
+        ))}
+      </AnimatePresence>
+    </ul>
   );
 }

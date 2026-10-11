@@ -36,7 +36,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, x: 40 }}
               className={`max-w-sm rounded-2xl px-5 py-4 text-sm font-medium shadow-panel ${
-                toast.type === "success" ? "bg-ink text-white" : "bg-flame-500 text-white"
+                toast.type === "success" ? "bg-ink text-white" : "bg-flame-600 text-white"
               }`}
             >
               {toast.message}

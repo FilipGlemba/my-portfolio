@@ -2,6 +2,7 @@ import connect from "@/lib/db";
 import Product from "@/models/Product";
 import Order from "@/models/Order";
 import Review from "@/models/Review";
+import { escapeRegex, MAX_SEARCH_LENGTH } from "@/lib/text";
 
 export type ProductSort = "price_asc" | "price_desc" | "newest";
 
@@ -35,7 +36,8 @@ export async function getProducts(filters: ProductFilters = {}) {
 
   const filter: Record<string, unknown> = {};
   if (filters.category) filter.category = filters.category;
-  if (filters.search) filter.name = { $regex: filters.search, $options: "i" };
+  const search = filters.search?.trim().slice(0, MAX_SEARCH_LENGTH);
+  if (search) filter.name = { $regex: escapeRegex(search), $options: "i" };
 
   let query = Product.find(filter);
   if (filters.sort === "price_asc") query = query.sort({ price: 1 });
@@ -91,6 +93,112 @@ export async function getRecommendations(category: string, excludeSlug: string, 
   }));
 }
 
+// ─── Serializable shapes for server → client components ───
+// Mongoose lean docs carry ObjectIds and Dates, which can't cross the
+// server/client boundary as props. These are plain JSON-safe copies.
+
+export type CatalogProduct = {
+  slug: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  stock: number;
+  images: string[];
+  badge: string;
+  featured: boolean;
+  sizes: string[];
+  rating: number | null;
+  reviewCount: number;
+};
+
+export type CatalogReview = {
+  id: string;
+  name: string;
+  rating: number;
+  comment: string;
+  createdAt: string;
+};
+
+type ProductLike = {
+  slug: string;
+  name: string;
+  description: string;
+  price: number;
+  category: string;
+  stock: number;
+  images?: string[];
+  badge?: string;
+  featured?: boolean;
+  sizes?: string[];
+  rating?: number | null;
+  reviewCount?: number;
+};
+
+export function toCatalogProduct(product: ProductLike): CatalogProduct {
+  return {
+    slug: product.slug,
+    name: product.name,
+    description: product.description,
+    price: product.price,
+    category: product.category,
+    stock: product.stock,
+    images: product.images ?? [],
+    badge: product.badge ?? "NONE",
+    featured: Boolean(product.featured),
+    sizes: product.sizes ?? [],
+    rating: product.rating ?? null,
+    reviewCount: product.reviewCount ?? 0,
+  };
+}
+
+export async function getCatalog(filters: ProductFilters = {}): Promise<CatalogProduct[]> {
+  return (await getProducts(filters)).map(toCatalogProduct);
+}
+
+export async function getProductPage(slug: string) {
+  const product = await getProductBySlug(slug);
+  if (!product) return null;
+  const [reviews, recommendations] = await Promise.all([
+    getReviewsForProduct(slug),
+    getRecommendations(product.category, slug),
+  ]);
+  return {
+    product: toCatalogProduct(product),
+    reviews: reviews.map(
+      (review): CatalogReview => ({
+        id: String(review._id),
+        name: review.name,
+        rating: review.rating,
+        comment: review.comment,
+        createdAt: new Date(review.createdAt).toISOString(),
+      }),
+    ),
+    recommendations: recommendations.map(toCatalogProduct),
+  };
+}
+
+export type HighlightedReview = CatalogReview & { productSlug: string; productName: string };
+
+/** Recent 4–5★ reviews across the catalog, with the product they're about. */
+export async function getHighlightedReviews(limit = 6): Promise<HighlightedReview[]> {
+  await connect();
+  const reviews = await Review.find({ rating: { $gte: 4 } }).sort({ createdAt: -1 }).limit(limit).lean();
+  const products = await Product.find({ slug: { $in: reviews.map((r) => r.productSlug) } }, { slug: 1, name: 1 }).lean();
+  const names = new Map(products.map((p) => [p.slug, p.name]));
+  return reviews
+    .filter((review) => names.has(review.productSlug))
+    .map((review) => ({
+      id: String(review._id),
+      name: review.name,
+      rating: review.rating,
+      comment: review.comment,
+      createdAt: new Date(review.createdAt).toISOString(),
+      productSlug: review.productSlug,
+      productName: names.get(review.productSlug)!,
+    }));
+}
+
 export async function getOrdersForUser(email: string, isAdmin: boolean) {
   await connect();
   const filter = isAdmin ? {} : { "shippingAddress.email": email };
@@ -122,8 +230,48 @@ export async function getAdminStats() {
   const products = await Product.find().lean();
   const topProducts = products
     .map((product) => ({ name: product.name, units: unitsBySlug.get(product.slug) ?? 0 }))
+    .filter((product) => product.units > 0)
     .sort((a, b) => b.units - a.units)
     .slice(0, 5);
 
-  return { revenue, ordersToday, topProducts, orderCount: orders.length };
+  // Last 30 days, one bucket per UTC day (oldest first), including empty days.
+  const DAY = 24 * 60 * 60 * 1000;
+  const startOfToday = Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate());
+  const daily = Array.from({ length: 30 }, (_, i) => ({
+    date: new Date(startOfToday - (29 - i) * DAY).toISOString().slice(0, 10),
+    revenue: 0,
+    orders: 0,
+  }));
+  const dayIndex = new Map(daily.map((day, i) => [day.date, i]));
+  for (const order of orders) {
+    const i = dayIndex.get(new Date(order.createdAt).toISOString().slice(0, 10));
+    if (i === undefined) continue;
+    daily[i].revenue = Math.round((daily[i].revenue + order.total) * 100) / 100;
+    daily[i].orders += 1;
+  }
+  const revenue30 = Math.round(daily.reduce((sum, day) => sum + day.revenue, 0) * 100) / 100;
+  const orders30 = daily.reduce((sum, day) => sum + day.orders, 0);
+
+  const recentOrders = [...orders]
+    .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+    .slice(0, 5)
+    .map((order) => ({
+      id: String(order._id),
+      name: order.shippingAddress?.name ?? "",
+      total: order.total,
+      status: order.status,
+      createdAt: new Date(order.createdAt).toISOString(),
+    }));
+
+  return {
+    revenue,
+    ordersToday,
+    topProducts,
+    orderCount: orders.length,
+    daily,
+    revenue30,
+    orders30,
+    averageOrder: orders30 ? Math.round((revenue30 / orders30) * 100) / 100 : 0,
+    recentOrders,
+  };
 }

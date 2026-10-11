@@ -14,10 +14,18 @@ export default async function AdminPage() {
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
       <div className="mb-8">
         <h1 className="font-display text-4xl text-ink sm:text-5xl">Dashboard</h1>
-        <p className="mt-2 text-black/50">Store performance at a glance.</p>
+        <p className="mt-2 text-black/60">Store performance at a glance.</p>
       </div>
       <AdminNav />
-      <AdminStats revenue={data.revenue} ordersToday={data.ordersToday} topProducts={data.topProducts} />
+      <AdminStats
+        revenue30={data.revenue30}
+        orders30={data.orders30}
+        averageOrder={data.averageOrder}
+        ordersToday={data.ordersToday}
+        daily={data.daily}
+        topProducts={data.topProducts}
+        recentOrders={data.recentOrders}
+      />
     </section>
   );
 }

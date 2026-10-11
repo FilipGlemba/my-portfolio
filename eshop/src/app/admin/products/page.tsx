@@ -15,14 +15,14 @@ export default async function AdminProductsPage() {
     <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6">
       <div className="mb-8 flex items-center justify-between gap-4">
         <h1 className="font-display text-4xl text-ink sm:text-5xl">Inventory</h1>
-        <Link href="/admin/products/new" className="inline-flex items-center justify-center rounded-full bg-flame-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600">
+        <Link href="/admin/products/new" className="inline-flex items-center justify-center rounded-full bg-flame-600 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-700">
           + Create product
         </Link>
       </div>
       <AdminNav />
       <div className="overflow-hidden rounded-2xl border border-black/5 bg-white shadow-sm">
         <table className="min-w-full divide-y divide-black/5 text-left text-sm">
-          <thead className="bg-black/[0.02] text-black/50">
+          <thead className="bg-black/[0.02] text-black/60">
             <tr>
               <th className="px-6 py-4 font-semibold">Product</th>
               <th className="px-6 py-4 font-semibold">Category</th>

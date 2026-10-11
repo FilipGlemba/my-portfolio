@@ -23,7 +23,6 @@ All photos below are freely licensed (Creative Commons / public domain), sourced
 | `products/performance-headband.jpg` | Trackandfield Tracksuit | Ryan McGuire / StockSnap | CC0 1.0 | https://stocksnap.io/photo/trackandfield-tracksuit-EAFA2E9467 |
 | `products/elite-running-shoe-2.jpg` | Cropped from "My hideous running shoes" (tight crop on the laced toe box, to leave out a side-panel logo) | minorissues | CC BY 2.0 | https://www.flickr.com/photos/63051956@N00/3769610224 |
 | `products/yoga-mat-2.jpg` | Cropped from "A woman prepares for her yoga routine" | Shixart1985 | CC BY 2.0 | https://commons.wikimedia.org/w/index.php?curid=197293341 |
-
-**Not a real photo** — `momentum-strength-tee` still uses a generated illustration (`src/lib/seed-data.ts`): every tee/tank-top photo found in the search had a competing brand's logo printed on it, so a custom graphic was used rather than a misleading one. Swap it for a real photo first if you keep editing.
+| `products/momentum-strength-tee.jpg` | Cropped from "Blank t-shirts hanging wooden hangers" (no logos) | rawpixel | CC0 1.0 | https://www.rawpixel.com/image/11524162/blank-t-shirts-hanging-wooden-hangers |
 
 All images were resized/re-compressed for the web (`sharp`) from their originals — go to the source link for the original file if you want to re-edit from full resolution.

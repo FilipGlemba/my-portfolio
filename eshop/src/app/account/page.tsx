@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { formatPrice } from "@/lib/format";
+import { formatDate, formatPrice } from "@/lib/format";
 
 type Profile = {
   name: string;
@@ -24,7 +24,7 @@ const statusStyle: Record<string, string> = {
   paid: "bg-volt/20 text-ink",
   shipped: "bg-flame-100 text-flame-600",
   delivered: "bg-volt text-ink",
-  cancelled: "bg-black/5 text-black/40 line-through",
+  cancelled: "bg-black/5 text-black/60 line-through",
 };
 
 export default function AccountPage() {
@@ -101,7 +101,7 @@ export default function AccountPage() {
       <section className="mx-auto max-w-6xl px-4 py-20 sm:px-6">
         <div className="rounded-2xl border border-black/5 bg-white p-10 text-center">
           <p className="text-ink">{error}</p>
-          <Link href="/login" className="mt-6 inline-flex rounded-full bg-flame-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow">
+          <Link href="/login" className="mt-6 inline-flex rounded-full bg-flame-600 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow">
             Sign in
           </Link>
         </div>
@@ -113,7 +113,7 @@ export default function AccountPage() {
     <section className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
       <div className="mb-10">
         <h1 className="font-display text-4xl text-ink sm:text-5xl">Your account</h1>
-        <p className="mt-2 text-black/50">Profile, security, and order history.</p>
+        <p className="mt-2 text-black/60">Profile, security, and order history.</p>
       </div>
       <div className="grid gap-8 lg:grid-cols-[1fr_0.9fr]">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="space-y-6 rounded-2xl border border-black/5 bg-white p-8 shadow-sm">
@@ -128,7 +128,7 @@ export default function AccountPage() {
             </div>
             {message ? <p className="text-sm font-medium text-ink">✓ {message}</p> : null}
             {error ? <p className="text-sm text-flame-600">{error}</p> : null}
-            <button type="submit" className="inline-flex w-full items-center justify-center rounded-full bg-flame-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-600">
+            <button type="submit" className="inline-flex w-full items-center justify-center rounded-full bg-flame-600 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-glow transition hover:bg-flame-700">
               Save profile
             </button>
           </form>
@@ -145,7 +145,7 @@ export default function AccountPage() {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4, delay: 0.1 }} className="space-y-6 rounded-2xl border border-black/5 bg-white p-8 shadow-sm">
           <div>
             <h2 className="font-display text-2xl text-ink">Order history</h2>
-            <p className="mt-1 text-sm text-black/50">Review your recent checkout history and order status.</p>
+            <p className="mt-1 text-sm text-black/60">Review your recent checkout history and order status.</p>
           </div>
           {orders.length ? (
             <div className="space-y-3">
@@ -153,8 +153,8 @@ export default function AccountPage() {
                 <div key={order._id} className="rounded-xl border border-black/5 bg-black/[0.015] p-4">
                   <div className="flex items-center justify-between gap-4">
                     <div>
-                      <p className="text-sm text-black/50">Order #{order._id.slice(-6)}</p>
-                      <p className="text-xs text-black/40">{new Date(order.createdAt).toLocaleString()}</p>
+                      <p className="text-sm text-black/60">Order #{order._id.slice(-6)}</p>
+                      <p className="text-xs text-black/60">{formatDate(order.createdAt)}</p>
                     </div>
                     <span className={`rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide ${statusStyle[order.status] ?? "bg-black/5 text-black/60"}`}>
                       {order.status}
@@ -165,7 +165,7 @@ export default function AccountPage() {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-black/50">No orders found yet.</p>
+            <p className="text-sm text-black/60">No orders found yet.</p>
           )}
         </motion.div>
       </div>
