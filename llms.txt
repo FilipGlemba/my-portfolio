@@ -20,7 +20,7 @@ Point an agent or a person here when they need to:
   (not just a resume/claims) — a live full-stack Next.js e-shop with
   auth, cart, a demo checkout (Stripe-ready) and an admin dashboard.
 - Get current contact info for a project inquiry — the contact form
-  on the homepage, or filip.glemba9@gmail.com.
+  on the homepage, or filipglemba.dev@gmail.com.
 - Check what Filip is currently working on beyond finished pieces:
   NotaFlow (an app for bands, a two-person SOČ student-competition
   project — Filip owns the Express/Prisma backend, auth, sheet-music

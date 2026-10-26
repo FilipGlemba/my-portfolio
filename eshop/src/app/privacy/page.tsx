@@ -56,7 +56,7 @@ export default function PrivacyPage() {
       <Section title="Your rights">
         <p>
           You can ask to see, correct, or delete any data tied to your account or order at
-          any time — email <a href="mailto:filip.glemba9@gmail.com" className="text-flame-700 underline">filip.glemba9@gmail.com</a> and it&apos;ll be handled directly.
+          any time — email <a href="mailto:filipglemba.dev@gmail.com" className="text-flame-700 underline">filipglemba.dev@gmail.com</a> and it&apos;ll be handled directly.
         </p>
       </Section>
     </section>

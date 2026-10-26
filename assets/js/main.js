@@ -59,7 +59,7 @@ document.querySelectorAll('.pcard').forEach(card => {
 // Je verejný – je určený na to, aby bol v kóde stránky. Kým je prázdny,
 // formulár len otvorí pripravený email v poštovom programe návštevníka.
 const WEB3FORMS_KEY = '';
-const CONTACT_EMAIL = 'filip.glemba9@gmail.com';
+const CONTACT_EMAIL = 'filipglemba.dev@gmail.com';
 
 const form = document.getElementById('contact-form');
 if (form) {

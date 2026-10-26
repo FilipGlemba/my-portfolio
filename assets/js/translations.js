@@ -67,7 +67,7 @@ const translations = {
     codeHeading: 'Hudba a kód',
     codeBecause: 'sa u mňa',
     codeEnjoy: 'stretávajú.',
-    aboutDesc1: 'Na akordeón ma mama prihlásila, keď som mal päť. Spočiatku som ho nemal rád – u učiteľa som celú hodinu nezahral ani tón, hoci doma mi to išlo bez problémov. Zlom prišiel v detskom folklórnom súbore Liptáčik, kde som sa rýchlo posunul. Dnes aktívne hrávam vo FS Liptov a v kapele Mozaika a po deviatich rokoch na ZUŠ si robím nadstavbu.',
+    aboutDesc1: 'Na akordeón ma mama prihlásila, keď som mal päť. Spočiatku som ho nemal rád – u učiteľa som celú hodinu nezahral ani tón, hoci doma mi to išlo bez problémov. Zlom prišiel v detskom folklórnom súbore Liptáčik, kde som sa rýchlo posunul. Dnes aktívne hrávam vo FS Liptov a v kapele Mozaika. Takisto po deviatich rokoch na ZUŠ v štúdiu pokračujem.',
     aboutDesc2: 'K webom som sa dostal sám – zaujímalo ma, ako fungujú, tak som skúšal. Naplno ma to chytilo v deviatom ročníku na Web Developer kurze v Bratislave, kde vznikli aj prvé kroky k tomuto portfóliu. Dnes robím v HTML, CSS a JavaScripte, väčšie projekty v Reacte a Next.js, a študujem na SSOSTA (Informačné a digitálne technológie, 3. ročník).',
     aboutDesc3: 'Prečo weby pre kapely? Keď chcem zistiť, kde hrá nejaká kapela, prvé, čo urobím, je Google. A väčšinou nájdem len Facebook s termínmi spred roka. Vlastný web dá kapele viditeľnosť a jedno miesto, kde je všetko aktuálne – rýchle aj na mobile a bez sledovania návštevníkov.',
     aboutDesc4: 'Keď práve nehrám ani nekódujem, robím na SOČ-ke, počúvam hudbu alebo športujem.',
@@ -112,7 +112,7 @@ const translations = {
     formNoteService: 'Správu doručuje služba Web3Forms.',
     orEmail: 'Alebo napíš priamo:',
     formTypePick: 'Vyber…',
-    formOpening: 'Otvára sa tvoj e-mail. Ak sa nič neotvorilo, napíš mi priamo na filip.glemba9@gmail.com.',
+    formOpening: 'Otvára sa tvoj e-mail. Ak sa nič neotvorilo, napíš mi priamo na filipglemba.dev@gmail.com.',
     privacyLink: 'Ochrana osobných údajov',
 
     // FOOTER
@@ -186,7 +186,7 @@ const translations = {
     codeHeading: 'Where music',
     codeBecause: 'meets',
     codeEnjoy: 'code.',
-    aboutDesc1: 'My mum signed me up for accordion lessons when I was five. At first I didn’t like it – at lessons I wouldn’t play a single note for the whole hour, even though at home it went fine. Things changed in the children’s folk ensemble Liptáčik, where I improved quickly. Today I play in the folk ensemble FS Liptov and in the band Mozaika, and after nine years at art school I’m continuing with advanced studies.',
+    aboutDesc1: 'My mum signed me up for accordion lessons when I was five. At first I didn’t like it – at lessons I wouldn’t play a single note for the whole hour, even though at home it went fine. Things changed in the children’s folk ensemble Liptáčik, where I improved quickly. Today I play in the folk ensemble FS Liptov and in the band Mozaika. After nine years at art school, I’m also continuing my studies there.',
     aboutDesc2: 'I got into websites on my own – I was curious how they work, so I tried things out. What really got me hooked was a Web Developer course in Bratislava in ninth grade, where I also took the first steps towards this portfolio. Today I work with HTML, CSS and JavaScript, bigger projects in React and Next.js, and I study Information and Digital Technologies at SSOSTA (3rd year).',
     aboutDesc3: 'So why websites for bands? When I want to know where a band is playing, the first thing I do is google it. Usually I only find a Facebook page with dates from a year ago. A website gives a band visibility and one place where everything is up to date – fast on phones and without tracking visitors.',
     aboutDesc4: 'When I’m not playing or coding, I’m working on my SOČ project, listening to music or doing sports.',
@@ -231,7 +231,7 @@ const translations = {
     formNoteService: 'The message is delivered by Web3Forms.',
     orEmail: 'Or email me directly:',
     formTypePick: 'Choose…',
-    formOpening: 'Your email app is opening. If nothing happened, email me directly at filip.glemba9@gmail.com.',
+    formOpening: 'Your email app is opening. If nothing happened, email me directly at filipglemba.dev@gmail.com.',
     privacyLink: 'Privacy policy',
 
     // FOOTER
