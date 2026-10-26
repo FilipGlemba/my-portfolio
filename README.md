@@ -13,7 +13,7 @@ Personal web developer portfolio showcasing standalone projects with bilingual c
 
 | Project               | Type          | Key Features                                                                  |
 | ---------------------- | ------------- | ------------------------------------------------------------------------------ |
-| 🛍️ **FitGear E-shop** | Next.js Stack | E-commerce with auth, catalog, cart, Stripe checkout, orders, admin dashboard  |
+| 🛍️ **FitGear E-shop** | Next.js Stack | E-commerce with auth, catalog, cart, demo checkout (Stripe-ready), orders, admin dashboard  |
 
 The portfolio homepage (`index.html`) also showcases two additional projects — **Mozaika** (a band website) and an ongoing **client project** — that live in their own separate repositories and aren't included in this one.
 

@@ -30,24 +30,6 @@
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../fonts/jetbrains-mono-400-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src: url('../fonts/jetbrains-mono-400-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
 /* Fraunces a Manrope sú variabilné fonty — jeden súbor pokryje všetky hrúbky. Licencia OFL. */
 
 @font-face {
@@ -176,7 +158,7 @@ h1,h2,h3,h4 { font-optical-sizing:auto }
 
 body {
   background:var(--bg); color:var(--ink);
-  font-family:var(--ff-ui); font-size:15px; line-height:1.65;
+  font-family:var(--ff-ui); font-size:16px; line-height:1.65;
   overflow-x:hidden; -webkit-font-smoothing:antialiased;
 }
 
@@ -321,6 +303,7 @@ nav.up {
   text-transform:uppercase - veľké písmená
 */
 .lang-btn {
+  min-width:44px; min-height:36px;
   background:none; border:1px solid var(--ink3); color:var(--ink2);
   padding:5px 12px; font-size:11px; font-weight:600; letter-spacing:.05em;
   border-radius:3px; cursor:pointer; transition:all .2s;
@@ -347,6 +330,7 @@ nav.up {
   transition - plynulé zmeny pozadia a transformácie
 */
 .nav-btn {
+  white-space:nowrap;
   padding:7px 20px; background:var(--ink); color:#fff;
   border-radius:3px; font-size:12px; font-weight:600;
   letter-spacing:.04em; text-decoration:none;
@@ -367,7 +351,7 @@ nav.up {
 */
 .menu-toggle {
   display:none; flex-direction:column; justify-content:center; gap:4px;
-  width:32px; height:32px; padding:0; background:none; border:none; cursor:pointer;
+  width:44px; height:44px; padding:6px; background:none; border:none; cursor:pointer;
 }
 .menu-toggle span {
   display:block; width:100%; height:1.5px; background:var(--ink);
@@ -391,10 +375,10 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   overflow:hidden - oreže všetko čo presahuje
 */
 #hero {
-  min-height:100vh;
-  display:grid; grid-template-columns:1fr 1fr;
-  align-items:center; gap:5rem;
-  padding:7rem 3.5rem 5rem;
+  min-height:min(100vh, 860px);
+  display:grid; grid-template-columns:1.1fr .9fr;
+  align-items:center; gap:4rem;
+  padding:8rem 3.5rem 5rem;
   position:relative; overflow:hidden;
 }
 
@@ -455,8 +439,8 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 */
 .h-pill {
   display:inline-flex; align-items:center; gap:7px;
-  font-family:var(--ff-mono); font-size:10.5px; letter-spacing:.06em;
-  color:var(--green); background:var(--green-bg);
+  font-family:var(--ff-mono); font-size:11.5px; letter-spacing:.06em;
+  color:var(--okra-dark); background:var(--amber-bg);
   padding:5px 13px; border-radius:20px; margin-bottom:2.25rem;
   opacity:0; transform:translateY(8px);
   animation:up .5s .05s forwards;
@@ -470,7 +454,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   animation - blikajúci glow efekt
 */
 .h-dot {
-  width:6px; height:6px; border-radius:50%; background:var(--green);
+  width:6px; height:6px; border-radius:50%; background:var(--okra);
   animation:glow-g 2.4s ease-in-out infinite;
 }
 
@@ -486,12 +470,12 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   animation - animácia "up" s oneskorením
 */
 .h-title {
-  font-family:var(--ff-head);
-  font-size:clamp(54px,6.5vw,90px);
-  line-height:.94; letter-spacing:-.03em;
-  margin-bottom:1.25rem;
-  opacity:0; transform:translateY(18px);
-  animation:up .8s .2s forwards;
+  font-family:var(--ff-head); font-weight:500;
+  font-size:clamp(46px,6vw,84px);
+  line-height:.98; letter-spacing:-.03em;
+  margin-bottom:1.4rem;
+  /* len posun, bez priehľadnosti — nadpis je hneď viditeľný (rýchlejšie LCP) */
+  animation:rise .8s .1s both;
 }
 
 /*
@@ -505,8 +489,8 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   H-ROLE - rola pod menom (Web developer · Slovensko)
 */
 .h-role {
-  font-family:var(--ff-mono); font-size:12px; letter-spacing:.08em;
-  color:var(--ink2); margin-bottom:1.75rem;
+  font-family:var(--ff-mono); font-size:13px; letter-spacing:.06em;
+  color:var(--ink2); margin-bottom:1.5rem;
   opacity:0; animation:up .75s .3s forwards;
 }
 
@@ -521,8 +505,8 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   animation - animácia "up" s oneskorením
 */
 .h-desc {
-  font-size:15px; color:var(--ink2);
-  line-height:1.85; max-width:460px; margin-bottom:2.25rem;
+  font-size:18px; color:var(--ink2);
+  line-height:1.7; max-width:46ch; margin-bottom:2.25rem;
   opacity:0; animation:up .75s .36s forwards;
 }
 
@@ -735,7 +719,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   padding:1.75rem; display:flex; flex-direction:column;
   position:relative; overflow:hidden;
   transition:transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s;
-  text-decoration:none; color:inherit; cursor:pointer;
+  text-decoration:none; color:inherit;
 }
 
 /*
@@ -832,7 +816,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   margin-bottom - odstup dole
   flex:1 - zaberá dostupný priestor
 */
-.pcard-desc { font-size:13px; color:var(--ink2); line-height:1.75; margin-bottom:1.25rem; flex:1 }
+.pcard-desc { font-size:15px; color:var(--ink2); line-height:1.75; margin-bottom:1.25rem; flex:1 }
 
 /*
   PCARD-TAGS - kontajner pre technické štítky
@@ -895,7 +879,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   letter-spacing - rozšírenie
   transition - zmena farby
 */
-.pcard-link { font-family:var(--ff-mono); font-size:11px; color:var(--ink3); text-decoration:none; letter-spacing:.04em; transition:color .2s }
+.pcard-link { font-family:var(--ff-mono); font-size:13px; color:var(--ink2); text-decoration:none; letter-spacing:.02em; padding:.55rem 0; transition:color .2s }
 
 /*
   PCARD:HOVER .PCARD-LINK - zmena farby odkazov pri hover na karte
@@ -924,7 +908,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   border-radius - veľmi zaoblené
   letter-spacing - rozšírenie
 */
-.badge { font-family:var(--ff-mono); font-size:9.5px; padding:3px 9px; border-radius:20px; letter-spacing:.06em }
+.badge { font-family:var(--ff-mono); font-size:10.5px; padding:3px 9px; border-radius:20px; letter-spacing:.06em }
 
 /*
   BADGE-DONE - štítok pre dokončené projekty
@@ -939,187 +923,6 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   color - oranžový text
 */
 .badge-wip  { background:var(--amber-bg); color:var(--amber) }
-
-/* ─── STACK ─── */
-
-/*
-  #STACK - sekcia s technickými zručnosťami
-  background - svetlé pozadie
-*/
-#stack { background:var(--bg) }
-
-/*
-  STACK-CATEGORIES - mriežka pre kategórie zručností
-  display:grid - CSS Grid
-  grid-template-columns:repeat(3,1fr) - tri stĺpce rovnakej šírky
-  gap - medzery medzi kategóriami
-*/
-.stack-categories { display:grid; grid-template-columns:repeat(3,1fr); gap:20px }
-
-/*
-  SCAT - karta kategórie zručností (napr. Frontend, Backend, Tools)
-  background - svetlé pozadie
-  border - tenká hranica
-  border-radius - zaoblené rohy
-  overflow:hidden - oreže pretekajúci obsah
-  transition - plynulé zmeny pri hover
-*/
-.scat { background:var(--bg); border:1px solid var(--bd); border-radius:14px; overflow:hidden; transition:box-shadow .25s, border-color .25s }
-
-/*
-  SCAT:HOVER - hover efekty pre kategóriu
-  box-shadow - väčší tieň
-  border-color - tmavšia hranica
-*/
-.scat:hover { box-shadow:0 8px 32px rgba(0,0,0,.07); border-color:var(--bd2) }
-
-/*
-  SCAT-HEAD - hlavička kategórie (ikona a názov)
-  padding - vnútorné odsadenie
-  border-bottom - horizontálna čiara
-  background - mierne tmavšie pozadie
-  display:flex - flexbox
-  align-items:center - vertikálne centrované
-  gap - medzera medzi ikonou a textom
-*/
-.scat-head { padding:1.1rem 1.4rem .9rem; border-bottom:1px solid var(--bd); background:var(--bg2); display:flex; align-items:center; gap:10px }
-
-/*
-  SCAT-LABEL - názov kategórie
-  font-family - monospace písmo
-  font-size - malý text
-  color - stredne tmavý
-  letter-spacing - rozšírenie
-  font-weight:500 - polotučné
-*/
-.scat-label { font-family:var(--ff-mono); font-size:10.5px; color:var(--ink2); letter-spacing:.1em; font-weight:500 }
-
-/*
-  SCAT-ITEMS - kontajner pre jednotlivé zručnosti v kategórii
-  padding - vertikálne odsadenie
-*/
-.scat-items { padding:.5rem 0 }
-
-/*
-  SITEM - jednotlivá zručnosť (napr. React, Node.js)
-  display:flex - flexbox
-  align-items:center - vertikálne centrované
-  justify-content:space-between - prvky na kraje
-  padding - vnútorné odsadenie
-  transition - zmena pozadia pri hover
-*/
-.sitem { display:flex; align-items:center; justify-content:space-between; padding:.7rem 1.4rem; transition:background .18s }
-
-/*
-  SITEM:HOVER - hover efekt pre zručnosť
-  background - mierne tmavšie pozadie
-*/
-.sitem:hover { background:var(--bg2) }
-
-/*
-  SITEM-L - ľavá časť zručnosti (bodka + názov)
-  display:flex - flexbox
-  align-items:center - vertikálne centrované
-  gap - medzera medzi bodkou a názvom
-*/
-.sitem-l { display:flex; align-items:center; gap:10px }
-
-/*
-  SITEM-DOT - farebná bodka označujúca úroveň zručnosti
-  width,height - veľkosť kruhu
-  border-radius:50% - kruhový tvar
-  flex-shrink:0 - nezmenšuje sa
-*/
-.sitem-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0 }
-
-/*
-  DOT-ADVANCED - bodka pre advanced úroveň (červená)
-  background - ľudová červená
-*/
-.dot-advanced { background:var(--red) }
-
-/*
-  DOT-MID - bodka pre mid úroveň (zelená)
-  background - tmavo zelená
-*/
-.dot-mid      { background:var(--okra) }
-
-/*
-  DOT-BASIC - bodka pre basic úroveň (sivá)
-  background - sivá
-*/
-.dot-basic    { background:var(--ink3) }
-
-/*
-  SITEM-NAME - názov zručnosti
-  font-size - stredný text
-  font-weight:600 - polotučné
-  color - tmavý text
-*/
-.sitem-name { font-size:13px; font-weight:600; color:var(--ink) }
-
-/*
-  SITEM-LEVEL - štítok s úrovňou zručnosti
-  font-family - monospace písmo
-  font-size - malý text
-  letter-spacing - rozšírenie
-  padding - vnútorné odsadenie
-  border-radius - zaoblené rohy
-*/
-.sitem-level { font-family:var(--ff-mono); font-size:9.5px; letter-spacing:.07em; padding:2px 8px; border-radius:20px }
-
-/*
-  LV-ADVANCED - štýl pre advanced úroveň
-  background - priesvitné červené pozadie
-  color - červený text
-*/
-.lv-advanced { background:var(--red-bg); color:var(--red) }
-
-/*
-  LV-MID - štýl pre mid úroveň
-  background - priesvitné zelené pozadie
-  color - zelený text
-*/
-.lv-mid      { background:var(--amber-bg); color:var(--okra-dark) }
-
-/*
-  LV-BASIC - štýl pre basic úroveň
-  background - priesvitné sivé pozadie
-  color - sivý text
-*/
-.lv-basic    { background:rgba(107,100,90,.12); color:var(--ink2) }
-
-/*
-  STACK-LEGEND - legenda vysvetľujúca farby úrovní
-  display:flex - horizontálne zoradenie
-  gap - medzery medzi položkami
-  margin-bottom - odstup dole
-  flex-wrap:wrap - zalamovanie na viac riadkov
-*/
-.stack-legend { display:flex; gap:1.5rem; margin-bottom:2rem; flex-wrap:wrap }
-
-/*
-  LEG-ITEM - jednotlivá položka legendy
-  display:flex - flexbox
-  align-items:center - vertikálne centrované
-  gap - medzera medzi bodkou a textom
-*/
-.leg-item { display:flex; align-items:center; gap:6px }
-
-/*
-  LEG-DOT - farebná bodka v legende
-  width,height - veľkosť kruhu
-  border-radius:50% - kruhový tvar
-*/
-.leg-dot { width:7px; height:7px; border-radius:50% }
-
-/*
-  LEG-LABEL - text v legende
-  font-family - monospace písmo
-  font-size - malý text
-  color - stredne tmavý
-*/
-.leg-label { font-family:var(--ff-mono); font-size:10.5px; color:var(--ink2) }
 
 /* ─── ABOUT ─── */
 
@@ -1173,7 +976,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   line-height - prirodzené riadkovanie
   margin-bottom - odstup dole
 */
-.about-p { font-size:14px; color:var(--ink2); line-height:1.9; margin-bottom:1rem }
+.about-p { font-size:16px; color:var(--ink2); line-height:1.9; margin-bottom:1rem }
 
 /*
   INFO-GRID - mriežka s informáciami (lokácia, skúsenosti, atď.)
@@ -1207,7 +1010,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   letter-spacing - rozšírenie
   margin-bottom - odstup dole
 */
-.ig-label { font-family:var(--ff-mono); font-size:10px; color:var(--ink3); letter-spacing:.1em; margin-bottom:.35rem }
+.ig-label { font-family:var(--ff-mono); font-size:11.5px; color:var(--ink3); letter-spacing:.1em; margin-bottom:.35rem }
 
 /*
   IG-VAL - hlavná hodnota informácie
@@ -1225,20 +1028,6 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 */
 .ig-sub { font-size:12px; color:var(--ink2); margin-top:2px }
 
-/*
-  EDU-CARD - mini-blok vzdelania a certifikácií pod tech stackom
-  border, border-radius, background - rovnaký jazyk ako ig-cell
-  margin-top - odstup od stack-categories grid
-*/
-.edu-card { border:1px solid var(--bd); border-radius:10px; background:var(--bg); padding:1.3rem 1.5rem; margin-top:1.5rem }
-
-/*
-  EDU-LIST - zoznam položiek vzdelania/certifikátov
-  display:flex column - položky pod sebou s odstupom
-*/
-.edu-list { display:flex; flex-direction:column; gap:.4rem; margin-top:.6rem }
-.edu-list li { list-style:none; font-size:14px; color:var(--ink2); padding-left:1rem; position:relative }
-.edu-list li::before { content:"–"; position:absolute; left:0; color:var(--ink3) }
 
 /* ─── CONTACT ─── */
 
@@ -1267,8 +1056,8 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   white-space:nowrap - bez zalamovania
 */
 .contact-ghost {
-  position:absolute; font-family:var(--ff-head); font-style:italic;
-  font-size:clamp(90px,16vw,210px); color:var(--bg2); letter-spacing:-.04em;
+  position:absolute; font-family:var(--ff-head);
+  font-size:clamp(80px,15vw,200px); color:var(--bg2); opacity:.7; letter-spacing:-.04em;
   top:7rem; left:50%; transform:translateX(-50%);
   pointer-events:none; user-select:none; white-space:nowrap;
 }
@@ -1299,7 +1088,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   letter-spacing - mierne zúženie
   margin-bottom - odstup dole
 */
-.c-title { font-family:var(--ff-head); font-size:clamp(44px,7vw,88px); font-weight:400; line-height:1; letter-spacing:-.03em; margin-bottom:1.2rem }
+.c-title { font-family:var(--ff-head); font-size:clamp(36px,7vw,88px); font-weight:400; line-height:1; letter-spacing:-.03em; margin-bottom:1.2rem }
 
 /*
   C-TITLE EM - kurzíva v nadpise
@@ -1316,7 +1105,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   margin - centrované a odstup dole
   line-height - prirodzené riadkovanie
 */
-.c-sub { font-size:15px; color:var(--ink2); max-width:460px; margin:0 auto 2.75rem; line-height:1.8 }
+.c-sub { font-size:16px; color:var(--ink2); max-width:460px; margin:0 auto 2.75rem; line-height:1.8 }
 
 /*
   KONTAKTNÝ FORMULÁR - polia zarovnané naľavo v strednom stĺpci
@@ -1324,7 +1113,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 .c-form { max-width:620px; margin:0 auto; text-align:left; display:flex; flex-direction:column; gap:1rem }
 .f-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem }
 .f-field { display:flex; flex-direction:column; gap:.4rem; min-width:0 }
-.f-label { font-family:var(--ff-mono); font-size:11px; letter-spacing:.06em; color:var(--ink2) }
+.f-label { font-family:var(--ff-mono); font-size:12px; letter-spacing:.06em; color:var(--ink2) }
 .f-field input,
 .f-field select,
 .f-field textarea {
@@ -1338,18 +1127,23 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 .f-field select:focus,
 .f-field textarea:focus {
   outline:none; border-color:var(--red); background:#fbf8f2;
-  box-shadow:0 0 0 3px var(--red-bg);
+  box-shadow:0 0 0 2px var(--red);
 }
+/* Chyba sa ukáže až po tom, čo s poľom človek pracoval (nie hneď pri načítaní) */
+.f-field input:user-invalid,
+.f-field select:user-invalid,
+.f-field textarea:user-invalid { border-color:var(--red); background:var(--red-bg) }
 .f-hp { position:absolute; left:-9999px; opacity:0 }
 .f-submit { align-self:flex-start; border:none; cursor:pointer; font:inherit; font-size:14px; font-weight:600 }
 .f-submit:disabled { opacity:.6; cursor:wait }
 .f-status { font-size:14px; min-height:1.2em; margin:0 }
 .f-status[data-state="ok"] { color:var(--green) }
 .f-status[data-state="error"] { color:var(--red) }
-.f-note { font-size:12px; color:var(--ink3); margin:0 }
+.f-note { font-size:13px; color:var(--ink3); margin:0 }
+.f-note a { color:var(--ink2); text-decoration:underline; text-decoration-color:var(--red); text-underline-offset:3px }
 
 /* Alternatíva k formuláru: email a GitHub v jednom riadku */
-.c-alt { margin-top:2.5rem; font-size:13px; color:var(--ink3); display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap }
+.c-alt { margin-top:2.5rem; font-size:14px; color:var(--ink3); display:flex; gap:.6rem; justify-content:center; flex-wrap:wrap }
 .c-alt a { color:var(--ink); text-decoration:underline; text-decoration-color:var(--red); text-underline-offset:3px }
 .c-alt a:hover { color:var(--red) }
 
@@ -1362,7 +1156,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 .faq-grid { display:grid; grid-template-columns:1fr 1fr; gap:2.25rem 4rem; margin:0 }
 .faq-item { padding-top:1.25rem; border-top:1px solid var(--bd) }
 .faq-q { font-family:var(--ff-head); font-size:19px; font-weight:500; color:var(--ink); margin-bottom:.45rem; line-height:1.3 }
-.faq-a { font-size:14px; color:var(--ink2); line-height:1.7; margin:0; max-width:52ch }
+.faq-a { font-size:15.5px; color:var(--ink2); line-height:1.7; margin:0; max-width:52ch }
 
 /* ─── FOOTER ─── */
 
@@ -1382,7 +1176,7 @@ footer { padding:1.2rem 3.5rem; border-top:1px solid var(--bd); display:flex; ju
   font-size - malý text
   color - svetlo sivý
 */
-footer p { font-family:var(--ff-mono); font-size:11px; color:var(--ink3) }
+footer p { font-family:var(--ff-mono); font-size:12px; color:var(--ink3) }
 
 /*
   FOOTER A - odkazy v päte
@@ -1390,7 +1184,7 @@ footer p { font-family:var(--ff-mono); font-size:11px; color:var(--ink3) }
   text-decoration:none - bez podčiarknutia
   transition - zmena farby
 */
-footer a { color:var(--ink3); text-decoration:none; transition:color .2s }
+footer a { color:var(--ink3); text-decoration:underline; text-underline-offset:3px; transition:color .2s }
 
 /*
   FOOTER A:HOVER - hover efekt pre odkazy v päte
@@ -1405,26 +1199,14 @@ footer a:hover { color:var(--ink) }
   to { opacity:1; transform:translateY(0) rotate(0) } - konečný stav: viditeľné, na pôvodnej pozícii
 */
 @keyframes up    { to { opacity:1; transform:translateY(0) rotate(0) } }
-
-/*
-  @KEYFRAMES BLINK - blikajúca animácia (pre kurzor)
-  0%,100% - plná nepriehľadnosť
-  50% - polovičná nepriehľadnosť
-*/
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+@keyframes rise  { from { transform:translateY(18px) } to { transform:translateY(0) } }
 
 /*
   @KEYFRAMES GLOW-G - zelené žiarivé blikanie (pre dostupnosť)
   0%,100% - žiadny tieň
   50% - zelený tieň s priesvitnosťou
 */
-@keyframes glow-g { 0%,100%{box-shadow:0 0 0 0 rgba(11,107,53,.4)} 50%{box-shadow:0 0 0 5px rgba(11,107,53,0)} }
-
-/*
-  @KEYFRAMES FLOAT - plávajúca animácia (hore-dole)
-  0%,100% - pôvodná pozícia
-  50% - posunutie nahor
-*/
+@keyframes glow-g { 0%,100%{box-shadow:0 0 0 0 rgba(200,144,46,.5)} 50%{box-shadow:0 0 0 5px rgba(200,144,46,0)} }
 
 /*
   REVEAL - trieda pre prvky ktoré sa postupne zobrazujú pri scroll
@@ -1432,14 +1214,14 @@ footer a:hover { color:var(--ink) }
   transform:translateY(22px) - posunuté dole
   transition - plynulé zobrazovanie
 */
-.reveal { opacity:0; transform:translateY(22px); transition:opacity .65s var(--ease), transform .65s var(--ease) }
+.js .reveal { opacity:0; transform:translateY(22px); transition:opacity .65s var(--ease), transform .65s var(--ease) }
 
 /*
   REVEAL.IN - stav keď je prvok viditeľný
   opacity:1 - plne viditeľné
   transform:translateY(0) - na pôvodnej pozícii
 */
-.reveal.in { opacity:1; transform:translateY(0) }
+.js .reveal.in { opacity:1; transform:translateY(0) }
 
 /*
   D1-D3 - oneskorenia pre postupné zobrazovanie prvkov
@@ -1475,13 +1257,14 @@ footer a:hover { color:var(--ink) }
 .svc-tag { font-family:var(--ff-mono); font-size:10px; letter-spacing:.12em; color:var(--red); margin-bottom:.8rem }
 .svc-title { font-family:var(--ff-head); font-size:21px; font-weight:500; line-height:1.25; color:var(--ink); margin-bottom:.6rem }
 .svc-main .svc-title { font-size:clamp(24px,2.4vw,30px) }
-.svc-desc { font-size:13.5px; color:var(--ink2); line-height:1.7; margin:0; max-width:52ch }
+.svc-desc { font-size:15px; color:var(--ink2); line-height:1.7; margin:0; max-width:52ch }
 
 .svc-list {
   list-style:none; margin:1.4rem 0 0; padding:0;
   display:grid; grid-template-columns:1fr 1fr; gap:.6rem 1.5rem;
 }
-.svc-list li { position:relative; padding-left:1.1rem; font-size:13.5px; color:var(--ink) }
+.svc-list-single { grid-template-columns:1fr; margin-top:1.1rem }
+.svc-list li { position:relative; padding-left:1.1rem; font-size:15px; color:var(--ink) }
 .svc-list li::before {
   content:""; position:absolute; left:0; top:.55em;
   width:6px; height:6px; background:var(--red); transform:rotate(45deg);
@@ -1489,6 +1272,13 @@ footer a:hover { color:var(--ink) }
 
 /* AKO TO PREBIEHA - štyri kroky v jednom riadku */
 .process { margin-top:4rem }
+.process-title { font-weight:400 }
+.process-cta {
+  display:inline-block; margin-top:1.5rem; font-weight:600; font-size:15px; color:var(--red);
+  text-decoration:none; border-bottom:1.5px solid var(--red-bd); padding-bottom:2px;
+  transition:border-color .2s;
+}
+.process-cta:hover { border-color:var(--red) }
 .steps {
   list-style:none; margin:1rem 0 0; padding:0;
   display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
@@ -1497,7 +1287,36 @@ footer a:hover { color:var(--ink) }
 .step { background:var(--bg); padding:1.5rem 1.4rem }
 .step-num { font-family:var(--ff-mono); font-size:11px; color:var(--red); letter-spacing:.08em }
 .step-title { font-family:var(--ff-head); font-size:18px; font-weight:500; color:var(--ink); margin:.55rem 0 .35rem }
-.step-desc { font-size:13px; color:var(--ink2); line-height:1.6; margin:0 }
+.step-desc { font-size:14.5px; color:var(--ink2); line-height:1.6; margin:0 }
+
+/* ─── PRÍSTUPNOSŤ ─── */
+
+/* Odkaz „Preskočiť na obsah“ — viditeľný len pri ovládaní klávesnicou */
+.skip-link {
+  position:fixed; top:.75rem; left:.75rem; z-index:1000;
+  background:var(--ink); color:var(--bg); padding:.7rem 1.1rem; border-radius:6px;
+  font-weight:600; text-decoration:none; transform:translateY(-200%); transition:transform .2s;
+}
+.skip-link:focus { transform:translateY(0) }
+
+/* Text len pre čítačky obrazovky */
+.sr-only {
+  position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+  overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+}
+
+/* Jasný fokus pre klávesnicu na všetkom klikateľnom */
+:focus-visible { outline:2px solid var(--red); outline-offset:3px }
+.f-field input:focus-visible,
+.f-field select:focus-visible,
+.f-field textarea:focus-visible { outline:none }
+
+/* Menej pohybu pre ľudí, ktorí si to nastavili v systéme */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto }
+  *, *::before, *::after { animation:none !important; transition:none !important }
+  .js .reveal, .h-pill, .h-title, .h-role, .h-desc, .h-actions, .hero-r, .hero-profile { opacity:1 !important; transform:none !important }
+}
 
 /* ─── RESPONSIVE ─── */
 
@@ -1508,7 +1327,6 @@ footer a:hover { color:var(--ink) }
 */
 @media(max-width:1050px) {
   .proj-grid { grid-template-columns:1fr 1fr }
-  .stack-categories { grid-template-columns:1fr 1fr }
   .svc-grid { grid-template-columns:1fr 1fr }
   .steps { grid-template-columns:1fr 1fr }
 }
@@ -1525,7 +1343,7 @@ footer a:hover { color:var(--ink) }
   #CONTACT - menšie padding
 */
 @media(max-width:960px) {
-  #hero { grid-template-columns:1fr; padding:7rem 2rem 4rem; gap:3rem }
+  #hero { grid-template-columns:1fr; min-height:auto; padding:7rem 2rem 4rem; gap:3rem }
   .hero-r { justify-content:flex-start }
   .avatar-ring { width:260px; height:260px }
   .photo-caption { max-width:260px; font-size:15px }
@@ -1542,22 +1360,18 @@ footer a:hover { color:var(--ink) }
     flex-direction:column; gap:0; margin:0; padding:.5rem 2rem 1rem;
     background:rgba(246,241,231,.98); backdrop-filter:blur(18px);
     border-bottom:1px solid var(--bd);
-    max-height:0; overflow:hidden; opacity:0;
-    transition:max-height .3s var(--ease), opacity .25s;
+    max-height:0; overflow:hidden; opacity:0; visibility:hidden;
+    transition:max-height .3s var(--ease), opacity .25s, visibility 0s .3s;
   }
   .nav-links li { width:100% }
   .nav-links a { display:block; padding:.85rem 0; border-bottom:1px solid var(--bd) }
   .nav-links li:last-child a { border-bottom:none }
-  nav.menu-open .nav-links { max-height:220px; opacity:1 }
+  nav.menu-open .nav-links { max-height:220px; opacity:1; visibility:visible; transition:max-height .3s var(--ease), opacity .25s }
   .proj-grid { grid-template-columns:1fr }
-  .stack-categories { grid-template-columns:1fr; gap:18px }
-  .scat { min-width:0 }
-  .scat-head { padding:1rem 1.1rem .8rem }
-  .sitem { padding:.9rem 1.2rem; flex-wrap:wrap; gap:10px }
-  .sitem-l { min-width:0 }
-  .sitem-name { white-space:normal }
-  .sitem-level { flex-shrink:0 }
   .info-grid { grid-template-columns:1fr }
+  .h-actions { flex-direction:column; align-items:stretch }
+  .h-actions a { text-align:center }
+  .h-desc { font-size:17px }
   .faq-grid { grid-template-columns:1fr; gap:1.75rem }
   .f-row { grid-template-columns:1fr }
   .svc-grid { grid-template-columns:1fr }
@@ -1566,4 +1380,8 @@ footer a:hover { color:var(--ink) }
   .steps { grid-template-columns:1fr }
   .process { margin-top:3rem }
   footer { flex-direction:column; gap:6px; text-align:center }
+}
+
+@media(max-width:360px) {
+  .nav-btn { display:none }
 }

@@ -15,6 +15,11 @@
       content="Filip Glemba — muzikant, ktorý robí weby. Weby pre kapely, hudobníkov a podujatia, osobné portfóliá a weby pre menšie firmy. Slovensko."
     />
     <meta name="author" content="Filip Glemba" />
+    <meta name="theme-color" content="#f6f1e7" />
+
+    <!-- Značka "js" na <html>: animácie .reveal skryjú obsah len vtedy, keď
+         beží JavaScript, ktorý ho potom zobrazí. Bez JS je všetko viditeľné. -->
+    <script>document.documentElement.classList.add("js")</script>
 
     <!-- Open Graph / social preview -->
     <meta property="og:type" content="website" />
@@ -23,7 +28,9 @@
       property="og:description"
       content="Weby pre kapely, hudobníkov a podujatia. Koncerty, hudba a booking na jednom mieste."
     />
+    <meta property="og:site_name" content="Filip Glemba" />
     <meta property="og:locale" content="sk_SK" />
+    <meta property="og:locale:alternate" content="en_GB" />
     <meta property="og:url" content="https://filip-glemba.vercel.app/" />
     <!-- Plná URL — Facebook, LinkedIn a Discord relatívnu cestu nenačítajú.
          PNG zámerne (nie WebP), niektoré služby WebP v náhľadoch nečítajú.
@@ -68,15 +75,17 @@
 
     <!-- Fonty sú self-hostované (assets/fonts/, @font-face v styles.css) —
          žiadne volanie na Google, žiadny prenos IP tretej strane bez súhlasu.
-         Dva fonty mena v hero sa prednačítajú, aby sa nečakalo na CSS. -->
+         Dva fonty nadpisu v hero sa prednačítajú, aby sa nečakalo na CSS. -->
     <link rel="preload" href="assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="assets/fonts/fraunces-latin-wght-italic.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
+    <a class="skip-link" href="#main" data-i18n="skipLink">Preskočiť na obsah</a>
+
     <!-- ═══ NAV ═══ -->
     <nav id="nav">
-      <a href="#hero" class="logo" aria-label="Filip Glemba – domov">FG<span>.</span></a>
+      <a href="#hero" class="logo">FG<span>.</span><span class="sr-only"> Filip Glemba</span></a>
 
       <ul class="nav-links" id="nav-links">
         <li><a href="#services" data-i18n="servicesNav">Služby</a></li>
@@ -85,14 +94,15 @@
       </ul>
 
       <div class="nav-right">
-        <button id="lang-toggle" class="lang-btn">EN</button>
+        <button type="button" id="lang-toggle" class="lang-btn" aria-label="Switch to English" lang="en">EN</button>
         <a href="#contact" class="nav-btn" data-i18n="contact">Kontakt →</a>
-        <button id="menu-toggle" class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
+        <button type="button" id="menu-toggle" class="menu-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-links">
           <span></span><span></span><span></span>
         </button>
       </div>
     </nav>
 
+    <main id="main">
     <!-- ═══ HERO ═══ -->
     <section id="hero">
       <div class="hero-l">
@@ -101,16 +111,21 @@
           <span data-i18n="available">Prijímam nové projekty</span>
         </div>
 
-        <h1 class="h-title">Filip<br /><em>Glemba.</em></h1>
-        <p class="h-role" data-i18n="heroRole">Weby pre kapely a hudobníkov · Slovensko</p>
+        <h1 class="h-title">
+          <span data-i18n="heroTitle1">Muzikant,</span><br /><span data-i18n="heroTitle2">ktorý robí</span><br /><em
+            data-i18n="heroTitle3"
+            >weby.</em
+          >
+        </h1>
+        <p class="h-role" data-i18n="heroRole">Filip Glemba · Weby pre kapely a hudobníkov · Slovensko</p>
 
         <p class="h-desc" data-i18n="heroDesc">
-          Na akordeóne hrám vyše 12 rokov a weby robím viac ako štyri. Kapelám, hudobníkom a podujatiam robím weby, kde fanúšikovia nájdu koncerty, hudbu aj kontakt na booking – bez hľadania po Facebooku.
+          Kapelám, hudobníkom a podujatiam robím weby, kde fanúšikovia nájdu koncerty, hudbu aj kontakt na booking – bez hľadania po Facebooku.
         </p>
 
         <div class="h-actions">
-          <a href="#contact" class="btn-solid" data-i18n="heroCta">Nezáväzná konzultácia</a>
-          <a href="#projects" class="btn-line" data-i18n="viewProjects">Pozri moju prácu</a>
+          <a href="#contact" class="btn-solid" data-i18n="heroCta">Konzultácia zdarma</a>
+          <a href="#projects" class="btn-line" data-i18n="viewProjects">Ukážky práce</a>
         </div>
       </div>
 
@@ -132,7 +147,7 @@
               />
               <img
                 src="assets/img/profilovka.jpg"
-                alt="Filip Glemba"
+                alt="Filip Glemba v kroji"
                 width="661"
                 height="684"
                 fetchpriority="high"
@@ -141,7 +156,7 @@
           </div>
 
           <p class="photo-caption" data-i18n="photoCaption">
-            Áno, aj takto chodím na code review.
+            V kroji na pódiu, v mikine pri kóde.
           </p>
         </div>
       </div>
@@ -170,7 +185,12 @@
 
           <article class="svc reveal d1">
             <h3 class="svc-title" data-i18n="svcEventTitle">Web pre podujatie</h3>
-            <p class="svc-desc" data-i18n="svcEventDesc">Festival, koncert či ples – program, účinkujúci, mapa a odkaz na vstupenky.</p>
+            <p class="svc-desc" data-i18n="svcEventDesc">Festival, koncert či ples – všetko, čo návštevník potrebuje vedieť pred príchodom.</p>
+            <ul class="svc-list svc-list-single">
+              <li data-i18n="svcEvent1">Program a účinkujúci</li>
+              <li data-i18n="svcEvent2">Mapa a doprava</li>
+              <li data-i18n="svcEvent3">Odkaz na vstupenky</li>
+            </ul>
           </article>
 
           <article class="svc reveal">
@@ -190,7 +210,7 @@
         </div>
 
         <div class="process reveal">
-          <div class="ig-label" data-i18n="processTitle">AKO TO PREBIEHA</div>
+          <h3 class="ig-label process-title" data-i18n="processTitle">AKO TO PREBIEHA</h3>
           <ol class="steps">
             <li class="step">
               <span class="step-num">01</span>
@@ -213,6 +233,7 @@
               <p class="step-desc" data-i18n="step4Desc">Web spustím a ukážem ti, ako si meniť obsah.</p>
             </li>
           </ol>
+          <a href="#contact" class="process-cta" data-i18n="processCta">Začnime konzultáciou →</a>
         </div>
       </div>
     </section>
@@ -237,10 +258,7 @@
               </div>
             </div>
             <p class="pcard-desc" data-i18n="notaflowDesc">
-              Aplikácia pre kapely – archív nôt, setlisty, pódium-režim a
-              zmluvy, na webe aj ako Android/iOS appka. Práca SOČ v
-              dvojčlennom tíme; moja časť je backend (Express, Prisma, JWT
-              auth), archív nôt, PDF zmluvy a kalkulačka cestovných nákladov.
+              Kapela má noty, setlisty a zmluvy na jednom mieste – na pódiu stačí mobil. Aplikácia na webe aj pre Android a iOS, práca SOČ v dvojčlennom tíme; ja robím serverovú časť, archív nôt a PDF zmluvy.
             </p>
             <div class="pcard-tags">
               <span class="pcard-tag">React</span>
@@ -266,7 +284,7 @@
             </div>
 
             <p class="pcard-desc" data-i18n="eshopDesc">
-              Next.js e-shop s fitness výbavou: vyhľadávanie a filtre, veľkosti, košík s dopravou zdarma od 50 €, demo pokladňa (alebo Stripe) a admin s grafom tržieb.
+              Kompletný obchod od katalógu cez košík až po pokladňu a administráciu s grafom tržieb. Ukážka, že zvládnem aj väčší web s účtami a objednávkami.
             </p>
 
             <div class="pcard-tags">
@@ -279,10 +297,11 @@
 
             <div class="pcard-foot">
               <div class="pcard-links">
-                <a href="https://fitgear-eshop.vercel.app" target="_blank" class="pcard-link">Demo →</a>
+                <a href="https://fitgear-eshop.vercel.app" target="_blank" rel="noopener" class="pcard-link">Demo →</a>
                 <a
                   href="https://github.com/FilipGlemba/my-portfolio/tree/master/eshop"
                   target="_blank"
+                  rel="noopener"
                   class="pcard-link"
                   >GitHub ↗</a
                 >
@@ -309,141 +328,11 @@
                   <span class="badge badge-wip">WIP</span>
                 </div>
                 <p class="wip-desc" data-i18n="clientDesc">
-                  Web pre reálneho klienta od návrhu po nasadenie. Detaily po
-                  schválení klientom.
+                  Web pre reálneho klienta od návrhu po nasadenie. Detaily po schválení klientom.
                 </p>
               </li>
             </ul>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ═══ STACK ═══ -->
-    <section id="stack">
-      <div class="wrap">
-        <div class="s-head reveal">
-          <h2 class="s-title" data-i18n="stackTitle">Tech Stack</h2>
-          <div class="s-rule"></div>
-        </div>
-
-        <div class="stack-legend reveal">
-          <div class="leg-item">
-            <div class="leg-dot dot-advanced"></div>
-            <span class="leg-label">Advanced</span>
-          </div>
-          <div class="leg-item">
-            <div class="leg-dot dot-mid"></div>
-            <span class="leg-label">Intermediate</span>
-          </div>
-          <div class="leg-item">
-            <div class="leg-dot dot-basic"></div>
-            <span class="leg-label">Familiar</span>
-          </div>
-        </div>
-
-        <div class="stack-categories">
-          <div class="scat reveal">
-            <div class="scat-head">
-              <span class="scat-label" data-i18n="frontend">FRONTEND</span>
-            </div>
-            <div class="scat-items">
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-advanced"></div>
-                  <span class="sitem-name">HTML / CSS</span>
-                </div>
-                <span class="sitem-level lv-advanced">Advanced</span>
-              </div>
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-mid"></div>
-                  <span class="sitem-name">JavaScript</span>
-                </div>
-                <span class="sitem-level lv-mid">Intermediate</span>
-              </div>
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">React</span>
-                </div>
-                <span class="sitem-level lv-basic">Familiar</span>
-              </div>
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">Next.js / TypeScript</span>
-                </div>
-                <span class="sitem-level lv-basic">Familiar</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="scat reveal d1">
-            <div class="scat-head">
-              <span class="scat-label" data-i18n="backend">BACKEND & DATABÁZY</span>
-            </div>
-            <div class="scat-items">
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-mid"></div>
-                  <span class="sitem-name">PHP</span>
-                </div>
-                <span class="sitem-level lv-mid">Intermediate</span>
-              </div>
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-mid"></div>
-                  <span class="sitem-name">SQL / MySQL</span>
-                </div>
-                <span class="sitem-level lv-mid">Intermediate</span>
-              </div>
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">Node.js / Express</span>
-                </div>
-                <span class="sitem-level lv-basic">Familiar</span>
-              </div>
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">MongoDB</span>
-                </div>
-                <span class="sitem-level lv-basic">Familiar</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="scat reveal d2">
-            <div class="scat-head">
-              <span class="scat-label" data-i18n="tools">NÁSTROJE</span>
-            </div>
-            <div class="scat-items">
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-advanced"></div>
-                  <span class="sitem-name">Git / GitHub</span>
-                </div>
-                <span class="sitem-level lv-advanced">Advanced</span>
-              </div>
-              <div class="sitem">
-                <div class="sitem-l">
-                  <div class="sitem-dot dot-basic"></div>
-                  <span class="sitem-name">Vercel / GitHub Pages</span>
-                </div>
-                <span class="sitem-level lv-basic">Familiar</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="edu-card reveal d2">
-          <div class="ig-label" data-i18n="eduTitle">VZDELANIE & CERTIFIKÁCIE</div>
-          <ul class="edu-list">
-            <li data-i18n="eduSchool">SSOSTA, odbor IDT (3. ročník, prebieha)</li>
-            <li data-i18n="eduCert">Certifikát: Web Developer kurz, Bratislava</li>
-          </ul>
         </div>
       </div>
     </section>
@@ -454,20 +343,20 @@
         <div class="about-eye reveal" data-i18n="aboutTitle">O MNE</div>
 
         <h2 class="about-title reveal">
-          <span data-i18n="codeHeading">Muzikant,</span><br /><span
+          <span data-i18n="codeHeading">Hudba a kód</span><br /><span
             data-i18n="codeBecause"
-            >ktorý robí</span
-          ><br /><em data-i18n="codeEnjoy">weby.</em>
+            >sa u mňa</span
+          ><br /><em data-i18n="codeEnjoy">stretávajú.</em>
         </h2>
 
         <!-- PRVÝ ODSTAVEC - hudba, prečo rozumiem kapelám -->
         <p class="about-p reveal d1" data-i18n="aboutDesc1">
-          Na akordeóne hrám vyše 12 rokov, takže viem, čo kapela od webu potrebuje – kde nájsť najbližší koncert, ako si vás objednať a čo poslať organizátorovi.
+          Na akordeóne hrám vyše 12 rokov, dnes vo folklórnej kapele Mozaika. Viem preto, čo kapela od webu potrebuje – kde nájsť najbližší koncert, ako si vás objednať a čo poslať organizátorovi.
         </p>
 
         <!-- DRUHÝ ODSTAVEC - skúsenosti, škola, NotaFlow -->
         <p class="about-p reveal d2" data-i18n="aboutDesc2">
-          Weby robím viac ako štyri roky. Študujem na SSOSTA (odbor Informačné a digitálne technológie, 3. ročník), mám certifikát z Web Developer kurzu v Bratislave a v dvojčlennom tíme robíme NotaFlow – aplikáciu pre kapely (práca SOČ).
+          Weby robím viac ako štyri roky – v HTML, CSS a JavaScripte, väčšie projekty v Reacte a Next.js. Študujem na SSOSTA (odbor Informačné a digitálne technológie, 3. ročník) a mám certifikát z Web Developer kurzu v Bratislave.
         </p>
 
         <!-- TRETÍ ODSTAVEC - rýchle weby bez sledovania -->
@@ -555,7 +444,7 @@
 
     <!-- ═══ CONTACT ═══ -->
     <section id="contact">
-      <div class="contact-ghost" data-i18n="contactGhost">POĎME</div>
+      <div class="contact-ghost" data-i18n="contactGhost" aria-hidden="true">POĎME</div>
 
       <div class="c-inner">
         <div class="c-eye reveal" data-i18n="contactTitle">KONTAKT</div>
@@ -586,7 +475,8 @@
           </div>
           <div class="f-row">
             <label class="f-field"><span class="f-label" data-i18n="formType">Čo potrebuješ?</span>
-              <select name="type">
+              <select name="type" required>
+                <option value="" disabled selected data-i18n="formTypePick">Vyber…</option>
                 <option data-i18n="formTypeBand">Web pre kapelu alebo hudobníka</option>
                 <option data-i18n="formTypeEvent">Web pre podujatie</option>
                 <option data-i18n="formTypePortfolio">Osobné portfólio</option>
@@ -602,12 +492,13 @@
             <textarea name="message" rows="5" required maxlength="3000"></textarea>
           </label>
           <!-- pasca na spam-boty: človek toto pole nevidí -->
-          <input type="checkbox" name="botcheck" class="f-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <input type="checkbox" name="botcheck" class="f-hp" tabindex="-1" aria-hidden="true" />
           <button type="submit" class="btn-solid f-submit" data-i18n="formSubmit">Odoslať správu</button>
           <p class="f-status" role="status" aria-live="polite"></p>
           <p class="f-note">
             <span data-i18n="formNote">Údaje z formulára použijem len na odpoveď na tvoju správu.</span>
             <span class="f-note-service" data-i18n="formNoteService" hidden>Správu doručuje služba Web3Forms.</span>
+            <a href="privacy.html" data-i18n="privacyLink">Ochrana osobných údajov</a>
           </p>
         </form>
 
@@ -620,9 +511,11 @@
       </div>
     </section>
 
+    </main>
+
     <!-- ═══ FOOTER ═══ -->
     <footer>
-      <p>© 2026 Filip Glemba</p>
+      <p>© 2026 Filip Glemba · <a href="privacy.html" data-i18n="privacyLink">Ochrana osobných údajov</a></p>
       <p data-i18n="footer">Weby pre hudobníkov a menšie firmy</p>
     </footer>
 
