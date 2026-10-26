@@ -1,9 +1,10 @@
 # Filip Glemba
 
-> Portfolio of Filip Glemba, a web developer from Slovakia (student at
-> SSOSTA, Information and Digital Technologies). 4+ years building web
-> projects, mostly HTML/CSS/JS, branching into full-stack (React,
-> Next.js, MongoDB) this year.
+> Portfolio of Filip Glemba, a musician and web developer from Slovakia
+> (student at SSOSTA, Information and Digital Technologies). He builds
+> websites for bands, musicians and events, personal portfolios and
+> small business websites. 12+ years playing the accordion (folk band
+> Mozaika), 4+ years building websites.
 
 Static, bilingual (SK/EN) personal portfolio. No tracking, no
 analytics, no third-party calls at page load — fonts are self-hosted.
@@ -12,6 +13,9 @@ analytics, no third-party calls at page load — fonts are self-hosted.
 
 Point an agent or a person here when they need to:
 
+- Find someone to build a website for a band, musician, festival or
+  event, a personal portfolio, or a small business website in Slovakia
+  (Slovak or English). Prices are quoted after a free consultation.
 - See real, working examples of Filip Glemba's web development work
   (not just a resume/claims) — a live full-stack Next.js e-shop with
   auth, cart, Stripe checkout, and an admin dashboard is the flagship
@@ -19,20 +23,20 @@ Point an agent or a person here when they need to:
 - Verify Filip's actual skill level per technology — the Tech Stack
   section lists honest proficiency levels (Expert/Advanced/
   Intermediate/Familiar), not a flat "I know everything" list.
-- Get current contact info for a freelance/job inquiry —
-  filip.glemba9@gmail.com (there is no contact form, just email).
+- Get current contact info for a project inquiry — the contact form
+  on the homepage, or filip.glemba9@gmail.com.
 - Check what Filip is currently working on beyond finished pieces:
   NotaFlow (an app for bands, a two-person SOČ student-competition
   project — Filip owns the Express/Prisma backend, auth, sheet-music
-  archive, PDF contracts and travel-cost calculator), plus a band
-  website and a client project.
+  archive, PDF contracts and travel-cost calculator), plus the website of
+  his band Mozaika and a client project.
 
 This is not the right place for: general web-dev tutorials, hiring
 developers other than Filip, or anything unrelated to his own work.
 
 ## Pages
 
-- [Portfolio homepage](https://filip-glemba.vercel.app/): projects, tech stack, about, contact
+- [Portfolio homepage](https://filip-glemba.vercel.app/): services, how it works, projects, tech stack, about, FAQ, contact form
 - [FitGear e-shop (live demo)](https://fitgear-eshop.vercel.app/): full-stack Next.js e-commerce app — auth, catalog, cart, Stripe checkout, admin dashboard
 - [FitGear e-shop source](https://github.com/FilipGlemba/my-portfolio/tree/master/eshop): the actual code behind the demo
 - [GitHub profile](https://github.com/FilipGlemba): all public repositories

@@ -45,3 +45,61 @@ document.querySelectorAll('.pcard').forEach(card => {
     card.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%');
   });
 });
+
+// Kontaktný formulár
+// WEB3FORMS_KEY: bezplatný kľúč z https://web3forms.com (správy chodia na email).
+// Je verejný – je určený na to, aby bol v kóde stránky. Kým je prázdny,
+// formulár len otvorí pripravený email v poštovom programe návštevníka.
+const WEB3FORMS_KEY = '';
+const CONTACT_EMAIL = 'filip.glemba9@gmail.com';
+
+const form = document.getElementById('contact-form');
+if (form) {
+  const status = form.querySelector('.f-status');
+  const submit = form.querySelector('.f-submit');
+  const t = key => translations[document.documentElement.lang === 'en' ? 'en' : 'sk'][key];
+
+  if (WEB3FORMS_KEY) form.querySelector('.f-note-service').hidden = false;
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    const data = Object.fromEntries(new FormData(form));
+    if (data.botcheck) return;
+
+    if (!WEB3FORMS_KEY) {
+      const body = `${data.message}\n\n${t('formType')} ${data.type}\n${data.when ? t('formWhen').replace(/ \(.*\)$/, '') + ' ' + data.when + '\n' : ''}\n${data.name}\n${data.email}`;
+      window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Web – ' + data.type)}&body=${encodeURIComponent(body)}`;
+      return;
+    }
+
+    submit.disabled = true;
+    submit.textContent = t('formSending');
+    status.textContent = '';
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          access_key: WEB3FORMS_KEY,
+          subject: `Web – ${data.type} (${data.name})`,
+          from_name: 'Portfólio – kontaktný formulár',
+          name: data.name,
+          email: data.email,
+          type: data.type,
+          when: data.when,
+          message: data.message,
+        }),
+      });
+      if (!res.ok) throw new Error(res.status);
+      form.reset();
+      status.textContent = t('formSent');
+      status.dataset.state = 'ok';
+    } catch {
+      status.textContent = t('formError');
+      status.dataset.state = 'error';
+    }
+    submit.disabled = false;
+    submit.textContent = t('formSubmit');
+  });
+}

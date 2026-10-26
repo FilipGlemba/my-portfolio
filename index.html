@@ -26,13 +26,14 @@
     <meta property="og:locale" content="sk_SK" />
     <meta property="og:url" content="https://filip-glemba.vercel.app/" />
     <!-- Plná URL — Facebook, LinkedIn a Discord relatívnu cestu nenačítajú.
-         JPG zámerne (nie WebP), niektoré služby WebP v náhľadoch nečítajú. -->
-    <meta property="og:image" content="https://filip-glemba.vercel.app/assets/img/profilovka.jpg" />
-    <meta property="og:image:width" content="661" />
-    <meta property="og:image:height" content="684" />
-    <meta property="og:image:alt" content="Filip Glemba" />
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:image" content="https://filip-glemba.vercel.app/assets/img/profilovka.jpg" />
+         PNG zámerne (nie WebP), niektoré služby WebP v náhľadoch nečítajú.
+         og.png je vyrenderovaná karta v štýle brandu (1200×630). -->
+    <meta property="og:image" content="https://filip-glemba.vercel.app/assets/img/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Filip Glemba – muzikant, ktorý robí weby pre kapely, hudobníkov a podujatia" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://filip-glemba.vercel.app/assets/img/og.png" />
     <meta name="twitter:title" content="Filip Glemba — Weby pre kapely a hudobníkov" />
     <meta
       name="twitter:description"
@@ -42,7 +43,7 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232d4ef5'/%3E%3Ctext x='32' y='42' font-family='Arial,Helvetica,sans-serif' font-size='28' font-weight='700' fill='white' text-anchor='middle'%3EFG%3C/text%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a1612'/%3E%3Ctext x='32' y='38' font-family='Georgia,serif' font-style='italic' font-size='28' fill='%23f6f1e7' text-anchor='middle'%3EFG%3C/text%3E%3Cpath d='M14 50 L20 44 L26 50 L32 44 L38 50 L44 44 L50 50' fill='none' stroke='%23b3261e' stroke-width='3' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E"
     />
 
     <!-- Kanonická URL — stránka beží aj na filipglemba.github.io/my-portfolio/,
@@ -68,14 +69,14 @@
     <!-- Fonty sú self-hostované (assets/fonts/, @font-face v styles.css) —
          žiadne volanie na Google, žiadny prenos IP tretej strane bez súhlasu.
          Dva fonty mena v hero sa prednačítajú, aby sa nečakalo na CSS. -->
-    <link rel="preload" href="assets/fonts/playfair-display-400-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="assets/fonts/playfair-display-400-italic-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="assets/fonts/fraunces-latin-wght-italic.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
     <!-- ═══ NAV ═══ -->
     <nav id="nav">
-      <a href="#hero" class="logo">FG.</a>
+      <a href="#hero" class="logo" aria-label="Filip Glemba – domov">FG<span>.</span></a>
 
       <ul class="nav-links" id="nav-links">
         <li><a href="#services" data-i18n="servicesNav">Služby</a></li>
@@ -299,8 +300,7 @@
                   <span class="badge badge-wip">WIP</span>
                 </div>
                 <p class="wip-desc" data-i18n="mozaikaDesc">
-                  Web pre folklórnu kapelu z Liptova s rezervačným formulárom
-                  (PHP, PHPMailer).
+                  Web mojej folklórnej kapely Mozaika z Liptova s rezervačným formulárom (PHP, PHPMailer). Čoskoro naživo.
                 </p>
               </li>
               <li class="wip-item">
@@ -517,6 +517,42 @@
       </div>
     </section>
 
+    <!-- ═══ FAQ ═══ -->
+    <section id="faq">
+      <div class="wrap">
+        <div class="s-head reveal">
+          <h2 class="s-title" data-i18n="faqTitle">Časté otázky</h2>
+          <div class="s-rule"></div>
+        </div>
+        <dl class="faq-grid reveal">
+          <div class="faq-item">
+            <dt class="faq-q" data-i18n="faq1Q">Koľko stojí web?</dt>
+            <dd class="faq-a" data-i18n="faq1A">Závisí od rozsahu. Po krátkej konzultácii dostaneš presnú cenovú ponuku – bez záväzkov.</dd>
+          </div>
+          <div class="faq-item">
+            <dt class="faq-q" data-i18n="faq2Q">Ako dlho to trvá?</dt>
+            <dd class="faq-a" data-i18n="faq2A">Jednoduchý web zvyčajne 2 – 4 týždne od chvíle, keď mám texty a fotky.</dd>
+          </div>
+          <div class="faq-item">
+            <dt class="faq-q" data-i18n="faq3Q">Môžem si koncerty a texty meniť sám?</dt>
+            <dd class="faq-a" data-i18n="faq3A">Áno. Ukážem ti, ako na to – alebo to za teba urobím v rámci správy webu.</dd>
+          </div>
+          <div class="faq-item">
+            <dt class="faq-q" data-i18n="faq4Q">Čo potrebujem pripraviť?</dt>
+            <dd class="faq-a" data-i18n="faq4A">Texty, fotky a logo, ak ich máš. Ak nie, poradím ti, kde začať.</dd>
+          </div>
+          <div class="faq-item">
+            <dt class="faq-q" data-i18n="faq5Q">Už web máme. Oplatí sa ho prerobiť?</dt>
+            <dd class="faq-a" data-i18n="faq5A">Pozriem sa naň zadarmo a poviem ti, čo by som zlepšil. Niekedy stačí úprava, nie nový web.</dd>
+          </div>
+          <div class="faq-item">
+            <dt class="faq-q" data-i18n="faq6Q">A doména a hosting?</dt>
+            <dd class="faq-a" data-i18n="faq6A">Pomôžem ti ich vybrať a nastaviť. Doména sa registruje na tvoje meno, takže web patrí tebe.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
     <!-- ═══ CONTACT ═══ -->
     <section id="contact">
       <div class="contact-ghost" data-i18n="contactGhost">POĎME</div>
@@ -535,24 +571,52 @@
           Máš kapelu, podujatie alebo potrebuješ web či portfólio? Napíš mi, čo potrebuješ – prvá konzultácia je zadarmo a ozvem sa do dvoch dní.
         </p>
 
-        <div class="c-btns reveal d2">
-          <a
-            href="mailto:filip.glemba9@gmail.com?subject=Web%20%E2%80%93%20konzult%C3%A1cia"
-            class="btn-solid"
-            data-i18n="sendEmail"
-            >Napíš email</a
-          >
+        <!-- KONTAKTNÝ FORMULÁR
+             Ak je v main.js vyplnený WEB3FORMS_KEY, správa sa odošle cez Web3Forms
+             priamo na email. Bez kľúča formulár len pripraví email v poštovom
+             programe návštevníka (mailto) – nikam sa nič neposiela. -->
+        <form class="c-form reveal d2" id="contact-form" novalidate>
+          <div class="f-row">
+            <label class="f-field"><span class="f-label" data-i18n="formName">Meno</span>
+              <input type="text" name="name" autocomplete="name" required maxlength="80" />
+            </label>
+            <label class="f-field"><span class="f-label" data-i18n="formEmail">Email</span>
+              <input type="email" name="email" autocomplete="email" required maxlength="120" />
+            </label>
+          </div>
+          <div class="f-row">
+            <label class="f-field"><span class="f-label" data-i18n="formType">Čo potrebuješ?</span>
+              <select name="type">
+                <option data-i18n="formTypeBand">Web pre kapelu alebo hudobníka</option>
+                <option data-i18n="formTypeEvent">Web pre podujatie</option>
+                <option data-i18n="formTypePortfolio">Osobné portfólio</option>
+                <option data-i18n="formTypeBusiness">Web pre firmu</option>
+                <option data-i18n="formTypeOther">Niečo iné</option>
+              </select>
+            </label>
+            <label class="f-field"><span class="f-label" data-i18n="formWhen">Do kedy? (nepovinné)</span>
+              <input type="text" name="when" maxlength="60" />
+            </label>
+          </div>
+          <label class="f-field"><span class="f-label" data-i18n="formMessage">Správa</span>
+            <textarea name="message" rows="5" required maxlength="3000"></textarea>
+          </label>
+          <!-- pasca na spam-boty: človek toto pole nevidí -->
+          <input type="checkbox" name="botcheck" class="f-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+          <button type="submit" class="btn-solid f-submit" data-i18n="formSubmit">Odoslať správu</button>
+          <p class="f-status" role="status" aria-live="polite"></p>
+          <p class="f-note">
+            <span data-i18n="formNote">Údaje z formulára použijem len na odpoveď na tvoju správu.</span>
+            <span class="f-note-service" data-i18n="formNoteService" hidden>Správu doručuje služba Web3Forms.</span>
+          </p>
+        </form>
 
-          <a
-            href="https://github.com/FilipGlemba"
-            target="_blank"
-            class="btn-line"
-            >GitHub ↗</a
-          >
+        <div class="c-alt reveal d3">
+          <span data-i18n="orEmail">Alebo napíš priamo:</span>
+          <a href="mailto:filip.glemba9@gmail.com?subject=Web%20%E2%80%93%20konzult%C3%A1cia">filip.glemba9@gmail.com</a>
+          <span aria-hidden="true">·</span>
+          <a href="https://github.com/FilipGlemba" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
-
-        <!-- EMAIL ADRESA - zobrazená pod tlačidlami -->
-        <div class="c-email reveal d3">filip.glemba9@gmail.com</div>
       </div>
     </section>
 
