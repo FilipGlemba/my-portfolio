@@ -421,44 +421,6 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 .hero-l { position:relative; z-index:1 }
 
 /*
-  H-PILL - zelený štítok "Dostupný pre spoluprácu"
-  display:inline-flex - flexbox v riadku
-  align-items:center - vertikálne centrované
-  gap - medzera medzi bodkou a textom
-  font-family - monospace písmo
-  font-size - malý text
-  letter-spacing - rozšírenie
-  color - zelený text
-  background - priesvitné zelené pozadie
-  padding - vnútorné odsadenie
-  border-radius - veľmi zaoblené rohy
-  margin-bottom - odstup dole
-  opacity:0 - počiatočná priehľadnosť pre animáciu
-  transform:translateY(8px) - počiatočná pozícia pre animáciu
-  animation - animácia "up" s oneskorením
-*/
-.h-pill {
-  display:inline-flex; align-items:center; gap:7px;
-  font-family:var(--ff-mono); font-size:11.5px; letter-spacing:.06em;
-  color:var(--okra-dark); background:var(--amber-bg);
-  padding:5px 13px; border-radius:20px; margin-bottom:2.25rem;
-  opacity:0; transform:translateY(8px);
-  animation:up .5s .05s forwards;
-}
-
-/*
-  H-DOT - animovaná zelená bodka v štítku
-  width,height - veľkosť kruhu
-  border-radius:50% - okrúhly tvar
-  background - zelená farba
-  animation - blikajúci glow efekt
-*/
-.h-dot {
-  width:6px; height:6px; border-radius:50%; background:var(--okra);
-  animation:glow-g 2.4s ease-in-out infinite;
-}
-
-/*
   H-TITLE - hlavný nadpis hero sekcie
   font-family - elegantné serif písmo
   font-size - responzívna veľkosť (clamp - medzi 54px a 90px)
@@ -894,6 +856,7 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 */
 .pcard-wip { border-style:dashed; cursor:default }
 .pcard-wip:hover { transform:none; box-shadow:none }
+.wip-title { font-size:14px; font-weight:600; color:var(--ink2) }
 .wip-list { list-style:none; margin:.6rem 0 0; padding:0; display:flex; flex-direction:column; gap:1.1rem }
 .wip-item + .wip-item { padding-top:1.1rem; border-top:1px solid var(--bd) }
 .wip-head { display:flex; align-items:center; justify-content:space-between; gap:.5rem; margin-bottom:.35rem }
@@ -937,19 +900,9 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 */
 #about {
   background:var(--bg2);
-  display:grid; grid-template-columns:1fr 1fr;
+  display:grid; grid-template-columns:minmax(0,680px);
   gap:6rem; align-items:start; padding:7rem 3.5rem;
 }
-
-/*
-  ABOUT-EYE - malý textový štítok "ABOUT"
-  font-family - monospace písmo
-  font-size - veľmi malý text
-  color - svetlo sivý
-  letter-spacing - rozšírenie
-  margin-bottom - odstup dole
-*/
-.about-eye { font-family:var(--ff-mono); font-size:10.5px; color:var(--ink3); letter-spacing:.12em; margin-bottom:1.2rem }
 
 /*
   ABOUT-TITLE - hlavný nadpis sekcie "About"
@@ -963,13 +916,6 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 .about-title { font-family:var(--ff-head); font-size:clamp(34px,3.6vw,50px); font-weight:400; line-height:1.08; letter-spacing:-.025em; margin-bottom:2rem }
 
 /*
-  ABOUT-TITLE EM - kurzíva v nadpise
-  font-style:italic - kurzívne písmo
-  color - stredne tmavý text
-*/
-.about-title em { font-style:italic; color:var(--red) }
-
-/*
   ABOUT-P - odsek s popisom
   font-size - stredný text
   color - stredne tmavý
@@ -979,55 +925,14 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 .about-p { font-size:16px; color:var(--ink2); line-height:1.9; margin-bottom:1rem }
 
 /*
-  INFO-GRID - mriežka s informáciami (lokácia, skúsenosti, atď.)
-  display:grid - CSS Grid
-  grid-template-columns:1fr 1fr - dva stĺpce rovnakej šírky
-  gap:1px - tenká medzera
-  background - farba medzier
-  border - hranica okolo celej mriežky
-  border-radius - zaoblené rohy
-  overflow:hidden - oreže pretekajúci obsah
-  margin-bottom - odstup dole
+  SIGNATURE - podpis pod textom O mne (vektor, farba atramentu)
+  Keď sa sekcia zobrazí (.in), odkryje sa zľava doprava, akoby sa práve písal.
 */
-.info-grid {
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:1px; background:var(--bd);
-  border:1px solid var(--bd); border-radius:10px; overflow:hidden; margin-bottom:1.25rem;
-}
-
-/*
-  IG-CELL - jednotlivá bunka v informačnej mriežke
-  background - svetlé pozadie
-  padding - vnútorné odsadenie
-*/
-.ig-cell { background:var(--bg); padding:1.3rem 1.5rem }
-
-/*
-  IG-LABEL - štítok informácie (napr. "Location", "Experience")
-  font-family - monospace písmo
-  font-size - veľmi malý text
-  color - svetlo sivý
-  letter-spacing - rozšírenie
-  margin-bottom - odstup dole
-*/
-.ig-label { font-family:var(--ff-mono); font-size:11.5px; color:var(--ink3); letter-spacing:.1em; margin-bottom:.35rem }
-
-/*
-  IG-VAL - hlavná hodnota informácie
-  font-size - stredný text
-  font-weight:600 - polotučné
-  color - tmavý text
-*/
-.ig-val { font-size:14px; font-weight:600; color:var(--ink) }
-
-/*
-  IG-SUB - doplnková informácia pod hlavnou hodnotou
-  font-size - malý text
-  color - stredne tmavý
-  margin-top - odstup zhora
-*/
-.ig-sub { font-size:12px; color:var(--ink2); margin-top:2px }
-
+.signature { color:var(--ink); margin:1.5rem 0 1.75rem }
+.signature-svg { display:block; width:150px; height:auto }
+.js .signature .signature-svg { clip-path:inset(0 100% 0 0); transition:clip-path 1.6s cubic-bezier(.55,.1,.35,1) .35s }
+.js .signature.in .signature-svg { clip-path:inset(0 0 0 0) }
+.about-cta { display:inline-block }
 
 /* ─── CONTACT ─── */
 
@@ -1042,42 +947,11 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
 #contact { background:var(--bg); border-top:1px solid var(--bd); text-align:center; padding:9rem 3.5rem; position:relative; overflow:hidden }
 
 /*
-  CONTACT-GHOST - veľký priesvitný text na pozadí
-  position:absolute - absolútne pozicionovanie
-  font-family - serif písmo
-  font-style:italic - kurzíva
-  font-size - obrovský text s clamp() pre responzivitu
-  color - veľmi svetlá farba (takmer neviditeľná)
-  letter-spacing - mierne zúženie
-  top,left:50% - centrované
-  transform:translate(-50%,-50%) - presné centrované
-  pointer-events:none - neinteraktívne
-  user-select:none - nemožno označiť
-  white-space:nowrap - bez zalamovania
-*/
-.contact-ghost {
-  position:absolute; font-family:var(--ff-head);
-  font-size:clamp(80px,15vw,200px); color:var(--bg2); opacity:.7; letter-spacing:-.04em;
-  top:7rem; left:50%; transform:translateX(-50%);
-  pointer-events:none; user-select:none; white-space:nowrap;
-}
-
-/*
   C-INNER - vnútorný kontajner pre obsah (nad ghost textom)
   position:relative - relatívne pozicionovanie
   z-index:1 - nad ghost textom
 */
 .c-inner { position:relative; z-index:1 }
-
-/*
-  C-EYE - malý textový štítok "CONTACT"
-  font-family - monospace písmo
-  font-size - malý text
-  color - svetlo sivý
-  letter-spacing - rozšírenie
-  margin-bottom - odstup dole
-*/
-.c-eye { font-family:var(--ff-mono); font-size:11px; color:var(--ink3); letter-spacing:.12em; margin-bottom:1.25rem }
 
 /*
   C-TITLE - hlavný nadpis sekcie "Get in touch"
@@ -1089,13 +963,6 @@ nav.menu-open .menu-toggle span:nth-child(3) { transform:translateY(-5.5px) rota
   margin-bottom - odstup dole
 */
 .c-title { font-family:var(--ff-head); font-size:clamp(36px,7vw,88px); font-weight:400; line-height:1; letter-spacing:-.03em; margin-bottom:1.2rem }
-
-/*
-  C-TITLE EM - kurzíva v nadpise
-  font-style:italic - kurzívne písmo
-  color - stredne tmavý text
-*/
-.c-title em { font-style:italic; color:var(--red) }
 
 /*
   C-SUB - podnadpis s vysvetlením
@@ -1202,13 +1069,6 @@ footer a:hover { color:var(--ink) }
 @keyframes rise  { from { transform:translateY(18px) } to { transform:translateY(0) } }
 
 /*
-  @KEYFRAMES GLOW-G - zelené žiarivé blikanie (pre dostupnosť)
-  0%,100% - žiadny tieň
-  50% - zelený tieň s priesvitnosťou
-*/
-@keyframes glow-g { 0%,100%{box-shadow:0 0 0 0 rgba(200,144,46,.5)} 50%{box-shadow:0 0 0 5px rgba(200,144,46,0)} }
-
-/*
   REVEAL - trieda pre prvky ktoré sa postupne zobrazujú pri scroll
   opacity:0 - počiatočne skryté
   transform:translateY(22px) - posunuté dole
@@ -1254,7 +1114,7 @@ footer a:hover { color:var(--ink) }
 }
 .svc-main:hover { border-color:var(--red) }
 
-.svc-tag { font-family:var(--ff-mono); font-size:10px; letter-spacing:.12em; color:var(--red); margin-bottom:.8rem }
+.svc-tag { font-size:14px; font-weight:600; color:var(--red); margin-bottom:.6rem }
 .svc-title { font-family:var(--ff-head); font-size:21px; font-weight:500; line-height:1.25; color:var(--ink); margin-bottom:.6rem }
 .svc-main .svc-title { font-size:clamp(24px,2.4vw,30px) }
 .svc-desc { font-size:15px; color:var(--ink2); line-height:1.7; margin:0; max-width:52ch }
@@ -1272,7 +1132,7 @@ footer a:hover { color:var(--ink) }
 
 /* AKO TO PREBIEHA - štyri kroky v jednom riadku */
 .process { margin-top:4rem }
-.process-title { font-weight:400 }
+.process-title { font-family:var(--ff-head); font-size:24px; font-weight:500; color:var(--ink); margin-bottom:1.1rem }
 .process-cta {
   display:inline-block; margin-top:1.5rem; font-weight:600; font-size:15px; color:var(--red);
   text-decoration:none; border-bottom:1.5px solid var(--red-bd); padding-bottom:2px;
@@ -1315,7 +1175,7 @@ footer a:hover { color:var(--ink) }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior:auto }
   *, *::before, *::after { animation:none !important; transition:none !important }
-  .js .reveal, .h-pill, .h-title, .h-role, .h-desc, .h-actions, .hero-r, .hero-profile { opacity:1 !important; transform:none !important }
+  .js .reveal, .h-title, .h-role, .h-desc, .h-actions, .hero-r, .hero-profile { opacity:1 !important; transform:none !important }
 }
 
 /* ─── RESPONSIVE ─── */
@@ -1368,7 +1228,6 @@ footer a:hover { color:var(--ink) }
   .nav-links li:last-child a { border-bottom:none }
   nav.menu-open .nav-links { max-height:220px; opacity:1; visibility:visible; transition:max-height .3s var(--ease), opacity .25s }
   .proj-grid { grid-template-columns:1fr }
-  .info-grid { grid-template-columns:1fr }
   .h-actions { flex-direction:column; align-items:stretch }
   .h-actions a { text-align:center }
   .h-desc { font-size:17px }
