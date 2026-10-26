@@ -25,6 +25,14 @@ document.addEventListener('click', e => {
   if (nav.classList.contains('menu-open') && !nav.contains(e.target)) setMenuOpen(false);
 });
 
+// Escape zatvorí menu a vráti fokus na tlačidlo
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && nav.classList.contains('menu-open')) {
+    setMenuOpen(false);
+    menuToggle.focus();
+  }
+});
+
 // Postupné zobrazovanie .reveal prvkov pri scrolli (animuje sa len raz)
 const io = new IntersectionObserver((entries) => {
   entries.forEach(e => {
@@ -70,6 +78,9 @@ if (form) {
     if (!WEB3FORMS_KEY) {
       const body = `${data.message}\n\n${t('formType')} ${data.type}\n${data.when ? t('formWhen').replace(/ \(.*\)$/, '') + ' ' + data.when + '\n' : ''}\n${data.name}\n${data.email}`;
       window.location.href = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent('Web – ' + data.type)}&body=${encodeURIComponent(body)}`;
+      // Bez poštového programu sa nič neotvorí — návštevník musí vedieť, čo ďalej.
+      status.textContent = t('formOpening');
+      status.dataset.state = 'ok';
       return;
     }
 
@@ -91,7 +102,8 @@ if (form) {
           message: data.message,
         }),
       });
-      if (!res.ok) throw new Error(res.status);
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json.success) throw new Error(json.message || res.status);
       form.reset();
       status.textContent = t('formSent');
       status.dataset.state = 'ok';

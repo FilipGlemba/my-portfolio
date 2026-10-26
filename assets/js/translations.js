@@ -2,6 +2,9 @@
 const translations = {
   sk: {
     // NAV
+    skipLink: 'Preskočiť na obsah',
+    langToggleLabel: 'Switch to English',
+    pageTitle: 'Filip Glemba — Weby pre kapely a hudobníkov',
     servicesNav: 'Služby',
     projectsNav: 'Projekty',
     about: 'O mne',
@@ -9,11 +12,14 @@ const translations = {
 
     // HERO
     available: 'Prijímam nové projekty',
-    heroRole: 'Weby pre kapely a hudobníkov · Slovensko',
-    photoCaption: 'Áno, aj takto chodím na code review.',
-    heroDesc: 'Na akordeóne hrám vyše 12 rokov a weby robím viac ako štyri. Kapelám, hudobníkom a podujatiam robím weby, kde fanúšikovia nájdu koncerty, hudbu aj kontakt na booking – bez hľadania po Facebooku.',
-    heroCta: 'Nezáväzná konzultácia',
-    viewProjects: 'Pozri moju prácu',
+    heroTitle1: 'Muzikant,',
+    heroTitle2: 'ktorý robí',
+    heroTitle3: 'weby.',
+    heroRole: 'Filip Glemba · Weby pre kapely a hudobníkov · Slovensko',
+    photoCaption: 'V kroji na pódiu, v mikine pri kóde.',
+    heroDesc: 'Kapelám, hudobníkom a podujatiam robím weby, kde fanúšikovia nájdu koncerty, hudbu aj kontakt na booking – bez hľadania po Facebooku.',
+    heroCta: 'Konzultácia zdarma',
+    viewProjects: 'Ukážky práce',
 
     // SERVICES
     servicesTitle: 'Čo robím',
@@ -25,13 +31,16 @@ const translations = {
     svcBand3: 'Galéria a press kit na stiahnutie',
     svcBand4: 'Kontakt a formulár na booking',
     svcEventTitle: 'Web pre podujatie',
-    svcEventDesc: 'Festival, koncert či ples – program, účinkujúci, mapa a odkaz na vstupenky.',
+    svcEventDesc: 'Festival, koncert či ples – všetko, čo návštevník potrebuje vedieť pred príchodom.',
     svcPortfolioTitle: 'Osobné portfólio',
     svcPortfolioDesc: 'Pre hudobníkov, fotografov, študentov či freelancerov, ktorí sa chcú ukázať. Ako toto, ktoré práve čítaš.',
     svcBusinessTitle: 'Web pre menšiu firmu',
     svcBusinessDesc: 'Prezentačný web pre kaderníctvo, reštauráciu či remeselníka – služby, otváracie hodiny a kontakt.',
     svcCareTitle: 'Správa webu',
     svcCareDesc: 'Pridám nové koncerty, fotky a zmením texty, aby si sa o web nemusel starať.',
+    svcEvent1: 'Program a účinkujúci',
+    svcEvent2: 'Mapa a doprava',
+    svcEvent3: 'Odkaz na vstupenky',
 
     // PROCESS
     processTitle: 'AKO TO PREBIEHA',
@@ -43,6 +52,7 @@ const translations = {
     step3Desc: 'Web priebežne vidíš a môžeš ho pripomienkovať.',
     step4Title: 'Spustenie',
     step4Desc: 'Web spustím a ukážem ti, ako si meniť obsah.',
+    processCta: 'Začnime konzultáciou →',
 
     // BADGES
     projectsStatus: '1 živý · 3 vo vývoji',
@@ -50,37 +60,22 @@ const translations = {
 
     // PROJECTS
     projectsTitle: 'Projekty',
-    eshopDesc: 'Next.js e-shop s fitness výbavou: vyhľadávanie a filtre, veľkosti, košík s dopravou zdarma od 50 €, demo pokladňa (alebo Stripe) a admin s grafom tržieb.',
-    notaflowDesc: 'Aplikácia pre kapely – archív nôt, setlisty, pódium-režim a zmluvy, na webe aj ako Android/iOS appka. Práca SOČ v dvojčlennom tíme; moja časť je backend (Express, Prisma, JWT auth), archív nôt, PDF zmluvy a kalkulačka cestovných nákladov.',
+    eshopDesc: 'Kompletný obchod od katalógu cez košík až po pokladňu a administráciu s grafom tržieb. Ukážka, že zvládnem aj väčší web s účtami a objednávkami.',
+    notaflowDesc: 'Kapela má noty, setlisty a zmluvy na jednom mieste – na pódiu stačí mobil. Aplikácia na webe aj pre Android a iOS, práca SOČ v dvojčlennom tíme; ja robím serverovú časť, archív nôt a PDF zmluvy.',
     wipTitle: 'ROZPRACOVANÉ',
     mozaikaDesc: 'Web mojej folklórnej kapely Mozaika z Liptova s rezervačným formulárom (PHP, PHPMailer). Čoskoro naživo.',
     clientTitle: 'Klientsky projekt',
     clientDesc: 'Web pre reálneho klienta od návrhu po nasadenie. Detaily po schválení klientom.',
 
-    // STACK
-    stackTitle: 'Tech Stack',
-    frontend: 'FRONTEND',
-    backend: 'BACKEND & DATABÁZY',
-    tools: 'NÁSTROJE',
-    expert: 'Expert',
-    advanced: 'Advanced',
-    intermediate: 'Intermediate',
-    familiar: 'Familiar',
-
     // ABOUT
     aboutTitle: 'O MNE',
-    codeHeading: 'Muzikant,',
-    codeBecause: 'ktorý robí',
-    codeEnjoy: 'weby.',
-    aboutDesc1: 'Na akordeóne hrám vyše 12 rokov, takže viem, čo kapela od webu potrebuje – kde nájsť najbližší koncert, ako si vás objednať a čo poslať organizátorovi.',
-    aboutDesc2: 'Weby robím viac ako štyri roky. Študujem na SSOSTA (odbor Informačné a digitálne technológie, 3. ročník), mám certifikát z Web Developer kurzu v Bratislave a v dvojčlennom tíme robíme NotaFlow – aplikáciu pre kapely (práca SOČ).',
+    codeHeading: 'Hudba a kód',
+    codeBecause: 'sa u mňa',
+    codeEnjoy: 'stretávajú.',
+    aboutDesc1: 'Na akordeóne hrám vyše 12 rokov, dnes vo folklórnej kapele Mozaika. Viem preto, čo kapela od webu potrebuje – kde nájsť najbližší koncert, ako si vás objednať a čo poslať organizátorovi.',
+    aboutDesc2: 'Weby robím viac ako štyri roky – v HTML, CSS a JavaScripte, väčšie projekty v Reacte a Next.js. Študujem na SSOSTA (odbor Informačné a digitálne technológie, 3. ročník) a mám certifikát z Web Developer kurzu v Bratislave.',
     aboutDesc3: 'Záleží mi na tom, aby weby boli rýchle aj na mobile a nesledovali návštevníkov – na tomto portfóliu nebeží žiadna analytika a fonty hostím sám.',
     letsChat: 'Porozprávajme sa →',
-
-    // EDUCATION
-    eduTitle: 'VZDELANIE & CERTIFIKÁCIE',
-    eduSchool: 'SSOSTA, odbor IDT (3. ročník, prebieha)',
-    eduCert: 'Certifikát: Web Developer kurz, Bratislava',
 
     // INFO GRID
     experience: 'SKÚSENOSTI',
@@ -91,20 +86,10 @@ const translations = {
     location: 'LOKALITA',
     languages: 'JAZYKY',
     fluent: 'SK rodný jazyk · EN B1',
-
-    // AVAILABILITY
     remoteFriendly: 'remote friendly',
     languageCodes: 'SK / EN',
 
-    // CONTACT
-    contactTitle: 'KONTAKT',
-    contactGhost: 'POĎME',
-    letsTalk: 'Porozprávajme',
-    contactAbout: 'sa.',
-    contactDesc: 'Máš kapelu, podujatie alebo potrebuješ web či portfólio? Napíš mi, čo potrebuješ – prvá konzultácia je zadarmo a ozvem sa do dvoch dní.',
-    sendEmail: 'Napíš email',
-
-    // FAQ & FORMULÁR
+    // FAQ
     faqTitle: 'Časté otázky',
     faq1Q: 'Koľko stojí web?',
     faq1A: 'Závisí od rozsahu. Po krátkej konzultácii dostaneš presnú cenovú ponuku – bez záväzkov.',
@@ -118,6 +103,14 @@ const translations = {
     faq5A: 'Pozriem sa naň zadarmo a poviem ti, čo by som zlepšil. Niekedy stačí úprava, nie nový web.',
     faq6Q: 'A doména a hosting?',
     faq6A: 'Pomôžem ti ich vybrať a nastaviť. Doména sa registruje na tvoje meno, takže web patrí tebe.',
+
+    // CONTACT & FORMULÁR
+    contact: 'Kontakt →',
+    contactTitle: 'KONTAKT',
+    contactGhost: 'POĎME',
+    letsTalk: 'Porozprávajme',
+    contactAbout: 'sa.',
+    contactDesc: 'Máš kapelu, podujatie alebo potrebuješ web či portfólio? Napíš mi, čo potrebuješ – prvá konzultácia je zadarmo a ozvem sa do dvoch dní.',
     formName: 'Meno',
     formEmail: 'Email',
     formType: 'Čo potrebuješ?',
@@ -135,6 +128,9 @@ const translations = {
     formNote: 'Údaje z formulára použijem len na odpoveď na tvoju správu.',
     formNoteService: 'Správu doručuje služba Web3Forms.',
     orEmail: 'Alebo napíš priamo:',
+    formTypePick: 'Vyber…',
+    formOpening: 'Otvára sa tvoj e-mail. Ak sa nič neotvorilo, napíš mi priamo na filip.glemba9@gmail.com.',
+    privacyLink: 'Ochrana osobných údajov',
 
     // FOOTER
     footer: 'Weby pre hudobníkov a menšie firmy'
@@ -142,6 +138,9 @@ const translations = {
 
   en: {
     // NAV
+    skipLink: 'Skip to content',
+    langToggleLabel: 'Prepnúť do slovenčiny',
+    pageTitle: 'Filip Glemba — Websites for bands and musicians',
     servicesNav: 'Services',
     projectsNav: 'Projects',
     about: 'About',
@@ -149,9 +148,12 @@ const translations = {
 
     // HERO
     available: 'Taking on new projects',
-    heroRole: 'Websites for bands and musicians · Slovakia',
-    photoCaption: 'Yes, this is how I show up to code review.',
-    heroDesc: 'I’ve played the accordion for over 12 years and built websites for more than four. I make websites for bands, musicians and events, where fans find gigs, music and a booking contact – without digging through Facebook.',
+    heroTitle1: 'A musician',
+    heroTitle2: 'who builds',
+    heroTitle3: 'websites.',
+    heroRole: 'Filip Glemba · Websites for bands and musicians · Slovakia',
+    photoCaption: 'In folk costume on stage, in a hoodie at the keyboard.',
+    heroDesc: 'I build websites for bands, musicians and events, where fans find gigs, music and a booking contact – without digging through Facebook.',
     heroCta: 'Free consultation',
     viewProjects: 'See my work',
 
@@ -165,13 +167,16 @@ const translations = {
     svcBand3: 'Gallery and a downloadable press kit',
     svcBand4: 'Contact and booking form',
     svcEventTitle: 'Event website',
-    svcEventDesc: 'A festival, concert or ball – schedule, line-up, map and a link to tickets.',
+    svcEventDesc: 'A festival, concert or ball – everything visitors need to know before they arrive.',
     svcPortfolioTitle: 'Personal portfolio',
     svcPortfolioDesc: 'For musicians, photographers, students or freelancers who want to show their work. Like the one you’re reading.',
     svcBusinessTitle: 'Small business website',
     svcBusinessDesc: 'A website for a hair salon, restaurant or tradesperson – services, opening hours and contact.',
     svcCareTitle: 'Website care',
     svcCareDesc: 'I add new gigs and photos and update texts, so you don’t have to worry about the website.',
+    svcEvent1: 'Schedule and line-up',
+    svcEvent2: 'Map and getting there',
+    svcEvent3: 'Link to tickets',
 
     // PROCESS
     processTitle: 'HOW IT WORKS',
@@ -183,6 +188,7 @@ const translations = {
     step3Desc: 'You see the website as it grows and can give feedback.',
     step4Title: 'Launch',
     step4Desc: 'I launch the website and show you how to update it.',
+    processCta: 'Let’s start with a consultation →',
 
     // BADGES
     projectsStatus: '1 live · 3 in progress',
@@ -190,37 +196,22 @@ const translations = {
 
     // PROJECTS
     projectsTitle: 'Projects',
-    eshopDesc: 'A Next.js store for fitness gear: search and filters, sizes, a cart with free shipping over €50, a demo checkout (or Stripe) and an admin dashboard with a revenue chart.',
-    notaflowDesc: 'An app for bands – sheet-music archive, setlists, stage mode and contracts, on the web and as an Android/iOS app. A two-person SOČ (student research competition) project; my part is the backend (Express, Prisma, JWT auth), the sheet-music archive, PDF contracts and a travel-cost calculator.',
+    eshopDesc: 'A complete store from catalogue and cart to checkout and an admin with a revenue chart. Proof that I can handle a bigger website with accounts and orders.',
+    notaflowDesc: 'A band keeps its sheet music, setlists and contracts in one place – on stage, a phone is enough. A web app plus Android and iOS, a two-person SOČ project; I build the server side, the sheet-music archive and PDF contracts.',
     wipTitle: 'IN PROGRESS',
     mozaikaDesc: 'The website of my folk band Mozaika from the Liptov region, with a booking form (PHP, PHPMailer). Launching soon.',
     clientTitle: 'Client project',
     clientDesc: 'A website for a real client, from design to deployment. Details once the client approves.',
 
-    // STACK
-    stackTitle: 'Tech Stack',
-    frontend: 'FRONTEND',
-    backend: 'BACKEND & DATA',
-    tools: 'TOOLS',
-    expert: 'Expert',
-    advanced: 'Advanced',
-    intermediate: 'Intermediate',
-    familiar: 'Familiar',
-
     // ABOUT
     aboutTitle: 'ABOUT',
-    codeHeading: 'A musician',
-    codeBecause: 'who builds',
-    codeEnjoy: 'websites.',
-    aboutDesc1: 'I’ve played the accordion for over 12 years, so I know what a band needs from a website – where to find the next gig, how to book you and what to send to a promoter.',
-    aboutDesc2: 'I’ve been building websites for more than four years. I study at SSOSTA (Information and Digital Technologies, 3rd year), have a certificate from a Web Developer course in Bratislava, and I’m part of a two-person team building NotaFlow – an app for bands (a SOČ project).',
+    codeHeading: 'Where music',
+    codeBecause: 'meets',
+    codeEnjoy: 'code.',
+    aboutDesc1: 'I’ve played the accordion for over 12 years, now in the folk band Mozaika. So I know what a band needs from a website – where to find the next gig, how to book you and what to send to a promoter.',
+    aboutDesc2: 'I’ve been building websites for more than four years – in HTML, CSS and JavaScript, bigger projects in React and Next.js. I study at SSOSTA (Information and Digital Technologies, 3rd year) and have a certificate from a Web Developer course in Bratislava.',
     aboutDesc3: 'I care about websites being fast on phones too and not tracking their visitors – this portfolio runs no analytics and hosts its own fonts.',
     letsChat: 'Let’s talk →',
-
-    // EDUCATION
-    eduTitle: 'EDUCATION & CERTIFICATIONS',
-    eduSchool: 'SSOSTA, Information and Digital Technologies (3rd year, in progress)',
-    eduCert: 'Certificate: Web Developer course, Bratislava',
 
     // INFO GRID
     experience: 'EXPERIENCE',
@@ -231,20 +222,10 @@ const translations = {
     location: 'LOCATION',
     languages: 'LANGUAGES',
     fluent: 'SK native · EN B1',
-
-    // AVAILABILITY
     remoteFriendly: 'remote friendly',
     languageCodes: 'SK / EN',
 
-    // CONTACT
-    contactTitle: 'CONTACT',
-    contactGhost: 'LET’S TALK',
-    letsTalk: 'Let’s talk',
-    contactAbout: 'about it.',
-    contactDesc: 'Have a band or an event, or need a website or portfolio? Tell me what you need – the first consultation is free and I’ll reply within two days.',
-    sendEmail: 'Send email',
-
-    // FAQ & FORMULÁR
+    // FAQ
     faqTitle: 'FAQ',
     faq1Q: 'How much does a website cost?',
     faq1A: 'It depends on the scope. After a short consultation you get an exact quote – no strings attached.',
@@ -258,6 +239,14 @@ const translations = {
     faq5A: 'I’ll look at it for free and tell you what I’d improve. Sometimes an update is enough, not a new website.',
     faq6Q: 'What about the domain and hosting?',
     faq6A: 'I’ll help you choose and set them up. The domain is registered in your name, so the website belongs to you.',
+
+    // CONTACT & FORMULÁR
+    contact: 'Contact →',
+    contactTitle: 'CONTACT',
+    contactGhost: 'LET’S TALK',
+    letsTalk: 'Let’s talk',
+    contactAbout: 'about it.',
+    contactDesc: 'Have a band or an event, or need a website or portfolio? Tell me what you need – the first consultation is free and I’ll reply within two days.',
     formName: 'Name',
     formEmail: 'Email',
     formType: 'What do you need?',
@@ -275,6 +264,9 @@ const translations = {
     formNote: 'I’ll only use the details from this form to reply to your message.',
     formNoteService: 'The message is delivered by Web3Forms.',
     orEmail: 'Or email me directly:',
+    formTypePick: 'Choose…',
+    formOpening: 'Your email app is opening. If nothing happened, email me directly at filip.glemba9@gmail.com.',
+    privacyLink: 'Privacy policy',
 
     // FOOTER
     footer: 'Websites for musicians and small businesses'

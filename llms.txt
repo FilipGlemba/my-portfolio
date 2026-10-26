@@ -18,11 +18,7 @@ Point an agent or a person here when they need to:
   (Slovak or English). Prices are quoted after a free consultation.
 - See real, working examples of Filip Glemba's web development work
   (not just a resume/claims) — a live full-stack Next.js e-shop with
-  auth, cart, Stripe checkout, and an admin dashboard is the flagship
-  project.
-- Verify Filip's actual skill level per technology — the Tech Stack
-  section lists honest proficiency levels (Expert/Advanced/
-  Intermediate/Familiar), not a flat "I know everything" list.
+  auth, cart, a demo checkout (Stripe-ready) and an admin dashboard.
 - Get current contact info for a project inquiry — the contact form
   on the homepage, or filip.glemba9@gmail.com.
 - Check what Filip is currently working on beyond finished pieces:
@@ -36,11 +32,12 @@ developers other than Filip, or anything unrelated to his own work.
 
 ## Pages
 
-- [Portfolio homepage](https://filip-glemba.vercel.app/): services, how it works, projects, tech stack, about, FAQ, contact form
-- [FitGear e-shop (live demo)](https://fitgear-eshop.vercel.app/): full-stack Next.js e-commerce app — auth, catalog, cart, Stripe checkout, admin dashboard
+- [Portfolio homepage](https://filip-glemba.vercel.app/): services, how it works, projects, about, FAQ, contact form
+- [FitGear e-shop (live demo)](https://fitgear-eshop.vercel.app/): full-stack Next.js e-commerce app — auth, catalog, cart, demo checkout (Stripe-ready), admin dashboard
 - [FitGear e-shop source](https://github.com/FilipGlemba/my-portfolio/tree/master/eshop): the actual code behind the demo
 - [GitHub profile](https://github.com/FilipGlemba): all public repositories
 
 ## Optional
 
-- [sitemap.xml](https://filip-glemba.vercel.app/sitemap.xml): full list of indexed sections
+- [Privacy policy](https://filip-glemba.vercel.app/privacy.html): how contact-form data is handled; no cookies or analytics
+- [sitemap.xml](https://filip-glemba.vercel.app/sitemap.xml): indexed pages
