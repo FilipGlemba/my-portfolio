@@ -10,6 +10,7 @@ import authOptions from "@/lib/auth";
 import { checkoutSchema } from "@/lib/schemas";
 import { createCheckoutSession, isStripeConfigured, type CheckoutLineItem } from "@/lib/stripe";
 import { orderTotal, shippingFor } from "@/lib/shipping";
+import { MAX_CART_LINES } from "@/lib/limits";
 
 // Thrown for problems the shopper can fix — its message is safe to show them.
 class CheckoutError extends Error {}
@@ -17,7 +18,12 @@ class CheckoutError extends Error {}
 export async function POST(request: NextRequest) {
   let body;
   try {
-    body = checkoutSchema.parse(await request.json());
+    const raw = await request.json();
+    // Obrovské pole odmietnuť skôr, než ho Zod začne prechádzať (ochrana pamäte).
+    if (Array.isArray(raw?.items) && raw.items.length > MAX_CART_LINES) {
+      return NextResponse.json({ error: "Please check your details and try again." }, { status: 400 });
+    }
+    body = checkoutSchema.parse(raw);
   } catch (error) {
     const message = error instanceof ZodError ? "Please check your details and try again." : "Invalid request.";
     return NextResponse.json({ error: message }, { status: 400 });

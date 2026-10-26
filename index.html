@@ -19,6 +19,8 @@
 
     <!-- Značka "js" na <html>: animácie .reveal skryjú obsah len vtedy, keď
          beží JavaScript, ktorý ho potom zobrazí. Bez JS je všetko viditeľné. -->
+    <!-- POZOR: tento skript je povolený cez hash v CSP (vercel.json). Pri akejkoľvek
+         zmene (aj medzery) treba hash prepočítať, inak ho prehliadač zablokuje. -->
     <script>document.documentElement.classList.add("js")</script>
 
     <!-- Open Graph / social preview -->
