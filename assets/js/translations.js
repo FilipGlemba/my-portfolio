@@ -11,7 +11,6 @@ const translations = {
     contact: 'Kontakt →',
 
     // HERO
-    available: 'Prijímam nové projekty',
     heroTitle1: 'Muzikant,',
     heroTitle2: 'ktorý robí',
     heroTitle3: 'weby.',
@@ -23,7 +22,7 @@ const translations = {
 
     // SERVICES
     servicesTitle: 'Čo robím',
-    svcMainTag: 'HLAVNÉ ZAMERANIE',
+    svcMainTag: 'Hlavné zameranie',
     svcBandTitle: 'Web pre kapelu alebo hudobníka',
     svcBandDesc: 'Jedno miesto, kde fanúšikovia aj organizátori nájdu všetko podstatné. Termíny koncertov si vieš meniť sám.',
     svcBand1: 'Koncerty a termíny',
@@ -43,7 +42,7 @@ const translations = {
     svcEvent3: 'Odkaz na vstupenky',
 
     // PROCESS
-    processTitle: 'AKO TO PREBIEHA',
+    processTitle: 'Ako to prebieha',
     step1Title: 'Konzultácia',
     step1Desc: 'Zadarmo, online alebo osobne. Povieš mi, čo potrebuješ.',
     step2Title: 'Návrh a ponuka',
@@ -54,21 +53,17 @@ const translations = {
     step4Desc: 'Web spustím a ukážem ti, ako si meniť obsah.',
     processCta: 'Začnime konzultáciou →',
 
-    // BADGES
-    projectsStatus: '1 živý · 3 vo vývoji',
-    slovakia: 'Slovensko',
 
     // PROJECTS
     projectsTitle: 'Projekty',
     eshopDesc: 'Kompletný obchod od katalógu cez košík až po pokladňu a administráciu s grafom tržieb. Ukážka, že zvládnem aj väčší web s účtami a objednávkami.',
     notaflowDesc: 'Kapela má noty, setlisty a zmluvy na jednom mieste – na pódiu stačí mobil. Aplikácia na webe aj pre Android a iOS, práca SOČ v dvojčlennom tíme; ja robím serverovú časť, archív nôt a PDF zmluvy.',
-    wipTitle: 'ROZPRACOVANÉ',
+    wipTitle: 'Rozpracované',
     mozaikaDesc: 'Web mojej folklórnej kapely Mozaika z Liptova s rezervačným formulárom (PHP, PHPMailer). Čoskoro naživo.',
     clientTitle: 'Klientsky projekt',
     clientDesc: 'Web pre reálneho klienta od návrhu po nasadenie. Detaily po schválení klientom.',
 
     // ABOUT
-    aboutTitle: 'O MNE',
     codeHeading: 'Hudba a kód',
     codeBecause: 'sa u mňa',
     codeEnjoy: 'stretávajú.',
@@ -77,17 +72,6 @@ const translations = {
     aboutDesc3: 'Záleží mi na tom, aby weby boli rýchle aj na mobile a nesledovali návštevníkov – na tomto portfóliu nebeží žiadna analytika a fonty hostím sám.',
     letsChat: 'Porozprávajme sa →',
 
-    // INFO GRID
-    experience: 'SKÚSENOSTI',
-    years2plus: '4+ roky',
-    webDev: 'web development',
-    projects: 'PROJEKTY',
-    projectsCount: '4',
-    location: 'LOKALITA',
-    languages: 'JAZYKY',
-    fluent: 'SK rodný jazyk · EN B1',
-    remoteFriendly: 'remote friendly',
-    languageCodes: 'SK / EN',
 
     // FAQ
     faqTitle: 'Časté otázky',
@@ -106,8 +90,6 @@ const translations = {
 
     // CONTACT & FORMULÁR
     contact: 'Kontakt →',
-    contactTitle: 'KONTAKT',
-    contactGhost: 'POĎME',
     letsTalk: 'Porozprávajme',
     contactAbout: 'sa.',
     contactDesc: 'Máš kapelu, podujatie alebo potrebuješ web či portfólio? Napíš mi, čo potrebuješ – prvá konzultácia je zadarmo a ozvem sa do dvoch dní.',
@@ -147,7 +129,6 @@ const translations = {
     contact: 'Contact →',
 
     // HERO
-    available: 'Taking on new projects',
     heroTitle1: 'A musician',
     heroTitle2: 'who builds',
     heroTitle3: 'websites.',
@@ -159,7 +140,7 @@ const translations = {
 
     // SERVICES
     servicesTitle: 'What I do',
-    svcMainTag: 'MAIN FOCUS',
+    svcMainTag: 'Main focus',
     svcBandTitle: 'Website for a band or musician',
     svcBandDesc: 'One place where fans and promoters find everything that matters. You can update your gig dates yourself.',
     svcBand1: 'Gigs and dates',
@@ -179,7 +160,7 @@ const translations = {
     svcEvent3: 'Link to tickets',
 
     // PROCESS
-    processTitle: 'HOW IT WORKS',
+    processTitle: 'How it works',
     step1Title: 'Consultation',
     step1Desc: 'Free, online or in person. You tell me what you need.',
     step2Title: 'Design and quote',
@@ -190,21 +171,17 @@ const translations = {
     step4Desc: 'I launch the website and show you how to update it.',
     processCta: 'Let’s start with a consultation →',
 
-    // BADGES
-    projectsStatus: '1 live · 3 in progress',
-    slovakia: 'Slovakia',
 
     // PROJECTS
     projectsTitle: 'Projects',
     eshopDesc: 'A complete store from catalogue and cart to checkout and an admin with a revenue chart. Proof that I can handle a bigger website with accounts and orders.',
     notaflowDesc: 'A band keeps its sheet music, setlists and contracts in one place – on stage, a phone is enough. A web app plus Android and iOS, a two-person SOČ project; I build the server side, the sheet-music archive and PDF contracts.',
-    wipTitle: 'IN PROGRESS',
+    wipTitle: 'In progress',
     mozaikaDesc: 'The website of my folk band Mozaika from the Liptov region, with a booking form (PHP, PHPMailer). Launching soon.',
     clientTitle: 'Client project',
     clientDesc: 'A website for a real client, from design to deployment. Details once the client approves.',
 
     // ABOUT
-    aboutTitle: 'ABOUT',
     codeHeading: 'Where music',
     codeBecause: 'meets',
     codeEnjoy: 'code.',
@@ -213,17 +190,6 @@ const translations = {
     aboutDesc3: 'I care about websites being fast on phones too and not tracking their visitors – this portfolio runs no analytics and hosts its own fonts.',
     letsChat: 'Let’s talk →',
 
-    // INFO GRID
-    experience: 'EXPERIENCE',
-    years2plus: '4+ years',
-    webDev: 'web development',
-    projects: 'PROJECTS',
-    projectsCount: '4',
-    location: 'LOCATION',
-    languages: 'LANGUAGES',
-    fluent: 'SK native · EN B1',
-    remoteFriendly: 'remote friendly',
-    languageCodes: 'SK / EN',
 
     // FAQ
     faqTitle: 'FAQ',
@@ -242,8 +208,6 @@ const translations = {
 
     // CONTACT & FORMULÁR
     contact: 'Contact →',
-    contactTitle: 'CONTACT',
-    contactGhost: 'LET’S TALK',
     letsTalk: 'Let’s talk',
     contactAbout: 'about it.',
     contactDesc: 'Have a band or an event, or need a website or portfolio? Tell me what you need – the first consultation is free and I’ll reply within two days.',
