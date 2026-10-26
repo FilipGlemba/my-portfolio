@@ -58,7 +58,7 @@ document.querySelectorAll('.pcard').forEach(card => {
 // WEB3FORMS_KEY: bezplatný kľúč z https://web3forms.com (správy chodia na email).
 // Je verejný – je určený na to, aby bol v kóde stránky. Kým je prázdny,
 // formulár len otvorí pripravený email v poštovom programe návštevníka.
-const WEB3FORMS_KEY = '';
+const WEB3FORMS_KEY = 'b1b6a044-0c41-450b-bdb6-407d3992b985';
 const CONTACT_EMAIL = 'filipglemba.dev@gmail.com';
 
 const form = document.getElementById('contact-form');
