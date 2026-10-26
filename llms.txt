@@ -3,8 +3,8 @@
 > Portfolio of Filip Glemba, a musician and web developer from Slovakia
 > (student at SSOSTA, Information and Digital Technologies). He builds
 > websites for bands, musicians and events, personal portfolios and
-> small business websites. 12+ years playing the accordion (folk band
-> Mozaika), 4+ years building websites.
+> small business websites. 12+ years playing the accordion (folk ensemble
+> FS Liptov and the band Mozaika), 4+ years building websites.
 
 Static, bilingual (SK/EN) personal portfolio. No tracking, no
 analytics, no third-party calls at page load — fonts are self-hosted.
