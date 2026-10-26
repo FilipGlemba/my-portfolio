@@ -2,16 +2,47 @@
 const translations = {
   sk: {
     // NAV
+    servicesNav: 'Služby',
     projectsNav: 'Projekty',
     about: 'O mne',
     contact: 'Kontakt →',
 
     // HERO
-    available: 'Dostupný pre spoluprácu',
-    heroRole: 'Web developer · Slovensko',
+    available: 'Prijímam nové projekty',
+    heroRole: 'Weby pre kapely a hudobníkov · Slovensko',
     photoCaption: 'Áno, aj takto chodím na code review.',
-    heroDesc: 'Už vyše štyri roky robím weby v HTML, CSS a JavaScripte. Tento rok som pridal React, Next.js a backend – výsledkom je živý e-shop a NotaFlow, aplikácia pre kapely.',
-    viewProjects: 'Pozri projekty',
+    heroDesc: 'Na akordeóne hrám vyše 12 rokov a weby robím viac ako štyri. Kapelám, hudobníkom a podujatiam robím weby, kde fanúšikovia nájdu koncerty, hudbu aj kontakt na booking – bez hľadania po Facebooku.',
+    heroCta: 'Nezáväzná konzultácia',
+    viewProjects: 'Pozri moju prácu',
+
+    // SERVICES
+    servicesTitle: 'Čo robím',
+    svcMainTag: 'HLAVNÉ ZAMERANIE',
+    svcBandTitle: 'Web pre kapelu alebo hudobníka',
+    svcBandDesc: 'Jedno miesto, kde fanúšikovia aj organizátori nájdu všetko podstatné. Termíny koncertov si vieš meniť sám.',
+    svcBand1: 'Koncerty a termíny',
+    svcBand2: 'Hudba zo Spotify a YouTube',
+    svcBand3: 'Galéria a press kit na stiahnutie',
+    svcBand4: 'Kontakt a formulár na booking',
+    svcEventTitle: 'Web pre podujatie',
+    svcEventDesc: 'Festival, koncert či ples – program, účinkujúci, mapa a odkaz na vstupenky.',
+    svcPortfolioTitle: 'Osobné portfólio',
+    svcPortfolioDesc: 'Pre hudobníkov, fotografov, študentov či freelancerov, ktorí sa chcú ukázať. Ako toto, ktoré práve čítaš.',
+    svcBusinessTitle: 'Web pre menšiu firmu',
+    svcBusinessDesc: 'Prezentačný web pre kaderníctvo, reštauráciu či remeselníka – služby, otváracie hodiny a kontakt.',
+    svcCareTitle: 'Správa webu',
+    svcCareDesc: 'Pridám nové koncerty, fotky a zmením texty, aby si sa o web nemusel starať.',
+
+    // PROCESS
+    processTitle: 'AKO TO PREBIEHA',
+    step1Title: 'Konzultácia',
+    step1Desc: 'Zadarmo, online alebo osobne. Povieš mi, čo potrebuješ.',
+    step2Title: 'Návrh a ponuka',
+    step2Desc: 'Pripravím návrh webu a cenovú ponuku na mieru.',
+    step3Title: 'Tvorba',
+    step3Desc: 'Web priebežne vidíš a môžeš ho pripomienkovať.',
+    step4Title: 'Spustenie',
+    step4Desc: 'Web spustím a ukážem ti, ako si meniť obsah.',
 
     // BADGES
     projectsStatus: '1 živý · 3 vo vývoji',
@@ -38,12 +69,12 @@ const translations = {
 
     // ABOUT
     aboutTitle: 'O MNE',
-    codeHeading: 'Kódujem,',
-    codeBecause: 'pretože ma',
-    codeEnjoy: 'to baví.',
-    aboutDesc1: 'Som študent SSOSTA (odbor Informačné a digitálne technológie, 3. ročník) s viac ako 4 rokmi praxe vo web developmente a certifikátom z Web Developer kurzu v Bratislave.',
-    aboutDesc2: 'Okrem školy staviam veci, ktoré sám potrebujem – napríklad NotaFlow, aplikáciu pre kapely, ktorú robíme ako prácu SOČ. Na akordeóne hrám vyše 12 rokov, takže hudba a kód sa u mňa stretávajú často.',
-    aboutDesc3: 'Záleží mi na tom, aby weby boli rýchle a nesledovali návštevníkov – na tomto portfóliu nebeží žiadna analytika a fonty hostím sám. A úrovne v Tech Stacku sú úprimné: čo je pri „Familiar“, to sa práve učím.',
+    codeHeading: 'Muzikant,',
+    codeBecause: 'ktorý robí',
+    codeEnjoy: 'weby.',
+    aboutDesc1: 'Na akordeóne hrám vyše 12 rokov, takže viem, čo kapela od webu potrebuje – kde nájsť najbližší koncert, ako si vás objednať a čo poslať organizátorovi.',
+    aboutDesc2: 'Weby robím viac ako štyri roky. Študujem na SSOSTA (odbor Informačné a digitálne technológie, 3. ročník), mám certifikát z Web Developer kurzu v Bratislave a v dvojčlennom tíme robíme NotaFlow – aplikáciu pre kapely (práca SOČ).',
+    aboutDesc3: 'Záleží mi na tom, aby weby boli rýchle aj na mobile a nesledovali návštevníkov – na tomto portfóliu nebeží žiadna analytika a fonty hostím sám.',
     letsChat: 'Porozprávajme sa →',
 
     // EDUCATION
@@ -70,25 +101,56 @@ const translations = {
     contactGhost: 'POĎME',
     letsTalk: 'Porozprávajme',
     contactAbout: 'sa.',
-    contactDesc: 'Hľadáš developera do tímu alebo na projekt? Napíš mi a preberieme, ako ti viem pomôcť.',
+    contactDesc: 'Máš kapelu, podujatie alebo potrebuješ web či portfólio? Napíš mi, čo potrebuješ – prvá konzultácia je zadarmo a ozvem sa do dvoch dní.',
     sendEmail: 'Napíš email',
 
     // FOOTER
-    footer: 'Web Developer & Hudobník'
+    footer: 'Weby pre hudobníkov a menšie firmy'
   },
 
   en: {
     // NAV
+    servicesNav: 'Services',
     projectsNav: 'Projects',
     about: 'About',
     contact: 'Contact →',
 
     // HERO
-    available: 'Available for work',
-    heroRole: 'Web developer · Slovakia',
+    available: 'Taking on new projects',
+    heroRole: 'Websites for bands and musicians · Slovakia',
     photoCaption: 'Yes, this is how I show up to code review.',
-    heroDesc: 'I’ve been building websites with HTML, CSS and JavaScript for over four years. This year I added React, Next.js and backend work – the results are a live e-shop and NotaFlow, an app for bands.',
-    viewProjects: 'View projects',
+    heroDesc: 'I’ve played the accordion for over 12 years and built websites for more than four. I make websites for bands, musicians and events, where fans find gigs, music and a booking contact – without digging through Facebook.',
+    heroCta: 'Free consultation',
+    viewProjects: 'See my work',
+
+    // SERVICES
+    servicesTitle: 'What I do',
+    svcMainTag: 'MAIN FOCUS',
+    svcBandTitle: 'Website for a band or musician',
+    svcBandDesc: 'One place where fans and promoters find everything that matters. You can update your gig dates yourself.',
+    svcBand1: 'Gigs and dates',
+    svcBand2: 'Music from Spotify and YouTube',
+    svcBand3: 'Gallery and a downloadable press kit',
+    svcBand4: 'Contact and booking form',
+    svcEventTitle: 'Event website',
+    svcEventDesc: 'A festival, concert or ball – schedule, line-up, map and a link to tickets.',
+    svcPortfolioTitle: 'Personal portfolio',
+    svcPortfolioDesc: 'For musicians, photographers, students or freelancers who want to show their work. Like the one you’re reading.',
+    svcBusinessTitle: 'Small business website',
+    svcBusinessDesc: 'A website for a hair salon, restaurant or tradesperson – services, opening hours and contact.',
+    svcCareTitle: 'Website care',
+    svcCareDesc: 'I add new gigs and photos and update texts, so you don’t have to worry about the website.',
+
+    // PROCESS
+    processTitle: 'HOW IT WORKS',
+    step1Title: 'Consultation',
+    step1Desc: 'Free, online or in person. You tell me what you need.',
+    step2Title: 'Design and quote',
+    step2Desc: 'I prepare a design and a custom quote.',
+    step3Title: 'Build',
+    step3Desc: 'You see the website as it grows and can give feedback.',
+    step4Title: 'Launch',
+    step4Desc: 'I launch the website and show you how to update it.',
 
     // BADGES
     projectsStatus: '1 live · 3 in progress',
@@ -115,13 +177,13 @@ const translations = {
 
     // ABOUT
     aboutTitle: 'ABOUT',
-    codeHeading: 'I code',
-    codeBecause: 'because I',
-    codeEnjoy: 'enjoy it.',
-    aboutDesc1: 'I\'m a student at SSOSTA (Information and Digital Technologies program, 3rd year) with more than 4 years of practical experience in web development and a certificate from a Web Developer course in Bratislava.',
-    aboutDesc2: 'Outside of school I build things I need myself – like NotaFlow, an app for bands that we\'re making as a SOČ project. I\'ve played the accordion for over 12 years, so music and code meet a lot in my work.',
-    aboutDesc3: 'I care about sites being fast and not tracking their visitors – this portfolio runs no analytics and self-hosts its fonts. And the levels in the Tech Stack are honest: anything marked “Familiar” is what I’m learning right now.',
-    letsChat: 'Let\'s talk →',
+    codeHeading: 'A musician',
+    codeBecause: 'who builds',
+    codeEnjoy: 'websites.',
+    aboutDesc1: 'I’ve played the accordion for over 12 years, so I know what a band needs from a website – where to find the next gig, how to book you and what to send to a promoter.',
+    aboutDesc2: 'I’ve been building websites for more than four years. I study at SSOSTA (Information and Digital Technologies, 3rd year), have a certificate from a Web Developer course in Bratislava, and I’m part of a two-person team building NotaFlow – an app for bands (a SOČ project).',
+    aboutDesc3: 'I care about websites being fast on phones too and not tracking their visitors – this portfolio runs no analytics and hosts its own fonts.',
+    letsChat: 'Let’s talk →',
 
     // EDUCATION
     eduTitle: 'EDUCATION & CERTIFICATIONS',
@@ -144,13 +206,13 @@ const translations = {
 
     // CONTACT
     contactTitle: 'CONTACT',
-    contactGhost: 'LET\'S TALK',
-    letsTalk: 'Let\'s talk',
+    contactGhost: 'LET’S TALK',
+    letsTalk: 'Let’s talk',
     contactAbout: 'about it.',
-    contactDesc: 'Looking for a developer for your team or project? Send me a message and let’s talk about how I can help.',
+    contactDesc: 'Have a band or an event, or need a website or portfolio? Tell me what you need – the first consultation is free and I’ll reply within two days.',
     sendEmail: 'Send email',
 
     // FOOTER
-    footer: 'Web Developer & Musician'
+    footer: 'Websites for musicians and small businesses'
   }
 };
