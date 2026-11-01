@@ -15,7 +15,7 @@
       content="Filip Glemba — muzikant, ktorý robí weby. Weby pre kapely, hudobníkov a podujatia, osobné portfóliá a weby pre menšie firmy. Slovensko."
     />
     <meta name="author" content="Filip Glemba" />
-    <meta name="theme-color" content="#f6f1e7" />
+    <meta name="theme-color" content="#14110e" />
 
     <!-- Značka "js" na <html>: animácie .reveal skryjú obsah len vtedy, keď
          beží JavaScript, ktorý ho potom zobrazí. Bez JS je všetko viditeľné. -->
@@ -52,7 +52,7 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231a1612'/%3E%3Ctext x='32' y='38' font-family='Georgia,serif' font-style='italic' font-size='28' fill='%23f6f1e7' text-anchor='middle'%3EFG%3C/text%3E%3Cpath d='M14 50 L20 44 L26 50 L32 44 L38 50 L44 44 L50 50' fill='none' stroke='%23b3261e' stroke-width='3' stroke-linejoin='round' stroke-linecap='round'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2314110e'/%3E%3Ctext x='30' y='43' font-family='system-ui,sans-serif' font-weight='700' font-size='30' letter-spacing='-2' fill='%23f4eee3' text-anchor='middle'%3EFG%3C/text%3E%3Ccircle cx='52' cy='41' r='3' fill='%23c8362c'/%3E%3C/svg%3E"
     />
 
     <!-- Kanonická URL — stránka beží aj na filipglemba.github.io/my-portfolio/,
@@ -77,17 +77,19 @@
 
     <!-- Fonty sú self-hostované (assets/fonts/, @font-face v styles.css) —
          žiadne volanie na Google, žiadny prenos IP tretej strane bez súhlasu.
-         Dva fonty nadpisu v hero sa prednačítajú, aby sa nečakalo na CSS. -->
-    <link rel="preload" href="assets/fonts/fraunces-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="assets/fonts/fraunces-latin-wght-italic.woff2" as="font" type="font/woff2" crossorigin />
+         Font nadpisu v hero sa prednačíta, aby sa nečakalo na CSS. -->
+    <link rel="preload" href="assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="assets/css/styles.css" />
   </head>
   <body>
     <a class="skip-link" href="#main" data-i18n="skipLink">Preskočiť na obsah</a>
 
+    <!-- Reflektor: svetlo za myšou, čisto dekoratívne (main.js, initSpotlight) -->
+    <div class="spotlight" aria-hidden="true"></div>
+
     <!-- ═══ NAV ═══ -->
     <nav id="nav">
-      <a href="#hero" class="logo">FG<span>.</span><span class="sr-only"> Filip Glemba</span></a>
+      <a href="#hero" class="logo"><img src="assets/img/profilovka-64.webp" alt="" width="32" height="32" /><span>Filip Glemba</span></a>
 
       <ul class="nav-links" id="nav-links">
         <li><a href="#services" data-i18n="servicesNav">Služby</a></li>
@@ -107,55 +109,35 @@
     <main id="main">
     <!-- ═══ HERO ═══ -->
     <section id="hero">
-      <div class="hero-l">
-        <h1 class="h-title">
-          <span data-i18n="heroTitle1">Muzikant,</span><br /><span data-i18n="heroTitle2">ktorý robí</span><br /><em
-            data-i18n="heroTitle3"
-            >weby.</em
-          >
-        </h1>
-        <p class="h-role" data-i18n="heroRole">Filip Glemba · Weby pre kapely a hudobníkov · Slovensko</p>
+      <!-- WebP vo veľkosti podľa zariadenia; JPG je záloha pre staré prehliadače. -->
+      <picture>
+        <source type="image/webp" srcset="assets/img/profilovka-260.webp 260w" sizes="84px" />
+        <img class="hero-photo" src="assets/img/profilovka.jpg" alt="Filip Glemba v kroji" width="84" height="84" />
+      </picture>
 
-        <p class="h-desc" data-i18n="heroDesc">
-          Kapelám, hudobníkom a podujatiam robím weby, kde fanúšikovia nájdu koncerty, hudbu aj kontakt na booking – bez hľadania po Facebooku.
-        </p>
+      <h1 class="h-title" data-i18n="heroTitle">Muzikant, ktorý robí weby.</h1>
 
-        <div class="h-actions">
-          <a href="#contact" class="btn-solid" data-i18n="heroCta">Konzultácia zdarma</a>
-          <a href="#projects" class="btn-line" data-i18n="viewProjects">Ukážky práce</a>
-        </div>
+      <p class="h-desc" data-i18n="heroDesc">
+        Kapelám, hudobníkom a podujatiam robím weby, kde fanúšikovia nájdu koncerty, hudbu aj kontakt na booking – bez hľadania po Facebooku.
+      </p>
+
+      <div class="h-actions">
+        <a href="#contact" class="btn-solid" data-i18n="heroCta">Konzultácia zdarma</a>
+        <a href="#projects" class="btn-line" data-i18n="viewProjects">Ukážky práce</a>
       </div>
 
-      <div class="hero-r">
-        <div class="hero-profile">
-          <div class="avatar-ring">
-            <!-- WebP vo veľkosti podľa zariadenia (fotka má 400px, na mobile
-                 260px); JPG je záloha pre staré prehliadače. -->
-            <picture>
-              <source
-                type="image/webp"
-                srcset="
-                  assets/img/profilovka-260.webp 260w,
-                  assets/img/profilovka-400.webp 400w,
-                  assets/img/profilovka-520.webp 520w,
-                  assets/img/profilovka-661.webp 661w
-                "
-                sizes="(max-width: 960px) 260px, 400px"
-              />
-              <img
-                src="assets/img/profilovka.jpg"
-                alt="Filip Glemba v kroji"
-                width="661"
-                height="684"
-                fetchpriority="high"
-              />
-            </picture>
-          </div>
+      <!-- Živá vlna: zapne sa, keď bude nahrávka harmoniky -->
+      <div id="hero-wave" hidden></div>
 
-          <p class="photo-caption" data-i18n="photoCaption">
-            V kroji na pódiu, v mikine pri kóde.
-          </p>
-        </div>
+      <div id="hero-work">
+        <img
+          src="assets/img/projects/fitgear-1280.webp"
+          srcset="assets/img/projects/fitgear-640.webp 640w, assets/img/projects/fitgear-1280.webp 1280w"
+          sizes="(max-width: 1020px) 100vw, 980px"
+          alt="FitGear e-shop"
+          width="1280"
+          height="800"
+        />
       </div>
     </section>
 
@@ -164,7 +146,6 @@
       <div class="wrap">
         <div class="s-head reveal">
           <h2 class="s-title" data-i18n="servicesTitle">Čo robím</h2>
-          <div class="s-rule"></div>
         </div>
 
         <div class="svc-grid">
@@ -237,106 +218,77 @@
 
     <!-- ═══ PROJECTS ═══ -->
     <section id="projects">
-      <div class="wrap" style="padding-bottom: 0">
+      <div class="wrap">
         <div class="s-head reveal">
           <h2 class="s-title" data-i18n="projectsTitle">Projekty</h2>
-          <div class="s-rule"></div>
         </div>
-      </div>
 
-      <div class="wrap" style="padding-top: 0">
-        <div class="proj-grid">
-          <div class="pcard reveal">
-            <div class="pcard-accent"></div>
-            <div class="pcard-head">
-              <div>
-                <div class="pcard-num">001</div>
-                <h3 class="pcard-title">NotaFlow</h3>
+        <!-- Setlist: screenshot prepína čisté CSS (:hover, :focus-within), takže funguje aj bez JS -->
+        <ol class="setlist reveal">
+          <li class="set-item">
+            <span class="set-num">01</span>
+            <div class="set-body">
+              <h3 class="set-name">NotaFlow</h3>
+              <p class="set-type" data-i18n="setTypeApp">Aplikácia pre kapely</p>
+              <p class="set-desc" data-i18n="notaflowDesc">
+                Kapela má noty, setlisty a zmluvy na jednom mieste – na pódiu stačí mobil. Aplikácia na webe aj pre Android a iOS, práca SOČ v dvojčlennom tíme; ja robím serverovú časť, archív nôt a PDF zmluvy.
+              </p>
+            </div>
+          </li>
+
+          <li class="set-item has-shot is-default">
+            <span class="set-num">02</span>
+            <div class="set-body">
+              <h3 class="set-name"><a href="https://fitgear-eshop.vercel.app" target="_blank" rel="noopener">FitGear</a></h3>
+              <p class="set-type" data-i18n="setTypeShop">Full-stack e-shop</p>
+              <p class="set-desc" data-i18n="eshopDesc">
+                Kompletný obchod od katalógu cez košík až po pokladňu a administráciu s grafom tržieb. Ukážka, že zvládnem aj väčší web s účtami a objednávkami.
+              </p>
+              <div class="set-links">
+                <a href="https://fitgear-eshop.vercel.app" target="_blank" rel="noopener">Demo ↗</a>
+                <a href="https://github.com/FilipGlemba/my-portfolio/tree/master/eshop" target="_blank" rel="noopener">GitHub ↗</a>
               </div>
             </div>
-            <p class="pcard-desc" data-i18n="notaflowDesc">
-              Kapela má noty, setlisty a zmluvy na jednom mieste – na pódiu stačí mobil. Aplikácia na webe aj pre Android a iOS, práca SOČ v dvojčlennom tíme; ja robím serverovú časť, archív nôt a PDF zmluvy.
-            </p>
-            <div class="pcard-tags">
-              <span class="pcard-tag">React</span>
-              <span class="pcard-tag">Capacitor</span>
-              <span class="pcard-tag">Express</span>
-              <span class="pcard-tag">Prisma</span>
-              <span class="pcard-tag">Tailwind</span>
+            <img
+              class="set-shot"
+              src="assets/img/projects/fitgear-1280.webp"
+              srcset="assets/img/projects/fitgear-640.webp 640w, assets/img/projects/fitgear-1280.webp 1280w"
+              sizes="(min-width: 1001px) 540px, 100vw"
+              alt="E-shop FitGear"
+              width="1280"
+              height="800"
+              loading="lazy"
+            />
+          </li>
+
+          <li class="set-item">
+            <span class="set-num">03</span>
+            <div class="set-body">
+              <h3 class="set-name">Mozaika</h3>
+              <p class="set-type" data-i18n="setTypeBand">Web kapely</p>
+              <p class="set-desc" data-i18n="mozaikaDesc">
+                Web mojej folklórnej kapely Mozaika z Liptova s rezervačným formulárom (PHP, PHPMailer). Čoskoro naživo.
+              </p>
             </div>
-            <div class="pcard-foot">
-              <div class="pcard-links"></div>
-              <span class="badge badge-wip">WIP</span>
+          </li>
+
+          <li class="set-item">
+            <span class="set-num">04</span>
+            <div class="set-body">
+              <h3 class="set-name" data-i18n="clientTitle">Klientsky projekt</h3>
+              <p class="set-type" data-i18n="setTypeClient">Web na mieru</p>
+              <p class="set-desc" data-i18n="clientDesc">
+                Web pre reálneho klienta od návrhu po nasadenie. Detaily po schválení klientom.
+              </p>
             </div>
-          </div>
-
-          <div class="pcard reveal d1">
-            <div class="pcard-accent"></div>
-
-            <div class="pcard-head">
-              <div>
-                <div class="pcard-num">002</div>
-                <h3 class="pcard-title">Full-stack E-shop</h3>
-              </div>
-            </div>
-
-            <p class="pcard-desc" data-i18n="eshopDesc">
-              Kompletný obchod od katalógu cez košík až po pokladňu a administráciu s grafom tržieb. Ukážka, že zvládnem aj väčší web s účtami a objednávkami.
-            </p>
-
-            <div class="pcard-tags">
-              <span class="pcard-tag">Next.js</span>
-              <span class="pcard-tag">TypeScript</span>
-              <span class="pcard-tag">Node.js</span>
-              <span class="pcard-tag">MongoDB</span>
-              <span class="pcard-tag">Stripe</span>
-            </div>
-
-            <div class="pcard-foot">
-              <div class="pcard-links">
-                <a href="https://fitgear-eshop.vercel.app" target="_blank" rel="noopener" class="pcard-link">Demo →</a>
-                <a
-                  href="https://github.com/FilipGlemba/my-portfolio/tree/master/eshop"
-                  target="_blank"
-                  rel="noopener"
-                  class="pcard-link"
-                  >GitHub ↗</a
-                >
-              </div>
-              <span class="badge badge-done">DONE</span>
-            </div>
-          </div>
-
-          <div class="pcard pcard-wip reveal d2">
-            <h3 class="wip-title" data-i18n="wipTitle">Rozpracované</h3>
-            <ul class="wip-list">
-              <li class="wip-item">
-                <div class="wip-head">
-                  <span class="wip-name">Mozaika</span>
-                  <span class="badge badge-wip">WIP</span>
-                </div>
-                <p class="wip-desc" data-i18n="mozaikaDesc">
-                  Web mojej folklórnej kapely Mozaika z Liptova s rezervačným formulárom (PHP, PHPMailer). Čoskoro naživo.
-                </p>
-              </li>
-              <li class="wip-item">
-                <div class="wip-head">
-                  <span class="wip-name" data-i18n="clientTitle">Klientsky projekt</span>
-                  <span class="badge badge-wip">WIP</span>
-                </div>
-                <p class="wip-desc" data-i18n="clientDesc">
-                  Web pre reálneho klienta od návrhu po nasadenie. Detaily po schválení klientom.
-                </p>
-              </li>
-            </ul>
-          </div>
-        </div>
+          </li>
+        </ol>
       </div>
     </section>
 
     <!-- ═══ ABOUT ═══ -->
     <section id="about">
-      <div>
+      <div class="about-grid">
         <h2 class="about-title reveal">
           <span data-i18n="codeHeading">Hudba a kód</span><br /><span
             data-i18n="codeBecause"
@@ -344,6 +296,7 @@
           ><br /><span data-i18n="codeEnjoy">stretávajú.</span>
         </h2>
 
+        <div>
         <!-- PRVÝ ODSTAVEC - ako som sa dostal k akordeónu -->
         <p class="about-p reveal d1" data-i18n="aboutDesc1">
           Na akordeón ma mama prihlásila, keď som mal päť. Spočiatku som ho nemal rád – u učiteľa som celú hodinu nezahral ani tón, hoci doma mi to išlo bez problémov. Zlom prišiel v detskom folklórnom súbore Liptáčik, kde som sa rýchlo posunul. Dnes aktívne hrávam vo FS Liptov a v kapele Mozaika. Takisto po deviatich rokoch na ZUŠ v štúdiu pokračujem.
@@ -370,7 +323,8 @@
         </div>
 
         <!-- TLAČIDLO "POROZPRÁVAJME SA" - odkaz na kontakt -->
-        <a href="#contact" class="btn-solid about-cta reveal d3" data-i18n="letsChat">Porozprávajme sa →</a>
+        <a href="#contact" class="btn-solid reveal d3" data-i18n="letsChat">Porozprávajme sa →</a>
+        </div>
       </div>
     </section>
 
@@ -379,7 +333,6 @@
       <div class="wrap">
         <div class="s-head reveal">
           <h2 class="s-title" data-i18n="faqTitle">Časté otázky</h2>
-          <div class="s-rule"></div>
         </div>
         <dl class="faq-grid reveal">
           <div class="faq-item">

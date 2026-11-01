@@ -45,14 +45,26 @@ const io = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-// Svetelný efekt na kartách projektov sledujúci pozíciu myši (--mx/--my pre CSS)
-document.querySelectorAll('.pcard').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100).toFixed(1) + '%');
-    card.style.setProperty('--my', ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%');
-  });
-});
+// Reflektor: jemné svetlo ide za myšou. Bez myši alebo pri zníženom pohybe stojí na mieste.
+function initSpotlight() {
+  const light = document.querySelector('.spotlight');
+  const moves = matchMedia('(hover:hover) and (pointer:fine)').matches
+    && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!light || !moves) return;
+
+  let frame = 0;
+  window.addEventListener('pointermove', e => {
+    if (frame) return;
+    const { clientX, clientY } = e;
+    frame = requestAnimationFrame(() => {
+      frame = 0;
+      light.style.setProperty('--sx', clientX + 'px');
+      light.style.setProperty('--sy', clientY + 'px');
+    });
+  }, { passive: true });
+}
+
+initSpotlight();
 
 // Kontaktný formulár
 // WEB3FORMS_KEY: bezplatný kľúč z https://web3forms.com (správy chodia na email).
